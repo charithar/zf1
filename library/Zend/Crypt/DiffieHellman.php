@@ -172,7 +172,7 @@ class Zend_Crypt_DiffieHellman
     public function getPublicKey($type = self::NUMBER)
     {
         if ($this->_publicKey === null) {
-            require_once 'Zend/Crypt/DiffieHellman/Exception.php';
+            //require_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('A public key has not yet been generated using a prior call to generateKeys()');
         }
         if ($type == self::BINARY) {
@@ -366,7 +366,7 @@ class Zend_Crypt_DiffieHellman
         /**
          * @see Zend_Crypt_Math
          */
-        require_once 'Zend/Crypt/Math.php';
+        //require_once 'Zend/Crypt/Math.php';
         $this->_math = new Zend_Crypt_Math($extension);
     }
 

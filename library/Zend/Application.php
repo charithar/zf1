@@ -78,7 +78,7 @@ class Zend_Application
     {
         $this->_environment = (string) $environment;
 
-        require_once 'Zend/Loader/Autoloader.php';
+        //require_once 'Zend/Loader/Autoloader.php';
         $this->_autoloader = Zend_Loader_Autoloader::getInstance();
         $this->_autoloader->suppressNotFoundWarnings($suppressNotFoundWarnings);
 
