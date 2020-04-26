@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  zf1_test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+     - .:/app
+    environment:
+      - PHPUNIT=/app/bin/phpunit
+    working_dir: /app/tests
+  zf1_memcache:
+    image: memcached:1.6.5
+    ports:
+      - 11212:11211
+  zf1_mysql:
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3307:3306

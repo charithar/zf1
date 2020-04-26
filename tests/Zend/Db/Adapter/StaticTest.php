@@ -60,7 +60,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
     public function testDbConstructorExceptionInvalidOptions()
     {
         list($major, $minor, $revision) = explode('.', PHP_VERSION);
-        if ($minor >= 2) {
+        if ($major > 5 || $minor >= 2) {
             try {
                 $db = new Zend_Db_Adapter_Static('scalar');
                 $this->fail('Expected exception not thrown');
@@ -153,7 +153,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
     public function testDbFactoryExceptionInvalidOptions()
     {
         list($major, $minor, $revision) = explode('.', PHP_VERSION);
-        if ($minor >= 2) {
+        if ($major > 5 || $minor >= 2) {
             try {
                 $db = Zend_Db::factory('Static', 'scalar');
                 $this->fail('Expected exception not thrown');
@@ -168,7 +168,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
     public function testDbFactoryExceptionNoConfig()
     {
         list($major, $minor, $revision) = explode('.', PHP_VERSION);
-        if ($minor >= 2) {
+        if ($major > 5 || $minor >= 2) {
             try {
                 $db = Zend_Db::factory('Static');
                 $this->fail('Expected exception not thrown');
