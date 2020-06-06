@@ -40,7 +40,6 @@ RUN apt-get update \
         libxml2-dev \
         libbz2-dev \
         libjpeg62-turbo-dev \
-        libssl-dev \
         curl \
         unzip \
 #    && git checkout -b php7 origin/php7 \
