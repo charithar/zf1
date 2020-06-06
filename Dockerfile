@@ -1,25 +1,17 @@
 #
-# Use this dockerfile to run CIS api.
+# Use this dockerfile to run Zf1 tests.
 #
 # Start the server using docker-compose:
 #
 #   docker-compose build
-#   docker-compose up
 #
 # You can install dependencies via the container:
 #
-#   docker-compose run cis_api composer install
+#   docker-compose run zf1_test composer install
 #
-# You can manipulate dev mode from the container:
+# You can run tests using the container:
 #
-#   docker-compose run cis_api composer development-enable
-#   docker-compose run cis_api composer development-disable
-#   docker-compose run cis_api composer development-status
-#
-# OR use plain old docker
-#
-#   docker build -f Dockerfile-dev -t cis_api .
-#   docker run -it -p "8080:80" -v $PWD:/var/www cis_api
+#   docker-compose run zf1_test ../bin/phpunit <path to test file>
 #
 FROM php:7.0-cli
 
@@ -75,10 +67,21 @@ RUN docker-php-ext-install opcache \
 #RUN pecl install mongodb \
 #    && docker-php-ext-enable mongodb
 
+#RUN pecl install igbinary \
+#  && docker-php-ext-enable igbinary
+
+RUN git clone https://github.com/websupport-sk/pecl-memcache /usr/src/php/ext/memcache \
+  && cd /usr/src/php/ext/memcache \
+  && docker-php-ext-configure memcache \
+  && docker-php-ext-install memcache \
+  && docker-php-ext-enable memcache
+
 RUN git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached \
   && cd /usr/src/php/ext/memcached \
+#  && docker-php-ext-configure memcached --enable-memcached-igbinary \
   && docker-php-ext-configure memcached \
-  && docker-php-ext-install memcached
+  && docker-php-ext-install memcached \
+  && docker-php-ext-enable memcached
 
 RUN curl -sS https://getcomposer.org/installer \
         | php -- --install-dir=/usr/local/bin --filename=composer
@@ -87,5 +90,7 @@ RUN curl -sS https://getcomposer.org/installer \
 #COPY ./timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY tests/php7_config.ini $PHP_INI_DIR/conf.d/
+
+#COPY . /app
 
 WORKDIR /app
