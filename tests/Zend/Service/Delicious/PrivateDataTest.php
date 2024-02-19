@@ -35,7 +35,7 @@ require_once 'Zend/Service/Delicious.php';
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Delicious_PrivateDataTest extends \PHPUnit\Framework\TestCase
 {
     const TEST_UNAME = 'zfTestUser';
     const TEST_PASS  = 'zfuser';
@@ -55,7 +55,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $httpClient = new Zend_Http_Client();
         $httpClient->setConfig(array(
@@ -150,11 +150,11 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
         // test tag adding to tag
         $newTagName = uniqid('tag');
         $newPost->addTag($newTagName);
-        $this->assertContains($newTagName, $newPost->getTags());
+        $this->assertStringContainsStringIgnoringCase($newTagName, $newPost->getTags());
 
         // test tag removeing
         $newPost->removeTag($newTagName);
-        $this->assertNotContains($newTagName, $newPost->getTags());
+        $this->assertStringNotContainsStringIgnoringCase($newTagName, $newPost->getTags());
 
         // send post to del.icio.us
         $newPost->save();
@@ -199,7 +199,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($posts instanceof Zend_Service_Delicious_PostList);
 
         foreach ($posts as $post) {
-            $this->assertContains('zfSite', $post->getTags());
+            $this->assertStringContainsStringIgnoringCase('zfSite', $post->getTags());
         }
     }
 
@@ -215,7 +215,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {
-            $this->assertContains('zfSite', $post->getTags());
+            $this->assertStringContainsStringIgnoringCase('zfSite', $post->getTags());
         }
     }
 
@@ -231,7 +231,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {
-            $this->assertContains('zfSite', $post->getTags());
+            $this->assertStringContainsStringIgnoringCase('zfSite', $post->getTags());
         }
     }
 

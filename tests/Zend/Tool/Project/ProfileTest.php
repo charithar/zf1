@@ -33,7 +33,7 @@ require_once 'Zend/Tool/Project/Profile.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Action
  */
-class Zend_Tool_Project_ProfileTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Project_ProfileTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_projectDirectory   = null;
@@ -44,7 +44,7 @@ class Zend_Tool_Project_ProfileTest extends PHPUnit_Framework_TestCase
      */
     protected $_standardProfileFromData = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_projectDirectory   = dirname(__FILE__) . '/_files/project1/';
         $this->_projectProfileFile = dirname(__FILE__) . '/_files/.zfproject.xml.orig';
@@ -61,7 +61,7 @@ class Zend_Tool_Project_ProfileTest extends PHPUnit_Framework_TestCase
         $this->_standardProfileFromData->setAttribute('projectDirectory', $this->_projectDirectory);
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_removeProjectFiles();
     }
@@ -74,8 +74,8 @@ class Zend_Tool_Project_ProfileTest extends PHPUnit_Framework_TestCase
         $profile->setAttribute('boof', 'foob');
 
         $this->assertEquals('foob', $profile->getAttribute('boof'));
-        $this->assertContains('bar', $profile->getAttributes());
-        $this->assertContains('BAZ', $profile->getAttributes());
+        $this->assertStringContainsStringIgnoringCase('bar', $profile->getAttributes());
+        $this->assertStringContainsStringIgnoringCase('BAZ', $profile->getAttributes());
 
     }
 

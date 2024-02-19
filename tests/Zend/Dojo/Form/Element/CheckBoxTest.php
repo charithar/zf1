@@ -48,7 +48,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_Element_CheckBoxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
@@ -83,7 +83,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -116,14 +116,14 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
     public function testCheckedAttributeNotRenderedByDefault()
     {
         $html = $this->element->render();
-        $this->assertNotContains('checked="checked"', $html);
+        $this->assertStringNotContainsStringIgnoringCase('checked="checked"', $html);
     }
 
     public function testCheckedAttributeRenderedWhenCheckedFlagTrue()
     {
         $this->element->checked = true;
         $html = $this->element->render();
-        $this->assertContains('checked="checked"', $html);
+        $this->assertStringContainsStringIgnoringCase('checked="checked"', $html);
     }
 
     public function testCheckedValueDefaultsToOne()
@@ -242,7 +242,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
     public function testShouldRenderCheckBoxDijit()
     {
         $html = $this->element->render();
-        $this->assertContains('dojoType="dijit.form.CheckBox"', $html);
+        $this->assertStringContainsStringIgnoringCase('dojoType="dijit.form.CheckBox"', $html);
     }
 
     /**
@@ -251,7 +251,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
     public function testOptionsShouldNotBeRenderedAsElementAttribute()
     {
         $html = $this->element->render();
-        $this->assertNotContains('options="', $html, $html);
+        $this->assertStringNotContainsStringIgnoringCase('options="', $html, $html);
     }
 
     /**
@@ -265,7 +265,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
                 ));
         $element->setView(new Zend_View());
         $html = $element->render();
-        $this->assertContains('value="checkedVal"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('value="checkedVal"', $html, $html);
     }
 }
 

@@ -41,7 +41,7 @@ require_once 'Zend/Rest/Server.php';
  * @group      Zend_Rest
  * @group      Zend_Rest_Server
  */
-class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
+class Zend_Rest_ServerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -55,7 +55,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->request)) {
             $_REQUEST = $this->request;
@@ -89,7 +89,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc', 'who' => 'Davey'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc>', $result, "Bad Result");
     }
 
     public function testHandleFunctionNoArgs()
@@ -99,7 +99,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc2'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
     }
 
     public function testHandleFunctionNoArgsRaisesFaultResponse()
@@ -108,7 +108,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $server->returnResponse(true);
         $server->addFunction('Zend_Rest_Server_TestFunc');
         $result = $server->handle(array('method' => 'Zend_Rest_Server_TestFunc'));
-        $this->assertContains('failed', $result);
+        $this->assertStringContainsStringIgnoringCase('failed', $result);
     }
 
       public function testHandleFunctionNoArgsUsingRequest()
@@ -121,7 +121,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle();
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
     }
 
     public function testHandleAnonymousArgFunction()
@@ -131,7 +131,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc', 'arg1' => 'Davey'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc>', $result, "Bad Result");
     }
 
     public function testHandleMultipleFunction()
@@ -143,11 +143,11 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc2'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc', 'arg1' => 'Davey'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc>', $result, "Bad Result");
     }
 
     public function testHandleMethodNoArgs()
@@ -157,7 +157,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc><response>Hello World</response><status>success</status></testFunc></Zend_Rest_Server_Test>', $result, 'Bad Result');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc><response>Hello World</response><status>success</status></testFunc></Zend_Rest_Server_Test>', $result, 'Bad Result');
     }
 
     public function testHandleMethodOfClassWithConstructor()
@@ -167,7 +167,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'test2Func1'));
         $result = ob_get_clean();
-        $this->assertContains("testing args", $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase("testing args", $result, "Bad Result");
     }
 
     public function testHandleAnonymousArgMethod()
@@ -177,7 +177,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc2', 'arg1' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc2><response>Hello Davey</response><status>success</status></testFunc2></Zend_Rest_Server_Test>', $result, 'Bad Result');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc2><response>Hello Davey</response><status>success</status></testFunc2></Zend_Rest_Server_Test>', $result, 'Bad Result');
     }
 
     public function testHandleNamedArgMethod()
@@ -187,7 +187,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc3', 'who' => "Davey", 'when' => 'today'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc3><response>Hello Davey, How are you today</response><status>success</status></testFunc3></Zend_Rest_Server_Test>', $result, 'Bad Result');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc3><response>Hello Davey, How are you today</response><status>success</status></testFunc3></Zend_Rest_Server_Test>', $result, 'Bad Result');
     }
 
     public function testHandleStaticNoArgs()
@@ -197,7 +197,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc4'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc4><response>Hello World</response><status>success</status></testFunc4></Zend_Rest_Server_Test>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc4><response>Hello World</response><status>success</status></testFunc4></Zend_Rest_Server_Test>', $result, var_export($result, 1));
     }
 
     public function testHandleAnonymousArgStatic()
@@ -207,7 +207,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc5', 'arg1' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc5><response>Hello Davey</response><status>success</status></testFunc5></Zend_Rest_Server_Test>', $result, 'Bad Result');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc5><response>Hello Davey</response><status>success</status></testFunc5></Zend_Rest_Server_Test>', $result, 'Bad Result');
     }
 
     public function testHandleNamedArgStatic()
@@ -217,7 +217,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc6', 'who' => "Davey", 'when' => 'today'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc6><response>Hello Davey, How are you today</response><status>success</status></testFunc6></Zend_Rest_Server_Test>', $result, 'Bad Result');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc6><response>Hello Davey, How are you today</response><status>success</status></testFunc6></Zend_Rest_Server_Test>', $result, 'Bad Result');
     }
 
     public function testHandleMultipleAnonymousArgs()
@@ -227,7 +227,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc9', 'arg1' => "Hello", 'arg2' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc9 generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc9>', $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc9 generator="zend" version="1.0"><response>Hello Davey</response><status>success</status></Zend_Rest_Server_TestFunc9>', $result, "Bad Result");
     }
 
     public function testHandleReturnFalse()
@@ -237,7 +237,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc3'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc3 generator="zend" version="1.0"><response>0</response><status>success</status></Zend_Rest_Server_TestFunc3>', $result, 'Bas Response');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc3 generator="zend" version="1.0"><response>0</response><status>success</status></Zend_Rest_Server_TestFunc3>', $result, 'Bas Response');
     }
 
     public function testHandleReturnTrue()
@@ -247,7 +247,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc4'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc4 generator="zend" version="1.0"><response>1</response><status>success</status></Zend_Rest_Server_TestFunc4>', $result, 'Bas Response');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc4 generator="zend" version="1.0"><response>1</response><status>success</status></Zend_Rest_Server_TestFunc4>', $result, 'Bas Response');
     }
 
 
@@ -258,7 +258,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc5'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc5 generator="zend" version="1.0"><response>123</response><status>success</status></Zend_Rest_Server_TestFunc5>', $result, 'Bas Response');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc5 generator="zend" version="1.0"><response>123</response><status>success</status></Zend_Rest_Server_TestFunc5>', $result, 'Bas Response');
     }
 
     public function testHandleReturnString()
@@ -268,7 +268,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc6'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc6 generator="zend" version="1.0"><response>string</response><status>success</status></Zend_Rest_Server_TestFunc6>', $result, 'Bas Response');
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc6 generator="zend" version="1.0"><response>string</response><status>success</status></Zend_Rest_Server_TestFunc6>', $result, 'Bas Response');
     }
 
     public function testHandleReturnArray()
@@ -278,7 +278,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc7'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc7 generator="zend" version="1.0"><foo>bar</foo><baz>1</baz><key_1>0</key_1><bat>123</bat><status>success</status></Zend_Rest_Server_TestFunc7>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc7 generator="zend" version="1.0"><foo>bar</foo><baz>1</baz><key_1>0</key_1><bat>123</bat><status>success</status></Zend_Rest_Server_TestFunc7>', $result, $result);
     }
 
     public function testHandleReturnNestedArray()
@@ -288,10 +288,10 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc12'));
         $result = ob_get_clean();
-        $this->assertContains('Zend_Rest_Server_TestFunc12', $result, $result);
-        $this->assertContains('<foo><baz>1</baz>', $result, $result);
-        $this->assertContains('<bat>123</bat></foo><bar>baz</bar>', $result, $result);
-        $this->assertContains('</bar><status>success</status', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('Zend_Rest_Server_TestFunc12', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<foo><baz>1</baz>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<bat>123</bat></foo><bar>baz</bar>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('</bar><status>success</status', $result, $result);
     }
 
     public function testHandleMethodReturnObject()
@@ -301,11 +301,11 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'test2Struct'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test2', $result, $result);
-        $this->assertContains('<test2Struct', $result, $result);
-        $this->assertContains('<foo><baz>1</baz>', $result, $result);
-        $this->assertContains('<bat>123</bat></foo><bar>baz</bar>', $result, $result);
-        $this->assertContains('</bar><status>success</status', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test2', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<test2Struct', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<foo><baz>1</baz>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<bat>123</bat></foo><bar>baz</bar>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('</bar><status>success</status', $result, $result);
     }
 
     public function testHandleReturnObject()
@@ -315,7 +315,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc8'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc8 generator="zend" version="1.0"><foo>bar</foo><baz>1</baz><bat>123</bat><qux>0</qux><status>success</status></Zend_Rest_Server_TestFunc8>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc8 generator="zend" version="1.0"><foo>bar</foo><baz>1</baz><bat>123</bat><qux>0</qux><status>success</status></Zend_Rest_Server_TestFunc8>', $result, $result);
     }
 
     public function testHandleReturnSimpleXml()
@@ -325,7 +325,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'test2Xml'));
         $result = ob_get_clean();
-        $this->assertContains("<foo>bar</foo>", $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase("<foo>bar</foo>", $result, "Bad Result");
     }
 
     public function testHandleReturnDomDocument()
@@ -335,7 +335,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'test2DomDocument'));
         $result = ob_get_clean();
-        $this->assertContains("<foo>bar</foo>", $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase("<foo>bar</foo>", $result, "Bad Result");
     }
 
     public function testHandleReturnDomElement()
@@ -345,7 +345,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'test2DomElement'));
         $result = ob_get_clean();
-        $this->assertContains("<foo>bar</foo>", $result, "Bad Result");
+        $this->assertStringContainsStringIgnoringCase("<foo>bar</foo>", $result, "Bad Result");
     }
 
     /**
@@ -357,8 +357,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $server->setClass('Zend_Rest_Server_Test2');
         $server->returnResponse(true);
         $response = $server->handle(array('method' => 'test3DomElement'));
-        $this->assertContains('<status>failed</status>', $response);
-        $this->assertNotContains('<message>An unknown error occured. Please try again.</message>', $response);
+        $this->assertStringContainsStringIgnoringCase('<status>failed</status>', $response);
+        $this->assertStringNotContainsStringIgnoringCase('<message>An unknown error occured. Please try again.</message>', $response);
     }
 
     public function testFault()
@@ -370,7 +370,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $sx = simplexml_import_dom($fault);
         $this->assertTrue(isset($sx->response));
         $this->assertTrue(isset($sx->response->message));
-        $this->assertContains('testing fault', (string) $sx->response->message);
+        $this->assertStringContainsStringIgnoringCase('testing fault', (string) $sx->response->message);
     }
 
     public function testFaultWithoutException()
@@ -381,7 +381,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $sx = simplexml_import_dom($fault);
         $this->assertTrue(isset($sx->response));
         $this->assertTrue(isset($sx->response->message));
-        $this->assertContains('An unknown error occured. Please try again.', (string) $sx->response->message);
+        $this->assertStringContainsStringIgnoringCase('An unknown error occured. Please try again.', (string) $sx->response->message);
     }
 
     public function testHandleException()
@@ -391,8 +391,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc11'));
         $result = ob_get_clean();
-        $this->assertContains("<Zend_Rest_Server_TestFunc11", $result);
-        $this->assertContains("<message>testing rest server faults</message>", $result);
+        $this->assertStringContainsStringIgnoringCase("<Zend_Rest_Server_TestFunc11", $result);
+        $this->assertStringContainsStringIgnoringCase("<message>testing rest server faults</message>", $result);
     }
 
     public function testHandleClassMethodException()
@@ -402,9 +402,9 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'test2ThrowException'));
         $result = ob_get_clean();
-        $this->assertContains("<Zend_Rest_Server_Test2", $result);
-        $this->assertContains("<test2ThrowException>", $result);
-        $this->assertContains("<message>testing class method exception</message>", $result);
+        $this->assertStringContainsStringIgnoringCase("<Zend_Rest_Server_Test2", $result);
+        $this->assertStringContainsStringIgnoringCase("<test2ThrowException>", $result);
+        $this->assertStringContainsStringIgnoringCase("<message>testing class method exception</message>", $result);
     }
 
     public function testHandleVoid()
@@ -414,7 +414,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'Zend_Rest_Server_TestFunc10'));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_TestFunc10 generator="zend" version="1.0"><response/><status>success</status></Zend_Rest_Server_TestFunc10>', $result, $result);
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_TestFunc10 generator="zend" version="1.0"><response/><status>success</status></Zend_Rest_Server_TestFunc10>', $result, $result);
     }
 
     public function testGetHeaders()
@@ -425,7 +425,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $server->handle(array('method' => 'test2ThrowException'));
         $result = ob_get_clean();
         $headers = $server->getHeaders();
-        $this->assertContains('HTTP/1.0 400 Bad Request', $headers);
+        $this->assertStringContainsStringIgnoringCase('HTTP/1.0 400 Bad Request', $headers);
     }
 
     public function testReturnResponse()
@@ -445,7 +445,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $response = $server->handle(array('method' => 'test2Xml'));
         $result = ob_get_clean();
         $this->assertTrue(empty($result));
-        $this->assertContains('<foo>bar</foo>', $response);
+        $this->assertStringContainsStringIgnoringCase('<foo>bar</foo>', $response);
     }
 
     public function testGeneratedXmlEncodesScalarAmpersands()
@@ -457,7 +457,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $response = $server->handle(array('method' => 'testScalarEncoding'));
         $result = ob_get_clean();
         $this->assertTrue(empty($result));
-        $this->assertContains('This string has chars &amp; ampersands', $response);
+        $this->assertStringContainsStringIgnoringCase('This string has chars &amp; ampersands', $response);
     }
 
     public function testGeneratedXmlEncodesStructAmpersands()
@@ -469,7 +469,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $response = $server->handle(array('method' => 'testStructEncoding'));
         $result = ob_get_clean();
         $this->assertTrue(empty($result));
-        $this->assertContains('bar &amp; baz', $response);
+        $this->assertStringContainsStringIgnoringCase('bar &amp; baz', $response);
     }
 
     public function testGeneratedXmlEncodesFaultAmpersands()
@@ -481,7 +481,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $response = $server->handle(array('method' => 'testExceptionsEncoding'));
         $result = ob_get_clean();
         $this->assertTrue(empty($result));
-        $this->assertContains('testing class method exception &amp; encoding', $response);
+        $this->assertStringContainsStringIgnoringCase('testing class method exception &amp; encoding', $response);
     }
 
     /**
@@ -517,7 +517,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc6', 'arg2' => 'today', 'arg1' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc6><response>Hello Davey, How are you today</response><status>success</status></testFunc6></Zend_Rest_Server_Test>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<Zend_Rest_Server_Test generator="zend" version="1.0"><testFunc6><response>Hello Davey, How are you today</response><status>success</status></testFunc6></Zend_Rest_Server_Test>', $result, var_export($result, 1));
     }
 
     /**
@@ -534,7 +534,7 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $server->handle(array('method' => 'testFunc6', 'arg1' => 'Davey'));
         $result = ob_get_clean();
         $this->assertRegexp('#<message>Invalid Method Call to(.*?)(Missing argument\(s\): ).*?(</message>)#', $result);
-        $this->assertContains('<status>failed</status>', $result);
+        $this->assertStringContainsStringIgnoringCase('<status>failed</status>', $result);
     }
 
     /**
@@ -548,8 +548,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc7', 'arg1' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<status>success</status>', $result, var_export($result, 1));
-        $this->assertContains('<response>Hello Davey, How are you today</response>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<status>success</status>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<response>Hello Davey, How are you today</response>', $result, var_export($result, 1));
     }
 
     /**
@@ -561,8 +561,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $server->setClass('Zend_Rest_Server_Test2');
         $server->returnResponse(true);
         $response = $server->handle(array('method' => 'testCallingInvalidMethod'));
-        $this->assertContains('<status>failed</status>', $response);
-        $this->assertNotContains('<message>An unknown error occured. Please try again.</message>', $response);
+        $this->assertStringContainsStringIgnoringCase('<status>failed</status>', $response);
+        $this->assertStringNotContainsStringIgnoringCase('<message>An unknown error occured. Please try again.</message>', $response);
     }
 
     /**
@@ -574,8 +574,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $server->setClass('Zend_Rest_Server_Test2');
         $server->returnResponse(true);
         $response = $server->handle();
-        $this->assertContains('<status>failed</status>', $response);
-        $this->assertNotContains('<message>An unknown error occured. Please try again.</message>', $response);
+        $this->assertStringContainsStringIgnoringCase('<status>failed</status>', $response);
+        $this->assertStringNotContainsStringIgnoringCase('<message>An unknown error occured. Please try again.</message>', $response);
     }
 
     /**
@@ -588,8 +588,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc7', 'arg0' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<status>success</status>', $result, var_export($result, 1));
-        $this->assertContains('<response>Hello Davey, How are you today</response>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<status>success</status>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<response>Hello Davey, How are you today</response>', $result, var_export($result, 1));
     }
 
     /**
@@ -602,8 +602,8 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle(array('method' => 'testFunc7', 'who' => "Davey"));
         $result = ob_get_clean();
-        $this->assertContains('<status>success</status>', $result, var_export($result, 1));
-        $this->assertContains('<response>Hello Davey, How are you today</response>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<status>success</status>', $result, var_export($result, 1));
+        $this->assertStringContainsStringIgnoringCase('<response>Hello Davey, How are you today</response>', $result, var_export($result, 1));
     }
 }
 

@@ -40,7 +40,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_DescriptionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -60,7 +60,7 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->html)) {
             unset($this->html);
@@ -79,7 +79,7 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -93,9 +93,9 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
     public function testRendersDescriptionInParagraphTagsByDefault()
     {
         $html = $this->decorator->render('');
-        $this->assertContains('<p', $html, $html);
-        $this->assertContains('</p>', $html);
-        $this->assertContains($this->element->getDescription(), $html);
+        $this->assertStringContainsStringIgnoringCase('<p', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('</p>', $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getDescription(), $html);
         $this->html = $html;
     }
 
@@ -109,9 +109,9 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
     {
         $this->decorator->setTag('quote');
         $html = $this->decorator->render('');
-        $this->assertContains('<quote', $html, $html);
-        $this->assertContains('</quote>', $html);
-        $this->assertContains($this->element->getDescription(), $html);
+        $this->assertStringContainsStringIgnoringCase('<quote', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('</quote>', $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getDescription(), $html);
         $this->html = $html;
     }
 
@@ -119,9 +119,9 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
     {
         $this->decorator->setOption('tag', 'quote');
         $html = $this->decorator->render('');
-        $this->assertContains('<quote', $html, $html);
-        $this->assertContains('</quote>', $html);
-        $this->assertContains($this->element->getDescription(), $html);
+        $this->assertStringContainsStringIgnoringCase('<quote', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('</quote>', $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getDescription(), $html);
         $this->html = $html;
     }
 
@@ -143,10 +143,10 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
         $description = '<span>some spanned text</span>';
         $this->element->setDescription($description);
         $html = $this->decorator->render('');
-        $this->assertNotContains($description, $html);
-        $this->assertContains('&lt;', $html);
-        $this->assertContains('&gt;', $html);
-        $this->assertContains('some spanned text', $html);
+        $this->assertStringNotContainsStringIgnoringCase($description, $html);
+        $this->assertStringContainsStringIgnoringCase('&lt;', $html);
+        $this->assertStringContainsStringIgnoringCase('&gt;', $html);
+        $this->assertStringContainsStringIgnoringCase('some spanned text', $html);
     }
 
     public function testCanDisableEscapingDescription()
@@ -155,9 +155,9 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
         $this->element->setDescription($description);
         $this->decorator->setEscape(false);
         $html = $this->decorator->render('');
-        $this->assertContains($description, $html);
-        $this->assertNotContains('&lt;', $html);
-        $this->assertNotContains('&gt;', $html);
+        $this->assertStringContainsStringIgnoringCase($description, $html);
+        $this->assertStringNotContainsStringIgnoringCase('&lt;', $html);
+        $this->assertStringNotContainsStringIgnoringCase('&gt;', $html);
     }
 
     public function testCanSetEscapeFlagViaOption()
@@ -166,9 +166,9 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
         $this->element->setDescription($description);
         $this->decorator->setOption('escape', false);
         $html = $this->decorator->render('');
-        $this->assertContains($description, $html);
-        $this->assertNotContains('&lt;', $html);
-        $this->assertNotContains('&gt;', $html);
+        $this->assertStringContainsStringIgnoringCase($description, $html);
+        $this->assertStringNotContainsStringIgnoringCase('&lt;', $html);
+        $this->assertStringNotContainsStringIgnoringCase('&gt;', $html);
     }
 
     public function testDescriptionIsTranslatedWhenTranslationAvailable()
@@ -179,7 +179,7 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
         $this->element->setDescription('description')
                       ->setTranslator($translate);
         $html = $this->decorator->render('');
-        $this->assertContains($translations['description'], $html);
+        $this->assertStringContainsStringIgnoringCase($translations['description'], $html);
     }
 
     /**

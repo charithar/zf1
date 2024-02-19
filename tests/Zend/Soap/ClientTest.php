@@ -40,7 +40,7 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  */
-class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
+class Zend_Soap_ClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -53,7 +53,7 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('soap')) {
            $this->markTestSkipped('SOAP Extension is not loaded');

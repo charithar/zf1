@@ -34,7 +34,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
+class Zend_Http_Client_TestAdapterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test adapter
@@ -47,7 +47,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
      * Set up the test adapter before running the test
      *
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Zend_Http_Client_Adapter_Test();
     }
@@ -56,7 +56,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
      * Tear down the test adapter after running the test
      *
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->adapter = null;
     }

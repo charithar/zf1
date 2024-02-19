@@ -34,7 +34,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Sqs
  */
-class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Amazon_Sqs_OfflineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Amazon service consumer object
@@ -50,7 +50,7 @@ class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
      */
     protected $_httpClientAdapterTest;
     
-    public function setUp()
+    protected function setUp(): void
     {
         //$this->markTestSkipped('No offline tests for Zend_Service_Amazon_Sqs');
         

@@ -34,7 +34,7 @@ require_once 'Zend/Config.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
+abstract class Zend_Barcode_Object_TestCommon extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -49,12 +49,12 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
         return include_once (dirname(__FILE__) . "/_files/$fileName.php");
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_object = $this->_getBarcodeObject();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_object = null;
     }

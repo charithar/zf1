@@ -37,7 +37,7 @@ require_once 'Zend/Filter/Compress/Lzf.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Compress_LzfTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_Compress_LzfTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -50,7 +50,7 @@ class Zend_Filter_Compress_LzfTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('lzf')) {
             $this->markTestSkipped('This adapter needs the lzf extension');

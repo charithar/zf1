@@ -36,9 +36,9 @@ require_once 'Zend/Http/Response.php';
  * @group      Zend_Http
  * @group      Zend_Http_Response
  */
-class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_Http_ResponseTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     { }
 
     public function testGzipResponse ()

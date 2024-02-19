@@ -30,7 +30,7 @@ require_once 'Zend/Http/Client/Adapter/Socket.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service_Rackspace_Servers
  */
-class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Rackspace_Servers_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Rackspace Servers object
@@ -92,7 +92,7 @@ class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCa
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
             $this->markTestSkipped('Zend_Service_Rackspace_Servers_OnlineTest tests are not enabled');

@@ -39,7 +39,7 @@ require_once 'Zend/Validate/NotEmpty.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_NotEmptyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -64,7 +64,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_NotEmpty();
     }
@@ -515,7 +515,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
             $this->_validator->setType(true);
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Unknown', $e->getMessage());
         }
     }
 
@@ -568,7 +568,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($valid->isValid(''));
         $messages = $valid->getMessages();
         $this->assertTrue(array_key_exists('isEmpty', $messages));
-        $this->assertContains("can't be empty", $messages['isEmpty']);
+        $this->assertStringContainsStringIgnoringCase("can't be empty", $messages['isEmpty']);
     }
 
     /**

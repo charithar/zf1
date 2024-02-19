@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Hex.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_HexTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_HexTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Validate_Hex object
@@ -48,7 +48,7 @@ class Zend_Validate_HexTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_Hex();
     }

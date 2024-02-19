@@ -48,7 +48,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Placeholder_StandaloneContainerTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_Placeholder_StandaloneContainerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_View_Helper_Placeholder_StandaloneContainerTest extends PHPUnit_Frame
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
         if (Zend_Registry::isRegistered($regKey)) {
@@ -84,7 +84,7 @@ class Zend_View_Helper_Placeholder_StandaloneContainerTest extends PHPUnit_Frame
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -106,9 +106,9 @@ class Zend_View_Helper_Placeholder_StandaloneContainerTest extends PHPUnit_Frame
         $foo2->append('Bar');
 
         $test = $foo1->toString();
-        $this->assertContains('Foo', $test);
-        $this->assertContains(' - ', $test);
-        $this->assertContains('Bar', $test);
+        $this->assertStringContainsStringIgnoringCase('Foo', $test);
+        $this->assertStringContainsStringIgnoringCase(' - ', $test);
+        $this->assertStringContainsStringIgnoringCase('Bar', $test);
     }
 }
 

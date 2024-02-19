@@ -95,9 +95,9 @@ class Zend_Ldap_AllTests
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-class Zend_Ldap_SkipOnlineTests extends PHPUnit_Framework_TestCase
+class Zend_Ldap_SkipOnlineTests extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->markTestSkipped('Zend_Ldap online tests not enabled in TestConfiguration.php');
     }

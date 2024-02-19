@@ -38,7 +38,7 @@ require_once 'Zend/Auth/Adapter/Ldap.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Auth
  */
-class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_Ldap_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * LDAP connection options
@@ -52,7 +52,7 @@ class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
      */
     protected $_names = array();
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_options = array(
             'host' => TESTS_ZEND_LDAP_HOST,
@@ -171,7 +171,7 @@ class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($result->isValid());
         $this->assertThat($result->getCode(), $this->lessThanOrEqual(Zend_Auth_Result::FAILURE));
         $messages = $result->getMessages();
-        $this->assertContains('not found', $messages[0]);
+        $this->assertStringContainsStringIgnoringCase('not found', $messages[0]);
     }
 
     public function testAccountObjectRetrieval()

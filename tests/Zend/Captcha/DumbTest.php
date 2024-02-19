@@ -36,7 +36,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
-class Zend_Captcha_DumbTest extends PHPUnit_Framework_TestCase
+class Zend_Captcha_DumbTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -55,7 +55,7 @@ class Zend_Captcha_DumbTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->word)) {
             unset($this->word);
@@ -79,7 +79,7 @@ class Zend_Captcha_DumbTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -88,8 +88,8 @@ class Zend_Captcha_DumbTest extends PHPUnit_Framework_TestCase
         $id   = $this->captcha->generate('test');
         $word = $this->captcha->getWord();
         $html = $this->captcha->render(new Zend_View);
-        $this->assertContains(strrev($word), $html);
-        $this->assertNotContains($word, $html);
+        $this->assertStringContainsStringIgnoringCase(strrev($word), $html);
+        $this->assertStringNotContainsStringIgnoringCase($word, $html);
     }
 
     /**
@@ -118,7 +118,7 @@ class Zend_Captcha_DumbTest extends PHPUnit_Framework_TestCase
 
         $id   = $this->captcha->generate('test');
         $html = $this->captcha->render(new Zend_View);
-        $this->assertContains('Testing 123', $html);
+        $this->assertStringContainsStringIgnoringCase('Testing 123', $html);
     }
 }
 

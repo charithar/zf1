@@ -35,13 +35,13 @@ require_once 'Zend/Config.php';
  * @group      Zend_Service
  * @group      Zend_Service_ReCaptcha
  */
-class Zend_Service_ReCaptcha_MailHideTest extends PHPUnit_Framework_TestCase
+class Zend_Service_ReCaptcha_MailHideTest extends \PHPUnit\Framework\TestCase
 {
     protected $_publicKey = TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY;
     protected $_privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY;
     protected $_mailHide = null;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->_mailHide = new Zend_Service_ReCaptcha_MailHide();
     }
 

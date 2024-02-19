@@ -39,10 +39,10 @@ require_once dirname(__FILE__) . '/TestAsset/PopulatedStorage.php';
  * @group      Zend_Http
  * @group      Zend_Http_UserAgent
  */
-class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
+class Zend_Http_UserAgentTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->server                         = array();
         $this->server['os']                   = 'Windows_NT';
@@ -149,7 +149,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
         $userAgent = new Zend_Http_UserAgent($config);
 
         $config = $userAgent->getConfig();
-        $this->assertContains('Device/Browser/Features/Adapter.php', $config['mobile']['features']['path']);
+        $this->assertStringContainsStringIgnoringCase('Device/Browser/Features/Adapter.php', $config['mobile']['features']['path']);
     }
 
     public function testSetDefaultConfigAlone()

@@ -41,7 +41,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormTextTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -75,28 +75,28 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
     public function testIdSetFromName()
     {
         $element = $this->helper->formText('foo');
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('id="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('name="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('id="foo"', $element);
     }
 
     public function testSetIdFromAttribs()
     {
         $element = $this->helper->formText('foo', null, array('id' => 'bar'));
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('id="bar"', $element);
+        $this->assertStringContainsStringIgnoringCase('name="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('id="bar"', $element);
     }
 
     public function testSetValue()
     {
         $element = $this->helper->formText('foo', 'bar');
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('value="bar"', $element);
+        $this->assertStringContainsStringIgnoringCase('name="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $element);
     }
 
     public function testReadOnlyAttribute()
     {
         $element = $this->helper->formText('foo', null, array('readonly' => 'readonly'));
-        $this->assertContains('readonly="readonly"', $element);
+        $this->assertStringContainsStringIgnoringCase('readonly="readonly"', $element);
     }
 
     /**
@@ -130,14 +130,14 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
     public function testRendersAsHtmlByDefault()
     {
         $test = $this->helper->formText('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formText('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsStringIgnoringCase(' />', $test);
     }
 }
 

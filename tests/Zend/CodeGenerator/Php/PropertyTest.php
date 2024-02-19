@@ -34,10 +34,10 @@ require_once 'Zend/Reflection/Class.php';
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_PropertyTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setup()
+    protected function setUp(): void
     {
         if (!class_exists('Zend_CodeGenerator_Php_TestClassWithManyProperties')) {
             require_once dirname(__FILE__) . '/_files/TestClassWithManyProperties.php';

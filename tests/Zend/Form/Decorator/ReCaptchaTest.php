@@ -39,7 +39,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_ReCaptchaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $view = new Zend_View();
         $this->element   = new Zend_Form_Element_Captcha('captcha', array(
@@ -78,8 +78,8 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
     public function testDecoratorCreatesHiddenFieldsForChallengeAndResponse()
     {
         $html = $this->decorator->render('');
-        $this->assertContains('type="hidden" name="recaptcha_challenge_field" value="" id="captcha-challenge"', $html, $html);
-        $this->assertContains('type="hidden" name="recaptcha_response_field" value="" id="captcha-response"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('type="hidden" name="recaptcha_challenge_field" value="" id="captcha-challenge"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('type="hidden" name="recaptcha_response_field" value="" id="captcha-response"', $html, $html);
     }
 
     /** @group ZF-10991 */
@@ -87,23 +87,23 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
     {
         $html = $this->decorator->render('');
         // Test that we have script tags
-        $this->assertContains('<script type="text/javascript" language="JavaScript">', $html);
-        $this->assertContains('</script>', $html);
+        $this->assertStringContainsStringIgnoringCase('<script type="text/javascript" language="JavaScript">', $html);
+        $this->assertStringContainsStringIgnoringCase('</script>', $html);
 
         // Test that we create a DOM window.onload event, and trigger any previous
-        $this->assertContains('function windowOnLoad', $html);
-        $this->assertContains('old = window.onload', $html);
-        $this->assertContains('if (old)', $html);
+        $this->assertStringContainsStringIgnoringCase('function windowOnLoad', $html);
+        $this->assertStringContainsStringIgnoringCase('old = window.onload', $html);
+        $this->assertStringContainsStringIgnoringCase('if (old)', $html);
 
         //Test that we create IE/Mozilla zendBindEvent mediator
-        $this->assertContains('function zendBindEvent', $html);
+        $this->assertStringContainsStringIgnoringCase('function zendBindEvent', $html);
 
         // Test that we add an event listener for the form submit event
-        $this->assertContains('document.getElementById("captcha-challenge").form,', $html);
+        $this->assertStringContainsStringIgnoringCase('document.getElementById("captcha-challenge").form,', $html);
 
         // Test that we reset the hidden fields with the global recaptcha values
-        $this->assertContains('document.getElementById("captcha-challenge").value = document.getElementById("recaptcha_challenge_field").value', $html);
-        $this->assertContains('document.getElementById("captcha-response").value = document.getElementById("recaptcha_response_field").value', $html);
+        $this->assertStringContainsStringIgnoringCase('document.getElementById("captcha-challenge").value = document.getElementById("recaptcha_challenge_field").value', $html);
+        $this->assertStringContainsStringIgnoringCase('document.getElementById("captcha-response").value = document.getElementById("recaptcha_response_field").value', $html);
     }
 
     /** @group ZF-10991 */
@@ -111,8 +111,8 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
     {
         $this->element->setBelongsTo('contact');
         $html = $this->decorator->render('');
-        $this->assertContains('type="hidden" name="contact[recaptcha_challenge_field]" value="" id="contact-captcha-challenge"', $html, $html);
-        $this->assertContains('type="hidden" name="contact[recaptcha_response_field]" value="" id="contact-captcha-response"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('type="hidden" name="contact[recaptcha_challenge_field]" value="" id="contact-captcha-challenge"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('type="hidden" name="contact[recaptcha_response_field]" value="" id="contact-captcha-response"', $html, $html);
     }
 
     /** @group ZF-10991 */
@@ -120,9 +120,9 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
     {
         $this->element->setBelongsTo('contact');
         $html = $this->decorator->render('');
-        $this->assertContains('document.getElementById("contact-captcha-challenge").form,', $html);
-        $this->assertContains('document.getElementById("contact-captcha-challenge").value = document.getElementById("recaptcha_challenge_field").value', $html);
-        $this->assertContains('document.getElementById("contact-captcha-response").value = document.getElementById("recaptcha_response_field").value', $html);
+        $this->assertStringContainsStringIgnoringCase('document.getElementById("contact-captcha-challenge").form,', $html);
+        $this->assertStringContainsStringIgnoringCase('document.getElementById("contact-captcha-challenge").value = document.getElementById("recaptcha_challenge_field").value', $html);
+        $this->assertStringContainsStringIgnoringCase('document.getElementById("contact-captcha-response").value = document.getElementById("recaptcha_response_field").value', $html);
     }
 }
 

@@ -29,10 +29,10 @@ require_once 'Zend/Config.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_ManagerTest extends PHPUnit_Framework_TestCase
+class Zend_Cache_ManagerTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_cache_dir = $this->mkdir();
         $this->_cache = Zend_Cache::factory(
@@ -42,7 +42,7 @@ class Zend_Cache_ManagerTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->rmdir();
         $this->_cache = null;

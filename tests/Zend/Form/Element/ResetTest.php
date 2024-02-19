@@ -37,7 +37,7 @@ require_once 'Zend/Form/Element/Reset.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_ResetTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_ResetTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -57,7 +57,7 @@ class Zend_Form_Element_ResetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Reset('foo');
     }
@@ -68,7 +68,7 @@ class Zend_Form_Element_ResetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

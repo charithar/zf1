@@ -34,7 +34,7 @@ require_once 'Zend/Dojo/Data.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  */
-class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_DataTest extends \PHPUnit\Framework\TestCase
 {
     public $dojoData;
 
@@ -50,7 +50,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->dojoData = new Zend_Dojo_Data;
     }
@@ -119,7 +119,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             $this->dojoData->addItem($item);
             $this->fail('Should throw exception if no identifier present');
         } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('identifier', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('identifier', $e->getMessage());
         }
     }
 
@@ -134,7 +134,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             $this->dojoData->addItem($item);
             $this->fail('Should throw exception if no identifier present');
         } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('identifier', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('identifier', $e->getMessage());
         }
     }
 
@@ -181,7 +181,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             $this->dojoData->addItem('foo');
             $this->fail('Invalid item should throw error');
         } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('Only arrays and objects', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Only arrays and objects', $e->getMessage());
         }
     }
 
@@ -215,7 +215,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             $this->dojoData->addItem($item);
             $this->fail('Overwriting items via addItem() should throw error');
         } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('not allowed', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('not allowed', $e->getMessage());
         }
     }
 
@@ -388,7 +388,7 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
             $array = $this->dojoData->toArray();
             $this->fail('Serialization to array should throw error when no identifier is present in object');
         } catch (Zend_Dojo_Exception $e) {
-            $this->assertContains('present', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('present', $e->getMessage());
         }
     }
 

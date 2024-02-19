@@ -32,10 +32,10 @@ require_once 'Zend/Gdata.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_OpenSearch
  */
-class Zend_Gdata_OpenSearchTotalResultsTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_OpenSearchTotalResultsTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->openSearchTotalResultsText = file_get_contents(
                 'Zend/Gdata/_files/OpenSearchTotalResultsElementSample1.xml',
                 true);

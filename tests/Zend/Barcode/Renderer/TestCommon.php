@@ -30,7 +30,7 @@ require_once 'Zend/Config.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCase
+abstract class Zend_Barcode_Renderer_TestCommon extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -40,13 +40,13 @@ abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCa
 
     abstract protected function _getRendererObject($options = null);
 
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Barcode::setBarcodeFont(dirname(__FILE__) . '/../Object/_fonts/Vera.ttf');
         $this->_renderer = $this->_getRendererObject();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Barcode::setBarcodeFont('');
     }

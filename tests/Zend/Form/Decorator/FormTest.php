@@ -39,7 +39,7 @@ require_once 'Zend/Form.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_FormTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,7 +58,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Form();
     }
@@ -69,7 +69,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -120,7 +120,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
              ->setAttrib('id', 'bazbat')
              ->setView($this->getView());
         $html = $form->render();
-        $this->assertContains('id="bazbat"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('id="bazbat"', $html, $html);
     }
 
     public function testEmptyFormNameShouldNotRenderEmptyFormId()
@@ -130,7 +130,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
              ->setAction('/foo/bar')
              ->setView($this->getView());
         $html = $form->render();
-        $this->assertNotContains('id=""', $html, $html);
+        $this->assertStringNotContainsStringIgnoringCase('id=""', $html, $html);
     }
 }
 

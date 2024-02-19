@@ -37,7 +37,7 @@ require_once 'Zend/Form/Element/MultiCheckbox.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_MultiCheckboxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -56,7 +56,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_MultiCheckbox('foo');
     }
@@ -67,7 +67,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -151,7 +151,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
             ))
             ->setSeparator('--FooBarFunSep--');
         $html = $this->element->render($this->getView());
-        $this->assertContains($this->element->getSeparator(), $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getSeparator(), $html);
         $count = substr_count($html, $this->element->getSeparator());
         $this->assertEquals(4, $count);
     }
@@ -164,7 +164,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
         $this->element->addMultiOption(1, 'A');
         $this->element->addMultiOption(2, 'B');
         $html = $this->element->render($this->getView());
-        $this->assertContains('name="foo[]"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('name="foo[]"', $html, $html);
         $count = substr_count($html, 'name="foo[]"');
         $this->assertEquals(2, $count);
     }
@@ -201,7 +201,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
             if (!preg_match('#(<input[^>]*' . $key . '[^>]*>)#', $html, $m)) {
                 $this->fail('Missing input for a given multi option: ' . $html);
             }
-            $this->assertContains('checked="checked"', $m[1]);
+            $this->assertStringContainsStringIgnoringCase('checked="checked"', $m[1]);
         }
     }
 

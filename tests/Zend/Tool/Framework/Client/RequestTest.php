@@ -36,7 +36,7 @@ require_once 'Zend/Tool/Framework/Client/Request.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Client
  */
-class Zend_Tool_Framework_Client_RequestTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Client_RequestTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -44,7 +44,7 @@ class Zend_Tool_Framework_Client_RequestTest extends PHPUnit_Framework_TestCase
      */
     protected $_request = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_request = new Zend_Tool_Framework_Client_Request();
     }

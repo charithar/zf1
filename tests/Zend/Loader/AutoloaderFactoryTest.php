@@ -38,7 +38,7 @@ require_once 'Zend/Loader/StandardAutoloader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-class Zend_Loader_AutoloaderFactoryTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -46,7 +46,7 @@ class Zend_Loader_AutoloaderFactoryTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -66,7 +66,7 @@ class Zend_Loader_AutoloaderFactoryTest extends PHPUnit_Framework_TestCase
         $this->includePath = get_include_path();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Loader_AutoloaderFactory::unregisterAutoloaders();
         // Restore original autoloaders

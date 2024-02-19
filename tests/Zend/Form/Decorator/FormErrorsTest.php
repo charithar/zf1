@@ -41,7 +41,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_FormErrorsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -60,7 +60,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_FormErrors();
     }
@@ -71,7 +71,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -156,14 +156,14 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content, $test);
+        $this->assertStringContainsStringIgnoringCase($content, $test);
         foreach ($this->form->getMessages() as $name => $messages) {
             foreach ($messages as $key => $message) {
                 if (is_string($message)) {
-                    $this->assertContains($message, $test, var_export($messages, 1));
+                    $this->assertStringContainsStringIgnoringCase($message, $test, var_export($messages, 1));
                 } else {
                     foreach ($message as $m) {
-                        $this->assertContains($m, $test, var_export($messages, 1));
+                        $this->assertStringContainsStringIgnoringCase($m, $test, var_export($messages, 1));
                     }
                 }
             }
@@ -192,7 +192,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content . PHP_EOL . '<ul', $test);
+        $this->assertStringContainsStringIgnoringCase($content . PHP_EOL . '<ul', $test);
     }
 
     public function testRenderSeparatesContentAndErrorsWithCustomSeparatorWhenRequested()
@@ -201,7 +201,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content . $this->decorator->getSeparator() . '<ul', $test, $test);
+        $this->assertStringContainsStringIgnoringCase($content . $this->decorator->getSeparator() . '<ul', $test, $test);
     }
 
     public function testIgnoreSubFormsFlagShouldBeFalseByDefault()
@@ -213,11 +213,11 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
     {
         $this->setupForm();
         $markup = $this->decorator->render('');
-        $this->assertContains('>Sub Foo: </b>', $markup, $markup);
-        $this->assertContains('>Sub Bar: </b>', $markup, $markup);
-        $this->assertContains('>Master Foo: </b>', $markup);
-        $this->assertNotContains('>Master Bar: </b>', $markup);
-        $this->assertContains('>bar</b>', $markup);
+        $this->assertStringContainsStringIgnoringCase('>Sub Foo: </b>', $markup, $markup);
+        $this->assertStringContainsStringIgnoringCase('>Sub Bar: </b>', $markup, $markup);
+        $this->assertStringContainsStringIgnoringCase('>Master Foo: </b>', $markup);
+        $this->assertStringNotContainsStringIgnoringCase('>Master Bar: </b>', $markup);
+        $this->assertStringContainsStringIgnoringCase('>bar</b>', $markup);
     }
 
     public function testMarkupOptionsMayBePassedViaSetOptions()
@@ -258,9 +258,9 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $markup = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ($key == 'ignoreSubForms') {
-                $this->assertNotContains('Sub ', $markup);
+                $this->assertStringNotContainsStringIgnoringCase('Sub ', $markup);
             } else {
-                $this->assertContains($value, $markup);
+                $this->assertStringContainsStringIgnoringCase($value, $markup);
             }
         }
     }
@@ -272,11 +272,11 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
                    ->setIsArray(true);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content, $test);
+        $this->assertStringContainsStringIgnoringCase($content, $test);
         foreach ($this->form->getMessages() as $name => $messages) {
             while (($message = current($messages))) {
                 if (is_string($message)) {
-                    $this->assertContains($message, $test, var_export($messages, 1));
+                    $this->assertStringContainsStringIgnoringCase($message, $test, var_export($messages, 1));
                 }
                 if (false === next($messages) && is_array(prev($messages))) {
                     $messages = current($messages);
@@ -291,7 +291,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->form->addDecorator($this->decorator)
                    ->addError('form-badness');
         $html = $this->form->render();
-        $this->assertContains('form-badness', $html);
+        $this->assertStringContainsStringIgnoringCase('form-badness', $html);
 
         $this->decorator->setOnlyCustomFormErrors(true);
         $html = $this->form->render();
@@ -299,7 +299,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
 
         $this->decorator->setShowCustomFormErrors(false);
         $html = $this->form->render();
-        $this->assertNotContains('form-badness', $html);
+        $this->assertStringNotContainsStringIgnoringCase('form-badness', $html);
     }
 
 
@@ -339,7 +339,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->form->addDecorator($this->decorator)
                    ->addError('<strong>form-badness</strong>');
         $html = $this->form->render();
-        $this->assertContains('&lt;strong&gt;form-badness&lt;/strong&gt;', $html);
+        $this->assertStringContainsStringIgnoringCase('&lt;strong&gt;form-badness&lt;/strong&gt;', $html);
     }
 
     /**
@@ -359,8 +359,8 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->form->getDecorator('FormErrors')->setEscape(false);
 
         $html = $this->form->render();
-        $this->assertContains('<li><strong>form-badness</strong>', $html);
-        $this->assertContains('<li><b><strong>Sub Bar: </strong>', $html);
+        $this->assertStringContainsStringIgnoringCase('<li><strong>form-badness</strong>', $html);
+        $this->assertStringContainsStringIgnoringCase('<li><b><strong>Sub Bar: </strong>', $html);
     }
 
     /**
@@ -385,11 +385,11 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
 
         // Test
         $html = $this->form->render();
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<li><b>transleted label</b><ul class="errors">',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<li><b>translated name</b><ul class="errors">',
             $html
         );

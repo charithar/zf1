@@ -49,7 +49,7 @@ require_once 'Zend/Controller/Response/Cli.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Plugin
  */
-class Zend_Controller_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
 {
     public $controller;
 
@@ -66,7 +66,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->controller = Zend_Controller_Front::getInstance();
         $this->controller->resetInstance();
@@ -83,7 +83,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
             $broker->registerPlugin($plugin);
             $this->fail('Duplicate registry of plugin object should be disallowed');
         } catch (Exception $expected) {
-            $this->assertContains('already', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('already', $expected->getMessage());
         }
     }
 

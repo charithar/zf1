@@ -50,7 +50,7 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Module_AutoloaderTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -58,7 +58,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -83,7 +83,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -110,7 +110,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testDbTableResourceTypeShouldPointToModelsDbTableSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('models/DbTable', $resources['dbtable']['path']);
+        $this->assertStringContainsStringIgnoringCase('models/DbTable', $resources['dbtable']['path']);
     }
 
     public function testFormResourceTypeShouldBeLoadedByDefault()
@@ -121,7 +121,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testFormResourceTypeShouldPointToFormsSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('forms', $resources['form']['path']);
+        $this->assertStringContainsStringIgnoringCase('forms', $resources['form']['path']);
     }
 
     public function testModelResourceTypeShouldBeLoadedByDefault()
@@ -132,7 +132,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testModelResourceTypeShouldPointToModelsSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('models', $resources['model']['path']);
+        $this->assertStringContainsStringIgnoringCase('models', $resources['model']['path']);
     }
 
     public function testPluginResourceTypeShouldBeLoadedByDefault()
@@ -143,7 +143,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testPluginResourceTypeShouldPointToPluginsSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('plugins', $resources['plugin']['path']);
+        $this->assertStringContainsStringIgnoringCase('plugins', $resources['plugin']['path']);
     }
 
     public function testServiceResourceTypeShouldBeLoadedByDefault()
@@ -154,7 +154,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testServiceResourceTypeShouldPointToServicesSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('services', $resources['service']['path']);
+        $this->assertStringContainsStringIgnoringCase('services', $resources['service']['path']);
     }
 
     public function testViewHelperResourceTypeShouldBeLoadedByDefault()
@@ -165,7 +165,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testViewHelperResourceTypeShouldPointToViewHelperSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('views/helpers', $resources['viewhelper']['path']);
+        $this->assertStringContainsStringIgnoringCase('views/helpers', $resources['viewhelper']['path']);
     }
 
     public function testViewFilterResourceTypeShouldBeLoadedByDefault()
@@ -176,7 +176,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testViewFilterResourceTypeShouldPointToViewFilterSubdirectory()
     {
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('views/filters', $resources['viewfilter']['path']);
+        $this->assertStringContainsStringIgnoringCase('views/filters', $resources['viewfilter']['path']);
     }
 
     public function testDefaultResourceShouldBeModel()

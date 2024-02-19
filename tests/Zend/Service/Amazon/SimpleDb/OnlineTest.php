@@ -52,7 +52,7 @@ require_once 'Zend/Config/Ini.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Amazon_SimpleDb_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Amazon service consumer object
@@ -90,7 +90,7 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_amazon = new Zend_Service_Amazon_SimpleDb(
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
@@ -394,7 +394,7 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
                     $this->request('domainMetadata', array($tokenDomainName));
                     $this->fail('listDomains call with 3 domain maximum did not return last page');
                   } catch (Exception $e) {
-                    $this->assertContains('The specified domain does not exist', $e->getMessage());
+                    $this->assertStringContainsStringIgnoringCase('The specified domain does not exist', $e->getMessage());
                   }
                 }
               }
@@ -465,7 +465,7 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
         $this->request('createDomain', array($domainName));
         try {
             $domainListPage = $this->request('listDomains');
-            $this->assertContains($domainName, $domainListPage->getData());
+            $this->assertStringContainsStringIgnoringCase($domainName, $domainListPage->getData());
             // Delete the domain
             $this->request('deleteDomain', array($domainName));
         } catch(Exception $e) {
@@ -480,12 +480,12 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
         $this->request('createDomain', array($domainName));
         try {
             $domainListPage = $this->request('listDomains');
-            $this->assertContains($domainName, $domainListPage->getData());
+            $this->assertStringContainsStringIgnoringCase($domainName, $domainListPage->getData());
             $this->assertNull($domainListPage->getToken());
             // Delete the domain
             $this->request('deleteDomain', array($domainName));
             $domainListPage = $this->request('listDomains');
-            $this->assertNotContains($domainName, $domainListPage->getData());
+            $this->assertStringNotContainsStringIgnoringCase($domainName, $domainListPage->getData());
         } catch(Exception $e) {
             $this->request('deleteDomain', array($domainName));
             throw $e;
@@ -501,7 +501,7 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
 
         // $this->request('deleteDomain', array($this->_testDomainNamePrefix));

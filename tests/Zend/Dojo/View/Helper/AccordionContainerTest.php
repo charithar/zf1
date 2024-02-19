@@ -48,7 +48,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_View_Helper_AccordionContainerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
@@ -83,7 +83,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -137,9 +137,9 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
         $this->assertRegexp('/<div[^>]*(id="foo")/', $html);
         $this->assertEquals(2, substr_count($html, 'dijit.layout.AccordionPane'));
         $this->assertEquals(1, substr_count($html, 'dijit.layout.AccordionContainer'));
-        $this->assertContains('started', $html);
-        $this->assertContains('ended', $html);
-        $this->assertContains('Nested Content', $html);
+        $this->assertStringContainsStringIgnoringCase('started', $html);
+        $this->assertStringContainsStringIgnoringCase('ended', $html);
+        $this->assertStringContainsStringIgnoringCase('Nested Content', $html);
     }
 
     /**

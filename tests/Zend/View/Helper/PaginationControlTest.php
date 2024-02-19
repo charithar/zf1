@@ -38,7 +38,7 @@ require_once 'Zend/View/Helper/PaginationControl.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_PaginationControlTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_PaginationControl
@@ -77,7 +77,7 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
         $this->_paginator = Zend_Paginator::factory(range(1, 101));
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_viewHelper);
         unset($this->_paginator);
@@ -104,7 +104,7 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
     {
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('testPagination.phtml');
         $output = $this->_viewHelper->paginationControl($this->_paginator);
-        $this->assertContains('pagination control', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('pagination control', $output, $output);
         Zend_View_Helper_PaginationControl::setDefaultViewPartial(null);
     }
 
@@ -125,15 +125,15 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
     {
         // First we'll make sure the base case works
         $output = $this->_viewHelper->paginationControl($this->_paginator, 'All', 'testPagination.phtml');
-        $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('page count (11) equals pages in range (11)', $output, $output);
 
         Zend_Paginator::setDefaultScrollingStyle('All');
         $output = $this->_viewHelper->paginationControl($this->_paginator, null, 'testPagination.phtml');
-        $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('page count (11) equals pages in range (11)', $output, $output);
 
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('testPagination.phtml');
         $output = $this->_viewHelper->paginationControl($this->_paginator);
-        $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('page count (11) equals pages in range (11)', $output, $output);
     }
 
     /**
@@ -150,7 +150,7 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
             $this->fail('Could not find paginator in the view instance');
         }
 
-        $this->assertContains('pagination control', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('pagination control', $output, $output);
     }
 
     /**
@@ -194,7 +194,7 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
         $output = $this->_viewHelper->paginationControl($paginator);
-        $this->assertContains('page count (3)', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('page count (3)', $output, $output);
     }
 
     /**
@@ -210,7 +210,7 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
             $this->fail('Could not use object for sliding style');
         }
 
-        $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
+        $this->assertStringContainsStringIgnoringCase('page count (11) equals pages in range (11)', $output, $output);
     }
 }
 

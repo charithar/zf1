@@ -41,9 +41,9 @@ require_once dirname(__FILE__) . '/TestAsset/commontypes.php';
  * @group      Zend_Soap
  * @group      Zend_Soap_Server
  */
-class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
+class Zend_Soap_ServerTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('soap')) {
            $this->markTestSkipped('SOAP Extension is not loaded');
@@ -819,7 +819,7 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
         $fault = $server->fault("Faultmessage!");
 
         $this->assertTrue($fault instanceof SOAPFault);
-        $this->assertContains("Faultmessage!", $fault->getMessage());
+        $this->assertStringContainsStringIgnoringCase("Faultmessage!", $fault->getMessage());
     }
 
     public function testFaultWithUnregisteredException()
@@ -828,8 +828,8 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
         $fault = $server->fault(new Exception("MyException"));
 
         $this->assertTrue($fault instanceof SOAPFault);
-        $this->assertContains("Unknown error", $fault->getMessage());
-        $this->assertNotContains("MyException", $fault->getMessage());
+        $this->assertStringContainsStringIgnoringCase("Unknown error", $fault->getMessage());
+        $this->assertStringNotContainsStringIgnoringCase("MyException", $fault->getMessage());
     }
 
     public function testFaultWithRegisteredException()
@@ -839,8 +839,8 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
         $fault = $server->fault(new Exception("MyException"));
 
         $this->assertTrue($fault instanceof SOAPFault);
-        $this->assertNotContains("Unknown error", $fault->getMessage());
-        $this->assertContains("MyException", $fault->getMessage());
+        $this->assertStringNotContainsStringIgnoringCase("Unknown error", $fault->getMessage());
+        $this->assertStringContainsStringIgnoringCase("MyException", $fault->getMessage());
     }
 
     public function testFautlWithBogusInput()
@@ -848,7 +848,7 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
         $server = new Zend_Soap_Server();
         $fault = $server->fault(array("Here", "There", "Bogus"));
 
-        $this->assertContains("Unknown error", $fault->getMessage());
+        $this->assertStringContainsStringIgnoringCase("Unknown error", $fault->getMessage());
     }
 
     /**
@@ -918,7 +918,7 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
         $server->setClass('Zend_Soap_Server_TestClass');
         $response = $server->handle($request);
 
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<SOAP-ENV:Fault><faultcode>Receiver</faultcode><faultstring>Test Message</faultstring></SOAP-ENV:Fault>',
             $response
         );
@@ -1009,7 +1009,7 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
         $response = $server->handle($request);
-        $this->assertContains('Invalid XML', $response->getMessage());
+        $this->assertStringContainsStringIgnoringCase('Invalid XML', $response->getMessage());
     }
     */
 }

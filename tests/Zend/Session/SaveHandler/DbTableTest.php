@@ -37,7 +37,7 @@ require_once 'Zend/Session/SaveHandler/DbTable.php';
  * @group      Zend_Session
  * @group      Zend_Db_Table
  */
-class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
+class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var array
@@ -77,7 +77,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_setupDb($this->_saveHandlerTableConfig['primary']);
     }
@@ -87,7 +87,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         if ($this->_db instanceof Zend_Db_Adapter_Abstract) {
             $this->_dropTable();
@@ -110,7 +110,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
                 $saveHandler = new Zend_Session_SaveHandler_DbTable(null);
             $this->fail('Expected Zend_Session_SaveHandler_Exception not thrown');
         } catch (Zend_Session_SaveHandler_Exception $e) {
-            $this->assertContains('$config must be', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('$config must be', $e->getMessage());
         }
     }
 
@@ -543,7 +543,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (id = '$id') AND (save_path = '') AND (name = '')";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsStringIgnoringCase($partQueryExpected, $lastQuery);
 
         $configDb = array(
             'options' => array(
@@ -561,7 +561,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (\"id\" = '$id') AND (\"save_path\" = '') AND (\"name\" = '')";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsStringIgnoringCase($partQueryExpected, $lastQuery);
     }
 
     /**
@@ -586,7 +586,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (modified + lifetime < ";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsStringIgnoringCase($partQueryExpected, $lastQuery);
 
         $configDb = array(
             'options' => array(
@@ -604,7 +604,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (\"modified\" + \"lifetime\" < ";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsStringIgnoringCase($partQueryExpected, $lastQuery);
     }
 
     /**
@@ -652,7 +652,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
 /**
  * This class is used by Zend_Session_SaveHandler_AllTests to produce one skip message when pdo_sqlite is unavailable
  */
-class Zend_Session_SaveHandler_DbTableTestSkip extends PHPUnit_Framework_TestCase
+class Zend_Session_SaveHandler_DbTableTestSkip extends \PHPUnit\Framework\TestCase
 {
     public function testNothing()
     {

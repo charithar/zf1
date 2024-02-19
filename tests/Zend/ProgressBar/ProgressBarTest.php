@@ -43,7 +43,7 @@ require_once 'Zend/ProgressBar/Adapter.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
-class Zend_ProgressBar_ProgressBarTest extends PHPUnit_Framework_TestCase
+class Zend_ProgressBar_ProgressBarTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -62,7 +62,7 @@ class Zend_ProgressBar_ProgressBarTest extends PHPUnit_Framework_TestCase
             $progressBar = $this->_getProgressBar(1, 0);
             $this->fail('An expected Zend_Console_Exception has not been raised');
         } catch (Zend_ProgressBar_Exception $expected) {
-            $this->assertContains('$max must be greater than $min', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('$max must be greater than $min', $expected->getMessage());
         }
     }
 

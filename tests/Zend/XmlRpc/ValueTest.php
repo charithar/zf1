@@ -45,7 +45,7 @@ require_once 'Zend/Date.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
 {
     public $xmlRpcDateFormat = 'Ymd\\TH:i:s';
 
@@ -798,7 +798,7 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertXmlRpcType('base64', $val);
         $xml = $val->saveXml();
         $encoded = base64_encode($native);
-        $this->assertContains($encoded, $xml);
+        $this->assertStringContainsStringIgnoringCase($encoded, $xml);
     }
 
     /**

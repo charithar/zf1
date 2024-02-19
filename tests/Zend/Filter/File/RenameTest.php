@@ -37,7 +37,7 @@ require_once 'Zend/Filter/File/Rename.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_File_RenameTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Path to test files
@@ -113,7 +113,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (file_exists($this->_origFile)) {
             unlink($this->_origFile);
@@ -135,7 +135,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (!file_exists($this->_oldFile)) {
             copy($this->_origFile, $this->_oldFile);
@@ -401,7 +401,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('could not be renamed', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('could not be renamed', $e->getMessage());
         }
     }
 
@@ -450,7 +450,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
             $filter->addFile(1234);
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('Invalid options', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid options', $e->getMessage());
         }
     }
 
@@ -463,7 +463,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
             $filter = new Zend_Filter_File_Rename(1234);
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('Invalid options', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid options', $e->getMessage());
         }
     }
 }

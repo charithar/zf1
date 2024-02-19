@@ -37,7 +37,7 @@ require_once 'Zend/View/Helper/HtmlFlash.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HtmlFlashTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlFlash
@@ -70,7 +70,7 @@ class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
         $this->helper->setView($this->view);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -81,8 +81,8 @@ class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
 
         $objectStartElement = '<object data="/path/to/flash.swf" type="application/x-shockwave-flash">';
 
-        $this->assertContains($objectStartElement, $htmlFlash);
-        $this->assertContains('</object>', $htmlFlash);
+        $this->assertStringContainsStringIgnoringCase($objectStartElement, $htmlFlash);
+        $this->assertStringContainsStringIgnoringCase('</object>', $htmlFlash);
     }
 }
 

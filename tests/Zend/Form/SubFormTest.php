@@ -38,7 +38,7 @@ require_once 'Zend/Version.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
+class Zend_Form_SubFormTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -46,14 +46,14 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Form::setDefaultTranslator(null);
 
         $this->form = new Zend_Form_SubForm();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -107,8 +107,8 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
         $form->addSubForm($this->form, 'attributes');
         $html = $form->render(new Zend_View());
 
-        $this->assertContains('name="attributes[foo]"', $html);
-        $this->assertContains('name="attributes[bar]"', $html);
+        $this->assertStringContainsStringIgnoringCase('name="attributes[foo]"', $html);
+        $this->assertStringContainsStringIgnoringCase('name="attributes[bar]"', $html);
     }
 
     /**
@@ -126,7 +126,7 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
         $form->addSubForm($subForm, 'foobar')
              ->setView(new Zend_View);
         $html = $form->render();
-        $this->assertContains('>&#160;</dt>', $html  );
+        $this->assertStringContainsStringIgnoringCase('>&#160;</dt>', $html  );
     }
 
     /**

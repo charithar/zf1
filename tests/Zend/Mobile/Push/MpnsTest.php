@@ -37,10 +37,10 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
  */
-class Zend_Mobile_Push_MpnsTest extends PHPUnit_Framework_TestCase
+class Zend_Mobile_Push_MpnsTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Zend_Http_Client_Adapter_Test();
         $this->client = new Zend_Http_Client();

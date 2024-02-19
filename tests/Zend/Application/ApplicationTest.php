@@ -38,7 +38,7 @@ require_once 'Zend/Application.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
+class Zend_Application_ApplicationTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -46,7 +46,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -67,7 +67,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $this->iniOptions = array();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -174,7 +174,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
             ),
         ));
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertContains('Foo', $namespaces);
+        $this->assertStringContainsStringIgnoringCase('Foo', $namespaces);
     }
 
     public function testPassingIncludePathOptionShouldModifyIncludePath()
@@ -186,7 +186,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
             ),
         ));
         $test = get_include_path();
-        $this->assertContains($expected, $test);
+        $this->assertStringContainsStringIgnoringCase($expected, $test);
     }
 
     public function testPassingPhpSettingsSetsIniValues()
@@ -484,7 +484,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         ));
         $autoloader = $application->getAutoloader();
         $actual     = $autoloader->getZfPath();
-        $this->assertContains($latest, $actual);
+        $this->assertStringContainsStringIgnoringCase($latest, $actual);
     }
 
     /**

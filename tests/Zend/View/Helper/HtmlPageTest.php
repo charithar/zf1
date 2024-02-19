@@ -37,7 +37,7 @@ require_once 'Zend/View/Helper/HtmlPage.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlPage
@@ -70,7 +70,7 @@ class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
         $this->helper->setView($this->view);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -83,8 +83,8 @@ class Zend_View_Helper_HtmlPageTest extends PHPUnit_Framework_TestCase
                             . ' type="text/html"'
                             . ' classid="clsid:25336920-03F9-11CF-8FD0-00AA00686F13">';
 
-        $this->assertContains($objectStartElement, $htmlPage);
-        $this->assertContains('</object>', $htmlPage);
+        $this->assertStringContainsStringIgnoringCase($objectStartElement, $htmlPage);
+        $this->assertStringContainsStringIgnoringCase('</object>', $htmlPage);
     }
 }
 

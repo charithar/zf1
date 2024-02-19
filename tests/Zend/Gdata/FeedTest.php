@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/App/Util.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
  */
-class Zend_Gdata_FeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_FeedTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->etagLocalName = 'etag';
         $this->expectedEtag = 'W/"CE4BRXw4cCp7ImA9WxRVFEs."';
         $this->expectedMismatchExceptionMessage = "ETag mismatch";

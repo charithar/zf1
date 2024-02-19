@@ -34,7 +34,7 @@ require_once 'Zend/Loader/ClassMapAutoloader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-class Zend_Loader_ClassMapAutoloaderTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_ClassMapAutoloaderTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -42,7 +42,7 @@ class Zend_Loader_ClassMapAutoloaderTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -58,7 +58,7 @@ class Zend_Loader_ClassMapAutoloaderTest extends PHPUnit_Framework_TestCase
         $this->loader = new Zend_Loader_ClassMapAutoloader();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -159,7 +159,7 @@ class Zend_Loader_ClassMapAutoloaderTest extends PHPUnit_Framework_TestCase
                 $this->loader->registerAutoloadMaps($test);
                 $this->fail('Should not register non-traversable arguments');
             } catch (Zend_Loader_Exception_InvalidArgumentException $e) {
-                $this->assertContains('array or implement Traversable', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('array or implement Traversable', $e->getMessage());
             }
         }
     }

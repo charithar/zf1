@@ -42,7 +42,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormCheckboxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -56,7 +56,7 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -70,15 +70,15 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
     public function testIdSetFromName()
     {
         $element = $this->helper->formCheckbox('foo');
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('id="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('name="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('id="foo"', $element);
     }
 
     public function testSetIdFromAttribs()
     {
         $element = $this->helper->formCheckbox('foo', null, array('id' => 'bar'));
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('id="bar"', $element);
+        $this->assertStringContainsStringIgnoringCase('name="foo"', $element);
+        $this->assertStringContainsStringIgnoringCase('id="bar"', $element);
     }
 
     /**
@@ -104,7 +104,7 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
             'value'  => 'bar',
             'attribs'=> array('disable' => false)
         ));
-        $this->assertNotContains('disabled="disabled"', $html);
+        $this->assertStringNotContainsStringIgnoringCase('disabled="disabled"', $html);
     }
 
     public function testCanSelectCheckbox()
@@ -203,10 +203,10 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(2, count($matches[1]));
             foreach ($matches[1] as $element) {
                 if (strstr($element, 'hidden')) {
-                    $this->assertContains('baz', $element, 'Failed using ' . $html);
+                    $this->assertStringContainsStringIgnoringCase('baz', $element, 'Failed using ' . $html);
                 } else {
-                    $this->assertContains('bar', $element, 'Failed using ' . $html);
-                    $this->assertContains('checked', $element, 'Failed using ' . $html);
+                    $this->assertStringContainsStringIgnoringCase('bar', $element, 'Failed using ' . $html);
+                    $this->assertStringContainsStringIgnoringCase('checked', $element, 'Failed using ' . $html);
                 }
             }
         }
@@ -218,13 +218,13 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
     public function testCheckedAttributeNotRenderedIfItEvaluatesToFalse()
     {
         $test = $this->helper->formCheckbox('foo', 'value', array('checked' => false));
-        $this->assertNotContains('checked', $test);
+        $this->assertStringNotContainsStringIgnoringCase('checked', $test);
     }
 
     public function testCanSpecifyValue()
     {
         $test = $this->helper->formCheckbox('foo', 'bar');
-        $this->assertContains('value="bar"', $test);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $test);
     }
 
     /**
@@ -233,12 +233,12 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
     public function testShouldCheckValueIfValueMatchesCheckedOption()
     {
         $test = $this->helper->formCheckbox('foo', 'bar', array(), array('bar', 'baz'));
-        $this->assertContains('value="bar"', $test);
-        $this->assertContains('checked', $test);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $test);
+        $this->assertStringContainsStringIgnoringCase('checked', $test);
 
         $test = $this->helper->formCheckbox('foo', 'bar', array(), array('checked' => 'bar', 'unChecked' => 'baz'));
-        $this->assertContains('value="bar"', $test);
-        $this->assertContains('checked', $test);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $test);
+        $this->assertStringContainsStringIgnoringCase('checked', $test);
     }
 
     /**
@@ -247,7 +247,7 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
     public function testShouldOnlySetValueIfValueMatchesCheckedOption()
     {
         $test = $this->helper->formCheckbox('foo', 'baz', array(), array('bar', 'baz'));
-        $this->assertContains('value="bar"', $test);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $test);
     }
 
     /**
@@ -256,21 +256,21 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
     public function testShouldNotCheckValueIfValueDoesNotMatchCheckedOption()
     {
         $test = $this->helper->formCheckbox('foo', 'baz', array(), array('bar', 'baz'));
-        $this->assertContains('value="bar"', $test);
-        $this->assertNotContains('checked', $test);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $test);
+        $this->assertStringNotContainsStringIgnoringCase('checked', $test);
     }
 
     public function testRendersAsHtmlByDefault()
     {
         $test = $this->helper->formCheckbox('foo', 'bar');
-        $this->assertNotContains(' />', $test, $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test, $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formCheckbox('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsStringIgnoringCase(' />', $test);
     }
 
     /**
@@ -279,28 +279,28 @@ class Zend_View_Helper_FormCheckboxTest extends PHPUnit_Framework_TestCase
     public function testShouldNotShowHiddenFieldIfDisableIsTrue()
     {
         $test = $this->helper->formCheckbox('foo', 'bar', array('disable' => true));
-        $this->assertNotContains('type="hidden"', $test);
+        $this->assertStringNotContainsStringIgnoringCase('type="hidden"', $test);
     }
 
     public function testIntValueIsChecked()
     {
         $test = $this->helper->formCheckbox('foo', '1', array(), array('checked'=>1, 'unchecked'=>0));
-        $this->assertContains('checked="checked"', $test);
+        $this->assertStringContainsStringIgnoringCase('checked="checked"', $test);
 
         $test = $this->helper->formCheckbox('foo', '1', array(), array(1,0));
-        $this->assertContains('checked="checked"', $test);
+        $this->assertStringContainsStringIgnoringCase('checked="checked"', $test);
 
         $test = $this->helper->formCheckbox('foo', 1, array(), array('checked'=>1, 'unchecked'=>0));
-        $this->assertContains('checked="checked"', $test);
+        $this->assertStringContainsStringIgnoringCase('checked="checked"', $test);
 
         $test = $this->helper->formCheckbox('foo', 1, array(), array(1,0));
-        $this->assertContains('checked="checked"', $test);
+        $this->assertStringContainsStringIgnoringCase('checked="checked"', $test);
 
         $test = $this->helper->formCheckbox('foo', 0, array(), array('checked'=>1, 'unchecked'=>0));
-        $this->assertNotContains('checked="checked"', $test);
+        $this->assertStringNotContainsStringIgnoringCase('checked="checked"', $test);
 
         $test = $this->helper->formCheckbox('foo', 0, array(), array(1,0));
-        $this->assertNotContains('checked="checked"', $test);
+        $this->assertStringNotContainsStringIgnoringCase('checked="checked"', $test);
     }
 
     /**

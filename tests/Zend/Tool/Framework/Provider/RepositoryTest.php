@@ -41,7 +41,7 @@ require_once '_files/ProviderAltName.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Provider
  */
-class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Provider_RepositoryTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -49,7 +49,7 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
      */
     protected $_repository = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_repository = new Zend_Tool_Framework_Provider_Repository();
 
@@ -59,7 +59,7 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
         $this->_registry->setActionRepository(new Zend_Tool_Framework_Action_Repository());
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_registry->reset();
         $this->_repository = null;

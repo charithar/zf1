@@ -45,7 +45,7 @@ require_once 'Zend/Session.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
 {
     protected $_server;
 
@@ -55,14 +55,14 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_server = new Zend_Amf_Server();
         $this->_server->setProduction(false);
         Zend_Amf_Parse_TypeLoader::resetMap();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_server);
         //Zend_Amf_Parse_TypeLoader::resetMap();
@@ -721,7 +721,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($request instanceof Zend_Amf_Request_Http);
         $bodies  = $request->getAmfBodies();
         $this->assertEquals(0, count($bodies));
-        $this->assertContains('Endpoint', $content);
+        $this->assertStringContainsStringIgnoringCase('Endpoint', $content);
     }
 
     public function testSetRequestShouldAllowValidStringClassNames()
@@ -802,7 +802,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         foreach ($functions as $key => $value) {
             $this->assertTrue(strstr($key, '.') ? true : false, $key);
             $ns = substr($key, 0, strpos($key, '.'));
-            $this->assertContains($ns, $namespaces, $key);
+            $this->assertStringContainsStringIgnoringCase($ns, $namespaces, $key);
             $this->assertTrue($value instanceof Zend_Server_Reflection_Function_Abstract);
         }
     }
@@ -1014,8 +1014,8 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $this->_server->addDirectory(dirname(__FILE__)."/_files/services");
         $this->_server->addDirectory(dirname(__FILE__)."/_files/");
         $dirs = $this->_server->getDirectory();
-        $this->assertContains(dirname(__FILE__)."/_files/services/", $dirs);
-        $this->assertContains(dirname(__FILE__)."/_files/", $dirs);
+        $this->assertStringContainsStringIgnoringCase(dirname(__FILE__)."/_files/services/", $dirs);
+        $this->assertStringContainsStringIgnoringCase(dirname(__FILE__)."/_files/", $dirs);
     }
 
     public function testAddDirectoryService()
@@ -1111,7 +1111,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $this->_server->handle($request);
         $response = $this->_server->getResponse()->getAMFBodies();
         $this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
-        $this->assertContains("Oops, exception!", $response[0]->getData()->faultString);
+        $this->assertStringContainsStringIgnoringCase("Oops, exception!", $response[0]->getData()->faultString);
     }
 
 

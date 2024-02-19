@@ -49,7 +49,7 @@ require_once 'Zend/Layout.php';
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -70,7 +70,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Controller_Action_Helper_AutoCompleteTest_LayoutOverride::resetMvcInstance();
         Zend_Controller_Action_HelperBroker::resetHelpers();
@@ -92,7 +92,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -136,8 +136,8 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data, false);
         $decoded = Zend_Json::decode($encoded);
-        $this->assertContains('items', array_keys($decoded));
-        $this->assertContains('identifier', array_keys($decoded));
+        $this->assertStringContainsStringIgnoringCase('items', array_keys($decoded));
+        $this->assertStringContainsStringIgnoringCase('identifier', array_keys($decoded));
         $this->assertEquals('name', $decoded['identifier']);
 
         $test = array();
@@ -212,7 +212,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
             $encoded = $scriptaculous->encodeJson($data);
             $this->fail('Objects should be considered invalid');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('Invalid data', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid data', $e->getMessage());
         }
     }
 
@@ -222,11 +222,11 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
         $scriptaculous->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $formatted = $scriptaculous->direct($data);
-        $this->assertContains('<ul>', $formatted);
+        $this->assertStringContainsStringIgnoringCase('<ul>', $formatted);
         foreach ($data as $value) {
-            $this->assertContains('<li>' . $value . '</li>', $formatted);
+            $this->assertStringContainsStringIgnoringCase('<li>' . $value . '</li>', $formatted);
         }
-        $this->assertContains('</ul>', $formatted);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $formatted);
     }
 
     public function testScriptaculousHelperSendsResponseByDefault()

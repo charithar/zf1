@@ -41,7 +41,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormRadioTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -56,7 +56,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->view   = new Zend_View();
         $this->view->doctype('HTML4_LOOSE'); // Set default doctype
@@ -163,7 +163,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'listsep' => '--FunkySep--',
         ));
 
-        $this->assertContains('--FunkySep--', $html);
+        $this->assertStringContainsStringIgnoringCase('--FunkySep--', $html);
         $count = substr_count($html, '--FunkySep--');
         $this->assertEquals(2, $count);
     }
@@ -247,8 +247,8 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'options' => $options,
         ));
 
-        $this->assertNotContains($options['bar'], $html);
-        $this->assertContains('&lt;b&gt;Bar&lt;/b&gt;', $html);
+        $this->assertStringNotContainsStringIgnoringCase($options['bar'], $html);
+        $this->assertStringContainsStringIgnoringCase('&lt;b&gt;Bar&lt;/b&gt;', $html);
     }
 
     public function testXhtmlLabelsAreAllowed()
@@ -262,7 +262,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'attribs' => array('escape' => false)
         ));
 
-        $this->assertContains($options['bar'], $html);
+        $this->assertStringContainsStringIgnoringCase($options['bar'], $html);
     }
 
     /**
@@ -299,7 +299,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
         if (!preg_match('/(<input[^>]*?(value="bar")[^>]*>)/', $html, $matches)) {
             $this->fail('Radio for a given option was not found?');
         }
-        $this->assertContains('checked="checked"', $matches[1], var_export($matches, 1));
+        $this->assertStringContainsStringIgnoringCase('checked="checked"', $matches[1], var_export($matches, 1));
     }
 
     public function testOptionsWithMatchesInAnArrayOfValuesAreChecked()
@@ -319,7 +319,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             if (!preg_match('/(<input[^>]*?(value="' . $value . '")[^>]*>)/', $html, $matches)) {
                 $this->fail('Radio for a given option was not found?');
             }
-            $this->assertContains('checked="checked"', $matches[1], var_export($matches, 1));
+            $this->assertStringContainsStringIgnoringCase('checked="checked"', $matches[1], var_export($matches, 1));
         }
     }
 
@@ -381,7 +381,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'value'   => 'bar',
             'options' => $options,
         ));
-        $this->assertNotContains('style="white-space: nowrap;"', $html);
+        $this->assertStringNotContainsStringIgnoringCase('style="white-space: nowrap;"', $html);
     }
 
     /**
@@ -445,9 +445,9 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'options' => $options,
         ));
 
-        $this->assertContains('value="foo">', $html);
-        $this->assertContains('value="bar">', $html);
-        $this->assertContains('value="baz">', $html);
+        $this->assertStringContainsStringIgnoringCase('value="foo">', $html);
+        $this->assertStringContainsStringIgnoringCase('value="bar">', $html);
+        $this->assertStringContainsStringIgnoringCase('value="baz">', $html);
     }
 
     /**
@@ -465,9 +465,9 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'name'    => 'foo',
             'options' => $options,
         ));
-        $this->assertContains('value="foo" />', $html);
-        $this->assertContains('value="bar" />', $html);
-        $this->assertContains('value="baz" />', $html);
+        $this->assertStringContainsStringIgnoringCase('value="foo" />', $html);
+        $this->assertStringContainsStringIgnoringCase('value="bar" />', $html);
+        $this->assertStringContainsStringIgnoringCase('value="baz" />', $html);
     }
 
      /**
@@ -487,7 +487,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
              'options' => $options,
          ));
  
-         $this->assertContains('<br />', $html);
+         $this->assertStringContainsStringIgnoringCase('<br />', $html);
          $count = substr_count($html, '<br />');
          $this->assertEquals(2, $count);
      }
@@ -509,7 +509,7 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
              'options' => $options,
          ));
  
-         $this->assertContains('<br>', $html);
+         $this->assertStringContainsStringIgnoringCase('<br>', $html);
          $count = substr_count($html, '<br>');
          $this->assertEquals(2, $count);
      }

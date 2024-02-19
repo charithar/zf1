@@ -34,7 +34,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Photos
  */
-class Zend_Gdata_Photos_PhotosUserEntryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Photos_PhotosUserEntryTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $userEntry = null;
@@ -42,7 +42,7 @@ class Zend_Gdata_Photos_PhotosUserEntryTest extends PHPUnit_Framework_TestCase
     /**
       * Called before each test to setup any fixtures.
       */
-    public function setUp()
+    protected function setUp(): void
     {
         $userEntryText = file_get_contents(
                 '_files/TestUserEntry.xml',

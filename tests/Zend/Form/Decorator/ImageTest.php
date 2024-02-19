@@ -42,7 +42,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_ImageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -62,7 +62,7 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Image();
     }
@@ -73,7 +73,7 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -124,10 +124,10 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
         $this->decorator->setElement($element);
 
         $image = $this->decorator->render('');
-        $this->assertContains('<input', $image, $image);
-        $this->assertContains('src="foobar"', $image);
-        $this->assertContains('name="foo"', $image);
-        $this->assertContains('type="image"', $image);
+        $this->assertStringContainsStringIgnoringCase('<input', $image, $image);
+        $this->assertStringContainsStringIgnoringCase('src="foobar"', $image);
+        $this->assertStringContainsStringIgnoringCase('name="foo"', $image);
+        $this->assertStringContainsStringIgnoringCase('type="image"', $image);
     }
 
     public function testCanRenderImageWithinAdditionalTag()
@@ -168,9 +168,9 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
                         ->setOption('class', 'imageclass');
 
         $image = $this->decorator->render('');
-        $this->assertContains('class="imageclass"', $image);
-        $this->assertContains('onClick="foo()"', $image);
-        $this->assertContains('id="foo-element"', $image);
+        $this->assertStringContainsStringIgnoringCase('class="imageclass"', $image);
+        $this->assertStringContainsStringIgnoringCase('onClick="foo()"', $image);
+        $this->assertStringContainsStringIgnoringCase('id="foo-element"', $image);
     }
 }
 

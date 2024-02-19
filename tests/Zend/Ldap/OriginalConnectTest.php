@@ -39,11 +39,11 @@ require_once 'Zend/Ldap.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_OriginalConnectTest extends \PHPUnit\Framework\TestCase
 {
     protected $_options = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_options = array('host' => TESTS_ZEND_LDAP_HOST);
         if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
@@ -59,7 +59,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
             $ldap->connect();
             $this->fail('Expected exception for empty options');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('host parameter is required', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('host parameter is required', $zle->getMessage());
         }
     }
     public function testUnknownHostConnect()
@@ -70,7 +70,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for unknown host');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
     public function testPlainConnect()
@@ -83,7 +83,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid credentials', $zle->getMessage());
         }
     }
     public function testExplicitParamsConnect()
@@ -102,7 +102,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
                  ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid credentials', $zle->getMessage());
         }
     }
     public function testExplicitPortConnect()
@@ -119,7 +119,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
                  ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid credentials', $zle->getMessage());
         }
     }
     public function testBadPortConnect()
@@ -132,7 +132,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for unknown username');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
     public function testSetOptionsConnect()
@@ -143,7 +143,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid credentials', $zle->getMessage());
         }
     }
     public function testMultiConnect()
@@ -154,7 +154,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
                 $this->fail('Expected exception for unknown username');
             } catch (Zend_Ldap_Exception $zle) {
-                $this->assertContains('Invalid credentials', $zle->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Invalid credentials', $zle->getMessage());
             }
         }
     }
@@ -167,7 +167,7 @@ class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
                 $this->fail('Expected exception for unknown username');
             } catch (Zend_Ldap_Exception $zle) {
-                $this->assertContains('Invalid credentials', $zle->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Invalid credentials', $zle->getMessage());
             }
         }
     }

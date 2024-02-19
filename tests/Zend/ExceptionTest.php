@@ -30,7 +30,7 @@ require_once 'Zend/Exception.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_ExceptionTest extends PHPUnit_Framework_TestCase
+class Zend_ExceptionTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructorDefaults()
     {
@@ -64,8 +64,8 @@ class Zend_ExceptionTest extends PHPUnit_Framework_TestCase
         $p = new Zend_Exception('p', 0);
         $e = new Zend_Exception('e', 0, $p);
         $s = $e->__toString();
-        $this->assertContains('p', $s);
-        $this->assertContains('Next', $s);
-        $this->assertContains('e', $s);
+        $this->assertStringContainsStringIgnoringCase('p', $s);
+        $this->assertStringContainsStringIgnoringCase('Next', $s);
+        $this->assertStringContainsStringIgnoringCase('e', $s);
     }
 }

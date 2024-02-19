@@ -41,7 +41,7 @@ require_once 'Zend/Uri/Http.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_subscriber = null;
@@ -56,7 +56,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
         'adapter'     => 'Zend_Http_Client_Adapter_Socket'
     );
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (defined('TESTS_Zend_Feed_Pubsubhubbub_BASEURI') &&
             Zend_Uri_Http::check(TESTS_Zend_Feed_Pubsubhubbub_BASEURI)) {

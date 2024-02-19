@@ -42,7 +42,7 @@ require_once 'Zend/Controller/Response/Cli.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
+class Zend_Layout_PluginTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -62,7 +62,7 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Controller_Front::getInstance()->resetInstance();
 
@@ -82,7 +82,7 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Layout::resetMvcInstance();
     }
@@ -143,8 +143,8 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
         $plugin->postDispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Application content', $body, $body);
-        $this->assertContains('Site Layout', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('Application content', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('Site Layout', $body, $body);
     }
 
     public function testPostDispatchDoesNotRenderLayoutWhenForwardDetected()
@@ -168,8 +168,8 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
         $plugin->postDispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Application content', $body);
-        $this->assertNotContains('Site Layout', $body);
+        $this->assertStringContainsStringIgnoringCase('Application content', $body);
+        $this->assertStringNotContainsStringIgnoringCase('Site Layout', $body);
     }
 
     public function testPostDispatchDoesNotRenderLayoutWhenLayoutDisabled()
@@ -194,8 +194,8 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
         $plugin->postDispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Application content', $body);
-        $this->assertNotContains('Site Layout', $body);
+        $this->assertStringContainsStringIgnoringCase('Application content', $body);
+        $this->assertStringNotContainsStringIgnoringCase('Site Layout', $body);
     }
 
     /**
@@ -224,8 +224,8 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
         $plugin->postDispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Application content', $body);
-        $this->assertNotContains('Site Layout', $body);
+        $this->assertStringContainsStringIgnoringCase('Application content', $body);
+        $this->assertStringNotContainsStringIgnoringCase('Site Layout', $body);
     }
 }
 

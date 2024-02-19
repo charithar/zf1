@@ -35,7 +35,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Service_Rackspace_Files
  */
 class Zend_Service_Rackspace_Files_OfflineTest
-    extends PHPUnit_Framework_TestCase
+    extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to RackspaceFiles
@@ -77,7 +77,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->rackspace = new Zend_Service_Rackspace_Files('foo', 'bar');
 
@@ -212,7 +212,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
             'zf-object-test' . '-copy'
         );
         $this->assertTrue($result);
-        $this->assertNotContains('application/x-www-form-urlencoded', $this->rackspace->getHttpClient()->getLastRequest());
+        $this->assertStringNotContainsStringIgnoringCase('application/x-www-form-urlencoded', $this->rackspace->getHttpClient()->getLastRequest());
     }
 
     public function testGetObjects()

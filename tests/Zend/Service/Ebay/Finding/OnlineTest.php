@@ -32,7 +32,7 @@ require_once 'Zend/Service/Ebay/Finding.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Ebay_Finding_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Ebay_Finding_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Service_Ebay_Finding
@@ -48,7 +48,7 @@ class Zend_Service_Ebay_Finding_OnlineTest extends PHPUnit_Framework_TestCase
         Zend_Rest_Client::setHttpClient(new Zend_Http_Client());
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Rest_Client::setHttpClient($this->_httpClientOriginal);
     }
@@ -63,7 +63,7 @@ class Zend_Service_Ebay_Finding_OnlineTest extends PHPUnit_Framework_TestCase
             $this->fail('No exception found');
         } catch (Exception $e) {
             $this->assertTrue($e instanceof Zend_Service_Ebay_Finding_Exception);
-            $this->assertContains('eBay error', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('eBay error', $e->getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ class Zend_Service_Ebay_Finding_OnlineTest extends PHPUnit_Framework_TestCase
             $this->fail('No exception found for page #0');
         } catch (Exception $e) {
             $this->assertTrue($e instanceof Zend_Service_Ebay_Finding_Exception);
-            $this->assertContains('Page number ', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Page number ', $e->getMessage());
         }
 
         // out of range, one page after last one
@@ -145,7 +145,7 @@ class Zend_Service_Ebay_Finding_OnlineTest extends PHPUnit_Framework_TestCase
             $this->fail("No exception found for page out of range #$number");
         } catch (Exception $e) {
             $this->assertTrue($e instanceof Zend_Service_Ebay_Finding_Exception);
-            $this->assertContains('Page number ', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Page number ', $e->getMessage());
         }
 
         // page next
@@ -180,9 +180,9 @@ class Zend_Service_Ebay_Finding_OnlineTest extends PHPUnit_Framework_TestCase
  * @group      Zend_Service
  * @group      Zend_Service_Ebay
  */
-class Zend_Service_Ebay_Finding_OnlineSkipTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Ebay_Finding_OnlineSkipTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->markTestSkipped('Zend_Service_Ebay online tests not enabled with an APPID in TestConfiguration.php');
     }

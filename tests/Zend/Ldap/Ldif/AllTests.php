@@ -61,9 +61,9 @@ class Zend_Ldap_Ldif_AllTests
     }
 }
 
-class Zend_Ldap_Ldif_SkipOnlineTests extends PHPUnit_Framework_TestCase
+class Zend_Ldap_Ldif_SkipOnlineTests extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->markTestSkipped('Zend_Ldap_Ldif online tests not enabled in TestConfiguration.php');
     }

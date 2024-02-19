@@ -32,7 +32,7 @@ require_once 'Zend/Validate/Sitemap/Loc.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_Sitemap_LocTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Validator
@@ -95,7 +95,7 @@ class Zend_Validate_Sitemap_LocTest extends PHPUnit_Framework_TestCase
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('is not a valid', current($messages));
+            $this->assertStringContainsStringIgnoringCase('is not a valid', current($messages));
         }
     }
 
@@ -112,7 +112,7 @@ class Zend_Validate_Sitemap_LocTest extends PHPUnit_Framework_TestCase
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('String expected', current($messages));
+            $this->assertStringContainsStringIgnoringCase('String expected', current($messages));
         }
     }
 

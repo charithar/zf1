@@ -32,10 +32,10 @@ class Test_Http_Client_19485876 extends Zend_Http_Client {}
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Oauth
  */
-class Zend_OauthTest extends PHPUnit_Framework_TestCase
+class Zend_OauthTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Oauth::clearHttpClient();
     }
@@ -180,8 +180,8 @@ class Zend_OauthTest extends PHPUnit_Framework_TestCase
         $client->setUri('http://oauth.example.com');
         $client->prepareOauth();
 
-        $this->assertNotContains('realm=""',$client->getHeader('Authorization'));
-        $this->assertContains('realm="someRealm"',$client->getHeader('Authorization'));
+        $this->assertStringNotContainsStringIgnoringCase('realm=""',$client->getHeader('Authorization'));
+        $this->assertStringContainsStringIgnoringCase('realm="someRealm"',$client->getHeader('Authorization'));
     }
     
     /**
@@ -217,9 +217,9 @@ class Zend_OauthTest extends PHPUnit_Framework_TestCase
         
         // Ensure that parameter 'test' is unchanged, as URI parameters
         // should take precedence over ones set with setParameterGet
-        $this->assertContains('test=FooBar', $queryString);
+        $this->assertStringContainsStringIgnoringCase('test=FooBar', $queryString);
         
         // Ensure that new parameter was added
-        $this->assertContains('second=TestTest', $queryString);
+        $this->assertStringContainsStringIgnoringCase('second=TestTest', $queryString);
     }
 }

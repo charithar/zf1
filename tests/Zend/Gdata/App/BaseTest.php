@@ -31,9 +31,9 @@ require_once 'Zend/Gdata/App/MockBase.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
-class Zend_Gdata_App_BaseTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_App_BaseTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->fileName = 'Zend/Gdata/App/_files/FeedSample1.xml';
         $this->base = new Zend_Gdata_App_MockBase();

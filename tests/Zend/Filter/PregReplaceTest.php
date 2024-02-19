@@ -42,7 +42,7 @@ require_once 'Zend/Filter/PregReplace.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_PregReplaceTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_PregReplaceTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -55,7 +55,7 @@ class Zend_Filter_PregReplaceTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->filter = new Zend_Filter_PregReplace();
     }

@@ -32,7 +32,7 @@ require_once 'Zend/XmlRpc/Fault.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_FaultTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_XmlRpc_Fault object
@@ -43,7 +43,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_fault = new Zend_XmlRpc_Fault();
     }
@@ -51,7 +51,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_fault);
     }

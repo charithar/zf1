@@ -36,7 +36,7 @@ require_once 'Zend/Service/Delicious.php';
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Delicious_PublicDataTest extends \PHPUnit\Framework\TestCase
 {
     const TEST_UNAME = 'zfTestUser';
     const TEST_PASS  = 'zfuser';
@@ -50,7 +50,7 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $httpClient = new Zend_Http_Client();
         $httpClient->setConfig(array(
@@ -138,7 +138,7 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
 
         foreach ($filterPostList as $post) {
             $this->assertTrue(is_array($post->getTags()));
-            $this->assertContains('zfSite', $post->getTags());
+            $this->assertStringContainsStringIgnoringCase('zfSite', $post->getTags());
         }
     }
 

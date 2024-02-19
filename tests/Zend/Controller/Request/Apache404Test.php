@@ -40,7 +40,7 @@ require_once 'Zend/Controller/Request/Apache404.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
-class Zend_Controller_Request_Apache404Test extends PHPUnit_Framework_TestCase
+class Zend_Controller_Request_Apache404Test extends \PHPUnit\Framework\TestCase
 {
     /**
      * Copy of $_SERVER
@@ -61,12 +61,12 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_server = $_SERVER;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $_SERVER = $this->_server;
     }

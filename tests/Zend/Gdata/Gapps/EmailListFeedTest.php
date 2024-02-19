@@ -32,14 +32,14 @@ require_once 'Zend/Gdata/Gapps/EmailListFeed.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_Gapps_EmailListFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Gapps_EmailListFeedTest extends \PHPUnit\Framework\TestCase
 {
     protected $emailListFeed = null;
 
     /**
       * Called before each test to setup any fixtures.
       */
-    public function setUp()
+    protected function setUp(): void
     {
         $emailListFeedText = file_get_contents(
                 'Zend/Gdata/Gapps/_files/EmailListFeedDataSample1.xml',

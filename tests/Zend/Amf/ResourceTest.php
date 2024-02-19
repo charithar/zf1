@@ -38,7 +38,7 @@ require_once 'Zend/Amf/Value/Messaging/RemotingMessage.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_ResourceTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -54,7 +54,7 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_server = new Zend_Amf_Server();
         $this->_server->setProduction(false);
@@ -81,7 +81,7 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
     public function testFile()
     {
         $resp = $this->_callService("returnFile");
-        $this->assertContains("test data", $resp->getResponse());
+        $this->assertStringContainsStringIgnoringCase("test data", $resp->getResponse());
     }
 
     /**
@@ -95,7 +95,7 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
         try {
             $this->_callService("returnCtx");
         } catch(Zend_Amf_Server_Exception $e) {
-            $this->assertContains("serialize resource type", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("serialize resource type", $e->getMessage());
             return;
         }
         $this->fail("Failed to throw exception on unknown resource");
@@ -109,8 +109,8 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
     {
         Zend_Amf_Parse_TypeLoader::addResourceDirectory("Test_Resource", dirname(__FILE__)."/Resources");
         $resp = $this->_callService("returnCtx");
-        $this->assertContains("Accept-language:", $resp->getResponse());
-        $this->assertContains("foo=bar", $resp->getResponse());
+        $this->assertStringContainsStringIgnoringCase("Accept-language:", $resp->getResponse());
+        $this->assertStringContainsStringIgnoringCase("foo=bar", $resp->getResponse());
     }
 
     /**
@@ -121,8 +121,8 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
     {
         Zend_Amf_Parse_TypeLoader::setResourceLoader(new Zend_Amf_TestResourceLoader("2"));
         $resp = $this->_callService("returnCtx");
-        $this->assertContains("Accept-language:", $resp->getResponse());
-        $this->assertContains("foo=bar", $resp->getResponse());
+        $this->assertStringContainsStringIgnoringCase("Accept-language:", $resp->getResponse());
+        $this->assertStringContainsStringIgnoringCase("foo=bar", $resp->getResponse());
     }
 
     /**
@@ -135,7 +135,7 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
         try {
             $resp = $this->_callService("returnCtx");
         } catch(Zend_Amf_Server_Exception $e) {
-            $this->assertContains("Could not call parse()", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("Could not call parse()", $e->getMessage());
             return;
         }
         $this->fail("Failed to throw exception on unknown resource");

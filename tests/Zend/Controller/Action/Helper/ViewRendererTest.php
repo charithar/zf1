@@ -47,7 +47,7 @@ require_once dirname(__FILE__) . '/../../_files/modules/bar/controllers/IndexCon
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Base path to controllers, views
@@ -173,7 +173,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $scriptPaths = $this->helper->view->getScriptPaths();
         $this->assertEquals($count, count($scriptPaths), var_export($scriptPaths, 1));
-        $this->assertContains($module, $scriptPaths[0]);
+        $this->assertStringContainsStringIgnoringCase($module, $scriptPaths[0]);
 
         $helperPaths = $this->helper->view->getHelperPaths();
         $test        = ucfirst($module) . '_View_Helper_';
@@ -276,7 +276,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $scriptPaths = $this->helper->view->getScriptPaths();
         $scriptPath  = $scriptPaths[0];
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             $this->_normalizePath($viewDir),
             $this->_normalizePath($scriptPath)
             );
@@ -323,7 +323,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->postDispatch();
 
         $content = $this->response->getBody();
-        $this->assertNotContains('Rendered index/test.phtml', $this->response->getBody());
+        $this->assertStringNotContainsStringIgnoringCase('Rendered index/test.phtml', $this->response->getBody());
     }
 
     public function testNoRenderFlag()
@@ -401,7 +401,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->postDispatch();
 
         $content = $this->response->getBody();
-        $this->assertContains('Rendered index/test.phtml in bar module', $content);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $content);
     }
 
     public function testPostDispatchDoesNothingOnForward()
@@ -415,7 +415,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->postDispatch();
 
         $content = $this->response->getBody();
-        $this->assertNotContains('Rendered index/test.phtml in bar module', $content);
+        $this->assertStringNotContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $content);
         $this->assertTrue(empty($content));
     }
 
@@ -431,7 +431,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->postDispatch();
 
         $content = $this->response->getBody();
-        $this->assertNotContains('Rendered index/test.phtml in bar module', $content);
+        $this->assertStringNotContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $content);
         $this->assertTrue(empty($content));
     }
 
@@ -444,7 +444,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->postDispatch();
 
         $content = $this->response->getBody();
-        $this->assertNotContains('Rendered index/test.phtml in bar module', $content);
+        $this->assertStringNotContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $content);
         $this->assertTrue(empty($content));
     }
 
@@ -458,7 +458,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->postDispatch();
 
         $content = $this->response->getBody();
-        $this->assertNotContains('Rendered index/test.phtml in bar module', $content);
+        $this->assertStringNotContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $content);
         $this->assertTrue(empty($content));
     }
 
@@ -556,7 +556,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->renderScript('index/test.phtml');
         $body = $this->response->getBody();
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testRenderScriptToNamedResponseSegment()
@@ -567,7 +567,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->renderScript('index/test.phtml', 'foo');
         $body = $this->response->getBody('foo');
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testRenderScriptToPreviouslyNamedResponseSegment()
@@ -579,7 +579,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->setResponseSegment('foo');
         $this->helper->renderScript('index/test.phtml');
         $body = $this->response->getBody('foo');
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testRenderWithDefaults()
@@ -590,7 +590,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->render();
         $body = $this->response->getBody();
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testRenderToSpecifiedAction()
@@ -601,7 +601,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->render('test');
         $body = $this->response->getBody();
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testRenderWithNoController()
@@ -612,7 +612,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->render(null, null, true);
         $body = $this->response->getBody();
-        $this->assertContains('Rendered test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered test.phtml in bar module', $body);
     }
 
     public function testRenderToNamedSegment()
@@ -623,7 +623,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->render(null, 'foo');
         $body = $this->response->getBody('foo');
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testRenderBySpec()
@@ -634,7 +634,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->renderBySpec('foo', array('controller' => 'test', 'suffix' => 'php'));
         $body = $this->response->getBody();
-        $this->assertContains('Rendered test/foo.php', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered test/foo.php', $body);
     }
 
     public function testRenderBySpecToNamedResponseSegment()
@@ -645,7 +645,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->renderBySpec('foo', array('controller' => 'test', 'suffix' => 'php'), 'foo');
         $body = $this->response->getBody('foo');
-        $this->assertContains('Rendered test/foo.php', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered test/foo.php', $body);
     }
 
     public function testInitDoesNotInitViewWhenNoViewRendererSet()
@@ -731,7 +731,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $this->helper->render();
         $body = $this->response->getBody();
-        $this->assertContains('Rendered test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered test.phtml in bar module', $body);
     }
 
     public function testCustomInflectorUsesViewRendererTargetWhenPassedInWithReferenceFlag()
@@ -760,7 +760,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $this->helper->render();
         $body = $this->response->getBody();
-        $this->assertContains('Rendered index/test.phtml in bar module', $body);
+        $this->assertStringContainsStringIgnoringCase('Rendered index/test.phtml in bar module', $body);
     }
 
     public function testStockInflectorAllowsSubDirectoryViewScripts()
@@ -825,7 +825,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $this->helper->render();
         $body = $this->response->getBody();
-        $this->assertContains('fooUseHelper invoked', $body, 'Received ' . $body);
+        $this->assertStringContainsStringIgnoringCase('fooUseHelper invoked', $body, 'Received ' . $body);
     }
     /**
      * @group ZF-10725
@@ -850,7 +850,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $this->helper->render();
         $body = $this->response->getBody();
-        $this->assertContains('SampleZfHelper invoked', $body, 'Received ' . $body);
+        $this->assertStringContainsStringIgnoringCase('SampleZfHelper invoked', $body, 'Received ' . $body);
     }
     
     /**

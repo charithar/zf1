@@ -37,7 +37,7 @@ require_once 'Zend/Loader/Autoloader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Resource_NavigationTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -45,7 +45,7 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -65,7 +65,7 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         Zend_Registry::_unsetInstance();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Navigation_Page::setDefaultPageType();
 

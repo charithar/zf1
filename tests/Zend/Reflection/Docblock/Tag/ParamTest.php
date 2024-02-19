@@ -34,13 +34,13 @@ require_once 'Zend/Reflection/Docblock/Tag/Param.php';
  * @group      Zend_Reflection_Docblock_Tag
  * @group      Zend_Reflection_Docblock_Tag_Param
  */
-class Zend_Reflection_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
+class Zend_Reflection_Docblock_Tag_ParamTest extends \PHPUnit\Framework\TestCase
 {
 
 
     static protected $_sampleClassFileRequired = false;
 
-    public function setup()
+    protected function setUp(): void
     {
         if (self::$_sampleClassFileRequired === false) {
             $fileToRequire = dirname(dirname(dirname(__FILE__))) . '/_files/TestSampleClass.php';

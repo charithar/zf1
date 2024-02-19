@@ -37,7 +37,7 @@ require_once 'Zend/Filter/Compress/Rar.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Compress_RarTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_Compress_RarTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -50,7 +50,7 @@ class Zend_Filter_Compress_RarTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('rar')) {
             $this->markTestSkipped('This adapter needs the rar extension');
@@ -86,7 +86,7 @@ class Zend_Filter_Compress_RarTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $files = array(
             dirname(__FILE__) . '/../_files/zipextracted.txt',
@@ -219,7 +219,7 @@ class Zend_Filter_Compress_RarTest extends PHPUnit_Framework_TestCase
             $filter->setTarget('/unknown/path/to/file.txt');
             $this->fails('Exception expected');
         } catch(Zend_Filter_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
     }
 
@@ -236,14 +236,14 @@ class Zend_Filter_Compress_RarTest extends PHPUnit_Framework_TestCase
             $filter->compress('test.txt');
             $this->fails('Exception expected');
         } catch (Exception $e) {
-            $this->assertContains('No compression callback', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No compression callback', $e->getMessage());
         }
 
         try {
             $filter->setCallback('invalidCallback');
             $this->fails('Exception expected');
         } catch (Exception $e) {
-            $this->assertContains('Callback can not be accessed', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Callback can not be accessed', $e->getMessage());
         }
 
         $callback = array('Zend_Filter_Compress_RarTest', 'rarCompress');

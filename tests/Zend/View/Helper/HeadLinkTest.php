@@ -48,7 +48,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HeadLink
@@ -78,7 +78,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         foreach (array(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
             if (Zend_Registry::isRegistered($key)) {
@@ -98,7 +98,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -175,11 +175,11 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
 
         foreach ($links as $link) {
             $substr = ' href="' . $link['href'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
             $substr = ' rel="' . $link['rel'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
             $substr = ' type="' . $link['type'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
         }
 
         $order = array();
@@ -211,11 +211,11 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
 
         foreach ($links as $link) {
             $substr = ' href="' . $link['href'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
             $substr = ' rel="' . $link['rel'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
             $substr = ' type="' . $link['type'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
         }
 
         $order = array();
@@ -252,11 +252,11 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
 
         foreach ($links as $link) {
             $substr = ' href="' . $link['href'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
             $substr = ' title="' . $link['title'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
             $substr = ' type="' . $link['type'] . '"';
-            $this->assertContains($substr, $string);
+            $this->assertStringContainsStringIgnoringCase($substr, $string);
         }
 
         $order = array();
@@ -328,10 +328,10 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($item->conditionalStylesheet);
 
         $string = $this->helper->toString();
-        $this->assertContains('/styles.css', $string);
-        $this->assertNotContains('<!--[if', $string);
-        $this->assertNotContains(']>', $string);
-        $this->assertNotContains('<![endif]-->', $string);
+        $this->assertStringContainsStringIgnoringCase('/styles.css', $string);
+        $this->assertStringNotContainsStringIgnoringCase('<!--[if', $string);
+        $this->assertStringNotContainsStringIgnoringCase(']>', $string);
+        $this->assertStringNotContainsStringIgnoringCase('<![endif]-->', $string);
     }
 
     public function testConditionalStylesheetCreationOccursWhenRequested()
@@ -342,9 +342,9 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('ie6', $item->conditionalStylesheet);
 
         $string = $this->helper->toString();
-        $this->assertContains('/styles.css', $string);
-        $this->assertContains('<!--[if ie6]>', $string);
-        $this->assertContains('<![endif]-->', $string);
+        $this->assertStringContainsStringIgnoringCase('/styles.css', $string);
+        $this->assertStringContainsStringIgnoringCase('<!--[if ie6]>', $string);
+        $this->assertStringContainsStringIgnoringCase('<![endif]-->', $string);
     }
 
     public function testSettingAlternateWithTooFewArgsRaisesException()
@@ -376,7 +376,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         $this->helper->headLink(array('rel' => 'icon', 'src' => '/foo/bar'))
                      ->headLink(array('rel' => 'foo', 'href' => '/bar/baz'));
         $test = $this->helper->toString();
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test);
     }
 
     public function testDoesNotAllowDuplicateStylesheets()
@@ -393,7 +393,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     {
         $this->helper->appendStylesheet(array('href' => '/bar/baz', 'conditionalStylesheet' => false));
         $test = $this->helper->toString();
-        $this->assertNotContains('[if false]', $test);
+        $this->assertStringNotContainsStringIgnoringCase('[if false]', $test);
     }
 
     /**
@@ -404,8 +404,8 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     {
         $this->helper->appendStylesheet(array('href' => '/bar/baz', 'conditionalStylesheet' => true));
         $test = $this->helper->toString();
-        $this->assertNotContains('[if 1]', $test);
-        $this->assertNotContains('[if true]', $test);
+        $this->assertStringNotContainsStringIgnoringCase('[if 1]', $test);
+        $this->assertStringNotContainsStringIgnoringCase('[if true]', $test);
     }
 
     /**
@@ -415,28 +415,28 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     public function testTurnOffAutoEscapeDoesNotEncodeAmpersand()
     {
         $this->helper->setAutoEscape(false)->appendStylesheet('/css/rules.css?id=123&foo=bar');
-        $this->assertContains('id=123&foo=bar', $this->helper->toString());
+        $this->assertStringContainsStringIgnoringCase('id=123&foo=bar', $this->helper->toString());
     }
 
     public function testSetAlternateWithExtras()
     {
         $this->helper->setAlternate('/mydocument.pdf', 'application/pdf', 'foo', array('media' => array('print','screen')));
         $test = $this->helper->toString();
-        $this->assertContains('media="print,screen"', $test);
+        $this->assertStringContainsStringIgnoringCase('media="print,screen"', $test);
     }
 
     public function testAppendStylesheetWithExtras()
     {
         $this->helper->appendStylesheet(array('href' => '/bar/baz', 'conditionalStylesheet' => false, 'extras' => array('id' => 'my_link_tag')));
         $test = $this->helper->toString();
-        $this->assertContains('id="my_link_tag"', $test);
+        $this->assertStringContainsStringIgnoringCase('id="my_link_tag"', $test);
     }
 
     public function testSetStylesheetWithMediaAsArray()
     {
         $this->helper->appendStylesheet('/bar/baz', array('screen','print'));
         $test = $this->helper->toString();
-        $this->assertContains(' media="screen,print"', $test);
+        $this->assertStringContainsStringIgnoringCase(' media="screen,print"', $test);
     }
 
     /**
@@ -465,7 +465,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     public function testIdAttributeIsSupported()
     {
         $this->helper->appendStylesheet(array('href' => '/bar/baz', 'id' => 'foo'));
-        $this->assertContains('id="foo"', $this->helper->toString());
+        $this->assertStringContainsStringIgnoringCase('id="foo"', $this->helper->toString());
     }
 
     /**
@@ -475,7 +475,7 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
     {
         $this->helper->appendStylesheet('/css/auth.less', 'all', null, array('rel' => 'stylesheet/less'));
         $this->assertEquals(1, substr_count($this->helper->toString(), "rel=\""));
-        $this->assertContains('rel="stylesheet/less"', $this->helper->toString());
+        $this->assertStringContainsStringIgnoringCase('rel="stylesheet/less"', $this->helper->toString());
     }
 
     /**
@@ -507,9 +507,9 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('conditionalStylesheet', $item);
         $this->assertEquals('!IE', $item->conditionalStylesheet);
         $string = $this->helper->toString();
-        $this->assertContains('/styles.css', $string);
-        $this->assertContains('<!--[if !IE]><!--><', $string);
-        $this->assertContains('<!--<![endif]-->', $string);
+        $this->assertStringContainsStringIgnoringCase('/styles.css', $string);
+        $this->assertStringContainsStringIgnoringCase('<!--[if !IE]><!--><', $string);
+        $this->assertStringContainsStringIgnoringCase('<!--<![endif]-->', $string);
     }
 
     /**
@@ -522,9 +522,9 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('conditionalStylesheet', $item);
         $this->assertEquals('! IE', $item->conditionalStylesheet);
         $string = $this->helper->toString();
-        $this->assertContains('/styles.css', $string);
-        $this->assertContains('<!--[if ! IE]><!--><', $string);
-        $this->assertContains('<!--<![endif]-->', $string);
+        $this->assertStringContainsStringIgnoringCase('/styles.css', $string);
+        $this->assertStringContainsStringIgnoringCase('<!--[if ! IE]><!--><', $string);
+        $this->assertStringContainsStringIgnoringCase('<!--<![endif]-->', $string);
     }
 }
 

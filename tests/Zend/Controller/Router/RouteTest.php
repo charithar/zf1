@@ -45,7 +45,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_RouteTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Server backup
@@ -59,7 +59,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         // Backup server array
         $this->_server = $_SERVER;
@@ -81,7 +81,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore server array
         $_SERVER = $this->_server;

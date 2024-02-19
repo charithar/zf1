@@ -40,7 +40,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -76,7 +76,7 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper, $this->view);
     }
@@ -106,14 +106,14 @@ class Zend_View_Helper_FormResetTest extends PHPUnit_Framework_TestCase
     public function testShouldRenderAsHtmlByDefault()
     {
         $test = $this->helper->formReset('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test);
     }
 
     public function testShouldAllowRenderingAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formReset('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsStringIgnoringCase(' />', $test);
     }
 }
 

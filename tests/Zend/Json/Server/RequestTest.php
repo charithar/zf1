@@ -37,7 +37,7 @@ require_once 'Zend/Json.php';
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
+class Zend_Json_Server_RequestTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -57,7 +57,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->request = new Zend_Json_Server_Request();
     }
@@ -68,7 +68,7 @@ class Zend_Json_Server_RequestTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

@@ -32,17 +32,17 @@ require_once 'Zend/Serializer/Adapter/PhpCode.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
+class Zend_Serializer_Adapter_PhpCodeTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_adapter;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_adapter = new Zend_Serializer_Adapter_PhpCode();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_adapter = null;
     }

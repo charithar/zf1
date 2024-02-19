@@ -33,7 +33,7 @@ require_once 'Zend/Translate/Adapter/Tbx.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translate
  */
-class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
+class Zend_Translate_Adapter_TbxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -55,14 +55,14 @@ class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
             $adapter = new Zend_Translate_Adapter_Tbx(dirname(__FILE__) . '/_files/nofile.tbx', 'en');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('is not readable', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('is not readable', $e->getMessage());
         }
 
         try {
             $adapter = new Zend_Translate_Adapter_Tbx(dirname(__FILE__) . '/_files/failed.tbx', 'en');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('Mismatched tag at line', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Mismatched tag at line', $e->getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
             $adapter = new Zend_Translate_Adapter_Tbx(dirname(__FILE__) . '/_files/nofile.tbx', 'en');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('nofile.tbx', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('nofile.tbx', $e->getMessage());
         }
     }
     
@@ -117,7 +117,7 @@ class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
             $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en.tbx', 'xx');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
 
         $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.tbx', 'de', array('clear' => true));
@@ -175,7 +175,7 @@ class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
 
         set_error_handler(array($this, 'errorHandlerIgnore'));

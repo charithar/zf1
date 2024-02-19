@@ -164,8 +164,8 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
         $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
 
         // Make sure the body does *not* contain the set parameters
-        $this->assertNotContains('swallow', $res->getBody());
-        $this->assertNotContains('Camelot', $res->getBody());
+        $this->assertStringNotContainsStringIgnoringCase('swallow', $res->getBody());
+        $this->assertStringNotContainsStringIgnoringCase('Camelot', $res->getBody());
     }
 
     /**

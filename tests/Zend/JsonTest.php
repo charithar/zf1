@@ -48,16 +48,16 @@ require_once 'Zend/Json/Decoder.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Json
  */
-class Zend_JsonTest extends PHPUnit_Framework_TestCase
+class Zend_JsonTest extends \PHPUnit\Framework\TestCase
 {
     private $_originalUseBuiltinEncoderDecoderValue;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_originalUseBuiltinEncoderDecoderValue = Zend_Json::$useBuiltinEncoderDecoder;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Json::$useBuiltinEncoderDecoder = $this->_originalUseBuiltinEncoderDecoderValue;
     }
@@ -460,21 +460,21 @@ EOB;
     {
         $encoded = Zend_Json_Encoder::encodeClass('Zend_JsonTest_Object');
 
-        $this->assertContains("Class.create('Zend_JsonTest_Object'", $encoded);
-        $this->assertContains("ZAjaxEngine.invokeRemoteMethod(this, 'foo'", $encoded);
-        $this->assertContains("ZAjaxEngine.invokeRemoteMethod(this, 'bar'", $encoded);
-        $this->assertNotContains("ZAjaxEngine.invokeRemoteMethod(this, 'baz'", $encoded);
+        $this->assertStringContainsStringIgnoringCase("Class.create('Zend_JsonTest_Object'", $encoded);
+        $this->assertStringContainsStringIgnoringCase("ZAjaxEngine.invokeRemoteMethod(this, 'foo'", $encoded);
+        $this->assertStringContainsStringIgnoringCase("ZAjaxEngine.invokeRemoteMethod(this, 'bar'", $encoded);
+        $this->assertStringNotContainsStringIgnoringCase("ZAjaxEngine.invokeRemoteMethod(this, 'baz'", $encoded);
 
-        $this->assertContains('variables:{foo:"bar",bar:"baz"}', $encoded);
-        $this->assertContains('constants : {FOO: "bar"}', $encoded);
+        $this->assertStringContainsStringIgnoringCase('variables:{foo:"bar",bar:"baz"}', $encoded);
+        $this->assertStringContainsStringIgnoringCase('constants : {FOO: "bar"}', $encoded);
     }
 
     public function testEncodeClasses()
     {
         $encoded = Zend_Json_Encoder::encodeClasses(array('Zend_JsonTest_Object', 'Zend_JsonTest'));
 
-        $this->assertContains("Class.create('Zend_JsonTest_Object'", $encoded);
-        $this->assertContains("Class.create('Zend_JsonTest'", $encoded);
+        $this->assertStringContainsStringIgnoringCase("Class.create('Zend_JsonTest_Object'", $encoded);
+        $this->assertStringContainsStringIgnoringCase("Class.create('Zend_JsonTest'", $encoded);
     }
 
     public function testToJsonSerialization()
@@ -805,10 +805,10 @@ EOB;
 
     /**
      * @group ZF-8918
-     * @expectedException Zend_Json_Exception
      */
     public function testDecodingInvalidJsonShouldRaiseAnException()
     {
+        $this->expectException(Zend_Json_Exception::class);
         Zend_Json::decode(' some string ');
     }
 

@@ -39,7 +39,7 @@ require_once 'Zend/Loader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @group ZF-11267
@@ -1499,7 +1499,7 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Loader_PluginLoader_Exception,
                 'Expected object of type Zend_Filter_Exception, got '.get_class($e));
-            $this->assertContains("not found in the registry", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("not found in the registry", $e->getMessage());
         }
     }
 
@@ -2085,17 +2085,17 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $filter = new Zend_Filter_Input($filters, $validators, array('street' => ''));
         $this->assertFalse($filter->isValid());
         $message = $filter->getMessages();
-        $this->assertContains('Bitte geben Sie Ihre Straße ein.', $message['street']['isEmpty']);
+        $this->assertStringContainsStringIgnoringCase('Bitte geben Sie Ihre Straße ein.', $message['street']['isEmpty']);
 
         $filter2 = new Zend_Filter_Input($filters, $validators, array('street' => 'Str!!'));
         $this->assertFalse($filter2->isValid());
         $message = $filter2->getMessages();
-        $this->assertContains('Verwenden Sie bitte keine Sonderzeichen', $message['street']['regexNotMatch']);
+        $this->assertStringContainsStringIgnoringCase('Verwenden Sie bitte keine Sonderzeichen', $message['street']['regexNotMatch']);
 
         $filter3 = new Zend_Filter_Input($filters, $validators, array('street' => 'Str1234567890'));
         $this->assertFalse($filter3->isValid());
         $message = $filter3->getMessages();
-        $this->assertContains('Bitte beschränken Sie sich auf', $message['street']['stringLengthTooLong']);
+        $this->assertStringContainsStringIgnoringCase('Bitte beschränken Sie sich auf', $message['street']['stringLengthTooLong']);
     }
 
     /**
@@ -2124,9 +2124,9 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $filter = new Zend_Filter_Input($filters, $validators, $data);
         $this->assertFalse($filter->isValid());
         $message = $filter->getMessages();
-        $this->assertContains('Please enter your name', $message['name']['isEmpty']);
-        $this->assertContains('Please enter a subject', $message['subject']['isEmpty']);
-        $this->assertContains('Please enter message contents', $message['content']['isEmpty']);
+        $this->assertStringContainsStringIgnoringCase('Please enter your name', $message['name']['isEmpty']);
+        $this->assertStringContainsStringIgnoringCase('Please enter a subject', $message['subject']['isEmpty']);
+        $this->assertStringContainsStringIgnoringCase('Please enter message contents', $message['content']['isEmpty']);
     }
 
     /**

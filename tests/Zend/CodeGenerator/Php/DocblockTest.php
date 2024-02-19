@@ -35,7 +35,7 @@ require_once 'Zend/CodeGenerator/Php/Docblock.php';
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class Zend_CodeGenerator_Php_DocblockTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_DocblockTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -43,12 +43,12 @@ class Zend_CodeGenerator_Php_DocblockTest extends PHPUnit_Framework_TestCase
      */
     protected $_docblock = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_docblock = new Zend_CodeGenerator_Php_Docblock();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_docblock = null;
     }

@@ -43,7 +43,7 @@ require_once 'Zend/Controller/Action/Helper/Redirector.php';
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_HelperBrokerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Controller_Front
@@ -63,7 +63,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
@@ -187,7 +187,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
 
         $this->front->returnResponse(true);
         $response = $this->front->dispatch($request);
-        $this->assertContains('not found', $response->getBody());
+        $this->assertStringContainsStringIgnoringCase('not found', $response->getBody());
     }
 
     public function testCustomHelperRegistered()
@@ -231,8 +231,8 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
         $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertEquals(2, count($helpers));
-        $this->assertContains('ViewRenderer', array_keys($helpers));
-        $this->assertContains('Redirector', array_keys($helpers));
+        $this->assertStringContainsStringIgnoringCase('ViewRenderer', array_keys($helpers));
+        $this->assertStringContainsStringIgnoringCase('Redirector', array_keys($helpers));
     }
 
     public function testGetHelperStatically()

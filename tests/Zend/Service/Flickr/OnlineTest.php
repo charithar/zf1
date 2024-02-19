@@ -29,7 +29,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Flickr
  */
-class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Flickr_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Flickr service consumer object
@@ -50,7 +50,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         /**
          * @see Zend_Service_Flickr
@@ -93,7 +93,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
             $resultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         $resultSet->seek(9);
@@ -102,7 +102,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
             $resultSet->seek(10);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         $resultSet->rewind();
@@ -140,7 +140,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
             $resultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         $resultSet->seek(9);
@@ -149,7 +149,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
             $resultSet->seek(10);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         $resultSet->rewind();
@@ -223,7 +223,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
  * @group      Zend_Service
  * @group      Zend_Service_Flickr
  */
-class Zend_Service_Flickr_OnlineTest_Skip extends PHPUnit_Framework_TestCase
+class Zend_Service_Flickr_OnlineTest_Skip extends \PHPUnit\Framework\TestCase
 {
     public function testNothing()
     {

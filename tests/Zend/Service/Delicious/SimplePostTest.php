@@ -35,7 +35,7 @@ require_once 'Zend/Service/Delicious/SimplePost.php';
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Delicious_SimplePostTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Ensures that the constructor throws an exception when the title is missing
@@ -49,7 +49,7 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
             $simplePost = new Zend_Service_Delicious_SimplePost($post);
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
-            $this->assertContains('Title and URL', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Title and URL', $e->getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
             $simplePost = new Zend_Service_Delicious_SimplePost($post);
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
-            $this->assertContains('Title and URL', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Title and URL', $e->getMessage());
         }
     }
 

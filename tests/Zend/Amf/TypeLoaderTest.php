@@ -34,7 +34,7 @@ require_once 'Zend/Amf/Parse/TypeLoader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_TypeloaderTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

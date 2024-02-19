@@ -32,11 +32,11 @@ require_once "Zend/Test/PHPUnit/Db/Operation/Truncate.php";
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends PHPUnit_Framework_TestCase
+class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends \PHPUnit\Framework\TestCase
 {
     private $operation = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->operation = new Zend_Test_PHPUnit_Db_Operation_Truncate();
     }
@@ -104,7 +104,7 @@ class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends PHPUnit_Framework_Test
         $queries = $profiler->getQueryProfiles();
 
         $this->assertEquals(2, count($queries));
-        $this->assertContains('bar', $queries[0]->getQuery());
-        $this->assertContains('foo', $queries[1]->getQuery());
+        $this->assertStringContainsStringIgnoringCase('bar', $queries[0]->getQuery());
+        $this->assertStringContainsStringIgnoringCase('foo', $queries[1]->getQuery());
     }
 }

@@ -38,7 +38,7 @@ require_once 'Zend/XmlRpc/Request/Http.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_Request_HttpTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -54,7 +54,7 @@ class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->xml =<<<EOX
 <?xml version="1.0" encoding="UTF-8"?>
@@ -106,7 +106,7 @@ EOX;
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         $_SERVER = $this->server;
         unset($this->request);

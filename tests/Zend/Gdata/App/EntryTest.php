@@ -34,10 +34,10 @@ require_once 'Zend/Gdata/HttpClient.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
-class Zend_Gdata_App_EntryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_App_EntryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->enryText = $this->loadResponse(
             dirname(__FILE__) . '/../App/_files/EntrySample1.xml'

@@ -47,7 +47,7 @@ require_once 'Zend/Loader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  */
-class Zend_ViewTest extends PHPUnit_Framework_TestCase
+class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -55,14 +55,14 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->notices = array();
         $this->errorReporting = error_reporting();
         $this->displayErrors  = ini_get('display_errors');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         error_reporting($this->errorReporting);
         ini_set('display_errors', $this->displayErrors);
@@ -263,7 +263,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
             $view->nonexistantHelper();
             // @todo  fail if no exception?
         } catch (Zend_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('not found', $e->getMessage());
         }
     }
 
@@ -283,7 +283,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
             $view->stubEmpty();
             // @todo  fail if no exception?
         } catch (Zend_Exception $e) {
-            $this->assertContains("not found", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("not found", $e->getMessage());
         }
     }
 
@@ -327,8 +327,8 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(file_exists($logFile));
         $log = file_get_contents($logFile);
         unlink($logFile); // clean up...
-        $this->assertContains('This text should not be displayed', $log);
-        $this->assertNotContains('testSubTemplate.phtml', $log);
+        $this->assertStringContainsStringIgnoringCase('This text should not be displayed', $log);
+        $this->assertStringNotContainsStringIgnoringCase('testSubTemplate.phtml', $log);
     }
 
     /**
@@ -508,7 +508,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $helperPaths = $view->getHelperPaths();
         $filterPaths = $view->getFilterPaths();
 
-        $this->assertContains($this->_filterPath($scriptPath), $this->_filterPath($scriptPaths));
+        $this->assertStringContainsStringIgnoringCase($this->_filterPath($scriptPath), $this->_filterPath($scriptPaths));
 
         $found  = false;
         $prefix = false;
@@ -582,7 +582,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertSame($view, $status);
         $helperPaths = $view->getHelperPaths();
         $this->assertTrue(array_key_exists('My_View_Helper_', $helperPaths));
-        $this->assertContains($this->_filterPath('Zend/View/_stubs/HelperDir1/'), $this->_filterPath(current($helperPaths['My_View_Helper_'])));
+        $this->assertStringContainsStringIgnoringCase($this->_filterPath('Zend/View/_stubs/HelperDir1/'), $this->_filterPath(current($helperPaths['My_View_Helper_'])));
     }
 
     public function testFilterPathWithPrefix()
@@ -770,7 +770,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $scriptPaths = $this->_filterPath($view->getScriptPaths());
         $helperPaths = $this->_filterPath($view->getHelperPaths());
         $filterPaths = $this->_filterPath($view->getFilterPaths());
-        $this->assertContains($base  . '/scripts', $scriptPaths);
+        $this->assertStringContainsStringIgnoringCase($base  . '/scripts', $scriptPaths);
 
         $found  = false;
         $prefix = false;
@@ -828,7 +828,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $content = $view->render('testStrictVars.phtml');
         restore_error_handler();
         foreach (array('foo', 'bar') as $key) {
-            $this->assertContains('Key "' . $key . '" does not exist', $this->notices);
+            $this->assertStringContainsStringIgnoringCase('Key "' . $key . '" does not exist', $this->notices);
         }
     }
 
@@ -860,7 +860,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $view = new Zend_View();
         $view->declareVars();
         $helperPath = $view->getHelperPath('declareVars');
-        $this->assertContains($expected, $helperPath);
+        $this->assertStringContainsStringIgnoringCase($expected, $helperPath);
     }
 
     public function testGetFilter()
@@ -913,7 +913,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
             $view->render('bazbatNotExists.php.tpl');
             $this->fail('Non-existent view script should cause an exception');
         } catch (Exception $e) {
-            $this->assertContains($base. '_templates', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase($base. '_templates', $e->getMessage());
         }
     }
 
@@ -921,13 +921,13 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
     {
         $view = new Zend_View();
         $hidden = $view->formHidden('foo', 'bar');
-        $this->assertContains('<input type="hidden"', $hidden);
+        $this->assertStringContainsStringIgnoringCase('<input type="hidden"', $hidden);
 
         $hidden = $view->getHelper('formHidden')->formHidden('foo', 'bar');
-        $this->assertContains('<input type="hidden"', $hidden);
+        $this->assertStringContainsStringIgnoringCase('<input type="hidden"', $hidden);
 
         $hidden = $view->getHelper('FormHidden')->formHidden('foo', 'bar');
-        $this->assertContains('<input type="hidden"', $hidden);
+        $this->assertStringContainsStringIgnoringCase('<input type="hidden"', $hidden);
     }
 
     public function testGetHelperUsingDifferentCasesReturnsSameInstance()
@@ -951,21 +951,21 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
             $view->setHelperPath(dirname(__FILE__) . '/View/_stubs/HelperDir1', null);
             $this->fail('Exception for empty prefix was expected.');
         } catch (Exception $e) {
-            $this->assertContains('only takes strings', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('only takes strings', $e->getMessage());
         }
 
         try {
             $view->setHelperPath(dirname(__FILE__) . '/View/_stubs/HelperDir1', null);
             $this->fail('Exception for empty prefix was expected.');
         } catch (Exception $e) {
-            $this->assertContains('only takes strings', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('only takes strings', $e->getMessage());
         }
 
 
         try {
             $helper = $view->getHelper('Datetime');
         } catch (Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('not found', $e->getMessage());
         }
     }
 
@@ -994,21 +994,21 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
             $view->render('../foobar.html');
             $this->fail('Should not allow parent directory traversal');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('parent directory traversal', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('parent directory traversal', $e->getMessage());
         }
 
         try {
             $view->render('foo/../foobar.html');
             $this->fail('Should not allow parent directory traversal');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('parent directory traversal', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('parent directory traversal', $e->getMessage());
         }
 
         try {
             $view->render('foo/..\foobar.html');
             $this->fail('Should not allow parent directory traversal');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('parent directory traversal', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('parent directory traversal', $e->getMessage());
         }
     }
 
@@ -1051,7 +1051,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         ));
         try {
             $test = $view->render('../_stubs/scripts/LfiProtectionCheck.phtml');
-            $this->assertContains('LFI', $test);
+            $this->assertStringContainsStringIgnoringCase('LFI', $test);
         } catch (Zend_View_Exception $e) {
             $this->fail('LFI attack failed: ' . $e->getMessage());
         }
@@ -1143,7 +1143,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $path = rtrim('file://' . str_replace('\\', '/', realpath(dirname(__FILE__))), '/') . '/';
         $view->addScriptPath($path);
         $paths = $view->getScriptPaths();
-        $this->assertContains($path, $paths, var_export($paths, 1));
+        $this->assertStringContainsStringIgnoringCase($path, $paths, var_export($paths, 1));
     }
     
     /**

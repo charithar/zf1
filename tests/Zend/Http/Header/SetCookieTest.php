@@ -43,7 +43,7 @@ require_once 'Zend/Controller/Response/HttpTestCase.php';
  * @group      Zend_Http_Header
  * @group      ZF-4520
  */
-class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
+class Zend_Http_Header_SetCookieTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -235,7 +235,7 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
         $response = new Zend_Controller_Response_HttpTestCase();
         $cookie = Zend_Http_Header_SetCookie::fromString($cStr);
         $response->setRawHeader($cookie);
-        $this->assertContains((string)$cookie, $response->sendHeaders());
+        $this->assertStringContainsStringIgnoringCase((string)$cookie, $response->sendHeaders());
     }
 
     /**

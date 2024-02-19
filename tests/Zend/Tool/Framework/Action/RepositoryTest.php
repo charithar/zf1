@@ -39,19 +39,19 @@ require_once '_files/Foo.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Action
  */
-class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Action_RepositoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Tool_Framework_Action_Repository
      */
     protected $_repository = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_repository = new Zend_Tool_Framework_Action_Repository();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_repository = null;
     }

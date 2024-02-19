@@ -41,7 +41,7 @@ require_once 'Zend/Form/SubForm.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_FieldsetTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -61,7 +61,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Fieldset();
     }
@@ -72,7 +72,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -137,7 +137,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
         $html = $this->decorator->setElement($form)
                                 ->setOption('id', 'foo-id')
                                 ->render('content');
-        $this->assertContains('foo-id', $html);
+        $this->assertStringContainsStringIgnoringCase('foo-id', $html);
     }
 
     /**
@@ -151,9 +151,9 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
              ->setView($this->getView());
         $this->decorator->setElement($form);
         $test = $this->decorator->render('content');
-        $this->assertContains('<fieldset', $test, $test);
-        $this->assertNotContains('action="', $test);
-        $this->assertNotContains('method="', $test);
+        $this->assertStringContainsStringIgnoringCase('<fieldset', $test, $test);
+        $this->assertStringNotContainsStringIgnoringCase('action="', $test);
+        $this->assertStringNotContainsStringIgnoringCase('method="', $test);
     }
 
     /**#@+
@@ -168,7 +168,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
              ->setView($this->getView());
         $this->decorator->setElement($form);
         $test = $this->decorator->render('content');
-        $this->assertContains('id="fieldset-foobar"', $test);
+        $this->assertStringContainsStringIgnoringCase('id="fieldset-foobar"', $test);
     }
 
     public function testElementWithNoIdShouldNotCreateFieldsetId()
@@ -179,7 +179,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
              ->setView($this->getView());
         $this->decorator->setElement($form);
         $test = $this->decorator->render('content');
-        $this->assertNotContains('id="', $test);
+        $this->assertStringNotContainsStringIgnoringCase('id="', $test);
     }
     /**#@-*/
 
@@ -195,8 +195,8 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
              ->setView($this->getView());
         $this->decorator->setElement($form);
         $test = $this->decorator->render('content');
-        $this->assertContains('<fieldset', $test, $test);
-        $this->assertNotContains('enctype="', $test);
+        $this->assertStringContainsStringIgnoringCase('<fieldset', $test, $test);
+        $this->assertStringNotContainsStringIgnoringCase('enctype="', $test);
     }
 
     /**
@@ -211,8 +211,8 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
              ->setView($this->getView());
         $this->decorator->setElement($form);
         $test = $this->decorator->render('content');
-        $this->assertContains('<fieldset', $test, $test);
-        $this->assertNotContains('helper="', $test);
+        $this->assertStringContainsStringIgnoringCase('<fieldset', $test, $test);
+        $this->assertStringNotContainsStringIgnoringCase('helper="', $test);
     }
 
     /**
@@ -227,7 +227,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
         $html = $this->decorator->setElement($form)
                                 ->setOption('id', 'fieldset-id')
                                 ->render('content');
-        $this->assertContains('<fieldset id="fieldset-id"', $html);
+        $this->assertStringContainsStringIgnoringCase('<fieldset id="fieldset-id"', $html);
     }
 
     /**
@@ -255,7 +255,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
         
         $html = $this->decorator->setElement($form)->render('content');
         
-        $this->assertContains('<fieldset id="fieldset-form-id"', $html);
+        $this->assertStringContainsStringIgnoringCase('<fieldset id="fieldset-form-id"', $html);
     }
 }
 

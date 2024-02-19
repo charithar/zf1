@@ -38,7 +38,7 @@ require_once 'Zend/Tool/Framework/Client/Response/ContentDecorator/Separator.php
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Client
  */
-class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Client_ResponseTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -48,7 +48,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     protected $_responseBuffer = array();
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_response = new Zend_Tool_Framework_Client_Response();
     }
@@ -113,7 +113,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->addContentDecorator($separator);
         $decorators = $this->_response->getContentDecorators();
         $this->assertArrayHasKey('separator', $decorators);
-        $this->assertContains($separator, $decorators);
+        $this->assertStringContainsStringIgnoringCase($separator, $decorators);
     }
 
     public function testResponseWillApplyDecorator()

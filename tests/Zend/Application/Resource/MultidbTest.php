@@ -45,7 +45,7 @@ require_once 'Zend/Db/Table.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Resource_MultidbTest extends \PHPUnit\Framework\TestCase
 {
     protected $_dbOptions = array('db1' => array('adapter' => 'pdo_mysql','dbname' => 'db1','password' => 'XXXX','username' => 'webuser'),
                                 'db2' => array('adapter' => 'pdo_pgsql', 'dbname' => 'db2', 'password' => 'notthatpublic', 'username' => 'dba'));
@@ -56,7 +56,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -74,7 +74,7 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         Zend_Controller_Front::getInstance()->resetInstance();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Db_Table::setDefaultAdapter(null);
         Zend_Db_Table::setDefaultMetadataCache();

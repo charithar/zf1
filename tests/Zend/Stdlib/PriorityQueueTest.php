@@ -33,7 +33,7 @@ require_once 'Zend/Stdlib/PriorityQueue.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Stdlib_PriorityQueueTest extends PHPUnit_Framework_TestCase
+class Zend_Stdlib_PriorityQueueTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -41,7 +41,7 @@ class Zend_Stdlib_PriorityQueueTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->queue = new Zend_Stdlib_PriorityQueue();
         $this->queue->insert('foo', 3);

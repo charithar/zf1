@@ -35,11 +35,11 @@ require_once 'Zend/Cache/Backend/Test.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
+class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     private $_instance;
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!$this->_instance) {
             $this->_instance = new Zend_Cache_Frontend_Page(array());
@@ -48,7 +48,7 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_instance);
     }

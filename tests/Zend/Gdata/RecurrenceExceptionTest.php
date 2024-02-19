@@ -31,10 +31,10 @@ require_once 'Zend/Gdata.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
  */
-class Zend_Gdata_RecurrenceExceptionTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_RecurrenceExceptionTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->recurrenceExceptionText = file_get_contents(
                 'Zend/Gdata/_files/RecurrenceExceptionElementSample1.xml',
                 true);

@@ -34,10 +34,10 @@ require_once 'Zend/Debug.php';
  * @group Zend_Tool
  * @group Zend_Tool_Project
  */
-class Zend_Tool_Project_Context_RepositoryTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Project_Context_RepositoryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Tool_Project_Context_Repository::resetInstance();
     }

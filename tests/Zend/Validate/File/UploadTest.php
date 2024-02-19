@@ -38,7 +38,7 @@ require_once 'Zend/Validate/File/Upload.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_File_UploadTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_File_UploadTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -210,7 +210,7 @@ class Zend_Validate_File_UploadTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(array(), $validator->getFiles('test5'));
             $this->fail("Missing exception");
         } catch (Zend_Validate_Exception $e) {
-            $this->assertContains("was not found", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("was not found", $e->getMessage());
         }
     }
 

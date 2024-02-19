@@ -40,7 +40,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_AttributeJsEscapingTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_AttributeJsEscapingTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_View_Helper_AttributeJsEscapingTest extends PHPUnit_Framework_TestCas
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -76,7 +76,7 @@ class Zend_View_Helper_AttributeJsEscapingTest extends PHPUnit_Framework_TestCas
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper, $this->view);
     }

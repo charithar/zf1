@@ -35,11 +35,11 @@ require_once 'Zend/Gdata/App/InvalidArgumentException.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
  */
-class Zend_Gdata_GdataOnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_GdataOnlineTest extends \PHPUnit\Framework\TestCase
 {
     private $blog = null; // blog ID from config
 
-    public function setUp()
+    protected function setUp(): void
     {
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');

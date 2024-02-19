@@ -33,7 +33,7 @@ require_once 'Zend/Feed.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Entry_RssTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testContentEncodedSupport()
@@ -45,11 +45,11 @@ class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($item instanceof Zend_Feed_Entry_Rss);
 
         $this->assertTrue(isset($item->content));
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             'http://framework.zend.com/fisheye/changelog/Zend_Framework/?cs=7757',
             $item->content->__toString()
             );
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             'http://framework.zend.com/fisheye/changelog/Zend_Framework/?cs=7757',
             $item->content()
             );

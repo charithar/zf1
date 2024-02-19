@@ -35,7 +35,7 @@ require_once 'Zend/Stdlib/CallbackHandler.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_EventManager_FilterChainTest extends PHPUnit_Framework_TestCase
+class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -43,7 +43,7 @@ class Zend_EventManager_FilterChainTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->message)) {
             unset($this->message);

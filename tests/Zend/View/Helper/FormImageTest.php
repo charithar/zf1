@@ -39,7 +39,7 @@ require_once 'Zend/View/Helper/FormImage.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormImageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -103,7 +103,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
         $test = $this->helper->formImage(array(
             'name' => 'foo',
         ));
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test);
     }
 
     /**
@@ -115,7 +115,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
         $test = $this->helper->formImage(array(
             'name' => 'foo',
         ));
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsStringIgnoringCase(' />', $test);
     }
 }
 

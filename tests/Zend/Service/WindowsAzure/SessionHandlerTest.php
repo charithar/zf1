@@ -34,7 +34,7 @@ require_once 'Zend/Service/WindowsAzure/Storage/Table.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_SessionHandlerTest extends PHPUnit_Framework_TestCase
+class Zend_Service_WindowsAzure_SessionHandlerTest extends \PHPUnit\Framework\TestCase
 {
 
     protected static $uniqId = 0;
@@ -46,7 +46,7 @@ class Zend_Service_WindowsAzure_SessionHandlerTest extends PHPUnit_Framework_Tes
     /**
      * Test setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS) {
             $this->markTestSkipped('This test case requires TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS to be enabled in TestConfiguration.php');
@@ -56,9 +56,9 @@ class Zend_Service_WindowsAzure_SessionHandlerTest extends PHPUnit_Framework_Tes
     /**
      * Test teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        if ($this->status == PHPUnit_Runner_BaseTestRunner::STATUS_SKIPPED) {
+        if ($this->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_SKIPPED) {
             return;
         }
         $storageClient = $this->createStorageInstance();

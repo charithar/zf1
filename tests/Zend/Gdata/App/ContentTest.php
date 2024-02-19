@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/App.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
-class Zend_Gdata_App_ContentTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_App_ContentTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->contentText = file_get_contents(
                 'Zend/Gdata/App/_files/ContentElementSample1.xml',
                 true);

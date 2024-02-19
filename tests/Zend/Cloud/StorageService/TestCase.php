@@ -44,7 +44,7 @@ require_once 'Zend/Cloud/StorageService/Factory.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cloud_StorageService_TestCase extends PHPUnit_Framework_TestCase
+abstract class Zend_Cloud_StorageService_TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to storage adapter to test
@@ -74,7 +74,7 @@ abstract class Zend_Cloud_StorageService_TestCase extends PHPUnit_Framework_Test
      */
     protected $_waitPeriod = 1;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_config = $this->_getConfig();
         $this->_commonStorage = Zend_Cloud_StorageService_Factory::getAdapter($this->_config);
@@ -362,7 +362,7 @@ abstract class Zend_Cloud_StorageService_TestCase extends PHPUnit_Framework_Test
 
             $this->assertEquals(2, sizeof($objects));
 
-            // PHPUnit does an identical comparison for assertContains(), so we just
+            // PHPUnit does an identical comparison for assertStringContainsStringIgnoringCase(), so we just
             // use assertTrue and in_array()
             $this->assertTrue(in_array($dummyName1, $objects));
             $this->assertTrue(in_array($dummyName2, $objects));

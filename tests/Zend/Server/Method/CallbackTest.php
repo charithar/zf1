@@ -38,7 +38,7 @@ require_once 'Zend/Server/Method/Callback.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
+class Zend_Server_Method_CallbackTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -57,7 +57,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->callback = new Zend_Server_Method_Callback();
     }
@@ -68,7 +68,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

@@ -16,7 +16,7 @@ require_once 'Zend/Cache/Backend.php';
 /**
  * Test class for Zend_Controller_Action_Helper_Cache
  */
-class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_CacheTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_requestUriOld;
@@ -32,7 +32,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_requestUriOld =
             isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
@@ -46,7 +46,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
         $this->front->setRequest($this->request);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $_SERVER['REQUEST_URI'] = $this->_requestUriOld;
     }

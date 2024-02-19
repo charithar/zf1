@@ -45,7 +45,7 @@ require_once 'Zend/Loader/PluginLoader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_AbstractTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -65,7 +65,7 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Errors();
     }
@@ -76,7 +76,7 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -133,7 +133,7 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
             $this->decorator->setElement($config);
             $this->fail('Invalid element type should raise exception');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid element', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid element', $e->getMessage());
         }
     }
 

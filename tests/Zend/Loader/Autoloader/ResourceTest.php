@@ -50,7 +50,7 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Loader
  */
-class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_Autoloader_ResourceTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -58,7 +58,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -83,7 +83,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -171,7 +171,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $resources = $this->loader->getResourceTypes();
         $this->assertTrue(array_key_exists('models', $resources));
         $this->assertEquals($this->loader->getNamespace() . '_Model', $resources['models']['namespace']);
-        $this->assertContains('/models', $resources['models']['path']);
+        $this->assertStringContainsStringIgnoringCase('/models', $resources['models']['path']);
     }
 
     public function testAutoloaderShouldAllowAddingResettingResourcePaths()
@@ -179,8 +179,8 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->loader->addResourceType('models', 'models', 'Model');
         $this->loader->addResourceType('models', 'apis');
         $resources = $this->loader->getResourceTypes();
-        $this->assertNotContains('/models', $resources['models']['path']);
-        $this->assertContains('/apis', $resources['models']['path']);
+        $this->assertStringNotContainsStringIgnoringCase('/models', $resources['models']['path']);
+        $this->assertStringContainsStringIgnoringCase('/apis', $resources['models']['path']);
     }
 
     public function testAutoloaderShouldSupportAddingMultipleResourceTypesAtOnce()
@@ -190,8 +190,8 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
             'form'  => array('path' => 'forms', 'namespace' => 'Form'),
         ));
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('model', array_keys($resources));
-        $this->assertContains('form', array_keys($resources));
+        $this->assertStringContainsStringIgnoringCase('model', array_keys($resources));
+        $this->assertStringContainsStringIgnoringCase('form', array_keys($resources));
     }
 
     /**
@@ -223,10 +223,10 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         ));
 
         $resources = $this->loader->getResourceTypes();
-        $this->assertNotContains('model', array_keys($resources));
-        $this->assertNotContains('form', array_keys($resources));
-        $this->assertContains('view', array_keys($resources));
-        $this->assertContains('layout', array_keys($resources));
+        $this->assertStringNotContainsStringIgnoringCase('model', array_keys($resources));
+        $this->assertStringNotContainsStringIgnoringCase('form', array_keys($resources));
+        $this->assertStringContainsStringIgnoringCase('view', array_keys($resources));
+        $this->assertStringContainsStringIgnoringCase('layout', array_keys($resources));
     }
 
     public function testHasResourceTypeShouldReturnFalseWhenTypeNotDefined()
@@ -251,8 +251,8 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $this->loader->removeResourceType('form');
 
         $resources = $this->loader->getResourceTypes();
-        $this->assertContains('model', array_keys($resources));
-        $this->assertNotContains('form', array_keys($resources));
+        $this->assertStringContainsStringIgnoringCase('model', array_keys($resources));
+        $this->assertStringNotContainsStringIgnoringCase('form', array_keys($resources));
     }
 
     public function testAutoloaderShouldAllowSettingDefaultResourceType()

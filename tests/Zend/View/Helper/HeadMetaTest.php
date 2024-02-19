@@ -48,7 +48,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HeadMeta
@@ -77,7 +77,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->error = false;
         foreach (array(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
@@ -99,7 +99,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -297,13 +297,13 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         $metas = substr_count($string, 'http-equiv="');
         $this->assertEquals(1, $metas);
 
-        $this->assertContains('http-equiv="screen" content="projection"', $string);
-        $this->assertContains('name="keywords" content="foo bar"', $string);
-        $this->assertContains('lang="us_en"', $string);
-        $this->assertContains('scheme="foo"', $string);
-        $this->assertNotContains('bogus', $string);
-        $this->assertNotContains('unused', $string);
-        $this->assertContains('name="title" content="boo bah"', $string);
+        $this->assertStringContainsStringIgnoringCase('http-equiv="screen" content="projection"', $string);
+        $this->assertStringContainsStringIgnoringCase('name="keywords" content="foo bar"', $string);
+        $this->assertStringContainsStringIgnoringCase('lang="us_en"', $string);
+        $this->assertStringContainsStringIgnoringCase('scheme="foo"', $string);
+        $this->assertStringNotContainsStringIgnoringCase('bogus', $string);
+        $this->assertStringNotContainsStringIgnoringCase('unused', $string);
+        $this->assertStringContainsStringIgnoringCase('name="title" content="boo bah"', $string);
     }
 
     /**
@@ -357,9 +357,9 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         $this->view->doctype('HTML4_STRICT');
         $this->helper->headMeta('some content', 'foo');
         $test = $this->helper->toString();
-        $this->assertNotContains('/>', $test);
-        $this->assertContains('some content', $test);
-        $this->assertContains('foo', $test);
+        $this->assertStringNotContainsStringIgnoringCase('/>', $test);
+        $this->assertStringContainsStringIgnoringCase('some content', $test);
+        $this->assertStringContainsStringIgnoringCase('foo', $test);
     }
 
     /**
@@ -383,7 +383,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
             $this->helper->headMeta('foo', 'og:title', 'property');
             $this->fail('meta property attribute should not be supported on default doctype');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('Invalid value passed', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid value passed', $e->getMessage());
         }
     }
 
@@ -550,8 +550,8 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public function testConditionalNoIE()
     {
         $html = $this->helper->appendHttpEquiv('foo', 'bar', array('conditional' => '!IE'))->toString();
-        $this->assertContains('<!--[if !IE]><!--><', $html);
-        $this->assertContains('<!--<![endif]-->', $html);
+        $this->assertStringContainsStringIgnoringCase('<!--[if !IE]><!--><', $html);
+        $this->assertStringContainsStringIgnoringCase('<!--<![endif]-->', $html);
     }
 
     /**
@@ -560,8 +560,8 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public function testConditionalNoIEWidthSpace()
     {
         $html = $this->helper->appendHttpEquiv('foo', 'bar', array('conditional' => '! IE'))->toString();
-        $this->assertContains('<!--[if ! IE]><!--><', $html);
-        $this->assertContains('<!--<![endif]-->', $html);
+        $this->assertStringContainsStringIgnoringCase('<!--[if ! IE]><!--><', $html);
+        $this->assertStringContainsStringIgnoringCase('<!--<![endif]-->', $html);
     }
 }
 

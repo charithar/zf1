@@ -56,13 +56,13 @@ class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MaildirMessageOldTest extends \PHPUnit\Framework\TestCase
 {
     protected $_originalMaildir;
     protected $_maildir;
     protected $_tmpdir;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_originalMaildir = dirname(__FILE__) . '/_files/test.maildir/';
         if (!is_dir($this->_originalMaildir . '/cur/')) {
@@ -108,7 +108,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         foreach (array('cur', 'new') as $dir) {
             $dh = opendir($this->_tmpdir . $dir);

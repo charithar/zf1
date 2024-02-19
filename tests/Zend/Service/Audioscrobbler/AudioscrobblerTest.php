@@ -48,7 +48,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
             $response = $as->userGetProfileInformation();
             $this->fail('Expected Zend_Http_Client_Exception not thrown');
         } catch(Zend_Http_Client_Exception $e) {
-            $this->assertContains("No user exists with this name", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("No user exists with this name", $e->getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
             $response = $as->userGetProfileInformation();
             $this->fail('Expected Zend_Http_Client_Exception not thrown');
         } catch(Zend_Http_Client_Exception $e) {
-            $this->assertContains("404", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("404", $e->getMessage());
         }
     }
 

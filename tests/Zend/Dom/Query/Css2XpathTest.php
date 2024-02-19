@@ -32,7 +32,7 @@ require_once 'Zend/Dom/Query/Css2Xpath.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
-class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
+class Zend_Dom_Query_Css2XpathTest extends \PHPUnit\Framework\TestCase
 {
     public function testTransformShouldBeCalledStatically()
     {
@@ -52,7 +52,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('#foo, #bar');
         $this->assertTrue(is_string($test));
-        $this->assertContains('|', $test);
+        $this->assertStringContainsStringIgnoringCase('|', $test);
         $this->assertEquals(2, count(explode('|', $test)));
     }
 
@@ -71,13 +71,13 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     public function testTransformShouldAssumeSpacesToIndicateRelativeXpathQueries()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo .bar');
-        $this->assertContains('|', $test);
+        $this->assertStringContainsStringIgnoringCase('|', $test);
         $expected = array(
             "//div[@id='foo']//*[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
             "//div[@id='foo'][contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
         );
         foreach ($expected as $path) {
-            $this->assertContains($path, $test);
+            $this->assertStringContainsStringIgnoringCase($path, $test);
         }
     }
 
@@ -94,7 +94,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo span.bar, #bar li.baz a');
         $this->assertTrue(is_string($test));
-        $this->assertContains('|', $test);
+        $this->assertStringContainsStringIgnoringCase('|', $test);
         $actual   = explode('|', $test);
         $expected = array(
             "//div[@id='foo']//span[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
@@ -102,14 +102,14 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals(count($expected), count($actual));
         foreach ($actual as $path) {
-            $this->assertContains($path, $expected);
+            $this->assertStringContainsStringIgnoringCase($path, $expected);
         }
     }
 
     public function testClassNotationWithoutSpecifiedTagShouldResultInMultipleQueries()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div.foo .bar a .baz span');
-        $this->assertContains('|', $test);
+        $this->assertStringContainsStringIgnoringCase('|', $test);
         $segments = array(
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')]//*[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a//*[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')]//*[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
@@ -117,7 +117,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')][contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
         );
         foreach ($segments as $xpath) {
-            $this->assertContains($xpath, $test);
+            $this->assertStringContainsStringIgnoringCase($xpath, $test);
         }
     }
 

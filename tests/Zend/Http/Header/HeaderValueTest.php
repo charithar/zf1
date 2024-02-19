@@ -31,7 +31,7 @@ require_once 'Zend/Http/Header/HeaderValue.php';
  * @group      Zend_Http
  * @group      Zend_Http_Header
  */
-class Zend_Http_Header_HeaderValueTest extends PHPUnit_Framework_TestCase
+class Zend_Http_Header_HeaderValueTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Data for filter value

@@ -38,7 +38,7 @@ require_once 'Zend/Dom/Query.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
-class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
+class Zend_Dom_QueryTest extends \PHPUnit\Framework\TestCase
 {
     public $html;
 
@@ -59,7 +59,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->query = new Zend_Dom_Query();
     }
@@ -70,7 +70,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -153,7 +153,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
             $this->query->query('.foo');
             $this->fail('Querying without registering document should throw exception');
         } catch (Zend_Dom_Exception $e) {
-            $this->assertContains('no document', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('no document', $e->getMessage());
         }
     }
 
@@ -167,7 +167,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
             $this->fail('Querying invalid document should throw exception');
         } catch (Zend_Dom_Exception $e) {
             restore_error_handler();
-            $this->assertContains('Error parsing', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Error parsing', $e->getMessage());
         }
     }
 

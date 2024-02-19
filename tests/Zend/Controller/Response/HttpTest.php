@@ -37,7 +37,7 @@ require_once 'Zend/Controller/Response/Exception.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
-class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Http_Response
@@ -57,13 +57,13 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_response = new Zend_Controller_Response_Http();
         $this->_response->headersSentThrowsException = false;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_response);
     }
@@ -136,14 +136,14 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
         $headers = $this->_response->getRawHeaders();
-        $this->assertContains('HTTP/1.0 404 Not Found', $headers);
+        $this->assertStringContainsStringIgnoringCase('HTTP/1.0 404 Not Found', $headers);
     }
 
     public function testClearRawHeaders()
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
         $headers = $this->_response->getRawHeaders();
-        $this->assertContains('HTTP/1.0 404 Not Found', $headers);
+        $this->assertStringContainsStringIgnoringCase('HTTP/1.0 404 Not Found', $headers);
 
         $this->_response->clearRawHeaders();
         $headers = $this->_response->getRawHeaders();
@@ -300,7 +300,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
         ob_start();
         $this->_response->sendResponse();
         $string = ob_get_clean();
-        $this->assertContains('Test exception rendering', $string);
+        $this->assertStringContainsStringIgnoringCase('Test exception rendering', $string);
     }
 
     public function testSetResponseCodeThrowsExceptionWithBadCode()

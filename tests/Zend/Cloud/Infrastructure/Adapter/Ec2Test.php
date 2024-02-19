@@ -24,7 +24,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
 require_once 'Zend/Cloud/Infrastructure/Adapter/Ec2.php';
 require_once 'Zend/Cloud/Infrastructure/Factory.php';
 
-class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCase
+class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends \PHPUnit\Framework\TestCase
 {
     /**
      * Timeout in seconds for status change
@@ -55,7 +55,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     /**
      * Setup for each test
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->infrastructure = Zend_Cloud_Infrastructure_Factory::getAdapter(array( 
             Zend_Cloud_Infrastructure_Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend_Cloud_Infrastructure_Adapter_Ec2', 

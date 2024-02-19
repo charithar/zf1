@@ -37,7 +37,7 @@ require_once 'Zend/Form/Element/Select.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_SelectTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -56,7 +56,7 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Select('foo');
     }
@@ -67,7 +67,7 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -177,7 +177,7 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
         if (!preg_match('#(<option[^>]*(?:value="somewhat")[^>]*>)#s', $html, $matches)) {
             $this->fail('Could not find option: ' . $html);
         }
-        $this->assertNotContains('selected', $matches[1]);
+        $this->assertStringNotContainsStringIgnoringCase('selected', $matches[1]);
     }
 
     /**
@@ -193,8 +193,8 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
         ));
         $this->element->setView($this->getView());
         $html = $this->element->render();
-        $this->assertNotContains('unused', $html, $html);
-        $this->assertContains('bar', $html, $html);
+        $this->assertStringNotContainsStringIgnoringCase('unused', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('bar', $html, $html);
     }
 
     /**
@@ -247,7 +247,7 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     {
         $this->element->addMultiOption('1', '£' . number_format(1));
         $html = $this->element->render($this->getView());
-        $this->assertContains('>£', $html);
+        $this->assertStringContainsStringIgnoringCase('>£', $html);
     }
 
     /**

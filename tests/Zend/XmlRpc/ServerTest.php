@@ -37,7 +37,7 @@ require_once 'Zend/Server/Definition.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_XmlRpc_Server object
@@ -48,7 +48,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_server = new Zend_XmlRpc_Server();
     }
@@ -56,7 +56,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_server);
     }
@@ -304,7 +304,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     public function testMethodHelp()
     {
         $help = $this->_server->methodHelp('system.methodHelp', 'system.listMethods');
-        $this->assertContains('Display help message for an XMLRPC method', $help);
+        $this->assertStringContainsStringIgnoringCase('Display help message for an XMLRPC method', $help);
 
         $this->setExpectedException('Zend_XmlRpc_Server_Exception', 'Method "foo" does not exist');
         $this->_server->methodHelp('foo');
@@ -436,7 +436,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     {
         $this->_server->addFunction('Zend_XmlRpc_Server_testFunction', 'test', 'arg1');
         $methods = $this->_server->listMethods();
-        $this->assertContains('test.Zend_XmlRpc_Server_testFunction', $methods);
+        $this->assertStringContainsStringIgnoringCase('test.Zend_XmlRpc_Server_testFunction', $methods);
     }
 
     public function testAddFunctionThrowsExceptionWithBadData()

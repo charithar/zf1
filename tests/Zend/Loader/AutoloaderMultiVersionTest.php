@@ -37,7 +37,7 @@ require_once 'Zend/Loader/Autoloader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Loader
  */
-class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_AutoloaderMultiVersionTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -45,7 +45,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -71,7 +71,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
         $this->autoloader  = Zend_Loader_Autoloader::getInstance();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -123,7 +123,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
     {
         $this->autoloader->setZfPath($this->path, 'latest');
         $actual = $this->autoloader->getZfPath();
-        $this->assertContains($this->latest, $actual);
+        $this->assertStringContainsStringIgnoringCase($this->latest, $actual);
     }
 
     public function testAutoloadLatestIncludesLibraryInPath()
@@ -144,7 +144,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
     {
         $this->autoloader->setZfPath($this->path, $this->_getVersion($this->latestMajor, 'major'));
         $actual = $this->autoloader->getZfPath();
-        $this->assertContains($this->latestMajor, $actual);
+        $this->assertStringContainsStringIgnoringCase($this->latestMajor, $actual);
     }
 
     public function testAutoloadMajorRevisionIncludesLibraryInPath()
@@ -165,7 +165,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
     {
         $this->autoloader->setZfPath($this->path, $this->_getVersion($this->latestMinor, 'minor'));
         $actual = $this->autoloader->getZfPath();
-        $this->assertContains($this->latestMinor, $actual);
+        $this->assertStringContainsStringIgnoringCase($this->latestMinor, $actual);
     }
 
     public function testAutoloadMinorRevisionIncludesLibraryInPath()
@@ -186,7 +186,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
     {
         $this->autoloader->setZfPath($this->path, $this->specific);
         $actual = $this->autoloader->getZfPath();
-        $this->assertContains($this->specific, $actual);
+        $this->assertStringContainsStringIgnoringCase($this->specific, $actual);
     }
 
     public function testAutoloadSpecificRevisionIncludesLibraryInPath()

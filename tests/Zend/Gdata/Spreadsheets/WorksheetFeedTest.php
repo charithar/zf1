@@ -32,10 +32,10 @@ require_once 'Zend/Http/Client.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
-class Zend_Gdata_Spreadsheets_WorksheetFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Spreadsheets_WorksheetFeedTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->wksFeed = new Zend_Gdata_Spreadsheets_WorksheetFeed(
                 file_get_contents(dirname(__FILE__) . '/_files/TestDataWorksheetFeedSample1.xml'),

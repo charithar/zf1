@@ -54,7 +54,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -73,7 +73,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
@@ -89,7 +89,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -196,7 +196,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
     {
         $html = $this->getElement();
         // Note that ' is converted to &#39; in Zend_View_Helper_HtmlElement::_htmlAttribs() (line 116)
-        $this->assertContains('onChange="dojo.byId(&#39;elementId&#39;).value = arguments[0];"', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('onChange="dojo.byId(&#39;elementId&#39;).value = arguments[0];"', $html, $html);
     }
 
     public function testShouldCreateHiddenElementWithValue()
@@ -205,8 +205,8 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
         if (!preg_match('/(<input[^>]*(type="hidden")[^>]*>)/', $html, $m)) {
             $this->fail('No hidden element found');
         }
-        $this->assertContains('id="elementId"', $m[1]);
-        $this->assertContains('value="', $m[1]);
+        $this->assertStringContainsStringIgnoringCase('id="elementId"', $m[1]);
+        $this->assertStringContainsStringIgnoringCase('value="', $m[1]);
     }
 
     public function testShouldCreateTopAndBottomDecorationsWhenRequested()
@@ -214,15 +214,15 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
         $html = $this->getElement();
         $this->assertRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalRule")/', $html, $html);
         $this->assertRegexp('/<ol[^>]*(dojoType="dijit.form.HorizontalRuleLabels")/', $html, $html);
-        $this->assertContains('topDecoration', $html);
-        $this->assertContains('bottomDecoration', $html);
+        $this->assertStringContainsStringIgnoringCase('topDecoration', $html);
+        $this->assertStringContainsStringIgnoringCase('bottomDecoration', $html);
     }
 
     public function testShouldIgnoreLeftAndRightDecorationsWhenPassed()
     {
         $html = $this->getElement();
-        $this->assertNotContains('leftDecoration', $html);
-        $this->assertNotContains('rightDecoration', $html);
+        $this->assertStringNotContainsStringIgnoringCase('leftDecoration', $html);
+        $this->assertStringNotContainsStringIgnoringCase('rightDecoration', $html);
     }
 
     /**
@@ -261,8 +261,8 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
                 ),
             )
         );
-        $this->assertContains('required="', $html);
-        $this->assertContains('minimum="', $html);
+        $this->assertStringContainsStringIgnoringCase('required="', $html);
+        $this->assertStringContainsStringIgnoringCase('minimum="', $html);
     }
 
     /**
@@ -307,9 +307,9 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends PHPUnit_Framework_TestC
         $form->addSubForm($sliderForm, 'slidertab')
              ->setView($this->getView());
         $html = $form->render();
-        $this->assertContains('id="slidertab-slide1-slider"', $html);
-        $this->assertContains('id="slidertab-slide1-slider-topDecoration"', $html);
-        $this->assertContains('id="slidertab-slide1-slider-topDecoration-labels"', $html);
+        $this->assertStringContainsStringIgnoringCase('id="slidertab-slide1-slider"', $html);
+        $this->assertStringContainsStringIgnoringCase('id="slidertab-slide1-slider-topDecoration"', $html);
+        $this->assertStringContainsStringIgnoringCase('id="slidertab-slide1-slider-topDecoration-labels"', $html);
     }
 
     /**

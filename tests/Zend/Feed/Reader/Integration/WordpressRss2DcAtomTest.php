@@ -31,12 +31,12 @@ require_once 'Zend/Feed/Reader.php';
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_feedSamplePath = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         Zend_Feed_Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/wordpress-rss2-dc-atom.xml';

@@ -33,12 +33,12 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_ConfigTest extends PHPUnit_Framework_TestCase
+class Zend_ConfigTest extends \PHPUnit\Framework\TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileNested;
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Arrays representing common config configurations
         $this->_all = array(
@@ -131,7 +131,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         try {
             $config->hostname = 'test';
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('is read only', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('is read only', $expected->getMessage());
             return;
         }
         $this->fail('An expected Zend_Config_Exception has not been raised');
@@ -143,7 +143,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         try {
             $config->db->host = 'test';
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('is read only', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('is read only', $expected->getMessage());
             return;
         }
         $this->fail('An expected Zend_Config_Exception has not been raised');
@@ -172,14 +172,14 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
                 $var .= "\nkey = $key, value = $value";
             }
         }
-        $this->assertContains('key = name, value = thisname', $var);
+        $this->assertStringContainsStringIgnoringCase('key = name, value = thisname', $var);
 
         // 1 nest
         $var = '';
         foreach ($config->db as $key=>$value) {
             $var .= "\nkey = $key, value = $value";
         }
-        $this->assertContains('key = host, value = 127.0.0.1', $var);
+        $this->assertStringContainsStringIgnoringCase('key = host, value = 127.0.0.1', $var);
 
         // 2 nests
         $config = new Zend_Config($this->_menuData1);
@@ -187,7 +187,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         foreach ($config->button->b1 as $key=>$value) {
             $var .= "\nkey = $key, value = $value";
         }
-        $this->assertContains('key = L1, value = button1-1', $var);
+        $this->assertStringContainsStringIgnoringCase('key = L1, value = button1-1', $var);
     }
 
     public function testArray()
@@ -198,9 +198,9 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         print_r($config->toArray());
         $contents = ob_get_clean();
 
-        $this->assertContains('Array', $contents);
-        $this->assertContains('[hostname] => all', $contents);
-        $this->assertContains('[user] => username', $contents);
+        $this->assertStringContainsStringIgnoringCase('Array', $contents);
+        $this->assertStringContainsStringIgnoringCase('[hostname] => all', $contents);
+        $this->assertStringContainsStringIgnoringCase('[user] => username', $contents);
     }
 
     public function testErrorWriteToReadOnly()
@@ -209,7 +209,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         try {
             $config->test = '32';
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('read only', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('read only', $expected->getMessage());
             return;
         }
 
@@ -257,15 +257,15 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
     {
         $config = new Zend_Config($this->_leadingdot);
         $array = $config->toArray();
-        $this->assertContains('dot-test', $array['.test']);
+        $this->assertStringContainsStringIgnoringCase('dot-test', $array['.test']);
     }
 
     public function testZF1019_EmptyKeys()
     {
         $config = new Zend_Config($this->_invalidkey);
         $array = $config->toArray();
-        $this->assertContains('test', $array[' ']);
-        $this->assertContains('test', $array['']);
+        $this->assertStringContainsStringIgnoringCase('test', $array[' ']);
+        $this->assertStringContainsStringIgnoringCase('test', $array['']);
     }
 
     public function testZF1417_DefaultValues()
@@ -287,7 +287,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         try {
             unset($config->hostname);
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('is read only', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('is read only', $expected->getMessage());
             return;
         }
         $this->fail('Expected read only exception has not been raised.');
@@ -377,7 +377,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         try {
             $config->c = 'c';
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('is read only', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('is read only', $expected->getMessage());
             return;
         }
         $this->fail('Expected read only exception has not been raised.');

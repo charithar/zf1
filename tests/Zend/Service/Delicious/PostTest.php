@@ -40,7 +40,7 @@ require_once 'Zend/Service/Delicious/Post.php';
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Delicious_PostTest extends \PHPUnit\Framework\TestCase
 {
     const UNAME = 'zfTestUser';
     const PASS  = 'zfuser';
@@ -64,7 +64,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_delicious = new Zend_Service_Delicious(self::UNAME, self::PASS);
 
@@ -86,7 +86,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
             $post = new Zend_Service_Delicious_Post($this->_delicious, array('url' => 'anything'));
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
-            $this->assertContains("'url' and 'title'", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("'url' and 'title'", $e->getMessage());
         }
     }
 
@@ -101,7 +101,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
             $post = new Zend_Service_Delicious_Post($this->_delicious, array('title' => 'anything'));
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
-            $this->assertContains("'url' and 'title'", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("'url' and 'title'", $e->getMessage());
         }
     }
 
@@ -121,7 +121,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
             $post = new Zend_Service_Delicious_Post($this->_delicious, $values);
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
-            $this->assertContains('instance of Zend_Date', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('instance of Zend_Date', $e->getMessage());
         }
     }
 

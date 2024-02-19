@@ -48,7 +48,7 @@ require_once 'Zend/Oauth/Consumer.php';
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
-class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Twitter_TwitterTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -527,7 +527,7 @@ class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
         ));
         $response = $twitter->blocks->ids();
         $this->assertTrue($response instanceof Zend_Service_Twitter_Response);
-        $this->assertContains('23836616', $response->ids);
+        $this->assertStringContainsStringIgnoringCase('23836616', $response->ids);
     }
 
     public function testBlockingDestroy()

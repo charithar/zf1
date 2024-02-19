@@ -53,13 +53,13 @@ require_once 'Zend/TimeSync.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Date
  */
-class Zend_DateTest extends PHPUnit_Framework_TestCase
+class Zend_DateTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_cache = null;
     private $_orig  = array();
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
@@ -75,7 +75,7 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         Zend_Date::setOptions(array('format_type' => 'iso'));
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Date::setOptions($this->_orig);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);

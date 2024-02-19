@@ -45,7 +45,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_PlaceholderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder
@@ -70,7 +70,7 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->placeholder = new Zend_View_Helper_Placeholder();
     }
@@ -81,7 +81,7 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->placeholder);
         Zend_Registry::getInstance()->offsetUnset(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY);

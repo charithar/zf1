@@ -37,7 +37,7 @@ require_once 'Zend/Pdf/Exception.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Pdf
  */
-class Zend_PdfTest extends PHPUnit_Framework_TestCase
+class Zend_PdfTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Pdf = null

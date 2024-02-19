@@ -35,7 +35,7 @@ require_once 'Zend/Log/Writer/Db.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -43,7 +43,7 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->tableName = 'db-table-name';
 
@@ -72,7 +72,7 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
         $this->writer->write($fields);
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
+        $this->assertStringContainsStringIgnoringCase('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
@@ -94,7 +94,7 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
         $this->writer->write(array('message' => $message, 'priority' => $priority));
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
+        $this->assertStringContainsStringIgnoringCase('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
@@ -146,7 +146,7 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
             $this->writer->setFormatter(new StdClass());
         } catch (Exception $e) {
             $this->assertTrue($e instanceof PHPUnit_Framework_Error);
-            $this->assertContains('must implement interface', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('must implement interface', $e->getMessage());
         }
     }
 

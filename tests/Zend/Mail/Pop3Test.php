@@ -43,11 +43,11 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_Pop3Test extends PHPUnit_Framework_TestCase
+class Zend_Mail_Pop3Test extends \PHPUnit\Framework\TestCase
 {
     protected $_params;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_params = array('host'     => TESTS_ZEND_MAIL_POP3_HOST,
                                'user'     => TESTS_ZEND_MAIL_POP3_USER,

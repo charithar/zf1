@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Calendar.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
-class Zend_Gdata_Calendar_ColorTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Calendar_ColorTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->colorText = file_get_contents(
                 'Zend/Gdata/Calendar/_files/ColorElementSample1.xml',
                 true);

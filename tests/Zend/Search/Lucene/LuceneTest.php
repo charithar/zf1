@@ -37,7 +37,7 @@ require_once 'Zend/Search/Lucene.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
+class Zend_Search_Lucene_LuceneTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -61,7 +61,7 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
         closedir($dir);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }

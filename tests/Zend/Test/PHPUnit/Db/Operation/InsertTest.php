@@ -32,11 +32,11 @@ require_once "Zend/Test/PHPUnit/Db/Operation/Insert.php";
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_Operation_InsertTest extends PHPUnit_Framework_TestCase
+class Zend_Test_PHPUnit_Db_Operation_InsertTest extends \PHPUnit\Framework\TestCase
 {
     private $operation = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->operation = new Zend_Test_PHPUnit_Db_Operation_Insert();
     }

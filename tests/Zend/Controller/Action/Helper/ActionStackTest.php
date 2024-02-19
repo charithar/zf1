@@ -42,7 +42,7 @@ require_once 'Zend/Controller/Request/Simple.php';
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_ActionStackTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -74,7 +74,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_Te
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
@@ -89,7 +89,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_Te
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

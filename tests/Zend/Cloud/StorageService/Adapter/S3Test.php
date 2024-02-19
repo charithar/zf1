@@ -62,7 +62,7 @@ class Zend_Cloud_StorageService_Adapter_S3Test
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -99,7 +99,7 @@ class Zend_Cloud_StorageService_Adapter_S3Test
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (!$this->_config) {
             return;

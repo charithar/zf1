@@ -32,7 +32,7 @@ require_once 'Zend/XmlRpc/TestProvider.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_GeneratorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
@@ -78,7 +78,7 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
     {
         $generator->openElement('test')->closeElement('test');
         $this->assertXml('<test/>', $generator);
-        $this->assertContains('<test/>', $generator->flush());
+        $this->assertStringContainsStringIgnoringCase('<test/>', $generator->flush());
         $this->assertSame('', (string)$generator);
     }
 

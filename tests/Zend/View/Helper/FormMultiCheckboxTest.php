@@ -40,7 +40,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormMultiCheckboxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -77,7 +77,7 @@ class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         ob_end_clean();
     }
@@ -99,10 +99,10 @@ class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
             if (!preg_match($pattern, $html, $matches)) {
                 $this->fail('Failed to match ' . $pattern . ': ' . $html);
             }
-            $this->assertContains($value, $matches[5], var_export($matches, 1));
-            $this->assertContains('type="checkbox"', $matches[3], var_export($matches, 1));
-            $this->assertContains('name="foo[]"', $matches[3], var_export($matches, 1));
-            $this->assertContains('value="' . $key . '"', $matches[3], var_export($matches, 1));
+            $this->assertStringContainsStringIgnoringCase($value, $matches[5], var_export($matches, 1));
+            $this->assertStringContainsStringIgnoringCase('type="checkbox"', $matches[3], var_export($matches, 1));
+            $this->assertStringContainsStringIgnoringCase('name="foo[]"', $matches[3], var_export($matches, 1));
+            $this->assertStringContainsStringIgnoringCase('value="' . $key . '"', $matches[3], var_export($matches, 1));
         }
     }
 
@@ -123,7 +123,7 @@ class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
             if (!preg_match($pattern, $html, $matches)) {
                 $this->fail('Failed to match ' . $pattern . ': ' . $html);
             }
-            $this->assertNotContains(' />', $matches[1]);
+            $this->assertStringNotContainsStringIgnoringCase(' />', $matches[1]);
         }
     }
 
@@ -145,7 +145,7 @@ class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
             if (!preg_match($pattern, $html, $matches)) {
                 $this->fail('Failed to match ' . $pattern . ': ' . $html);
             }
-            $this->assertContains(' />', $matches[1]);
+            $this->assertStringContainsStringIgnoringCase(' />', $matches[1]);
         }
     }
 }

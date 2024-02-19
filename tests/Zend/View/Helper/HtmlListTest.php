@@ -37,7 +37,7 @@ require_once 'Zend/View/Helper/HtmlList.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HtmlListTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlList
@@ -70,7 +70,7 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
         $this->helper->setView($this->view);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -81,10 +81,10 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items);
 
-        $this->assertContains('<ul>', $list);
-        $this->assertContains('</ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertStringContainsStringIgnoringCase('<li>' . $item . '</li>', $list);
         }
     }
 
@@ -94,10 +94,10 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items, true);
 
-        $this->assertContains('<ol>', $list);
-        $this->assertContains('</ol>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ol>', $list);
+        $this->assertStringContainsStringIgnoringCase('</ol>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertStringContainsStringIgnoringCase('<li>' . $item . '</li>', $list);
         }
     }
 
@@ -108,12 +108,12 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items, false, $attribs);
 
-        $this->assertContains('<ul', $list);
-        $this->assertContains('class="selected"', $list);
-        $this->assertContains('name="list"', $list);
-        $this->assertContains('</ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ul', $list);
+        $this->assertStringContainsStringIgnoringCase('class="selected"', $list);
+        $this->assertStringContainsStringIgnoringCase('name="list"', $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertStringContainsStringIgnoringCase('<li>' . $item . '</li>', $list);
         }
     }
 
@@ -124,12 +124,12 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items, true, $attribs);
 
-        $this->assertContains('<ol', $list);
-        $this->assertContains('class="selected"', $list);
-        $this->assertContains('name="list"', $list);
-        $this->assertContains('</ol>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ol', $list);
+        $this->assertStringContainsStringIgnoringCase('class="selected"', $list);
+        $this->assertStringContainsStringIgnoringCase('name="list"', $list);
+        $this->assertStringContainsStringIgnoringCase('</ol>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertStringContainsStringIgnoringCase('<li>' . $item . '</li>', $list);
         }
     }
 
@@ -142,10 +142,10 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items);
 
-        $this->assertContains('<ul>' . Zend_View_Helper_HtmlList::EOL, $list);
-        $this->assertContains('</ul>' . Zend_View_Helper_HtmlList::EOL, $list);
-        $this->assertContains('one<ul>' . Zend_View_Helper_HtmlList::EOL.'<li>four', $list);
-        $this->assertContains('<li>six</li>' . Zend_View_Helper_HtmlList::EOL . '</ul>' .
+        $this->assertStringContainsStringIgnoringCase('<ul>' . Zend_View_Helper_HtmlList::EOL, $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>' . Zend_View_Helper_HtmlList::EOL, $list);
+        $this->assertStringContainsStringIgnoringCase('one<ul>' . Zend_View_Helper_HtmlList::EOL.'<li>four', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>six</li>' . Zend_View_Helper_HtmlList::EOL . '</ul>' .
             Zend_View_Helper_HtmlList::EOL . '</li>' . Zend_View_Helper_HtmlList::EOL . '<li>two', $list);
     }
 
@@ -158,11 +158,11 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items);
 
-        $this->assertContains('<ul>' . Zend_View_Helper_HtmlList::EOL, $list);
-        $this->assertContains('</ul>' . Zend_View_Helper_HtmlList::EOL, $list);
-        $this->assertContains('one<ul>' . Zend_View_Helper_HtmlList::EOL . '<li>four', $list);
-        $this->assertContains('<li>four<ul>' . Zend_View_Helper_HtmlList::EOL . '<li>six', $list);
-        $this->assertContains('<li>five</li>' . Zend_View_Helper_HtmlList::EOL . '</ul>' .
+        $this->assertStringContainsStringIgnoringCase('<ul>' . Zend_View_Helper_HtmlList::EOL, $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>' . Zend_View_Helper_HtmlList::EOL, $list);
+        $this->assertStringContainsStringIgnoringCase('one<ul>' . Zend_View_Helper_HtmlList::EOL . '<li>four', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>four<ul>' . Zend_View_Helper_HtmlList::EOL . '<li>six', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>five</li>' . Zend_View_Helper_HtmlList::EOL . '</ul>' .
             Zend_View_Helper_HtmlList::EOL . '</li>' . Zend_View_Helper_HtmlList::EOL . '<li>two', $list);
     }
 
@@ -172,12 +172,12 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items);
 
-        $this->assertContains('<ul>', $list);
-        $this->assertContains('</ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $list);
 
-        $this->assertContains('<li>one &lt;small&gt; test</li>', $list);
-        $this->assertContains('<li>second &amp; third</li>', $list);
-        $this->assertContains('<li>And \'some\' &quot;final&quot; test</li>', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>one &lt;small&gt; test</li>', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>second &amp; third</li>', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>And \'some\' &quot;final&quot; test</li>', $list);
     }
 
     public function testListEscapeSwitchedOffForZF2283()
@@ -186,10 +186,10 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items, false, false, false);
 
-        $this->assertContains('<ul>', $list);
-        $this->assertContains('</ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $list);
 
-        $this->assertContains('<li>one <b>small</b> test</li>', $list);
+        $this->assertStringContainsStringIgnoringCase('<li>one <b>small</b> test</li>', $list);
     }
 
     /**
@@ -202,7 +202,7 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
         $list = $this->helper->htmlList($items, false, false, false);
 
         foreach ($items[1] as $item) {
-            $this->assertContains($item, $list);
+            $this->assertStringContainsStringIgnoringCase($item, $list);
         }
     }
 
@@ -242,8 +242,8 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
         $list = $this->helper->htmlList($items, false, false, false);
 
-        $this->assertContains('<ul>', $list);
-        $this->assertContains('</ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('<ul>', $list);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $list);
 
         $this->markTestSkipped('Wrong array_walk_recursive behavior.');
 
@@ -252,7 +252,7 @@ class Zend_View_Helper_HtmlListTest extends PHPUnit_Framework_TestCase
 
     public function validateItems($value, $key, $userdata)
     {
-        $this->assertContains('<li>' . $value, $userdata);
+        $this->assertStringContainsStringIgnoringCase('<li>' . $value, $userdata);
     }
 }
 

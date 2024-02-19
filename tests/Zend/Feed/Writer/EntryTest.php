@@ -31,12 +31,12 @@ require_once 'Zend/Feed/Writer/Entry.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_EntryTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_feedSamplePath = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_feedSamplePath = dirname(__FILE__) . '/_files';
     }

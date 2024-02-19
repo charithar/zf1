@@ -38,14 +38,14 @@ require_once 'Zend/Mail/Protocol/Smtp.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_SmtpProtocolTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Mail_Protocol_Smtp
      */
     protected $_protocol;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_protocol = new ProtocolMock();
     }

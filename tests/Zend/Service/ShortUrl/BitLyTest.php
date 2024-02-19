@@ -26,7 +26,7 @@ require_once 'Zend/Service/ShortUrl/BitLy.php';
  * @package  Zend_Service
  * @subpackage  UnitTests
  */
-class Zend_Service_ShortUrl_BitLyTest extends PHPUnit_Framework_TestCase
+class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

@@ -37,7 +37,7 @@ require_once 'Zend/Loader/Autoloader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Resource_TranslateTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var array
@@ -71,7 +71,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -91,7 +91,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();

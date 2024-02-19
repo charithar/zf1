@@ -32,10 +32,10 @@ require_once 'Zend/Http/Client.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
-class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Spreadsheets_ListEntryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->listEntry = new Zend_Gdata_Spreadsheets_ListEntry();
         $this->rowData = array();

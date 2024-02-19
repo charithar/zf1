@@ -45,7 +45,7 @@ require_once 'Zend/Currency.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_CurrencyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Currency
@@ -79,7 +79,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->clearRegistry();
         require_once 'Zend/Cache.php';
@@ -97,7 +97,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
@@ -135,9 +135,9 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
             $helper = new Zend_View_Helper_Currency('something');
         } catch (Exception $e) {
             if (substr($e->getMessage(), 0, 15) == 'No region found') {
-                $this->assertContains('within the locale', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('within the locale', $e->getMessage());
             } else {
-                $this->assertContains('not found', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('not found', $e->getMessage());
             }
         }
     }
@@ -148,9 +148,9 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
             $this->helper->setCurrency('something');
         } catch (Exception $e) {
             if (substr($e->getMessage(), 0, 15) == 'No region found') {
-                $this->assertContains('within the locale', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('within the locale', $e->getMessage());
             } else {
-                $this->assertContains('not found', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('not found', $e->getMessage());
             }
         }
     }

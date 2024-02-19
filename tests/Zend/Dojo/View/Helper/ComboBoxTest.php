@@ -48,7 +48,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_View_Helper_ComboBoxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
@@ -83,7 +83,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -152,7 +152,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
         if (!preg_match('/(<input[^>]*(dojoType="dijit.form.ComboBox"))/', $html, $m)) {
             $this->fail('Did not create text input as remoter: ' . $html);
         }
-        $this->assertContains('type="text"', $m[1]);
+        $this->assertStringContainsStringIgnoringCase('type="text"', $m[1]);
     }
 
     public function testShouldAllowProgrammaticDijitCreationAsRemoter()
@@ -164,7 +164,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
 
         $found = false;
-        $this->assertContains('var stateStore;', $this->view->dojo()->getJavascript());
+        $this->assertStringContainsStringIgnoringCase('var stateStore;', $this->view->dojo()->getJavascript());
 
         $scripts = $this->view->dojo()->_getZendLoadActions();
         foreach ($scripts as $js) {
@@ -191,11 +191,11 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
         if (!preg_match('/(<input[^>]*(dojoType="dijit.form.ComboBox"))/', $html, $m)) {
             $this->fail('Did not create text input as remoter: ' . $html);
         }
-        $this->assertContains('type="text"', $m[1]);
+        $this->assertStringContainsStringIgnoringCase('type="text"', $m[1]);
         if (!preg_match('/(<div[^>]*(?:dojoType="dojo.data.ItemFileReadStore")[^>]*>)/', $html, $m)) {
             $this->fail('Did not create data store: ' . $html);
         }
-        $this->assertContains('url="states.txt"', $m[1]);
+        $this->assertStringContainsStringIgnoringCase('url="states.txt"', $m[1]);
     }
 
     /**
@@ -208,7 +208,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
         $html = $this->getElementAsRemoter();
 
         $js   = $this->view->dojo()->getJavascript();
-        $this->assertContains('var stateStore;', $js);
+        $this->assertStringContainsStringIgnoringCase('var stateStore;', $js);
 
         $onLoad = $this->view->dojo()->_getZendLoadActions();
         $storeDeclarationFound = false;

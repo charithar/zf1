@@ -36,7 +36,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
-class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
+class Zend_Captcha_ReCaptchaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -55,7 +55,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->word)) {
             unset($this->word);
@@ -79,7 +79,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -175,8 +175,8 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         ));
         $view = new Zend_View();
         $html = $captcha->render($view, $element);
-        $this->assertContains('contact[recaptcha_challenge_field]', $html);
-        $this->assertContains('contact[recaptcha_response_field]', $html);
+        $this->assertStringContainsStringIgnoringCase('contact[recaptcha_challenge_field]', $html);
+        $this->assertStringContainsStringIgnoringCase('contact[recaptcha_response_field]', $html);
     }
 
     /** @group ZF-10991 */

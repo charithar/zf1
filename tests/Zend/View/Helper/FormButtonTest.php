@@ -39,7 +39,7 @@ require_once 'Zend/View/Helper/FormButton.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormButtonTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -83,29 +83,29 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
         $this->assertRegexp('/<button[^>]*?value="bar"/', $button);
         $this->assertRegexp('/<button[^>]*?name="foo"/', $button);
         $this->assertRegexp('/<button[^>]*?id="foo"/', $button);
-        $this->assertContains('</button>', $button);
+        $this->assertStringContainsStringIgnoringCase('</button>', $button);
     }
 
     public function testCanPassContentViaContentAttribKey()
     {
         $button = $this->helper->formButton('foo', 'bar', array('content' => 'Display this'));
-        $this->assertContains('>Display this<', $button);
-        $this->assertContains('<button', $button);
-        $this->assertContains('</button>', $button);
+        $this->assertStringContainsStringIgnoringCase('>Display this<', $button);
+        $this->assertStringContainsStringIgnoringCase('<button', $button);
+        $this->assertStringContainsStringIgnoringCase('</button>', $button);
     }
 
     public function testCanDisableContentEscaping()
     {
         $button = $this->helper->formButton('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
-        $this->assertContains('><b>Display this</b><', $button);
+        $this->assertStringContainsStringIgnoringCase('><b>Display this</b><', $button);
 
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
-        $this->assertContains('><b>Display this</b><', $button);
+        $this->assertStringContainsStringIgnoringCase('><b>Display this</b><', $button);
 
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
-        $this->assertContains('><b>Display this</b><', $button);
-        $this->assertContains('<button', $button);
-        $this->assertContains('</button>', $button);
+        $this->assertStringContainsStringIgnoringCase('><b>Display this</b><', $button);
+        $this->assertStringContainsStringIgnoringCase('<button', $button);
+        $this->assertStringContainsStringIgnoringCase('</button>', $button);
     }
 
     public function testValueUsedForContentWhenNoContentProvided()
@@ -117,19 +117,19 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
     public function testButtonTypeIsButtonByDefault()
     {
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
-        $this->assertContains('type="button"', $button);
+        $this->assertStringContainsStringIgnoringCase('type="button"', $button);
     }
 
     public function testButtonTypeMayOnlyBeValidXhtmlButtonType()
     {
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
-        $this->assertContains('type="submit"', $button);
+        $this->assertStringContainsStringIgnoringCase('type="submit"', $button);
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
-        $this->assertContains('type="reset"', $button);
+        $this->assertStringContainsStringIgnoringCase('type="reset"', $button);
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
-        $this->assertContains('type="button"', $button);
+        $this->assertStringContainsStringIgnoringCase('type="button"', $button);
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
-        $this->assertContains('type="button"', $button);
+        $this->assertStringContainsStringIgnoringCase('type="button"', $button);
     }
 }
 

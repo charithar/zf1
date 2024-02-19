@@ -662,7 +662,7 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $this->_helper->setUlId('foo');
 
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<ul class="navigation" id="foo">',
             $this->_helper->renderMenu()
         );
@@ -673,7 +673,7 @@ class Zend_View_Helper_Navigation_MenuTest
      */
     public function testRenderingWithUlIdPerOptions()
     {
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<ul class="navigation" id="foo">',
             $this->_helper->renderMenu(null, array('ulId' => 'foo'))
         );
@@ -688,7 +688,7 @@ class Zend_View_Helper_Navigation_MenuTest
                       ->setOnlyActiveBranch()
                       ->setRenderParents();
 
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<ul class="navigation" id="foo">',
             $this->_helper->renderMenu()
         );
@@ -699,7 +699,7 @@ class Zend_View_Helper_Navigation_MenuTest
      */
     public function testRenderingSubMenuWithUlId()
     {
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<ul class="navigation" id="foo">',
             $this->_helper->renderSubMenu(null, null, null, 'foo')
         );
@@ -710,7 +710,7 @@ class Zend_View_Helper_Navigation_MenuTest
      */
     public function testRenderingDeepestMenuWithUlId()
     {
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<ul class="navigation" id="foo">',
             $this->_helper->renderMenu(null, array('ulId' => 'foo'))
         );
@@ -737,11 +737,11 @@ class Zend_View_Helper_Navigation_MenuTest
         $container->findBy('href', 'page1')->setClass('foo');
 
         // Tests
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<li class="foo">',
             $this->_helper->renderMenu()
         );
-        $this->assertNotContains(
+        $this->assertStringNotContainsStringIgnoringCase(
             '<a class="foo" href="page1">Page 1</a>',
             $this->_helper->renderMenu()
         );
@@ -763,11 +763,11 @@ class Zend_View_Helper_Navigation_MenuTest
             'addPageClassToLi' => true,
         );
 
-        $this->assertContains(
+        $this->assertStringContainsStringIgnoringCase(
             '<li class="active foo">',
             $this->_helper->renderMenu(null, $options)
         );
-        $this->assertNotContains(
+        $this->assertStringNotContainsStringIgnoringCase(
             '<a class="foo" href="page1">Page 1</a>',
             $this->_helper->renderMenu(null, $options)
         );
@@ -802,8 +802,8 @@ class Zend_View_Helper_Navigation_MenuTest
 
         $html = $this->_helper->renderMenu(null, $options);
 
-        $this->assertContains('<li class="current">', $html);
-        $this->assertNotContains('<li class="active">', $html);
+        $this->assertStringContainsStringIgnoringCase('<li class="current">', $html);
+        $this->assertStringNotContainsStringIgnoringCase('<li class="active">', $html);
     }
 
     /**

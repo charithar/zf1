@@ -34,12 +34,12 @@ require_once 'Zend/Locale/Data.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
-class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
+class Zend_Locale_DataTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_cache = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
@@ -49,7 +49,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     }
 
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
     }

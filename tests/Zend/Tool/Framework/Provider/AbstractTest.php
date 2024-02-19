@@ -37,14 +37,14 @@ require_once '_files/ProviderFullFeatured.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Provider
  */
-class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Provider_AbstractTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_request = null;
     protected $_response = null;
     protected $_registry = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_request = new Zend_Tool_Framework_Client_Request();
         $this->_response = new Zend_Tool_Framework_Client_Response();

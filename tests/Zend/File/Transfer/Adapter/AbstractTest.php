@@ -43,7 +43,7 @@ require_once 'Zend/Validate/File/Extension.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
-class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
+class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_File_Transfer_Adapter_AbstractTest_MockAdapter
@@ -67,7 +67,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Zend_File_Transfer_Adapter_AbstractTest_MockAdapter();
     }
@@ -78,7 +78,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -685,7 +685,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
             $this->adapter->getHash('foo', 'unknown_hash');
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown hash algorithm', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Unknown hash algorithm', $e->getMessage());
         }
     }
 
@@ -722,7 +722,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(10, $this->adapter->getFileSize());
             $this->fail();
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
     }
 
@@ -750,7 +750,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
             $this->assertEquals('image/jpeg', $this->adapter->getMimeType());
             $this->fail();
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
     }
 
@@ -771,13 +771,13 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
         $this->adapter->addValidator('Count', false, array('min' => 5, 'max' => 5, 'messages' => array(Zend_Validate_File_Count::TOO_FEW => 'Zu wenige')));
         $this->assertFalse($this->adapter->isValid('foo'));
         $message = $this->adapter->getMessages();
-        $this->assertContains('Zu wenige', $message);
+        $this->assertStringContainsStringIgnoringCase('Zu wenige', $message);
 
         try {
             $this->assertEquals('image/jpeg', $this->adapter->getMimeType());
             $this->fail();
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
     }
 
@@ -790,7 +790,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(is_string($this->adapter->getDestination('reallynonexisting')));
             $this->fail();
         } catch(Exception $e) {
-            $this->assertContains('not find', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('not find', $e->getMessage());
         }
     }
 

@@ -37,7 +37,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend\Service\Rackspace
  * @group      Zend\Service\Rackspace\Files
  */
- class Zend_Service_Rackspace_OfflineTest extends PHPUnit_Framework_TestCase
+ class Zend_Service_Rackspace_OfflineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to RackspaceFiles
@@ -62,7 +62,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_files = new Zend_Service_Rackspace_Files('foo','bar');
         $this->_filesPath   = dirname(__FILE__) . '/_files';

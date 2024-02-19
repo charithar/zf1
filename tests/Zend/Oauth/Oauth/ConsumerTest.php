@@ -30,10 +30,10 @@ require_once 'Zend/Oauth/Consumer.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Oauth
  */
-class Zend_Oauth_ConsumerTest extends PHPUnit_Framework_TestCase
+class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Oauth::clearHttpClient();
     }

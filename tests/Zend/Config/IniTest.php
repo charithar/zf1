@@ -33,13 +33,13 @@ require_once 'Zend/Config/Ini.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
+class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileAllSectionsConfig;
     protected $_iniFileCircularConfig;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_iniFileConfig = dirname(__FILE__) . '/_files/config.ini';
         $this->_iniFileAllSectionsConfig = dirname(__FILE__) . '/_files/allsections.ini';
@@ -113,7 +113,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Ini($this->_iniFileConfig, 'extendserror');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
     }
 
@@ -125,7 +125,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
                 $config = new Zend_Config_Ini($this->_iniFileConfig, $section);
                 $this->fail('An expected Zend_Config_Exception has not been raised');
             } catch (Zend_Config_Exception $expected) {
-                $this->assertContains('Invalid key', $expected->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Invalid key', $expected->getMessage());
             }
         }
     }
@@ -136,7 +136,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Ini($this->_iniFileConfig, 'zf426');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Cannot create sub-key for', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Cannot create sub-key for', $expected->getMessage());
         }
     }
 
@@ -177,7 +177,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Ini($this->_iniFileCircularConfig, null);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('circular inheritance', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('circular inheritance', $expected->getMessage());
         }
     }
 
@@ -187,7 +187,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Ini('','');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Filename is not set', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Filename is not set', $expected->getMessage());
         }
     }
 
@@ -198,7 +198,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
             zend::dump($config);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('may not extend multiple sections', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('may not extend multiple sections', $expected->getMessage());
         }
     }
 
@@ -208,14 +208,14 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Ini($this->_iniFileConfig,array('all', 'notthere'));
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
 
         try {
             $config = new Zend_Config_Ini($this->_iniFileConfig,'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
 
     }

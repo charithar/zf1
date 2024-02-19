@@ -32,14 +32,14 @@ require_once 'Zend/Gdata/Gapps/GroupFeed.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_Gapps_GroupFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Gapps_GroupFeedTest extends \PHPUnit\Framework\TestCase
 {
     protected $groupFeed = null;
 
     /**
       * Called before each test to setup any fixtures.
       */
-    public function setUp()
+    protected function setUp(): void
     {
         $groupFeedText = file_get_contents(
                 'Zend/Gdata/Gapps/_files/GroupFeedDataSample1.xml',

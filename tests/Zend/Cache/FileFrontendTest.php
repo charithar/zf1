@@ -35,7 +35,7 @@ require_once 'Zend/Cache/Backend/Test.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
+class Zend_Cache_FileFrontendTest extends \PHPUnit\Framework\TestCase {
 
     private $_instance1;
     private $_instance2;
@@ -46,7 +46,7 @@ class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
     private $_masterFile2;
 
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $this->_masterFile = $this->_getTmpDirWindows() . DIRECTORY_SEPARATOR . 'zend_cache_master';
@@ -93,7 +93,7 @@ class Zend_Cache_FileFrontendTest extends PHPUnit_Framework_TestCase {
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_instance1);
         unlink($this->_masterFile);

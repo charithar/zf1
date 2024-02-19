@@ -8,5 +8,5 @@ This fork of Zend Framework could be installed using following composer statemen
 SYSTEM REQUIREMENTS
 -------------------
 
-Zend Framework requires PHP 5.2.11 or later. 
+Zend Framework requires PHP 7.1 or later. 
 

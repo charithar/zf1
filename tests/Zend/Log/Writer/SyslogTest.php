@@ -35,7 +35,7 @@ require_once 'Zend/Log/Writer/Syslog.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -71,7 +71,7 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
             $writer->setFacility(LOG_USER * 1000);
         } catch (Exception $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertContains('Invalid log facility provided', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid log facility provided', $e->getMessage());
         }
     }
 
@@ -88,7 +88,7 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
             $writer->setFacility(LOG_AUTH);
         } catch (Exception $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertContains('Only LOG_USER is a valid', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Only LOG_USER is a valid', $e->getMessage());
         }
     }
 

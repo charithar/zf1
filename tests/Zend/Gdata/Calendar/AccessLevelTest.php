@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Calendar.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
-class Zend_Gdata_Calendar_AccessLevelTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Calendar_AccessLevelTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->accessLevelText = file_get_contents(
                 'Zend/Gdata/Calendar/_files/AccessLevelElementSample1.xml',
                 true);

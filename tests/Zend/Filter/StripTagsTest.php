@@ -39,7 +39,7 @@ require_once 'Zend/Filter/StripTags.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_StripTagsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Filter_StripTags object
@@ -65,7 +65,7 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_filter = new Zend_Filter_StripTags();
     }
@@ -515,7 +515,7 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
 =
     "alert(&quot;Gotcha&quot;); return false;">http://framework.zend.com/issues</a>';
         $filtered = $this->_filter->filter($input);
-        $this->assertNotContains('onclick', $filtered);
+        $this->assertStringNotContainsStringIgnoringCase('onclick', $filtered);
     }
 
     /**

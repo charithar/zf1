@@ -41,7 +41,7 @@ require_once 'Zend/Service/WindowsAzure/Storage/Blob.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_BlobStreamTest extends PHPUnit_Framework_TestCase
+class Zend_Service_WindowsAzure_BlobStreamTest extends \PHPUnit\Framework\TestCase
 {
     static $path;
     

@@ -30,7 +30,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service_Rackspace_Servers
  */
-class Zend_Service_Rackspace_Servers_OfflineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Rackspace_Servers_OfflineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Rackspace Servers object
@@ -89,7 +89,7 @@ class Zend_Service_Rackspace_Servers_OfflineTest extends PHPUnit_Framework_TestC
     /**
      * SetUpBerofeClass
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->rackspace= new Zend_Service_Rackspace_Servers('foo','bar');
         

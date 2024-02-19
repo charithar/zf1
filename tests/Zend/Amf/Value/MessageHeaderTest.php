@@ -36,7 +36,7 @@ require_once 'Zend/Amf/Value/MessageHeader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_Value_MessageHeaderTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Value_MessageHeaderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

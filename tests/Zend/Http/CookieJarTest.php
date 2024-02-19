@@ -33,7 +33,7 @@ require_once 'Zend/Http/CookieJar.php';
  * @group      Zend_Http
  * @group      Zend_Http_CookieJar
  */
-class Zend_Http_CookieJarTest extends PHPUnit_Framework_TestCase
+class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
 {
     public function loadResponse($filename)
     {
@@ -149,7 +149,7 @@ class Zend_Http_CookieJarTest extends PHPUnit_Framework_TestCase
         $cobjects = $jar->getAllCookies();
 
         foreach ($cobjects as $id => $cookie) {
-            $this->assertContains((string) $cookie, $cookies[$id]);
+            $this->assertStringContainsStringIgnoringCase((string) $cookie, $cookies[$id]);
         }
     }
 

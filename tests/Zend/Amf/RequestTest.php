@@ -40,7 +40,7 @@ require_once 'Contact.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_RequestTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_RequestTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Amf_Request object
@@ -62,7 +62,7 @@ class Zend_Amf_RequestTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         date_default_timezone_set("America/Chicago");
         Zend_Locale::setDefault('en');
@@ -73,7 +73,7 @@ class Zend_Amf_RequestTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_request);
     }

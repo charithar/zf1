@@ -33,7 +33,7 @@ require_once 'Zend/Filter/Boolean.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_BooleanTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Filter_Boolean object
@@ -47,7 +47,7 @@ class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_filter = new Zend_Filter_Boolean();
     }
@@ -751,7 +751,7 @@ class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
             $this->_filter->setType(true);
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Unknown', $e->getMessage());
         }
     }
 
@@ -776,7 +776,7 @@ class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
             $this->_filter->setLocale(true);
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Locale has to be', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Locale has to be', $e->getMessage());
         }
     }
 
@@ -791,7 +791,7 @@ class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
             $this->_filter->setLocale('yy');
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown locale', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Unknown locale', $e->getMessage());
         }
     }
 }

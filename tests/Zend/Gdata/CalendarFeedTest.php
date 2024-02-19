@@ -34,14 +34,14 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
-class Zend_Gdata_CalendarFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_CalendarFeedTest extends \PHPUnit\Framework\TestCase
 {
     protected $listFeed = null;
 
     /**
       * Called before each test to setup any fixtures.
       */
-    public function setUp()
+    protected function setUp(): void
     {
         $listFeedText = file_get_contents(
                 'Zend/Gdata/Calendar/_files/ListFeedSample1.xml',

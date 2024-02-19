@@ -36,7 +36,7 @@ require_once 'Zend/Session.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Session
  */
-class Zend_SessionTest extends PHPUnit_Framework_TestCase
+class Zend_SessionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Helper script invoked via exec()
@@ -83,7 +83,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         ini_set('session.save_path', $this->_savePath);
 

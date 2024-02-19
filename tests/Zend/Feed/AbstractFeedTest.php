@@ -38,13 +38,13 @@ require_once 'Zend/Http/Client.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_AbstractFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_AbstractFeedTest extends \PHPUnit\Framework\TestCase
 {
     public $baseUri;
 
     public $remoteFeedNames = array();
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!defined('TESTS_ZEND_FEED_IMPORT_ONLINE_BASEURI')
             || !constant('TESTS_ZEND_FEED_IMPORT_ONLINE_BASEURI')
@@ -55,7 +55,7 @@ class Zend_Feed_AbstractFeedTest extends PHPUnit_Framework_TestCase
         Zend_Feed::setHttpClient(new Zend_Http_Client());
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (!$this->baseUri) {
             return parent::tearDown();

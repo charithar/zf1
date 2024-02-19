@@ -43,7 +43,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_FileTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form_Element_File
@@ -72,7 +72,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Form::setDefaultTranslator(null);
@@ -85,7 +85,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -246,8 +246,8 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
 
         $form->setView(new Zend_View());
         $output = (string) $form;
-        $this->assertContains('name="file1"', $output);
-        $this->assertContains('name="file2"', $output);
+        $this->assertStringContainsStringIgnoringCase('name="file1"', $output);
+        $this->assertStringContainsStringIgnoringCase('name="file2"', $output);
     }
 
     public function testMultiFileInSubSubSubform()
@@ -268,7 +268,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
 
         $form->setView(new Zend_View());
         $output = (string) $form;
-        $this->assertContains('name="file[]"', $output);
+        $this->assertStringContainsStringIgnoringCase('name="file[]"', $output);
         $this->assertEquals(2, substr_count($output, 'file[]'));
     }
 
@@ -290,7 +290,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
 
         $form->setView(new Zend_View());
         $output = (string) $form;
-        $this->assertNotContains('name="file[]"', $output);
+        $this->assertStringNotContainsStringIgnoringCase('name="file[]"', $output);
     }
 
     public function testSettingMaxFileSize()
@@ -396,7 +396,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
             $content = $this->element->render(new Zend_View());
             $this->fail();
         } catch (Zend_Form_Element_Exception $e) {
-            $this->assertContains('No file decorator found', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No file decorator found', $e->getMessage());
         }
     }
 
@@ -430,7 +430,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($element->hasErrors());
         $messages = $element->getMessages();
-        $this->assertContains('TestError3', $messages);
+        $this->assertStringContainsStringIgnoringCase('TestError3', $messages);
     }
 
     public function testGetTranslatorRetrievesGlobalDefaultWhenAvailable()

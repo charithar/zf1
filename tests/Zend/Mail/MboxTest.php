@@ -39,13 +39,13 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MboxTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MboxTest extends \PHPUnit\Framework\TestCase
 {
     protected $_mboxOriginalFile;
     protected $_mboxFile;
     protected $_tmpdir;
 
-    public function setUp()
+    protected function setUp(): void
     {
         if ($this->_tmpdir == null) {
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
@@ -74,7 +74,7 @@ class Zend_Mail_MboxTest extends PHPUnit_Framework_TestCase
         copy($this->_mboxOriginalFile, $this->_mboxFile);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unlink($this->_mboxFile);
     }

@@ -31,10 +31,10 @@ require_once 'Zend/Gdata.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
  */
-class Zend_Gdata_OriginalEventTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_OriginalEventTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->originalEventText = file_get_contents(
                 'Zend/Gdata/_files/OriginalEventElementSample1.xml',
                 true);

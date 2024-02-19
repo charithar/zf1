@@ -56,7 +56,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Amazon_OfflineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Amazon service consumer object
@@ -77,7 +77,7 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_amazon = new Zend_Service_Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
 
@@ -95,7 +95,7 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
             $amazon = new Zend_Service_Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 'oops');
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
-            $this->assertContains('Unknown country code', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Unknown country code', $e->getMessage());
         }
     }
 

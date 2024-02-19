@@ -32,7 +32,7 @@ require_once 'Zend/Http/UserAgent/Features/Adapter/Browscap.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends PHPUnit_Framework_TestCase
+class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -40,7 +40,7 @@ class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends PHPUnit_Framewor
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $browscap = ini_get('browscap');
         if (empty($browscap) || !file_exists($browscap)) {
@@ -56,7 +56,7 @@ class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends PHPUnit_Framewor
         $this->assertEquals(1,                           $adapter['javascript']);
         $this->assertEquals(3,                           $adapter['cssversion']);
         $this->assertEquals('iPhone',                    $adapter['mobile_browser']);
-        $this->assertContains('^mozilla/.\\..*(iphone;.*cpu', $adapter['browser_name_regex']);
+        $this->assertStringContainsStringIgnoringCase('^mozilla/.\\..*(iphone;.*cpu', $adapter['browser_name_regex']);
 
         $request['http_user_agent'] = 'SonyEricssonK700i/R2AC SEMC-Browser/4.0.2 Profile/MIDP-2.0 Configuration/CLDC-1.1';
         $adapter = Zend_Http_UserAgent_Features_Adapter_Browscap::getFromRequest($request, array());

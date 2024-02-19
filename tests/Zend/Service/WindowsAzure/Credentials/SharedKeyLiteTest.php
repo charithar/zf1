@@ -41,7 +41,7 @@ require_once 'Zend/Service/WindowsAzure/Credentials/SharedKeyLite.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest extends PHPUnit_Framework_TestCase
+class Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

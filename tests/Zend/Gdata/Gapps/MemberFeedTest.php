@@ -32,14 +32,14 @@ require_once 'Zend/Gdata/Gapps/MemberFeed.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_Gapps_MemberFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Gapps_MemberFeedTest extends \PHPUnit\Framework\TestCase
 {
     protected $memberFeed = null;
 
     /**
       * Called before each test to setup any fixtures.
       */
-    public function setUp()
+    protected function setUp(): void
     {
         $memberFeedText = file_get_contents(
                 'Zend/Gdata/Gapps/_files/MemberFeedDataSample1.xml',

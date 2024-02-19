@@ -37,7 +37,7 @@ require_once 'Zend/Validate/EmailAddress.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_EmailAddressTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Default instance created for all test methods
@@ -62,7 +62,7 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_EmailAddress();
     }
@@ -128,7 +128,7 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('@example.com'));
         $messages = $this->_validator->getMessages();
         $this->assertEquals(1, count($messages));
-        $this->assertContains('local-part@hostname', current($messages));
+        $this->assertStringContainsStringIgnoringCase('local-part@hostname', current($messages));
     }
 
     /**
@@ -144,14 +144,14 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, count($messages));
 
-        $this->assertContains('Some User', current($messages));
-        $this->assertContains('dot-atom', current($messages));
+        $this->assertStringContainsStringIgnoringCase('Some User', current($messages));
+        $this->assertStringContainsStringIgnoringCase('dot-atom', current($messages));
 
-        $this->assertContains('Some User', next($messages));
-        $this->assertContains('quoted-string', current($messages));
+        $this->assertStringContainsStringIgnoringCase('Some User', next($messages));
+        $this->assertStringContainsStringIgnoringCase('quoted-string', current($messages));
 
-        $this->assertContains('Some User', next($messages));
-        $this->assertContains('not a valid local part', current($messages));
+        $this->assertStringContainsStringIgnoringCase('Some User', next($messages));
+        $this->assertStringContainsStringIgnoringCase('not a valid local part', current($messages));
     }
 
     /**
@@ -179,7 +179,7 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('username@ example . com'));
         $messages = $this->_validator->getMessages();
         $this->assertThat(count($messages), $this->greaterThanOrEqual(1));
-        $this->assertContains('not a valid hostname', current($messages));
+        $this->assertStringContainsStringIgnoringCase('not a valid hostname', current($messages));
     }
 
     /**
@@ -250,9 +250,9 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('User Name <username@example.com>'));
         $messages = $this->_validator->getMessages();
         $this->assertThat(count($messages), $this->greaterThanOrEqual(3));
-        $this->assertContains('not a valid hostname', current($messages));
-        $this->assertContains('cannot match TLD', next($messages));
-        $this->assertContains('does not appear to be a valid local network name', next($messages));
+        $this->assertStringContainsStringIgnoringCase('not a valid hostname', current($messages));
+        $this->assertStringContainsStringIgnoringCase('cannot match TLD', next($messages));
+        $this->assertStringContainsStringIgnoringCase('does not appear to be a valid local network name', next($messages));
     }
 
     /**

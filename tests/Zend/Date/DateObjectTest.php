@@ -33,10 +33,10 @@ require_once 'Zend/Date.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Date
  */
-class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
+class Zend_Date_DateObjectTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
@@ -47,7 +47,7 @@ class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
         Zend_Date_DateObjectTestHelper::setOptions(array('cache' => $this->_cache));
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         date_default_timezone_set($this->originalTimezone);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);

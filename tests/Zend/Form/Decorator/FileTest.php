@@ -41,7 +41,7 @@ require_once 'Zend/View/Helper/FormElement.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_FileTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -61,7 +61,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_File();
     }
@@ -72,7 +72,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

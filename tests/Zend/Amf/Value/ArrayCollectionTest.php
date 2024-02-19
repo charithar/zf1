@@ -35,7 +35,7 @@ require_once 'Zend/Amf/Value/Messaging/ArrayCollection.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_Value_ArrayCollectionTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Value_ArrayCollectionTest extends \PHPUnit\Framework\TestCase
 {
 
 
@@ -60,7 +60,7 @@ class Zend_Amf_Value_ArrayCollectionTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $data = array();
         $data[] = array('foo' => 'foo1', 'bar' => 'bar1');
@@ -69,7 +69,7 @@ class Zend_Amf_Value_ArrayCollectionTest extends PHPUnit_Framework_TestCase
 
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_arrayCollection);
         unset($this->_data);

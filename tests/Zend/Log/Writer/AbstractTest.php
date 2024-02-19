@@ -35,7 +35,7 @@ require_once 'Zend/Log/Writer/Abstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_AbstractTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_AbstractTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Log_Writer_Abstract

@@ -39,7 +39,7 @@ require_once 'Zend/Translate.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_MultiselectTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -63,7 +63,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Multiselect('foo');
     }
@@ -74,7 +74,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -243,7 +243,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
 
         $html = $this->element->render($this->getView());
         foreach ($options as $value => $label) {
-            $this->assertNotContains($label, $html, $html);
+            $this->assertStringNotContainsStringIgnoringCase($label, $html, $html);
             $this->assertRegexp('/<option.*value="' . $value . '"[^>]*>' . $translations[$label] . '/s', $html, $html);
         }
     }
@@ -318,7 +318,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
         $this->element->setValue('barValue');
 
         $html = $this->element->render($this->getView());
-        $this->assertContains($translations['ThisIsTheLabel'], $html, $html);
+        $this->assertStringContainsStringIgnoringCase($translations['ThisIsTheLabel'], $html, $html);
     }
 
     /**

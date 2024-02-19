@@ -35,7 +35,7 @@ require_once 'Zend/Log/Formatter/Xml.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Formatter_XmlTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -48,15 +48,15 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $f = new Zend_Log_Formatter_Xml();
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
-        $this->assertContains('foo', $line);
-        $this->assertContains((string)42, $line);
+        $this->assertStringContainsStringIgnoringCase('foo', $line);
+        $this->assertStringContainsStringIgnoringCase((string)42, $line);
     }
 
     public function testConfiguringElementMapping()
     {
         $f = new Zend_Log_Formatter_Xml('log', array('foo' => 'bar'));
         $line = $f->format(array('bar' => 'baz'));
-        $this->assertContains('<log><foo>baz</foo></log>', $line);
+        $this->assertStringContainsStringIgnoringCase('<log><foo>baz</foo></log>', $line);
     }
 
     public function testXmlDeclarationIsStripped()
@@ -64,7 +64,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $f = new Zend_Log_Formatter_Xml();
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
-        $this->assertNotContains('<\?xml version=', $line);
+        $this->assertStringNotContainsStringIgnoringCase('<\?xml version=', $line);
     }
 
     public function testXmlValidates()
@@ -85,7 +85,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $f = new Zend_Log_Formatter_Xml();
         $line = $f->format(array('message' => '&key1=value1&key2=value2', 'priority' => 42));
 
-        $this->assertContains("&amp;", $line);
+        $this->assertStringContainsStringIgnoringCase("&amp;", $line);
         $this->assertTrue(substr_count($line, "&amp;") == 2);
     }
 
@@ -98,7 +98,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $f = new Zend_Log_Formatter_Xml();
         $line = $f->format(array('message' => '&amp', 'priority' => 42));
 
-        $this->assertContains('&amp;amp', $line);
+        $this->assertStringContainsStringIgnoringCase('&amp;amp', $line);
     }
 
     public function testConstructorWithArray()
@@ -118,7 +118,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
 
         $formatter = new Zend_Log_Formatter_Xml($options);
         $output = $formatter->format($event);
-        $this->assertContains($expected, $output);
+        $this->assertStringContainsStringIgnoringCase($expected, $output);
         $this->assertEquals('UTF-8', $formatter->getEncoding());
     }
 
@@ -156,7 +156,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
 
         $formatter = new Zend_Log_Formatter_Xml($options);
         $output = $formatter->format($event);
-        $this->assertContains($expected, $output);
+        $this->assertStringContainsStringIgnoringCase($expected, $output);
     }
     
     /**
@@ -177,7 +177,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
 
         $formatter = new Zend_Log_Formatter_Xml($options);
         $output = $formatter->format($event);
-        $this->assertContains($expected, $output);
+        $this->assertStringContainsStringIgnoringCase($expected, $output);
     }
 }
 

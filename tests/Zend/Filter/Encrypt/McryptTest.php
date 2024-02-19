@@ -33,9 +33,9 @@ require_once 'Zend/Filter/Encrypt/Mcrypt.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_Encrypt_McryptTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('This adapter needs the mcrypt extension');
@@ -79,7 +79,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
             $filter->setVector('1');
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('wrong size', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('wrong size', $e->getMessage());
         }
     }
 
@@ -164,7 +164,7 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
             $filter = new Zend_Filter_Encrypt_Mcrypt(1234);
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('Invalid options argument', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid options argument', $e->getMessage());
         }
     }
 
@@ -191,21 +191,21 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
             $filter->setEncryption(1234);
             $filter->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('Invalid options argument', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid options argument', $e->getMessage());
         }
 
         try {
             $filter->setEncryption(array('algorithm' => 'unknown'));
             $filter->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('The algorithm', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('The algorithm', $e->getMessage());
         }
 
         try {
             $filter->setEncryption(array('mode' => 'unknown'));
             $filter->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('The mode', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('The mode', $e->getMessage());
         }
     }
 

@@ -39,11 +39,11 @@ require_once 'Zend/Ldap.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_CanonTest extends \PHPUnit\Framework\TestCase
 {
     protected $_options = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_options = array(
             'host' => TESTS_ZEND_LDAP_HOST,
@@ -196,7 +196,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
             $canon = $ldap->getCanonicalAccountName('invalid', Zend_Ldap::ACCTNAME_FORM_DN);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('(&(objectClass=posixAccount)(uid=invalid))', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('(&(objectClass=posixAccount)(uid=invalid))', $zle->getMessage());
         }
 
         $options['bindRequiresDn'] = false;
@@ -205,7 +205,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
             $canon = $ldap->getCanonicalAccountName('invalid', Zend_Ldap::ACCTNAME_FORM_DN);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('(&(objectClass=user)(sAMAccountName=invalid))', $zle->getMessage());
+            $this->assertStringContainsStringIgnoringCase('(&(objectClass=user)(sAMAccountName=invalid))', $zle->getMessage());
         }
     }
 
@@ -218,7 +218,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_USERNAME);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Binding domain is not an authority for user: invalid\invalid',
+            $this->assertStringContainsStringIgnoringCase('Binding domain is not an authority for user: invalid\invalid',
                 $zle->getMessage());
         }
         try {
@@ -226,7 +226,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_USERNAME);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Binding domain is not an authority for user: invalid@invalid.tld',
+            $this->assertStringContainsStringIgnoringCase('Binding domain is not an authority for user: invalid@invalid.tld',
                 $zle->getMessage());
         }
 
@@ -240,7 +240,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_USERNAME);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Binding domain is not an authority for user: invalid@' .
+            $this->assertStringContainsStringIgnoringCase('Binding domain is not an authority for user: invalid@' .
                 TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME,
                 $zle->getMessage());
         }
@@ -253,7 +253,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_USERNAME);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Binding domain is not an authority for user: ' .
+            $this->assertStringContainsStringIgnoringCase('Binding domain is not an authority for user: ' .
                 TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT . '\invalid',
                 $zle->getMessage());
         }
@@ -282,7 +282,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_USERNAME);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid account name syntax: 0@' .
+            $this->assertStringContainsStringIgnoringCase('Invalid account name syntax: 0@' .
                 TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME,
                 $zle->getMessage());
         }
@@ -292,7 +292,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_USERNAME);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid account name syntax: ' .
+            $this->assertStringContainsStringIgnoringCase('Invalid account name syntax: ' .
                 TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT . '\\0',
                 $zle->getMessage());
         }
@@ -307,7 +307,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
             $canon = $ldap->getCanonicalAccountName(TESTS_ZEND_LDAP_ALT_USERNAME, 99);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Unknown canonical name form: 99',
+            $this->assertStringContainsStringIgnoringCase('Unknown canonical name form: 99',
                 $zle->getMessage());
         }
     }
@@ -322,7 +322,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_PRINCIPAL);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Option required: accountDomainName',
+            $this->assertStringContainsStringIgnoringCase('Option required: accountDomainName',
                 $zle->getMessage());
         }
 
@@ -333,7 +333,7 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
                 Zend_Ldap::ACCTNAME_FORM_BACKSLASH);
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Option required: accountDomainNameShort',
+            $this->assertStringContainsStringIgnoringCase('Option required: accountDomainNameShort',
                 $zle->getMessage());
         }
     }

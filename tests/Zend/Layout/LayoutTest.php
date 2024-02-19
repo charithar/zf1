@@ -44,7 +44,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
+class Zend_Layout_LayoutTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -64,7 +64,7 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Layout_LayoutTest_Override::resetMvcInstance();
 
@@ -83,7 +83,7 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Layout::resetMvcInstance();
     }
@@ -392,8 +392,8 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
                ->setView($view);
         $layout->message = 'Rendered layout';
         $received = $layout->render();
-        $this->assertContains('Testing layouts:', $received);
-        $this->assertContains($layout->message, $received);
+        $this->assertStringContainsStringIgnoringCase('Testing layouts:', $received);
+        $this->assertStringContainsStringIgnoringCase($layout->message, $received);
     }
 
     public function testRenderWithDefaultInflection()
@@ -404,8 +404,8 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
                ->setView($view);
         $layout->message = 'Rendered layout';
         $received = $layout->render();
-        $this->assertContains('Testing layouts:', $received);
-        $this->assertContains($layout->message, $received);
+        $this->assertStringContainsStringIgnoringCase('Testing layouts:', $received);
+        $this->assertStringContainsStringIgnoringCase($layout->message, $received);
     }
 
     public function testRenderWithCustomInflection()
@@ -419,8 +419,8 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
                   ->setStaticRule('suffix', 'php');
         $layout->message = 'Rendered layout';
         $received = $layout->render();
-        $this->assertContains('Testing layouts with custom inflection:', $received);
-        $this->assertContains($layout->message, $received);
+        $this->assertStringContainsStringIgnoringCase('Testing layouts with custom inflection:', $received);
+        $this->assertStringContainsStringIgnoringCase($layout->message, $received);
     }
 
     public function testGetMvcInstanceReturnsNullWhenStartMvcHasNotBeenCalled()

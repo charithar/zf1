@@ -36,7 +36,7 @@ require_once 'Zend/Tool/Framework/Manifest/ProviderMetadata.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
  */
-class Zend_Tool_Framework_Manifest_ProviderMetadataTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Manifest_ProviderMetadataTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -44,12 +44,12 @@ class Zend_Tool_Framework_Manifest_ProviderMetadataTest extends PHPUnit_Framewor
      */
     protected $_metadata = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_metadata = new Zend_Tool_Framework_Manifest_ProviderMetadata();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_metadata = null;
     }

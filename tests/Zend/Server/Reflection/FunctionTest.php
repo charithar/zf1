@@ -32,7 +32,7 @@ require_once 'Zend/Server/Reflection/Function.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
+class Zend_Server_Reflection_FunctionTest extends \PHPUnit\Framework\TestCase
 {
     public function test__construct()
     {
@@ -84,7 +84,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
     {
         $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
         $r = new Zend_Server_Reflection_Function($function);
-        $this->assertContains('function for reflection', $r->getDescription());
+        $this->assertStringContainsStringIgnoringCase('function for reflection', $r->getDescription());
         $r->setDescription('Testing setting descriptions');
         $this->assertEquals('Testing setting descriptions', $r->getDescription());
     }
@@ -175,7 +175,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $prototype  = $prototypes[0];
         $params = $prototype->getParameters();
         $param  = $params[0];
-        $this->assertContains('Some description', $param->getDescription(), var_export($param, 1));
+        $this->assertStringContainsStringIgnoringCase('Some description', $param->getDescription(), var_export($param, 1));
     }
 }
 

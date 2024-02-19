@@ -55,7 +55,7 @@ require_once 'Zend/Mail/Transport/Abstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Mock Transport for Zend_Mail
@@ -325,10 +325,10 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
     	$writer->shutdown();
 
     	$this->assertEquals('admin@domain.com', $this->_transport->recipients);
-    	$this->assertContains('an info message', $this->_transport->body);
-    	$this->assertContains('From: log@test.framework.zend.com', $this->_transport->header);
-    	$this->assertContains('To: admin@domain.com', $this->_transport->header);
-    	$this->assertContains('Subject: [error] exceptions on my application', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('an info message', $this->_transport->body);
+    	$this->assertStringContainsStringIgnoringCase('From: log@test.framework.zend.com', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('To: admin@domain.com', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('Subject: [error] exceptions on my application', $this->_transport->header);
     }
 
     /**
@@ -344,7 +344,7 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
 
-    	$this->assertContains('Subject: [error] exceptions on my application (INFO=1)', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('Subject: [error] exceptions on my application (INFO=1)', $this->_transport->header);
     }
 
     /**
@@ -374,7 +374,7 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
 
-    	$this->assertContains('Content-Type: text/plain; charset=UTF-8', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('Content-Type: text/plain; charset=UTF-8', $this->_transport->header);
     }
 
     /**
@@ -397,14 +397,14 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
 
-    	$this->assertContains('admin1@domain.com', $this->_transport->recipients);
-    	$this->assertContains('admin2@domain.com', $this->_transport->recipients);
-    	$this->assertContains('bug@domain.com', $this->_transport->recipients);
-    	$this->assertContains('projectname@domain.com', $this->_transport->recipients);
-    	$this->assertContains('To: John Doe <admin1@domain.com>', $this->_transport->header);
-    	$this->assertContains('admin2@domain.com', $this->_transport->header);
-    	$this->assertContains('Cc: bug@domain.com', $this->_transport->header);
-    	$this->assertContains('project <projectname@domain.com>', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('admin1@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsStringIgnoringCase('admin2@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsStringIgnoringCase('bug@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsStringIgnoringCase('projectname@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsStringIgnoringCase('To: John Doe <admin1@domain.com>', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('admin2@domain.com', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('Cc: bug@domain.com', $this->_transport->header);
+    	$this->assertStringContainsStringIgnoringCase('project <projectname@domain.com>', $this->_transport->header);
     }
 
     /**
@@ -423,11 +423,11 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
     	$writer->shutdown();
 
         $this->assertFalse(empty($this->_transport->boundary));
-        $this->assertContains('Content-Type: multipart/', $this->_transport->header);
-        $this->assertContains('boundary=', $this->_transport->header);
-        $this->assertContains('Content-Type: text/plain', $this->_transport->body);
-        $this->assertContains('Content-Type: text/html', $this->_transport->body);
-        $this->assertContains($this->_transport->boundary, $this->_transport->body);
+        $this->assertStringContainsStringIgnoringCase('Content-Type: multipart/', $this->_transport->header);
+        $this->assertStringContainsStringIgnoringCase('boundary=', $this->_transport->header);
+        $this->assertStringContainsStringIgnoringCase('Content-Type: text/plain', $this->_transport->body);
+        $this->assertStringContainsStringIgnoringCase('Content-Type: text/html', $this->_transport->body);
+        $this->assertStringContainsStringIgnoringCase($this->_transport->boundary, $this->_transport->body);
         $this->assertEquals(2, substr_count($this->_transport->body, 'an info message'));
     }
 

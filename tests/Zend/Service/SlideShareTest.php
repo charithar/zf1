@@ -34,7 +34,7 @@ require_once 'Zend/Service/SlideShare.php';
  * @group      Zend_Service
  * @group      Zend_Service_SlideShare
  */
-class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
+class Zend_Service_SlideShareTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * The Slide share object instance
@@ -72,7 +72,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
         return $ss;
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!defined("TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY")
             || !defined("TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET")

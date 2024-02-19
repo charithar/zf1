@@ -39,7 +39,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormErrorsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->view   = new Zend_View();
         $this->helper = new Zend_View_Helper_FormErrors();
@@ -73,7 +73,7 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         ob_end_clean();
     }
@@ -118,11 +118,11 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
     {
         $errors = array('foo', 'bar', 'baz');
         $html = $this->helper->formErrors($errors);
-        $this->assertContains('<ul', $html);
+        $this->assertStringContainsStringIgnoringCase('<ul', $html);
         foreach ($errors as $error) {
-            $this->assertContains('<li>' . $error . '</li>', $html);
+            $this->assertStringContainsStringIgnoringCase('<li>' . $error . '</li>', $html);
         }
-        $this->assertContains('</ul>', $html);
+        $this->assertStringContainsStringIgnoringCase('</ul>', $html);
     }
 
     public function testFormErrorsRendersWithSpecifiedStrings()
@@ -132,11 +132,11 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
                      ->setElementEnd('</dt></dl>');
         $errors = array('foo', 'bar', 'baz');
         $html = $this->helper->formErrors($errors);
-        $this->assertContains('<dl>', $html);
+        $this->assertStringContainsStringIgnoringCase('<dl>', $html);
         foreach ($errors as $error) {
-            $this->assertContains('<dt>' . $error . '</dt>', $html);
+            $this->assertStringContainsStringIgnoringCase('<dt>' . $error . '</dt>', $html);
         }
-        $this->assertContains('</dl>', $html);
+        $this->assertStringContainsStringIgnoringCase('</dl>', $html);
     }
 
     public function testFormErrorsPreventsXssAttacks()
@@ -145,8 +145,8 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
             'bad' => '\"><script>alert("xss");</script>',
         );
         $html = $this->helper->formErrors($errors);
-        $this->assertNotContains($errors['bad'], $html);
-        $this->assertContains('&', $html);
+        $this->assertStringNotContainsStringIgnoringCase($errors['bad'], $html);
+        $this->assertStringContainsStringIgnoringCase('&', $html);
     }
 
     public function testCanDisableEscapingErrorMessages()
@@ -156,8 +156,8 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
             'bar' => '<a href="/help">Please click here for more information</a>'
         );
         $html = $this->helper->formErrors($errors, array('escape' => false));
-        $this->assertContains($errors['foo'], $html);
-        $this->assertContains($errors['bar'], $html);
+        $this->assertStringContainsStringIgnoringCase($errors['foo'], $html);
+        $this->assertStringContainsStringIgnoringCase($errors['bar'], $html);
     }
 
     /**

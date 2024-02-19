@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Request/Http.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
-class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
+class Zend_Navigation_ContainerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Prepares the environment before running a test.
@@ -106,7 +106,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $pages', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid argument: $pages', $e->getMessage());
         }
 
         try {
@@ -114,7 +114,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $pages', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid argument: $pages', $e->getMessage());
         }
 
         try {
@@ -122,7 +122,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $pages', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid argument: $pages', $e->getMessage());
         }
     }
 
@@ -394,7 +394,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to addPages(), ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid argument: $pages must be', $e->getMessage());
         }
     }
 
@@ -407,7 +407,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to addPages(), ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid argument: $pages must be', $e->getMessage());
         }
     }
 
@@ -1050,7 +1050,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid magic finder method was used, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Bad method call', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Bad method call', $e->getMessage());
         }
     }
 
@@ -1063,7 +1063,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('An invalid magic finder method was used, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Bad method call', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Bad method call', $e->getMessage());
         }
     }
     
@@ -1222,7 +1222,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             $this->fail('Container index is invalid, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Corruption detected', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Corruption detected', $e->getMessage());
         }
     }
 

@@ -69,7 +69,7 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         // Isolate the tests from slow deletes
@@ -106,7 +106,7 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
             $errorMessage .= "\nHave queue URLs $queueURL1 and $queueURL2\n";
             $this->assertEquals(2, count($queues), $errorMessage);
 
-            // PHPUnit does an identical comparison for assertContains(), so we just
+            // PHPUnit does an identical comparison for assertStringContainsStringIgnoringCase(), so we just
             // use assertTrue and in_array()
             $this->assertTrue(in_array($queueURL1, $queues));
             $this->assertTrue(in_array($queueURL2, $queues));

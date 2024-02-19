@@ -44,7 +44,7 @@ require_once 'Zend/Cloud/QueueService/Factory.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCase
+abstract class Zend_Cloud_QueueService_TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to queue adapter to test
@@ -72,7 +72,7 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
      */
     protected $_waitPeriod = 1;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_config = $this->_getConfig();
         $this->_commonQueue = Zend_Cloud_QueueService_Factory::getAdapter($this->_config);
@@ -152,7 +152,7 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $errorMessage .= "\nHave queue URLs $queueURL1 and $queueURL2\n";
             $this->assertEquals(2, count($queues), $errorMessage);
 
-            // PHPUnit does an identical comparison for assertContains(), so we just
+            // PHPUnit does an identical comparison for assertStringContainsStringIgnoringCase(), so we just
             // use assertTrue and in_array()
             $this->assertTrue(in_array($queueURL1, $queues));
             $this->assertTrue(in_array($queueURL2, $queues));
@@ -260,8 +260,8 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
                 $tests[] = $message;
             }
             $texts = array($tests[0]->getBody(), $tests[1]->getBody());
-            $this->assertContains($message1, $texts);
-            $this->assertContains($message2, $texts);
+            $this->assertStringContainsStringIgnoringCase($message1, $texts);
+            $this->assertStringContainsStringIgnoringCase($message2, $texts);
 
             $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {

@@ -40,7 +40,7 @@ require_once 'Zend/Cloud/Infrastructure/Instance.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cloud_Infrastructure_TestCase extends PHPUnit_Framework_TestCase
+abstract class Zend_Cloud_Infrastructure_TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Document adapter to test
@@ -279,7 +279,7 @@ abstract class Zend_Cloud_Infrastructure_TestCase extends PHPUnit_Framework_Test
         $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::deployInstance',$this->_commonInfrastructure->deploy('foo','bar'));
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_config = $this->_getConfig();
         $this->_commonInfrastructure = Zend_Cloud_Infrastructure_Factory::getAdapter($this->_config);

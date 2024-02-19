@@ -35,7 +35,7 @@ require_once 'Zend/Http/Client.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_GappsOnlineTest extends \PHPUnit\Framework\TestCase
 {
 
     const GIVEN_NAME = 'Zend_Gdata';
@@ -43,7 +43,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     const PASSWORD = '4ohtladfl;';
     const PASSWORD_HASH = 'SHA-1';
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->id = uniqid('ZF-');
         $username = constant('TESTS_ZEND_GDATA_GAPPS_EMAIL');
@@ -60,7 +60,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->autoDeletePool = array();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Delete all entries in $this->autoDeletePool.
         foreach ($this->autoDeletePool as $x) {

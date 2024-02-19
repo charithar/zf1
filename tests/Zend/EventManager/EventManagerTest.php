@@ -39,7 +39,7 @@ require_once 'Zend/Stdlib/CallbackHandler.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
+class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -47,7 +47,7 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->message)) {
             unset($this->message);
@@ -67,7 +67,7 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $listener  = $this->events->attach('test', array($this, __METHOD__));
         $listeners = $this->events->getListeners('test');
         $this->assertEquals(1, count($listeners));
-        $this->assertContains($listener, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listener, $listeners);
     }
 
     public function testAttachShouldAddEventIfItDoesNotExist()
@@ -77,7 +77,7 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $listener = $this->events->attach('test', array($this, __METHOD__));
         $events = $this->events->getEvents();
         $this->assertFalse(empty($events));
-        $this->assertContains('test', $events);
+        $this->assertStringContainsStringIgnoringCase('test', $events);
     }
 
     public function testAllowsPassingArrayOfEventNamesWhenAttaching()
@@ -111,10 +111,10 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
     {
         $listener  = $this->events->attach('test', array($this, __METHOD__));
         $listeners = $this->events->getListeners('test');
-        $this->assertContains($listener, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listener, $listeners);
         $this->events->detach($listener);
         $listeners = $this->events->getListeners('test');
-        $this->assertNotContains($listener, $listeners);
+        $this->assertStringNotContainsStringIgnoringCase($listener, $listeners);
     }
 
     public function testDetachShouldReturnFalseIfEventDoesNotExist()
@@ -237,7 +237,7 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $this->events->attachAggregate($aggregate);
         $events = $this->events->getEvents();
         foreach (array('foo.bar', 'foo.baz') as $event) {
-            $this->assertContains($event, $events);
+            $this->assertStringContainsStringIgnoringCase($event, $events);
         }
     }
 
@@ -247,7 +247,7 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $this->events->attach($aggregate);
         $events = $this->events->getEvents();
         foreach (array('foo.bar', 'foo.baz') as $event) {
-            $this->assertContains($event, $events);
+            $this->assertStringContainsStringIgnoringCase($event, $events);
         }
     }
 
@@ -271,21 +271,21 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $this->events->detachAggregate($aggregate);
         $events = $this->events->getEvents();
         foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
-            $this->assertContains($event, $events);
+            $this->assertStringContainsStringIgnoringCase($event, $events);
         }
 
         $listeners = $this->events->getListeners('foo.bar');
         $this->assertEquals(2, count($listeners));
-        $this->assertContains($listenerFooBar1, $listeners);
-        $this->assertContains($listenerFooBar2, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerFooBar1, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerFooBar2, $listeners);
 
         $listeners = $this->events->getListeners('foo.baz');
         $this->assertEquals(1, count($listeners));
-        $this->assertContains($listenerFooBaz1, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerFooBaz1, $listeners);
 
         $listeners = $this->events->getListeners('other');
         $this->assertEquals(1, count($listeners));
-        $this->assertContains($listenerOther, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerOther, $listeners);
     }
 
     public function testCanDetachListenerAggregatesViaDetach()
@@ -301,21 +301,21 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $this->events->detach($aggregate);
         $events = $this->events->getEvents();
         foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
-            $this->assertContains($event, $events);
+            $this->assertStringContainsStringIgnoringCase($event, $events);
         }
 
         $listeners = $this->events->getListeners('foo.bar');
         $this->assertEquals(2, count($listeners));
-        $this->assertContains($listenerFooBar1, $listeners);
-        $this->assertContains($listenerFooBar2, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerFooBar1, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerFooBar2, $listeners);
 
         $listeners = $this->events->getListeners('foo.baz');
         $this->assertEquals(1, count($listeners));
-        $this->assertContains($listenerFooBaz1, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerFooBaz1, $listeners);
 
         $listeners = $this->events->getListeners('other');
         $this->assertEquals(1, count($listeners));
-        $this->assertContains($listenerOther, $listeners);
+        $this->assertStringContainsStringIgnoringCase($listenerOther, $listeners);
     }
 
     public function testDetachAggregateReturnsDetachOfListenerAggregate()
@@ -559,7 +559,7 @@ class Zend_EventManager_EventManagerTest extends PHPUnit_Framework_TestCase
         $this->events->attach('*', $callback);
         foreach (array('foo', 'bar', 'baz') as $event) {
             $this->events->trigger($event);
-            $this->assertContains($event, $this->test->events);
+            $this->assertStringContainsStringIgnoringCase($event, $this->test->events);
         }
     }
 

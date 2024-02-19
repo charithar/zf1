@@ -26,7 +26,7 @@ require_once 'Zend/Service/ShortUrl/JdemCz.php';
  * @package  Zend_Service
  * @subpackage  UnitTests
  */
-class Zend_Service_ShortUrl_JdemCzTest extends PHPUnit_Framework_TestCase
+class Zend_Service_ShortUrl_JdemCzTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Service_JdemCz object

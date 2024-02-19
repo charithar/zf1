@@ -45,7 +45,7 @@ require_once 'Zend/Db/Adapter/Static.php';
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
-class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
+class Zend_Db_Adapter_StaticTest extends \PHPUnit\Framework\TestCase
 {
 
     protected static $_isCaseSensitiveFileSystem = null;
@@ -65,7 +65,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
                 $db = new Zend_Db_Adapter_Static('scalar');
                 $this->fail('Expected exception not thrown');
             } catch (Exception $e) {
-                $this->assertContains('Adapter parameters must be in an array or a Zend_Config object', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Adapter parameters must be in an array or a Zend_Config object', $e->getMessage());
             }
         } else {
             $this->markTestIncomplete('Failure to meet type hint results in fatal error in PHP < 5.2.0');
@@ -158,7 +158,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
                 $db = Zend_Db::factory('Static', 'scalar');
                 $this->fail('Expected exception not thrown');
             } catch (Exception $e) {
-                $this->assertContains('Adapter parameters must be in an array or a Zend_Config object', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Adapter parameters must be in an array or a Zend_Config object', $e->getMessage());
             }
         } else {
             $this->markTestIncomplete('Failure to meet type hint results in fatal error in PHP < 5.2.0');
@@ -173,7 +173,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
                 $db = Zend_Db::factory('Static');
                 $this->fail('Expected exception not thrown');
             } catch (Exception $e) {
-                $this->assertContains('Configuration must have a key for \'dbname\' that names the database instance', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Configuration must have a key for \'dbname\' that names the database instance', $e->getMessage());
             }
         } else {
             $this->markTestIncomplete('Failure to meet type hint results in fatal error in PHP < 5.2.0');
@@ -342,7 +342,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
                 );
         } catch (Exception $e) {
             set_include_path($oldIncludePath);
-            $this->assertContains('failed to open stream', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('failed to open stream', $e->getMessage());
             return;
         }
 

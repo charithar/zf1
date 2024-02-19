@@ -35,7 +35,7 @@ require_once 'Zend/CodeGenerator/Php/Docblock/Tag.php';
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class Zend_CodeGenerator_Php_Docblock_TagTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_Docblock_TagTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -43,12 +43,12 @@ class Zend_CodeGenerator_Php_Docblock_TagTest extends PHPUnit_Framework_TestCase
      */
     protected $_tag = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_tag = new Zend_CodeGenerator_Php_Docblock_Tag();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_tag = null;
     }

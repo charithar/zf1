@@ -37,7 +37,7 @@ require_once 'Zend/Form/Element/Radio.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_RadioTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -56,7 +56,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Radio('foo');
     }
@@ -67,7 +67,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -151,7 +151,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
             ))
             ->setSeparator('--FooBarFunSep--');
         $html = $this->element->render($this->getView());
-        $this->assertContains($this->element->getSeparator(), $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getSeparator(), $html);
         $count = substr_count($html, $this->element->getSeparator());
         $this->assertEquals(4, $count);
     }
@@ -197,7 +197,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
              ))
              ->setLabel('Foo');
         $html = $this->element->render($this->getView());
-        $this->assertNotContains('for="foo"', $html);
+        $this->assertStringNotContainsStringIgnoringCase('for="foo"', $html);
     }
 
     /**
@@ -236,7 +236,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
         ));
 
         $html = $element->render($this->getView());
-        $this->assertNotContains('<dt id="foo-label">&#160;</dt>', $html);
+        $this->assertStringNotContainsStringIgnoringCase('<dt id="foo-label">&#160;</dt>', $html);
     }
 
     /**

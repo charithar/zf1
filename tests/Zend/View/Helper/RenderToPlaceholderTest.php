@@ -38,12 +38,12 @@ require_once 'Zend/View/Helper/Placeholder.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_RenderToPlaceholderTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_RenderToPlaceholderTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_view = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_view = new Zend_View(array('scriptPath'=>dirname(__FILE__).'/_files/scripts/'));
     }

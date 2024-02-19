@@ -42,7 +42,7 @@ require_once 'Zend/View.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_SubFormTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -61,7 +61,7 @@ class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->form = new Zend_Dojo_Form_SubForm();
         $this->form->addElement('TextBox', 'foo')
@@ -75,7 +75,7 @@ class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

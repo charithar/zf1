@@ -33,13 +33,13 @@ require_once 'Zend/Version.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Writer_Renderer_Entry_AtomTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_validWriter = null;
     protected $_validEntry = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_validWriter = new Zend_Feed_Writer_Feed;
 
@@ -62,7 +62,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
         $this->_validWriter->addEntry($this->_validEntry);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_validWriter = null;
         $this->_validEntry = null;

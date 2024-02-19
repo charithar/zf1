@@ -39,7 +39,7 @@ require_once 'Zend/Xml/Exception.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Xml
  */
-class Zend_Xml_SecurityTest extends PHPUnit_Framework_TestCase
+class Zend_Xml_SecurityTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

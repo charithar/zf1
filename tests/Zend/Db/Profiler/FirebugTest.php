@@ -48,7 +48,7 @@ require_once 'Zend/Controller/Response/Http.php';
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
-class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
+class Zend_Db_Profiler_FirebugTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_controller = null;
@@ -70,7 +70,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Requires PDO_Sqlite extension');
@@ -95,7 +95,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
                                             )');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('pdo_sqlite')) {
             $this->_db->getConnection()->exec('DROP TABLE foo');

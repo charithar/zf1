@@ -37,7 +37,7 @@ require_once 'Zend/Json.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  */
-class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_BuildLayerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -51,13 +51,13 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         Zend_Dojo::enableView($this->view);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->view);
     }

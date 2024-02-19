@@ -40,14 +40,14 @@ require_once 'Zend/Http/Client/Adapter/Socket.php';
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Amazon_S3_StreamTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Sets up this test case
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_amazon = new Zend_Service_Amazon_S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
@@ -73,7 +73,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_amazon->unregisterStreamWrapper();
         $buckets = $this->_amazon->getBuckets();
@@ -209,7 +209,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
 
         // Check that each bucket is in our original list
         foreach ($buckets as $bucket) {
-            $this->assertContains($bucket, $online_buckets);
+            $this->assertStringContainsStringIgnoringCase($bucket, $online_buckets);
         }
 
         // Remove the buckets
@@ -263,9 +263,9 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-class Zend_Service_Amazon_S3_StreamTest_Skip extends PHPUnit_Framework_TestCase
+class Zend_Service_Amazon_S3_StreamTest_Skip extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->markTestSkipped('Zend_Service_Amazon_S3 online tests not enabled with an access key ID and '
                              . ' secret key ID in TestConfiguration.php');

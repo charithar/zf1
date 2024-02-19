@@ -48,7 +48,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_View_Helper_ValidationTextBoxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_Test
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
@@ -83,7 +83,7 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_Test
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -134,7 +134,7 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_Test
     public function testTrueRequiredParameterShouldBeRenderedAsStringValue()
     {
         $html = $this->getElement();
-        $this->assertContains('required="true"', $html);
+        $this->assertStringContainsStringIgnoringCase('required="true"', $html);
     }
 
     /**
@@ -151,7 +151,7 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_Test
             ),
             array()
         );
-        $this->assertContains('required="false"', $html);
+        $this->assertStringContainsStringIgnoringCase('required="false"', $html);
     }
 }
 

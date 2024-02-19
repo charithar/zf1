@@ -33,10 +33,10 @@ require_once 'Zend/Gdata/App.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
-class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_App_FeedTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->feedText = file_get_contents(
                 'Zend/Gdata/App/_files/FeedSample1.xml',
                 true);

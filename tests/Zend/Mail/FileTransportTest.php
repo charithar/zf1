@@ -38,13 +38,13 @@ require_once 'Zend/Mail/Transport/File.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_FileTransportTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_FileTransportTest extends \PHPUnit\Framework\TestCase
 {
     protected $_params;
     protected $_transport;
     protected $_tmpdir;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->createdTmpDir = false;
 
@@ -67,7 +67,7 @@ class Zend_Mail_FileTransportTest extends PHPUnit_Framework_TestCase
         $this->_cleanDir($this->_tmpdir);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_cleanDir($this->_tmpdir);
         if ($this->createdTmpDir) {
@@ -144,10 +144,10 @@ class Zend_Mail_FileTransportTest extends PHPUnit_Framework_TestCase
         }
 
         $email = file_get_contents($filename);
-        $this->assertContains('To: Oleg Lobach <oleg@example.com>', $email);
-        $this->assertContains('Subject: TestSubject', $email);
-        $this->assertContains('From: Alexander Steshenko <alexander@example.com>', $email);
-        $this->assertContains("This is the text of the mail.", $email);
+        $this->assertStringContainsStringIgnoringCase('To: Oleg Lobach <oleg@example.com>', $email);
+        $this->assertStringContainsStringIgnoringCase('Subject: TestSubject', $email);
+        $this->assertStringContainsStringIgnoringCase('From: Alexander Steshenko <alexander@example.com>', $email);
+        $this->assertStringContainsStringIgnoringCase("This is the text of the mail.", $email);
     }
 
     public function prependCallback($transport)
@@ -177,9 +177,9 @@ class Zend_Mail_FileTransportTest extends PHPUnit_Framework_TestCase
         }
 
         // file name should now contain recipient email address
-        $this->assertContains('oleg@example.com', $entry);
+        $this->assertStringContainsStringIgnoringCase('oleg@example.com', $entry);
         // and default callback part
-        $this->assertContains('ZendMail', $entry);
+        $this->assertStringContainsStringIgnoringCase('ZendMail', $entry);
     }
 
     public function directoryNotExisting($transport)

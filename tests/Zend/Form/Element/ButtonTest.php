@@ -38,7 +38,7 @@ require_once 'Zend/Translate.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form_Element_Button
@@ -63,7 +63,7 @@ class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Button('foo');
     }
@@ -74,7 +74,7 @@ class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -146,8 +146,8 @@ class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
         $this->element->setLabel('Button Label')
                       ->setView($this->getView());
         $html = $this->element->render();
-        $this->assertContains('Button Label', $html, $html);
-        $this->assertNotContains('value="', $html);
+        $this->assertStringContainsStringIgnoringCase('Button Label', $html, $html);
+        $this->assertStringNotContainsStringIgnoringCase('value="', $html);
     }
 
     public function testSetDefaultIgnoredToTrueWhenNotDefined()

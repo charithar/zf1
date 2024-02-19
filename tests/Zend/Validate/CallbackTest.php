@@ -37,7 +37,7 @@ require_once 'Zend/Validate/Callback.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_CallbackTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_CallbackTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -97,7 +97,7 @@ class Zend_Validate_CallbackTest extends PHPUnit_Framework_TestCase
             $valid->setCallback('invalidcallback');
             $this->fail('Exception expected');
         } catch (Zend_Exception $e) {
-            $this->assertContains('Invalid callback given', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid callback given', $e->getMessage());
         }
     }
 
@@ -121,7 +121,7 @@ class Zend_Validate_CallbackTest extends PHPUnit_Framework_TestCase
     public function optionsCallback($value)
     {
         $args = func_get_args();
-        $this->assertContains('something', $args);
+        $this->assertStringContainsStringIgnoringCase('something', $args);
         return $args;
     }
 }

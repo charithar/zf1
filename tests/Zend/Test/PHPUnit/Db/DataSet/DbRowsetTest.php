@@ -33,7 +33,7 @@ require_once 'Zend/Db/Table/Abstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_DataSet_DbRowsetTest extends PHPUnit_Framework_TestCase
+class Zend_Test_PHPUnit_Db_DataSet_DbRowsetTest extends \PHPUnit\Framework\TestCase
 {
     protected function getRowSet()
     {

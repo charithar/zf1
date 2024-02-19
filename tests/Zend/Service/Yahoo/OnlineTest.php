@@ -39,7 +39,7 @@ require_once 'Zend/Http/Client/Adapter/Socket.php';
  * @group      Zend_Service
  * @group      Zend_Service_Yahoo
  */
-class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Yahoo_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Yahoo service consumer object
@@ -60,7 +60,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_yahoo = new Zend_Service_Yahoo(constant('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID'));
 
@@ -91,7 +91,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $inlinkDataResultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         foreach ($inlinkDataResultSet as $inlinkDataResult) {
@@ -123,7 +123,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $imageResultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         foreach ($imageResultSet as $imageResult) {
@@ -146,7 +146,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $this->_yahoo->imageSearch('php', array('adult_ok' => -1));
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
-            $this->assertContains('error occurred sending request', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('error occurred sending request', $e->getMessage());
         }
     }
 
@@ -182,7 +182,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $this->_yahoo->localSearch('php', array('zip' => '95014', 'radius' => -1));
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
-            $this->assertContains('error occurred sending request', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('error occurred sending request', $e->getMessage());
         }
     }
 
@@ -227,7 +227,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $pageDataResultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         foreach ($pageDataResultSet as $pageDataResult) {
@@ -259,7 +259,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $videoResultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
         } catch (OutOfBoundsException $e) {
-            $this->assertContains('Illegal index', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Illegal index', $e->getMessage());
         }
 
         foreach ($videoResultSet as $videoResult) {
@@ -303,7 +303,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $this->_yahoo->webSearch('php', array('adult_ok' => 'oops'));
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
-            $this->assertContains('error occurred sending request', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('error occurred sending request', $e->getMessage());
         }
     }
 
@@ -318,7 +318,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $this->_yahoo->webSearch('php', array('similar_ok' => 'oops'));
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
-            $this->assertContains('error occurred sending request', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('error occurred sending request', $e->getMessage());
         }
     }
 
@@ -336,7 +336,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
             $this->_yahoo->webSearch('php', array('region' => 'oops'));
             $this->fail('Expected Zend_Service_Exception not thrown');
         }catch (Zend_Service_Exception $e) {
-            $this->assertContains("Invalid value for option 'region': oops", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("Invalid value for option 'region': oops", $e->getMessage());
         }
     }
 
@@ -371,9 +371,9 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
  * @group      Zend_Service
  * @group      Zend_Service_Yahoo
  */
-class Zend_Service_Yahoo_OnlineTest_Skip extends PHPUnit_Framework_TestCase
+class Zend_Service_Yahoo_OnlineTest_Skip extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->markTestSkipped('Zend_Service_Yahoo online tests not enabled with an APPID in TestConfiguration.php');
     }

@@ -32,7 +32,7 @@ require_once 'Zend/Gdata/HttpClient.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_AuthSub
  */
-class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_AuthSubTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Dummy token used during testing
@@ -41,7 +41,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     protected $token = 'DQAAFPHOW7DCTN';
     
     
-    public function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -230,9 +230,9 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
         
         $respBody = Zend_Gdata_AuthSub::getAuthSubTokenInfo($this->token, $client);
         
-        $this->assertContains("Target=http://example.com", $respBody);
-        $this->assertContains("Scope=http://example.com", $respBody);
-        $this->assertContains("Secure=false", $respBody);
+        $this->assertStringContainsStringIgnoringCase("Target=http://example.com", $respBody);
+        $this->assertStringContainsStringIgnoringCase("Scope=http://example.com", $respBody);
+        $this->assertStringContainsStringIgnoringCase("Secure=false", $respBody);
     }
     
     /**

@@ -35,7 +35,7 @@ require_once 'Zend/Filter/StringToUpper.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
+class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -64,7 +64,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_markup = Zend_Markup::factory('bbcode', 'html');
     }
@@ -75,7 +75,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_markup);
     }

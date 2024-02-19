@@ -37,7 +37,7 @@ require_once 'Zend/View/Helper/HtmlQuicktime.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlQuicktimeTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HtmlQuicktimeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlQuicktime
@@ -70,7 +70,7 @@ class Zend_View_Helper_HtmlQuicktimeTest extends PHPUnit_Framework_TestCase
         $this->helper->setView($this->view);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -84,8 +84,8 @@ class Zend_View_Helper_HtmlQuicktimeTest extends PHPUnit_Framework_TestCase
                             . ' classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"'
                             . ' codebase="http://www.apple.com/qtactivex/qtplugin.cab">';
 
-        $this->assertContains($objectStartElement, $htmlQuicktime);
-        $this->assertContains('</object>', $htmlQuicktime);
+        $this->assertStringContainsStringIgnoringCase($objectStartElement, $htmlQuicktime);
+        $this->assertStringContainsStringIgnoringCase('</object>', $htmlQuicktime);
     }
 }
 

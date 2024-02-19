@@ -46,7 +46,7 @@ require_once '_files/ManifestBadMetadata.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
  */
-class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Manifest_RepositoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Tool_Framework_Registry
@@ -58,7 +58,7 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
      */
     protected $_repository = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_repository = new Zend_Tool_Framework_Manifest_Repository();
 
@@ -69,7 +69,7 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends PHPUnit_Framework_Test
         $this->_registry->setManifestRepository($this->_repository);
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_registry->reset();
         $this->_repository = null;

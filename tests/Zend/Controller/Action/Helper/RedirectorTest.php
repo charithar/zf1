@@ -44,7 +44,7 @@ require_once 'Zend/Controller/Response/Http.php';
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_RedirectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Controller_Action_Helper_Redirector
@@ -84,7 +84,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
      *
      * Also resets the front controller instance.
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
@@ -114,7 +114,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
     /**
      * Unset all properties
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->redirector);
         unset($this->controller);
@@ -498,7 +498,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
         $this->redirector->gotoUrl('/bar/baz');
         $test = $this->redirector->getRedirectUrl();
 
-        $this->assertNotContains('https://', $test);
+        $this->assertStringNotContainsStringIgnoringCase('https://', $test);
         $this->assertEquals('http://localhost/bar/baz', $test);
     }
 

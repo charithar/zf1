@@ -48,7 +48,7 @@ require_once 'Zend/Http/Client.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_ImportTest extends \PHPUnit\Framework\TestCase
 {
     protected $_client;
     protected $_feedDir;
@@ -60,7 +60,7 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
      */
     protected $_adapter;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_adapter = new Zend_Http_Client_Adapter_Test();
         Zend_Feed::setHttpClient(new Zend_Http_Client(null, array('adapter' => $this->_adapter)));

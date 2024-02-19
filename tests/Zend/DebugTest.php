@@ -33,7 +33,7 @@ require_once 'Zend/Debug.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Debug
  */
-class Zend_DebugTest extends PHPUnit_Framework_TestCase
+class Zend_DebugTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testDebugDefaultSapi()
@@ -79,7 +79,7 @@ class Zend_DebugTest extends PHPUnit_Framework_TestCase
         $result1 = Zend_Debug::Dump($data, null, true);
         $result2 = ob_get_clean();
 
-        $this->assertContains('string(6) "string"', $result1);
+        $this->assertStringContainsStringIgnoringCase('string(6) "string"', $result1);
         $this->assertEquals($result1, $result2);
     }
 
@@ -108,8 +108,8 @@ class Zend_DebugTest extends PHPUnit_Framework_TestCase
         $a = array("a" => "b");
 
         $result = Zend_Debug::dump($a, "LABEL", false);
-        $this->assertContains("<pre>", $result);
-        $this->assertContains("</pre>", $result);
+        $this->assertStringContainsStringIgnoringCase("<pre>", $result);
+        $this->assertStringContainsStringIgnoringCase("</pre>", $result);
     }
 
 }

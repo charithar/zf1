@@ -34,7 +34,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Gcm
  */
-class Zend_Mobile_Push_gcmTest extends PHPUnit_Framework_TestCase
+class Zend_Mobile_Push_gcmTest extends \PHPUnit\Framework\TestCase
 {
 
     protected function _createJSONResponse($id, $success, $failure, $ids, $results)
@@ -48,7 +48,7 @@ class Zend_Mobile_Push_gcmTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Zend_Http_Client_Adapter_Test();
         $this->client = new Zend_Http_Client();

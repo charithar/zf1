@@ -31,12 +31,12 @@ require_once 'Zend/Oauth/Http/RequestToken.php';
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Http
  */
-class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
+class Zend_Oauth_Http_RequestTokenTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $stubConsumer = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->stubConsumer = new Test_Consumer_32874;
         $this->stubConsumer2 = new Test_Consumer_32874b;
@@ -44,7 +44,7 @@ class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
         Zend_Oauth::setHttpClient(new Test_Client_32874);
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Oauth::clearHttpClient();
     }

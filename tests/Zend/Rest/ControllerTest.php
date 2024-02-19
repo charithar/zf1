@@ -84,7 +84,7 @@ class Zend_Rest_TestController extends Zend_Rest_Controller
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Rest
  */
-class Zend_Rest_ControllerTest extends PHPUnit_Framework_TestCase
+class Zend_Rest_ControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected $_testController;
 
@@ -101,7 +101,7 @@ class Zend_Rest_ControllerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $request = new Zend_Controller_Request_HttpTestCase();
         $response = new Zend_Controller_Response_HttpTestCase();

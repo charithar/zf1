@@ -39,7 +39,7 @@ require_once 'Zend/Translate/Adapter/Array.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_ImageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,7 +58,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Image('foo');
     }
@@ -69,7 +69,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -116,14 +116,14 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     {
         $this->testCanSetImageSourceViaAccessors();
         $html = $this->element->render(new Zend_View());
-        $this->assertContains('src="foo.gif"', $html);
+        $this->assertStringContainsStringIgnoringCase('src="foo.gif"', $html);
     }
 
     public function testHelperAttributeNotRenderedWhenRenderingImage()
     {
         $this->testCanSetImageSourceViaAccessors();
         $html = $this->element->render(new Zend_View());
-        $this->assertNotContains('helper="', $html);
+        $this->assertStringNotContainsStringIgnoringCase('helper="', $html);
     }
 
     public function testValueEmptyWhenRenderingImageByDefault()
@@ -133,7 +133,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
         if (!strstr($html, 'value="')) {
             return;
         }
-        $this->assertContains('value=""', $html);
+        $this->assertStringContainsStringIgnoringCase('value=""', $html);
     }
 
     public function testLabelUsedAsAltAttribute()
@@ -173,9 +173,9 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
         $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
         $this->element->setTranslator($translator);
         $html = $this->element->render(new Zend_View());
-        $this->assertContains('title', $html);
-        $this->assertContains('baz', $html);
-        $this->assertNotContains('bar', $html);
+        $this->assertStringContainsStringIgnoringCase('title', $html);
+        $this->assertStringContainsStringIgnoringCase('baz', $html);
+        $this->assertStringNotContainsStringIgnoringCase('bar', $html);
     }
 
     public function testTitleAttributeDoesNotGetTranslatedIfTranslatorIsDisabled()
@@ -186,9 +186,9 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
         // now disable translator and see if that works
         $this->element->setDisableTranslator(true);
         $html = $this->element->render(new Zend_View());
-        $this->assertContains('title', $html);
-        $this->assertContains('bar', $html);
-        $this->assertNotContains('baz', $html);
+        $this->assertStringContainsStringIgnoringCase('title', $html);
+        $this->assertStringContainsStringIgnoringCase('bar', $html);
+        $this->assertStringNotContainsStringIgnoringCase('baz', $html);
     }
 
     /**

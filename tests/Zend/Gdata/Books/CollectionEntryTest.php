@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Books/CollectionEntry.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Books
  */
-class Zend_Gdata_Books_CollectionEntryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Books_CollectionEntryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->gdata = new Zend_Gdata_Books_CollectionEntry();
     }

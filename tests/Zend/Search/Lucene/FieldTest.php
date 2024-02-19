@@ -33,7 +33,7 @@ require_once 'Zend/Search/Lucene/Field.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_FieldTest extends PHPUnit_Framework_TestCase
+class Zend_Search_Lucene_FieldTest extends \PHPUnit\Framework\TestCase
 {
     public function testBinary()
     {
@@ -112,12 +112,12 @@ class Zend_Search_Lucene_FieldTest extends PHPUnit_Framework_TestCase
 
     public function testEncoding()
     {
-        $field = Zend_Search_Lucene_Field::Text('field', 'Words with umlauts: åãü...', 'ISO-8859-1');
+        $field = Zend_Search_Lucene_Field::Text('field', 'Words with umlauts: ï¿½ï¿½ï¿½...', 'ISO-8859-1');
 
         $this->assertEquals($field->encoding, 'ISO-8859-1');
 
         $this->assertEquals($field->name, 'field');
-        $this->assertEquals($field->value, 'Words with umlauts: åãü...');
+        $this->assertEquals($field->value, 'Words with umlauts: ï¿½ï¿½ï¿½...');
         $this->assertEquals($field->getUtf8Value(), 'Words with umlauts: Ã¥Ã£Ã¼...');
     }
 }

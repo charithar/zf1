@@ -34,12 +34,12 @@ require_once 'Zend/Reflection/Parameter.php';
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Parameter
  */
-class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
+class Zend_Reflection_ParameterTest extends \PHPUnit\Framework\TestCase
 {
 
     static protected $_sampleClassFileRequired = false;
 
-    public function setup()
+    protected function setUp(): void
     {
         if (self::$_sampleClassFileRequired === false) {
             $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';

@@ -33,9 +33,9 @@ require_once 'Zend/Console/Getopt.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Console_Getopt
  */
-class Zend_Console_GetoptTest extends PHPUnit_Framework_TestCase
+class Zend_Console_GetoptTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         if(ini_get('register_argc_argv') == false) {
             $this->markTestSkipped("Cannot Test Zend_Console_Getopt without 'register_argc_argv' ini option true.");
@@ -576,7 +576,7 @@ class Zend_Console_GetoptTest extends PHPUnit_Framework_TestCase
             $opts = new Zend_Console_GetOpt('abp:');
             $this->fail();
         } catch(Zend_Console_GetOpt_Exception $e) {
-            $this->assertContains('$_SERVER["argv"]', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('$_SERVER["argv"]', $e->getMessage());
         }
 
         $_SERVER['argv'] = $argv;

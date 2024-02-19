@@ -44,15 +44,15 @@ require_once '_files/EmptyLoader.php';
  * @group Zend_Tool
  * @group Zend_Tool_Framework
  */
-class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_RegistryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_registry = new Zend_Tool_Framework_Registry();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_registry->reset();
     }

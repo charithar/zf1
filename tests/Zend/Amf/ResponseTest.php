@@ -44,7 +44,7 @@ require_once 'Zend/Date.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_ResponseTest extends \PHPUnit\Framework\TestCase
 {
     // The message response status code.
     public $responseURI = "/2/onResult";
@@ -69,7 +69,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         date_default_timezone_set('America/Chicago');
         Zend_Locale::setDefault('en_US');
@@ -80,7 +80,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_response);
     }
@@ -1014,8 +1014,8 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
                         ->addAmfHeader($this->header2);
         $headers = $this->_response->getAmfHeaders();
         $this->assertEquals(2, count($headers));
-        $this->assertContains($this->header1, $headers);
-        $this->assertContains($this->header2, $headers);
+        $this->assertStringContainsStringIgnoringCase($this->header1, $headers);
+        $this->assertStringContainsStringIgnoringCase($this->header2, $headers);
     }
 
     public function testResponseHeadersShouldBeSerializedWhenWritingMessage()

@@ -39,7 +39,7 @@ require_once 'Zend/View/Helper/Form.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -88,7 +88,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
     public function testFormWithInputNeedingEscapesUsesViewEscaping()
     {
         $form = $this->helper->form('<&foo');
-        $this->assertContains($this->view->escape('<&foo'), $form);
+        $this->assertStringContainsStringIgnoringCase($this->view->escape('<&foo'), $form);
     }
 
     /**

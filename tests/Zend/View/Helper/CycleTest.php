@@ -39,7 +39,7 @@ require_once 'Zend/View/Helper/Cycle.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_CycleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Cycle
@@ -63,7 +63,7 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->helper = new Zend_View_Helper_Cycle();
     }
@@ -74,7 +74,7 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }

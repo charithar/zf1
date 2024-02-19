@@ -34,9 +34,9 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
-class Zend_Gdata_CalendarTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_CalendarTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->eventFeedText = file_get_contents(
                 'Zend/Gdata/Calendar/_files/TestDataEventFeedSample1.xml',

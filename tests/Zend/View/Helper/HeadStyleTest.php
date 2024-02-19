@@ -45,7 +45,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HeadStyle
@@ -75,7 +75,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
         if (Zend_Registry::isRegistered($regKey)) {
@@ -92,7 +92,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
@@ -222,8 +222,8 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
             'bogus' => 'unused'
         ));
         $value = $this->helper->toString();
-        $this->assertContains('<!--' . PHP_EOL, $value);
-        $this->assertContains(PHP_EOL . '-->', $value);
+        $this->assertStringContainsStringIgnoringCase('<!--' . PHP_EOL, $value);
+        $this->assertStringContainsStringIgnoringCase(PHP_EOL . '-->', $value);
     }
 
     public function testRenderedStyleTagsContainsDefaultMedia()
@@ -241,7 +241,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
     {
         $this->helper->appendStyle('a { }', array('media' => 'screen, projection'));
         $string = $this->helper->toString();
-        $this->assertContains('media="screen,projection"', $string);
+        $this->assertStringContainsStringIgnoringCase('media="screen,projection"', $string);
     }
 
     public function testHeadStyleProxiesProperly()
@@ -278,9 +278,9 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, $styles);
         $styles = substr_count($html, '</style>');
         $this->assertEquals(3, $styles);
-        $this->assertContains($style3, $html);
-        $this->assertContains($style2, $html);
-        $this->assertContains($style1, $html);
+        $this->assertStringContainsStringIgnoringCase($style3, $html);
+        $this->assertStringContainsStringIgnoringCase($style2, $html);
+        $this->assertStringContainsStringIgnoringCase($style1, $html);
     }
 
     public function testCapturingCapturesToObject()
@@ -291,7 +291,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $values = $this->helper->getArrayCopy();
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
-        $this->assertContains('foobar', $item->content);
+        $this->assertStringContainsStringIgnoringCase('foobar', $item->content);
     }
 
     public function testOverloadingOffsetSetWritesToSpecifiedIndex()
@@ -301,7 +301,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($values));
         $this->assertTrue(isset($values[100]));
         $item = $values[100];
-        $this->assertContains('foobar', $item->content);
+        $this->assertStringContainsStringIgnoringCase('foobar', $item->content);
     }
 
     public function testInvalidMethodRaisesException()
@@ -335,12 +335,12 @@ h1 {
 
         $scripts = substr_count($string, '    <style');
         $this->assertEquals(2, $scripts);
-        $this->assertContains('    <!--', $string);
-        $this->assertContains('    a {', $string);
-        $this->assertContains('    h1 {', $string);
-        $this->assertContains('        display', $string);
-        $this->assertContains('        font-weight', $string);
-        $this->assertContains('    }', $string);
+        $this->assertStringContainsStringIgnoringCase('    <!--', $string);
+        $this->assertStringContainsStringIgnoringCase('    a {', $string);
+        $this->assertStringContainsStringIgnoringCase('    h1 {', $string);
+        $this->assertStringContainsStringIgnoringCase('        display', $string);
+        $this->assertStringContainsStringIgnoringCase('        font-weight', $string);
+        $this->assertStringContainsStringIgnoringCase('    }', $string);
     }
 
     public function testSerialCapturingWorks()
@@ -367,7 +367,7 @@ h1 {
                 $this->fail('Nested capturing should fail');
             } catch (Zend_View_Exception $e) {
                 $this->helper->headStyle()->captureEnd();
-                $this->assertContains('Cannot nest', $e->getMessage());
+                $this->assertStringContainsStringIgnoringCase('Cannot nest', $e->getMessage());
             }
     }
 
@@ -382,9 +382,9 @@ a {
 
         $scripts = substr_count($string, '    <style');
         $this->assertEquals(1, $scripts);
-        $this->assertContains('    <!--', $string);
-        $this->assertContains('    a {', $string);
-        $this->assertContains(' media="screen,projection"', $string);
+        $this->assertStringContainsStringIgnoringCase('    <!--', $string);
+        $this->assertStringContainsStringIgnoringCase('    a {', $string);
+        $this->assertStringContainsStringIgnoringCase(' media="screen,projection"', $string);
 
     }
 
@@ -399,9 +399,9 @@ a {
 
         $scripts = substr_count($string, '    <style');
         $this->assertEquals(1, $scripts);
-        $this->assertContains('    <!--', $string);
-        $this->assertContains('    a {', $string);
-        $this->assertContains(' media="screen,projection"', $string);
+        $this->assertStringContainsStringIgnoringCase('    <!--', $string);
+        $this->assertStringContainsStringIgnoringCase('    a {', $string);
+        $this->assertStringContainsStringIgnoringCase(' media="screen,projection"', $string);
 
     }
 
@@ -412,7 +412,7 @@ a {
     display: none;
 }', array('media' => 'screen,projection', 'conditional' => 'lt IE 7'));
         $test = $this->helper->toString();
-        $this->assertContains('<!--[if lt IE 7]>', $test);
+        $this->assertStringContainsStringIgnoringCase('<!--[if lt IE 7]>', $test);
     }
 
     /**
@@ -453,8 +453,8 @@ a {
         ));
         $value = $this->helper->toString();
 
-        $this->assertNotContains('<!--' . PHP_EOL, $value);
-        $this->assertNotContains(PHP_EOL . '-->', $value);
+        $this->assertStringNotContainsStringIgnoringCase('<!--' . PHP_EOL, $value);
+        $this->assertStringNotContainsStringIgnoringCase(PHP_EOL . '-->', $value);
     }
 
     /**
@@ -467,8 +467,8 @@ a {
     display: none;
 }', array('media' => 'screen,projection', 'conditional' => '!IE'));
         $test = $this->helper->toString();
-        $this->assertContains('<!--[if !IE]><!--><', $test);
-        $this->assertContains('<!--<![endif]-->', $test);
+        $this->assertStringContainsStringIgnoringCase('<!--[if !IE]><!--><', $test);
+        $this->assertStringContainsStringIgnoringCase('<!--<![endif]-->', $test);
     }
 
     /**
@@ -481,8 +481,8 @@ a {
     display: none;
 }', array('media' => 'screen,projection', 'conditional' => '! IE'));
         $test = $this->helper->toString();
-        $this->assertContains('<!--[if ! IE]><!--><', $test);
-        $this->assertContains('<!--<![endif]-->', $test);
+        $this->assertStringContainsStringIgnoringCase('<!--[if ! IE]><!--><', $test);
+        $this->assertStringContainsStringIgnoringCase('<!--<![endif]-->', $test);
     }
 }
 

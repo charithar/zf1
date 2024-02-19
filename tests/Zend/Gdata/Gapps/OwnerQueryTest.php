@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Gapps/OwnerQuery.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_Gapps_OwnerQueryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Gapps_OwnerQueryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->query = new Zend_Gdata_Gapps_OwnerQuery();
     }

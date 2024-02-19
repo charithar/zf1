@@ -43,11 +43,11 @@ require_once 'Zend/Mime/Decode.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MessageTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
 {
     protected $_file;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_file = tempnam(sys_get_temp_dir(), 'zm_');
         $mail = file_get_contents(dirname(__FILE__) . '/_files/mail.txt');
@@ -55,7 +55,7 @@ class Zend_Mail_MessageTest extends PHPUnit_Framework_TestCase
         file_put_contents($this->_file, $mail);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists($this->_file)) {
             unlink($this->_file);

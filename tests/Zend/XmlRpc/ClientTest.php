@@ -42,7 +42,7 @@ require_once 'Zend/Http/Client.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Http_Client_Adapter_Abstract
@@ -59,7 +59,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
      */
     protected $xmlrpcClient;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
         $this->httpClient = new Zend_Http_Client('http://foo',

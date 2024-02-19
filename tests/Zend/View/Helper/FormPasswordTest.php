@@ -42,7 +42,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormPasswordTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -104,20 +104,20 @@ class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase
     public function testShouldRenderAsHtmlByDefault()
     {
         $test = $this->helper->formPassword('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test);
     }
 
     public function testShouldAllowRenderingAsXhtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formPassword('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsStringIgnoringCase(' />', $test);
     }
 
     public function testShouldNotRenderValueByDefault()
     {
         $test = $this->helper->formPassword('foo', 'bar');
-        $this->assertNotContains('bar', $test);
+        $this->assertStringNotContainsStringIgnoringCase('bar', $test);
     }
 
     /**
@@ -126,7 +126,7 @@ class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase
     public function testShouldRenderValueWhenRenderPasswordFlagPresentAndTrue()
     {
         $test = $this->helper->formPassword('foo', 'bar', array('renderPassword' => true));
-        $this->assertContains('value="bar"', $test);
+        $this->assertStringContainsStringIgnoringCase('value="bar"', $test);
     }
 
     /**
@@ -135,9 +135,9 @@ class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase
     public function testRenderPasswordAttribShouldNeverBeRendered()
     {
         $test = $this->helper->formPassword('foo', 'bar', array('renderPassword' => true));
-        $this->assertNotContains('renderPassword', $test);
+        $this->assertStringNotContainsStringIgnoringCase('renderPassword', $test);
         $test = $this->helper->formPassword('foo', 'bar', array('renderPassword' => false));
-        $this->assertNotContains('renderPassword', $test);
+        $this->assertStringNotContainsStringIgnoringCase('renderPassword', $test);
     }
 }
 

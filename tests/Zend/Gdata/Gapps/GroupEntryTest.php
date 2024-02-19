@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Gapps.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_Gapps_GroupEntryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Gapps_GroupEntryTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->entryText = file_get_contents(
                 'Zend/Gdata/Gapps/_files/GroupEntryDataSample1.xml',
                 true);

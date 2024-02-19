@@ -39,7 +39,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class Zend_Controller_Router_Route_HostnameTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -116,7 +116,7 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit_Framework_TestCa
             $route->assemble();
             $this->fail('An expected Zend_Controller_Router_Exception has not been raised');
         } catch (Zend_Controller_Router_Exception $expected) {
-            $this->assertContains('subdomain is not specified', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('subdomain is not specified', $expected->getMessage());
         }
     }
 

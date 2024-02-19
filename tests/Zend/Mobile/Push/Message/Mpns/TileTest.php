@@ -32,11 +32,11 @@ require_once 'Zend/Mobile/Push/Message/Mpns/Tile.php';
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
  */
-class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
+class Zend_Mobile_Push_Message_Mpns_TileTest extends \PHPUnit\Framework\TestCase
 {
     private $_msg;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_msg = new Zend_Mobile_Push_Message_Mpns_Tile();
     }

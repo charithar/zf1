@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Ccnum.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_CcnumTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Validate_Ccnum object
@@ -48,7 +48,7 @@ class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $this->_validator = new Zend_Validate_Ccnum();

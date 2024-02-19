@@ -58,7 +58,7 @@ require_once 'Zend/Uri/Http.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_RewriteTest extends \PHPUnit\Framework\TestCase
 {
     protected $_router;
 
@@ -75,7 +75,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->_router = new Zend_Controller_Router_Rewrite();
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
@@ -84,7 +84,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
         $this->_router->setFrontController($front);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         unset($this->_router);
     }
 

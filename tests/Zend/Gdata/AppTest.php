@@ -33,9 +33,9 @@ require_once 'Zend/Gdata/TestUtility/MockHttpClient.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
-class Zend_Gdata_AppTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_AppTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->fileName = 'Zend/Gdata/App/_files/FeedSample1.xml';
         $this->expectedEtag = 'W/"CkcHQH8_fCp7ImA9WxRTGEw."';
@@ -619,7 +619,7 @@ class Zend_Gdata_AppTest extends PHPUnit_Framework_TestCase
             // but the extension was not found in any directory
             // (Expected since we didn't load the Calendar extension dir)
             restore_error_handler();
-            $this->assertContains('EventQuery', $ex->getMessage());
+            $this->assertStringContainsStringIgnoringCase('EventQuery', $ex->getMessage());
         } catch ( ErrorException $ex ) {
             restore_error_handler();
             $this->fail('Did not expect ErrorException');
@@ -639,6 +639,6 @@ class Zend_Gdata_AppTest extends PHPUnit_Framework_TestCase
             false
         );
 
-        $this->assertContains('<id>12345678901234567890</id>', $feed);
+        $this->assertStringContainsStringIgnoringCase('<id>12345678901234567890</id>', $feed);
     }
 }

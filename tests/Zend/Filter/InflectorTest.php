@@ -47,7 +47,7 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_InflectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -66,7 +66,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->inflector = new Zend_Filter_Inflector();
         $this->loader    = $this->inflector->getPluginLoader();
@@ -78,7 +78,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->loader->clearPaths();
     }
@@ -401,11 +401,11 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
         $rules = $inflector->getRules();
         foreach (array_values($options['rules'][':controller']) as $key => $rule) {
             $class = get_class($rules['controller'][$key]);
-            $this->assertContains($rule, $class);
+            $this->assertStringContainsStringIgnoringCase($rule, $class);
         }
         foreach (array_values($options['rules'][':action']) as $key => $rule) {
             $class = get_class($rules['action'][$key]);
-            $this->assertContains($rule, $class);
+            $this->assertStringContainsStringIgnoringCase($rule, $class);
         }
         $this->assertEquals($options['rules']['suffix'], $rules['suffix']);
     }

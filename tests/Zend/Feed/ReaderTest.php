@@ -32,17 +32,17 @@ require_once 'Zend/Cache.php';
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_ReaderTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_feedSamplePath = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_feedSamplePath = dirname(__FILE__) . '/Reader/_files';
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Feed_Reader::reset();
     }

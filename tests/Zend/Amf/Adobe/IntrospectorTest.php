@@ -38,7 +38,7 @@ require_once 'Zend/Amf/Adobe/Introspector.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Adobe_IntrospectorTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -46,7 +46,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->introspector = new Zend_Amf_Adobe_Introspector();
     }
@@ -54,13 +54,13 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
     public function testIntrospectionDoesNotIncludeConstructor()
     {
         $xml = $this->introspector->introspect('com.zend.framework.IntrospectorTest');
-        $this->assertNotContains('__construct', $xml);
+        $this->assertStringNotContainsStringIgnoringCase('__construct', $xml);
     }
 
     public function testIntrospectionDoesNotIncludeMagicMethods()
     {
         $xml = $this->introspector->introspect('com.zend.framework.IntrospectorTest');
-        $this->assertNotContains('__get', $xml);
+        $this->assertStringNotContainsStringIgnoringCase('__get', $xml);
     }
 
     public function testIntrospectionContainsPublicPropertiesOfReturnClassTypes()
@@ -111,7 +111,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
             $this->fail('Baz property of com.zend.framework.IntrospectorTestCustomType not found');
         }
         $node = $matches[1];
-        $this->assertContains('type="Unknown"', $node, $node);
+        $this->assertStringContainsStringIgnoringCase('type="Unknown"', $node, $node);
     }
 
     public function testPropertyDocblockWithoutAnnotationInTypedClassShouldReportTypeAsUnknown()
@@ -121,7 +121,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
             $this->fail('Bat property of com.zend.framework.IntrospectorTestCustomType not found');
         }
         $node = $matches[1];
-        $this->assertContains('type="Unknown"', $node, $node);
+        $this->assertStringContainsStringIgnoringCase('type="Unknown"', $node, $node);
     }
 
     public function testTypedClassWithExplicitTypeShouldReportAsThatType()

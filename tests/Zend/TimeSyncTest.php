@@ -33,7 +33,7 @@ require_once 'Zend/TimeSync.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_TimeSync
  */
-class Zend_TimeSyncTest extends PHPUnit_Framework_TestCase
+class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
 {
     public $timeservers = array(
         // invalid servers
@@ -247,7 +247,7 @@ class Zend_TimeSyncTest extends PHPUnit_Framework_TestCase
             $result = $server->getDate();
             $this->assertTrue($result instanceof Zend_Date);
         } catch (Zend_TimeSync_Exception $e) {
-            $this->assertContains('all timeservers are bogus', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('all timeservers are bogus', $e->getMessage());
         }
     }
 
@@ -264,7 +264,7 @@ class Zend_TimeSyncTest extends PHPUnit_Framework_TestCase
             $result = $server->getDate();
             $this->assertTrue($result instanceof Zend_Date);
         } catch (Zend_TimeSync_Exception $e) {
-            $this->assertContains('all timeservers are bogus', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('all timeservers are bogus', $e->getMessage());
         }
     }
 
@@ -281,7 +281,7 @@ class Zend_TimeSyncTest extends PHPUnit_Framework_TestCase
             $result = $server->getDate();
             $this->assertTrue($result instanceof Zend_Date);
         } catch (Zend_TimeSync_Exception $e) {
-            $this->assertContains('all timeservers are bogus', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('all timeservers are bogus', $e->getMessage());
         }
     }
 

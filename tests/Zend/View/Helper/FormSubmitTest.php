@@ -40,7 +40,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormSubmitTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormSubmitTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_View_Helper_FormSubmitTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -76,7 +76,7 @@ class Zend_View_Helper_FormSubmitTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper, $this->view);
     }
@@ -118,14 +118,14 @@ class Zend_View_Helper_FormSubmitTest extends PHPUnit_Framework_TestCase
     public function testRendersAsHtmlByDefault()
     {
         $test = $this->helper->formSubmit('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsStringIgnoringCase(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formSubmit('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsStringIgnoringCase(' />', $test);
     }
 
     /**
@@ -134,7 +134,7 @@ class Zend_View_Helper_FormSubmitTest extends PHPUnit_Framework_TestCase
     public function testDoesNotOutputEmptyId()
     {
         $test = $this->helper->formSubmit('', 'bar');
-        $this->assertNotContains('id=""', $test);
+        $this->assertStringNotContainsStringIgnoringCase('id=""', $test);
     }
 }
 

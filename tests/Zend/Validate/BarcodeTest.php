@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Barcode.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_BarcodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test if EAN-13 contains only numeric characters
@@ -148,7 +148,7 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
             $barcode->setAdapter('MyBarcode5');
             $this->fails('Exception expected');
         } catch (Exception $e) {
-            $this->assertContains('does not implement', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not implement', $e->getMessage());
         }
     }
 
@@ -165,7 +165,7 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
             $barcode = new Zend_Validate_Barcode(array('options' => 'unknown', 'checksum' => false));
             $this->fails('Exception expected');
         } catch (Exception $e) {
-            $this->assertContains('Missing option', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Missing option', $e->getMessage());
         }
     }
 
@@ -437,6 +437,6 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('123'));
         $message = $barcode->getMessages();
         $this->assertTrue(array_key_exists('barcodeInvalidLength', $message));
-        $this->assertContains("length of 7/8 characters", $message['barcodeInvalidLength']);
+        $this->assertStringContainsStringIgnoringCase("length of 7/8 characters", $message['barcodeInvalidLength']);
     }
 }

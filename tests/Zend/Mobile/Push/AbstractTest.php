@@ -34,9 +34,9 @@ require_once 'Zend/Mobile/Push/Message/Abstract.php';
  * @group      Zend_Mobile_Push_Abstract
  */
 
-class Zend_Mobile_Push_AbstractTest extends PHPUnit_Framework_TestCase
+class Zend_Mobile_Push_AbstractTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Zend_Mobile_Push_AbstractProxy();
     }

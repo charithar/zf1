@@ -30,10 +30,10 @@ require_once 'Zend/Feed/Pubsubhubbub.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_PubsubhubbubTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Pubsubhubbub_PubsubhubbubTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Feed_Pubsubhubbub::clearHttpClient();
     }

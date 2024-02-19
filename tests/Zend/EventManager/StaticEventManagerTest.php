@@ -34,7 +34,7 @@ require_once 'Zend/EventManager/StaticEventManager.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCase
+class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -42,12 +42,12 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_EventManager_StaticEventManager::resetInstance();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_EventManager_StaticEventManager::resetInstance();
     }
@@ -78,7 +78,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        $this->assertContains('bar', $events->getEvents('foo'));
+        $this->assertStringContainsStringIgnoringCase('bar', $events->getEvents('foo'));
         $expected  = array($this, __FUNCTION__);
         $found     = false;
         $listeners = $events->getListeners('foo', 'bar');
@@ -97,8 +97,8 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach('bar', array('foo', 'test'), array($this, __FUNCTION__));
-        $this->assertContains('foo', $events->getEvents('bar'));
-        $this->assertContains('test', $events->getEvents('bar'));
+        $this->assertStringContainsStringIgnoringCase('foo', $events->getEvents('bar'));
+        $this->assertStringContainsStringIgnoringCase('test', $events->getEvents('bar'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $event) {
             $found     = false;
@@ -119,8 +119,8 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach(array('foo', 'test'), 'bar', array($this, __FUNCTION__));
-        $this->assertContains('bar', $events->getEvents('foo'));
-        $this->assertContains('bar', $events->getEvents('test'));
+        $this->assertStringContainsStringIgnoringCase('bar', $events->getEvents('foo'));
+        $this->assertStringContainsStringIgnoringCase('bar', $events->getEvents('test'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $id) {
             $found     = false;
@@ -141,8 +141,8 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach(array('bar', 'baz'), array('foo', 'test'), array($this, __FUNCTION__));
-        $this->assertContains('foo', $events->getEvents('bar'));
-        $this->assertContains('test', $events->getEvents('bar'));
+        $this->assertStringContainsStringIgnoringCase('foo', $events->getEvents('bar'));
+        $this->assertStringContainsStringIgnoringCase('test', $events->getEvents('bar'));
         $expected = array($this, __FUNCTION__);
         foreach (array('bar', 'baz') as $resource) {
             foreach (array('foo', 'test') as $event) {
@@ -174,7 +174,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
 
         foreach (array('foo', 'bar', 'baz') as $event) {
             $events->trigger($event);
-            $this->assertContains($event, $this->test->events);
+            $this->assertStringContainsStringIgnoringCase($event, $this->test->events);
         }
     }
 

@@ -33,7 +33,7 @@ require_once 'Zend/OpenId/Provider/Storage/File.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
-class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_Provider_Storage_FileTest extends \PHPUnit\Framework\TestCase
 {
     const HANDLE   = "d41d8cd98f00b204e9800998ecf8427e";
     const MAC_FUNC = "sha256";
@@ -69,7 +69,7 @@ class Zend_OpenId_Provider_Storage_FileTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue( $ex instanceof Zend_OpenId_Exception );
         $this->assertSame( Zend_OpenId_Exception::ERROR_STORAGE, $ex->getCode() );
-        $this->assertContains( 'Cannot access storage directory', $ex->getMessage() );
+        $this->assertStringContainsStringIgnoringCase( 'Cannot access storage directory', $ex->getMessage() );
         chmod($dir, 0777);
         $this->assertFalse( is_dir($dir2) );
         @rmdir($dir);

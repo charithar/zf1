@@ -39,7 +39,7 @@ require_once 'Zend/Application/Resource/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Resource_ViewTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -47,7 +47,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
@@ -68,7 +68,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
         Zend_Controller_Action_HelperBroker::resetHelpers();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -110,7 +110,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
         $resource->init();
         $view  = $resource->getView();
         $paths = $view->getScriptPaths();
-        $this->assertContains(dirname(__FILE__) . '/', $paths, var_export($paths, 1));
+        $this->assertStringContainsStringIgnoringCase(dirname(__FILE__) . '/', $paths, var_export($paths, 1));
     }
 
     public function testDoctypeIsSet()

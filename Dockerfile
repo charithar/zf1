@@ -13,7 +13,7 @@
 #
 #   docker-compose run zf1_test ../bin/phpunit <path to test file>
 #
-FROM php:7.0-cli
+FROM php:7.4-cli
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -36,30 +36,34 @@ RUN apt-get update \
         unzip \
 #    && git checkout -b php7 origin/php7 \
     && docker-php-ext-configure bcmath --enable-bcmath \
-    && docker-php-ext-configure pcntl --enable-pcntl \
-    && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
-    && docker-php-ext-configure pdo_pgsql --with-pgsql \
-    && docker-php-ext-configure mbstring --enable-mbstring \
-    && docker-php-ext-configure soap --enable-soap \
-    && docker-php-ext-configure intl \
+#    && docker-php-ext-configure pcntl --enable-pcntl \
+#    && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
+#    && docker-php-ext-configure pdo_pgsql \
+#    && docker-php-ext-configure mcrypt --enable-mcrypt \
+#    && docker-php-ext-configure mbstring --enable-mbstring \
+#    && docker-php-ext-configure soap --enable-soap \
+#    && docker-php-ext-configure intl \
     && docker-php-ext-install \
         bcmath \
-        intl \
-        mbstring \
-        mcrypt \
-        mysqli \
-        pcntl \
-        pdo_mysql \
-        pdo_pgsql \
-        soap \
-        sockets \
+#        intl \
+#        mbstring \
+#        mcrypt \
+#        mysqli \
+#        pcntl \
+#        pdo_mysql \
+#        pdo_pgsql \
+#        soap \
+#        sockets \
         zip
 
-RUN docker-php-ext-configure gd \
-        --enable-gd-native-ttf \
-        --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/include/freetype2 \
-    && docker-php-ext-install gd
+RUN docker-php-ext-install gd \
+  && docker-php-ext-enable gd
+
+#RUN docker-php-ext-configure gd \
+#        --enable-gd-native-ttf \
+#        --with-jpeg-dir=/usr/lib \
+#        --with-freetype-dir=/usr/include/freetype2 \
+#    && docker-php-ext-install gd
 
 RUN docker-php-ext-install opcache \
   && docker-php-ext-enable opcache
@@ -92,5 +96,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY tests/php7_config.ini $PHP_INI_DIR/conf.d/
 
 #COPY . /app
+
+ENV PATH="/app/bin:${PATH}"
 
 WORKDIR /app

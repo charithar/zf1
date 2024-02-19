@@ -38,7 +38,7 @@ require_once "Zend/Test/PHPUnit/Db/DataSet/DbRowset.php";
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit_Framework_TestCase
+abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Db_Adapter_Abstract

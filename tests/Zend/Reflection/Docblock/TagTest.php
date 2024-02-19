@@ -32,13 +32,13 @@ require_once 'Zend/Reflection/File.php';
  * @group      Zend_Reflection_Docblock
  * @group      Zend_Reflection_Docblock_Tag
  */
-class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
+class Zend_Reflection_Docblock_TagTest extends \PHPUnit\Framework\TestCase
 {
 
 
     static protected $_sampleClassFileRequired = false;
 
-    public function setup()
+    protected function setUp(): void
     {
         if (self::$_sampleClassFileRequired === false) {
             $fileToRequire = dirname(dirname(__FILE__)) . '/_files/TestSampleClass.php';

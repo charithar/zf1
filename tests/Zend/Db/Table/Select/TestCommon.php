@@ -47,7 +47,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
      */
     protected $_table = array();
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -57,7 +57,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $this->_table['products']      = $this->_getTable('My_ZendDbTable_TableProducts');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         if ($this->_runtimeIncludePath) {
             $this->_restoreIncludePath();
@@ -243,15 +243,15 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $select3->setIntegrityCheck(false);
         $select3->joinLeft('tableB', 'tableA.id=tableB.id');
         $select3Text = $select3->__toString();
-        $this->assertNotContains('zfaccounts', $select3Text);
+        $this->assertStringNotContainsStringIgnoringCase('zfaccounts', $select3Text);
 
         $select4 = $table->select(Zend_Db_Table_Abstract::SELECT_WITH_FROM_PART);
         $select4->setIntegrityCheck(false);
         $select4->joinLeft('tableB', 'tableA.id=tableB.id');
         $select4Text = $select4->__toString();
-        $this->assertContains('zfaccounts', $select4Text);
-        $this->assertContains('tableA', $select4Text);
-        $this->assertContains('tableB', $select4Text);
+        $this->assertStringContainsStringIgnoringCase('zfaccounts', $select4Text);
+        $this->assertStringContainsStringIgnoringCase('tableA', $select4Text);
+        $this->assertStringContainsStringIgnoringCase('tableB', $select4Text);
     }
 
     public function testAssembleDbTableUnionSelect()

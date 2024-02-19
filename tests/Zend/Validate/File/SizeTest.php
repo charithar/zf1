@@ -38,7 +38,7 @@ require_once 'Zend/Validate/File/Size.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_File_SizeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -96,7 +96,7 @@ class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
             $validator = new Zend_Validate_File_Size(array('min' => 100, 'max' => 1));
             $this->fail("Missing exception");
         } catch (Zend_Validate_Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("greater than or equal", $e->getMessage());
         }
 
         $validator = new Zend_Validate_File_Size(array('min' => 1, 'max' => 100, 'bytestring' => false));
@@ -118,7 +118,7 @@ class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
             $validator->setMin(20000);
             $this->fail("Missing exception");
         } catch (Zend_Validate_Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("less than or equal", $e->getMessage());
         }
 
         $validator = new Zend_Validate_File_Size(array('min' => 1000, 'max' => 10000, 'bytestring' => false));
@@ -140,7 +140,7 @@ class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
             $validator = new Zend_Validate_File_Size(array('min' => 100, 'max' => 1));
             $this->fail("Missing exception");
         } catch (Zend_Validate_Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("greater than or equal", $e->getMessage());
         }
 
         $validator = new Zend_Validate_File_Size(array('min' => 1, 'max' => 100000));
@@ -203,13 +203,13 @@ class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
     {
         $validator = new Zend_Validate_File_Size(array('min' => 9999, 'max' => 10000));
         $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
-        $this->assertContains('9.76kB', current($validator->getMessages()));
-        $this->assertContains('794B', current($validator->getMessages()));
+        $this->assertStringContainsStringIgnoringCase('9.76kB', current($validator->getMessages()));
+        $this->assertStringContainsStringIgnoringCase('794B', current($validator->getMessages()));
 
         $validator = new Zend_Validate_File_Size(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
         $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
-        $this->assertContains('9999', current($validator->getMessages()));
-        $this->assertContains('794', current($validator->getMessages()));
+        $this->assertStringContainsStringIgnoringCase('9999', current($validator->getMessages()));
+        $this->assertStringContainsStringIgnoringCase('794', current($validator->getMessages()));
     }
 }
 

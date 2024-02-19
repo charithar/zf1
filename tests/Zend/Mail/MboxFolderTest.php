@@ -39,14 +39,14 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MboxFolderTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MboxFolderTest extends \PHPUnit\Framework\TestCase
 {
     protected $_params;
     protected $_originalDir;
     protected $_tmpdir;
     protected $_subdirs = array('.', 'subfolder');
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_originalDir = dirname(__FILE__) . '/_files/test.mbox/';
 
@@ -91,7 +91,7 @@ class Zend_Mail_MboxFolderTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
             $dh = opendir($this->_tmpdir . $dir);

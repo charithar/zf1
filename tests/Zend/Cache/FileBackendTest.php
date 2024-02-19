@@ -70,7 +70,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
         parent::setUp($notag);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         unset($this->_instance);
@@ -89,7 +89,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
                 throw $e;
             }
 
-            $this->assertContains('hashed_directory_umask', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('hashed_directory_umask', $e->getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
                 throw $e;
             }
 
-            $this->assertContains('cache_file_umask', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cache_file_umask', $e->getMessage());
         }
     }
 

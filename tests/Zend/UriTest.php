@@ -42,7 +42,7 @@ require_once 'Zend/Config.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  */
-class Zend_UriTest extends PHPUnit_Framework_TestCase
+class Zend_UriTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -50,14 +50,14 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->notices = array();
         $this->errorReporting = error_reporting();
         $this->displayErrors  = ini_get('display_errors');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         error_reporting($this->errorReporting);
         ini_set('display_errors', $this->displayErrors);
@@ -147,7 +147,7 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(empty($text));
         $this->assertTrue(isset($this->error));
-        $this->assertContains('Exception in getUri()', $this->error);
+        $this->assertStringContainsStringIgnoringCase('Exception in getUri()', $this->error);
 
     }
 

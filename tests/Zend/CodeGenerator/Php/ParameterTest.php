@@ -36,7 +36,7 @@ require_once '_files/TestSampleSingleClass.php';
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -44,12 +44,12 @@ class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
      */
     protected $_parameter = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_parameter = new Zend_CodeGenerator_Php_Parameter();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_parameter = null;
     }

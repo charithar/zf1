@@ -33,11 +33,11 @@ require_once 'Zend/Mail/Storage/Mbox.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_InterfaceTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_InterfaceTest extends \PHPUnit\Framework\TestCase
 {
     protected $_mboxFile;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_mboxFile = dirname(__FILE__) . '/_files/test.mbox/INBOX';
     }

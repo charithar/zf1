@@ -40,7 +40,7 @@ require_once 'Zend/Form/SubForm.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_PrepareElementsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->form = new Zend_Form();
         $this->form->setDecorators(array('PrepareElements'));
@@ -72,7 +72,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

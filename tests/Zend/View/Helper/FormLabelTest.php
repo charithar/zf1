@@ -40,7 +40,7 @@ require_once 'Zend/View/Helper/FormLabel.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormLabelTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -116,11 +116,11 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
     public function testCanDisableEscapingLabelValue()
     {
         $label = $this->helper->formLabel('foo', '<b>Label This!</b>', array('escape' => false));
-        $this->assertContains('<b>Label This!</b>', $label);
+        $this->assertStringContainsStringIgnoringCase('<b>Label This!</b>', $label);
         $label = $this->helper->formLabel(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'escape' => false));
-        $this->assertContains('<b>Label This!</b>', $label);
+        $this->assertStringContainsStringIgnoringCase('<b>Label This!</b>', $label);
         $label = $this->helper->formLabel(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'attribs' => array('escape' => false)));
-        $this->assertContains('<b>Label This!</b>', $label);
+        $this->assertStringContainsStringIgnoringCase('<b>Label This!</b>', $label);
     }
 
     /**
@@ -129,7 +129,7 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
     public function testHelperShouldAllowSuppressionOfForAttribute()
     {
         $label = $this->helper->formLabel('foo', 'bar', array('disableFor' => true));
-        $this->assertNotContains('for="foo"', $label);
+        $this->assertStringNotContainsStringIgnoringCase('for="foo"', $label);
     }
 
     /**
@@ -138,7 +138,7 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
     public function testShouldNotRenderDisableForAttributeIfForIsSuppressed()
     {
         $label = $this->helper->formLabel('foo', 'bar', array('disableFor' => true));
-        $this->assertNotContains('disableFor=', $label, 'Output contains disableFor attribute!');
+        $this->assertStringNotContainsStringIgnoringCase('disableFor=', $label, 'Output contains disableFor attribute!');
     }
 }
 

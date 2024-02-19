@@ -33,7 +33,7 @@ require_once 'Zend/Filter/RealPath.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_RealPathTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Path to test files
@@ -64,7 +64,7 @@ class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_filter = new Zend_Filter_RealPath();
     }
@@ -77,7 +77,7 @@ class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
     public function testFileExists()
     {
         $filename = 'file.1';
-        $this->assertContains($filename, $this->_filter->filter($this->_filesPath . DIRECTORY_SEPARATOR . $filename));
+        $this->assertStringContainsStringIgnoringCase($filename, $this->_filter->filter($this->_filesPath . DIRECTORY_SEPARATOR . $filename));
     }
 
     /**

@@ -42,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Rest
  */
-class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
+class Zend_Rest_RouteTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_front;
@@ -62,7 +62,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_front = Zend_Controller_Front::getInstance();
         $this->_front->resetInstance();

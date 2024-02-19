@@ -37,7 +37,7 @@ require_once 'Zend/Form/Element/Hash.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -57,7 +57,7 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($this->hash)) {
             unset($this->hash);
@@ -77,7 +77,7 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -149,8 +149,8 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
     public function testSessionNameContainsSaltAndName()
     {
         $sessionName = $this->element->getSessionName();
-        $this->assertContains($this->element->getSalt(), $sessionName);
-        $this->assertContains($this->element->getName(), $sessionName);
+        $this->assertStringContainsStringIgnoringCase($this->element->getSalt(), $sessionName);
+        $this->assertStringContainsStringIgnoringCase($this->element->getName(), $sessionName);
     }
 
     public function getView()
@@ -186,7 +186,7 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
     public function testHashTokenIsRendered()
     {
         $html = $this->element->render($this->getView());
-        $this->assertContains($this->element->getHash(), $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getHash(), $html);
     }
 
     public function testHiddenInputRenderedByDefault()
@@ -202,7 +202,7 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
     {
         $this->element->setView($this->getView());
         $html = $this->element->renderViewHelper();
-        $this->assertContains($this->element->getHash(), $html, 'Html is: ' . $html);
+        $this->assertStringContainsStringIgnoringCase($this->element->getHash(), $html, 'Html is: ' . $html);
     }
 
     /**

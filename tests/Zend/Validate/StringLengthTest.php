@@ -33,7 +33,7 @@ require_once 'Zend/Validate/StringLength.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_StringLengthTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_StringLengthTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Default instance created for all test methods
@@ -47,7 +47,7 @@ class Zend_Validate_StringLengthTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_StringLength();
     }

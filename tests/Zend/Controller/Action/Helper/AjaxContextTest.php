@@ -50,7 +50,7 @@ require_once 'Zend/View.php';
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_AjaxContextTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -71,7 +71,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             unset($_SERVER['HTTP_X_REQUESTED_WITH']);
@@ -111,7 +111,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             unset($_SERVER['HTTP_X_REQUESTED_WITH']);

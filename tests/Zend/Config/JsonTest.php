@@ -32,13 +32,13 @@ require_once 'Zend/Config/Json.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
+class Zend_Config_JsonTest extends \PHPUnit\Framework\TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileAllSectionsConfig;
     protected $_iniFileCircularConfig;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_iniFileConfig = dirname(__FILE__) . '/_files/config.json';
         $this->_iniFileAllSectionsConfig = dirname(__FILE__) . '/_files/allsections.json';
@@ -164,14 +164,14 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Json($this->_iniFileConfig,array('all', 'notthere'));
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
 
         try {
             $config = new Zend_Config_Json($this->_iniFileConfig,'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
     }
 

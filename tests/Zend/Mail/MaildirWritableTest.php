@@ -33,14 +33,14 @@ require_once 'Zend/Mail/Storage/Writable/Maildir.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class Zend_Mail_MaildirWritableTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MaildirWritableTest extends \PHPUnit\Framework\TestCase
 {
     protected $_params;
     protected $_originalDir;
     protected $_tmpdir;
     protected $_subdirs = array('.', '.subfolder', '.subfolder.test');
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_originalDir = dirname(__FILE__) . '/_files/test.maildir/';
 
@@ -98,7 +98,7 @@ class Zend_Mail_MaildirWritableTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
             if (!file_exists($this->_tmpdir . $dir)) {

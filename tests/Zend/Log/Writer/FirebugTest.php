@@ -53,7 +53,7 @@ require_once 'Zend/Controller/Response/Http.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_FirebugTest extends \PHPUnit\Framework\TestCase
 {
     protected $_controller = null;
     protected $_request = null;
@@ -73,7 +73,7 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         date_default_timezone_set('America/Los_Angeles');
 
@@ -99,7 +99,7 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         Zend_Wildfire_Plugin_FirePhp::getInstance()->setOption('includeLineNumbers', false);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Wildfire_Channel_HttpHeaders::destroyInstance();
         Zend_Wildfire_Plugin_FirePhp::destroyInstance();

@@ -34,9 +34,9 @@ require_once 'Zend/Filter/File/Encrypt.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_File_DecryptTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_File_DecryptTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('This filter needs the mcrypt extension');
@@ -51,7 +51,7 @@ class Zend_Filter_File_DecryptTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists(dirname(__FILE__).'/../_files/newencryption.txt')) {
             unlink(dirname(__FILE__).'/../_files/newencryption.txt');
@@ -135,7 +135,7 @@ class Zend_Filter_File_DecryptTest extends PHPUnit_Framework_TestCase
             $filter->filter(dirname(__FILE__).'/../_files/nofile.txt');
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('not found', $e->getMessage());
         }
     }
 }

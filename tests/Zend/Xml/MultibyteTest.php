@@ -43,7 +43,7 @@ require_once 'Zend/Xml/Exception.php';
  * @group      Zend_Xml
  * @group      ZF2015-06
  */
-class Zend_Xml_MultibyteTest extends PHPUnit_Framework_TestCase
+class Zend_Xml_MultibyteTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

@@ -11,7 +11,7 @@ Contains Zend Framework 1 plus performance improvements and bug fixes.
 SYSTEM REQUIREMENTS
 ===================
 
-Zend Framework requires PHP 5.2.11 or later. 
+Zend Framework requires PHP 7.1 or later. 
 
 INSTALLATION
 ============
@@ -24,3 +24,5 @@ LICENSE
 The files in this archive are released under the Zend Framework license.
 You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
+
+docker compose exec zf1_test ../bin/phpunit --stderr -d memory_limit=-1 Zend/RegistryTest.php

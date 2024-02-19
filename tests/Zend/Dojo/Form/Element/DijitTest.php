@@ -48,7 +48,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_Element_DijitTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
@@ -83,7 +83,7 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -145,7 +145,7 @@ class Zend_Dojo_Form_Element_DijitTest extends PHPUnit_Framework_TestCase
     public function testRenderingShouldCreateDijit()
     {
         $html = $this->element->render();
-        $this->assertContains('dojoType="dijit.form.TextBox"', $html);
+        $this->assertStringContainsStringIgnoringCase('dojoType="dijit.form.TextBox"', $html);
     }
 
     public function testElementShouldDojoEnableViewObject()

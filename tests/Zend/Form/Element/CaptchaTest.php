@@ -42,7 +42,7 @@ require_once 'Zend/Captcha/ReCaptcha.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_CaptchaTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -51,7 +51,7 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->element = new Zend_Form_Element_Captcha(
             'foo',
@@ -138,8 +138,8 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
         $form->addElement($this->element)
              ->setElementsBelongTo('bar');
         $html = $form->render(new Zend_View);
-        $this->assertContains('name="bar[foo', $html, $html);
-        $this->assertContains('id="bar-foo-', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('name="bar[foo', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('id="bar-foo-', $html, $html);
         $this->form = $form;
     }
 

@@ -36,7 +36,7 @@ require_once 'Zend/Tool/Framework/Manifest/ActionMetadata.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
  */
-class Zend_Tool_Framework_Manifest_ActionMetadataTest extends PHPUnit_Framework_TestCase
+class Zend_Tool_Framework_Manifest_ActionMetadataTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -44,12 +44,12 @@ class Zend_Tool_Framework_Manifest_ActionMetadataTest extends PHPUnit_Framework_
      */
     protected $_metadata = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->_metadata = new Zend_Tool_Framework_Manifest_ActionMetadata();
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         $this->_metadata = null;
     }

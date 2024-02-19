@@ -32,10 +32,10 @@ require_once 'Zend/Http/Client.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
-class Zend_Gdata_Spreadsheets_ColCountTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Spreadsheets_ColCountTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->colCount = new Zend_Gdata_Spreadsheets_Extension_ColCount();
     }

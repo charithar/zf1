@@ -38,7 +38,7 @@ require_once 'Zend/Log/Filter/Suppress.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Filter_SuppressTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -46,7 +46,7 @@ class Zend_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->filter = new Zend_Log_Filter_Suppress();
     }

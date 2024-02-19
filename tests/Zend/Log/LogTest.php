@@ -44,7 +44,7 @@ require_once 'Zend/Log/FactoryInterface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
+class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -52,7 +52,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->log = fopen('php://memory', 'w+');
         $this->writer = new Zend_Log_Writer_Stream($this->log);
@@ -66,7 +66,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->log($message = 'message-to-log', Zend_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsStringIgnoringCase($message, stream_get_contents($this->log));
     }
 
     public function testAddWriter()
@@ -76,7 +76,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->log($message = 'message-to-log', Zend_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsStringIgnoringCase($message, stream_get_contents($this->log));
     }
 
     public function testAddWriterAddsMultipleWriters()
@@ -98,9 +98,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
         // verify both writers were called by the logger
         rewind($log1);
-        $this->assertContains($message, stream_get_contents($log1));
+        $this->assertStringContainsStringIgnoringCase($message, stream_get_contents($log1));
         rewind($log2);
-        $this->assertContains($message, stream_get_contents($log2));
+        $this->assertStringContainsStringIgnoringCase($message, stream_get_contents($log2));
 
         // prove the two memory streams are different
         // and both writers were indeed called
@@ -185,8 +185,8 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
-        $this->assertContains((string)$priority, $logdata);
-        $this->assertContains($message, $logdata);
+        $this->assertStringContainsStringIgnoringCase((string)$priority, $logdata);
+        $this->assertStringContainsStringIgnoringCase($message, $logdata);
     }
 
     // Fields
@@ -223,7 +223,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', array('content' => 'nonesuch'));
         $event = array_shift($mock->events);
-        $this->assertContains('content', array_keys($event));
+        $this->assertStringContainsStringIgnoringCase('content', array_keys($event));
         $this->assertEquals('nonesuch', $event['content']);
     }
 
@@ -235,9 +235,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', array('content' => 'nonesuch', 'bar'));
         $event = array_shift($mock->events);
-        $this->assertContains('content', array_keys($event));
-        $this->assertContains('info', array_keys($event));
-        $this->assertContains('bar', $event['info']);
+        $this->assertStringContainsStringIgnoringCase('content', array_keys($event));
+        $this->assertStringContainsStringIgnoringCase('info', array_keys($event));
+        $this->assertStringContainsStringIgnoringCase('bar', $event['info']);
     }
 
     /**
@@ -248,9 +248,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', 'nonesuch');
         $event = array_shift($mock->events);
-        $this->assertContains('info', array_keys($event));
+        $this->assertStringContainsStringIgnoringCase('info', array_keys($event));
         $info = $event['info'];
-        $this->assertContains('nonesuch', $info);
+        $this->assertStringContainsStringIgnoringCase('nonesuch', $info);
     }
 
     // Factory

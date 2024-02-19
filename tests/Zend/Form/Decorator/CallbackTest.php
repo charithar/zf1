@@ -38,7 +38,7 @@ require_once 'Zend/Form/Element.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_CallbackTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,7 +58,7 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Callback();
     }
@@ -69,7 +69,7 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -97,7 +97,7 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
             $this->decorator->setCallback(true);
             $this->fail('Only string or array callbacks should be allowed');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid', $e->getMessage());
         }
 
         try {
@@ -105,21 +105,21 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
             $this->decorator->setCallback($o);
             $this->fail('Only string or array callbacks should be allowed');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid', $e->getMessage());
         }
 
         try {
             $this->decorator->setCallback(array('foo', 'bar', 'baz'));
             $this->fail('Only arrays of two elements should be allowed as callbacks');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid', $e->getMessage());
         }
 
         try {
             $this->decorator->setCallback(array('foo'));
             $this->fail('Only arrays of two elements should be allowed as callbacks');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid', $e->getMessage());
         }
     }
 
@@ -133,9 +133,9 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
                         ->setElement($element);
 
         $content = $this->decorator->render('foo bar');
-        $this->assertContains('foo bar', $content);
-        $this->assertContains($element->getName(), $content);
-        $this->assertContains($element->getLabel(), $content);
+        $this->assertStringContainsStringIgnoringCase('foo bar', $content);
+        $this->assertStringContainsStringIgnoringCase($element->getName(), $content);
+        $this->assertStringContainsStringIgnoringCase($element->getLabel(), $content);
     }
 
     public function testRenderCallsMethodCallback()
@@ -148,10 +148,10 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
                         ->setElement($element);
 
         $content = $this->decorator->render('foo bar');
-        $this->assertContains('foo bar', $content);
-        $this->assertContains($element->getName(), $content);
-        $this->assertContains($element->getLabel(), $content);
-        $this->assertContains('Item ', $content);
+        $this->assertStringContainsStringIgnoringCase('foo bar', $content);
+        $this->assertStringContainsStringIgnoringCase($element->getName(), $content);
+        $this->assertStringContainsStringIgnoringCase($element->getLabel(), $content);
+        $this->assertStringContainsStringIgnoringCase('Item ', $content);
     }
 
     public function testRenderCanPrepend()
@@ -164,9 +164,9 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
                         ->setElement($element);
 
         $content = $this->decorator->render('foo bar');
-        $this->assertContains('foo bar', $content);
-        $this->assertContains($element->getName(), $content);
-        $this->assertContains($element->getLabel(), $content);
+        $this->assertStringContainsStringIgnoringCase('foo bar', $content);
+        $this->assertStringContainsStringIgnoringCase($element->getName(), $content);
+        $this->assertStringContainsStringIgnoringCase($element->getLabel(), $content);
         $this->assertRegexp('/foo bar$/s', $content);
     }
 
@@ -180,9 +180,9 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
                         ->setElement($element);
 
         $content = $this->decorator->render('foo bar');
-        $this->assertNotContains('foo bar', $content, $content);
-        $this->assertContains($element->getName(), $content);
-        $this->assertContains($element->getLabel(), $content);
+        $this->assertStringNotContainsStringIgnoringCase('foo bar', $content, $content);
+        $this->assertStringContainsStringIgnoringCase($element->getName(), $content);
+        $this->assertStringContainsStringIgnoringCase($element->getLabel(), $content);
     }
 }
 

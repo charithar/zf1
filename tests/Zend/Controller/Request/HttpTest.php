@@ -36,7 +36,7 @@ require_once 'Zend/Controller/Request/Http.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
-class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Controller_Request_Http
@@ -61,7 +61,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_origServer = $_SERVER;
         $_GET  = array();
@@ -73,7 +73,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->_request = new Zend_Controller_Request_Http('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_request);
         $_SERVER = $this->_origServer;

@@ -31,12 +31,12 @@ require_once 'Zend/Feed/Reader.php';
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_TestCase
+class Zend_Feed_Reader_Integration_PodcastRss2Test extends \PHPUnit\Framework\TestCase
 {
 
     protected $_feedSamplePath = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         Zend_Feed_Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
@@ -49,7 +49,7 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
         Zend_Date::setOptions(array('format_type'=>'iso'));
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Date::setOptions($this->_options);
     }

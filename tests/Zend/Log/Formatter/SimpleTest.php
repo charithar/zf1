@@ -35,7 +35,7 @@ require_once 'Zend/Log/Formatter/Simple.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -64,10 +64,10 @@ class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
         $f = new Zend_Log_Formatter_Simple();
         $line = $f->format($fields);
 
-        $this->assertContains((string)$fields['timestamp'], $line);
-        $this->assertContains($fields['message'], $line);
-        $this->assertContains($fields['priorityName'], $line);
-        $this->assertContains((string)$fields['priority'], $line);
+        $this->assertStringContainsStringIgnoringCase((string)$fields['timestamp'], $line);
+        $this->assertStringContainsStringIgnoringCase($fields['message'], $line);
+        $this->assertStringContainsStringIgnoringCase($fields['priorityName'], $line);
+        $this->assertStringContainsStringIgnoringCase((string)$fields['priority'], $line);
     }
 
     function testComplexValues()
@@ -80,36 +80,36 @@ class Zend_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
 
         $fields['message'] = 'Foo';
         $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
+        $this->assertStringContainsStringIgnoringCase($fields['message'], $line);
 
         $fields['message'] = 10;
         $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
+        $this->assertStringContainsStringIgnoringCase($fields['message'], $line);
 
         $fields['message'] = 10.5;
         $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
+        $this->assertStringContainsStringIgnoringCase($fields['message'], $line);
 
         $fields['message'] = true;
         $line = $f->format($fields);
-        $this->assertContains('1', $line);
+        $this->assertStringContainsStringIgnoringCase('1', $line);
 
         $fields['message'] = fopen('php://stdout', 'w');
         $line = $f->format($fields);
-        $this->assertContains('Resource id ', $line);
+        $this->assertStringContainsStringIgnoringCase('Resource id ', $line);
         fclose($fields['message']);
 
         $fields['message'] = range(1,10);
         $line = $f->format($fields);
-        $this->assertContains('array', $line);
+        $this->assertStringContainsStringIgnoringCase('array', $line);
 
         $fields['message'] = new Zend_Log_Formatter_SimpleTest_TestObject1();
         $line = $f->format($fields);
-        $this->assertContains($fields['message']->__toString(), $line);
+        $this->assertStringContainsStringIgnoringCase($fields['message']->__toString(), $line);
 
         $fields['message'] = new Zend_Log_Formatter_SimpleTest_TestObject2();
         $line = $f->format($fields);
-        $this->assertContains('object', $line);
+        $this->assertStringContainsStringIgnoringCase('object', $line);
     }
 
     /**

@@ -33,7 +33,7 @@ require_once 'Zend/OpenId/Consumer/Storage/File.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
-class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_Consumer_Storage_FileTest extends \PHPUnit\Framework\TestCase
 {
     const URL      = "http://www.myopenid.com/";
     const HANDLE   = "d41d8cd98f00b204e9800998ecf8427e";
@@ -77,7 +77,7 @@ class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
         @rmdir($dirName);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_tmpDir = dirname(__FILE__) . "/_files";
 
@@ -86,7 +86,7 @@ class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
         mkdir($this->_tmpDir);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         self::_rmDir($this->_tmpDir);
     }
@@ -117,7 +117,7 @@ class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue( $ex instanceof Zend_OpenId_Exception );
         $this->assertSame( Zend_OpenId_Exception::ERROR_STORAGE, $ex->getCode() );
-        $this->assertContains( 'Cannot access storage directory', $ex->getMessage() );
+        $this->assertStringContainsStringIgnoringCase( 'Cannot access storage directory', $ex->getMessage() );
         chmod($dir, 0777);
         $this->assertFalse( is_dir($dir2) );
         self::_rmDir($dir);

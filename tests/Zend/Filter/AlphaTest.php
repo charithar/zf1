@@ -35,7 +35,7 @@ require_once 'Zend/Filter/Alpha.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_AlphaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Filter_Alpha object
@@ -70,7 +70,7 @@ class Zend_Filter_AlphaTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_filter = new Zend_Filter_Alpha();
         if (null === self::$_unicodeEnabled) {

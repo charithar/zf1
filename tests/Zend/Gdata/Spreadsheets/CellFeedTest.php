@@ -32,10 +32,10 @@ require_once 'Zend/Http/Client.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
-class Zend_Gdata_Spreadsheets_CellFeedTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Spreadsheets_CellFeedTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->cellFeed = new Zend_Gdata_Spreadsheets_CellFeed(
                 file_get_contents('Zend/Gdata/Spreadsheets/_files/TestDataCellFeedSample1.xml', true),

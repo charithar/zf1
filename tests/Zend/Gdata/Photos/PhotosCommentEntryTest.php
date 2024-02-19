@@ -34,7 +34,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Photos
  */
-class Zend_Gdata_Photos_PhotosCommentEntryTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Photos_PhotosCommentEntryTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $commentEntry = null;
@@ -42,7 +42,7 @@ class Zend_Gdata_Photos_PhotosCommentEntryTest extends PHPUnit_Framework_TestCas
     /**
       * Called before each test to setup any fixtures.
       */
-    public function setUp()
+    protected function setUp(): void
     {
         $commentEntryText = file_get_contents(
                 '_files/TestCommentEntry.xml',

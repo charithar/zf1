@@ -38,7 +38,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,7 +58,7 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->errors = array();
         $this->element = new Zend_Form_Element_Password('foo');
@@ -70,7 +70,7 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -110,8 +110,8 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
         $expect = '*******';
         $this->assertFalse($this->element->isValid($value));
         foreach ($this->element->getMessages() as $message) {
-            $this->assertNotContains($value, $message);
-            $this->assertContains($expect, $message, $message);
+            $this->assertStringNotContainsStringIgnoringCase($value, $message);
+            $this->assertStringContainsStringIgnoringCase($expect, $message, $message);
         }
     }
 
@@ -167,11 +167,11 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
         $this->element->setValue('foobar')
                       ->setView(new Zend_View());
         $test = $this->element->render();
-        $this->assertContains('value=""', $test);
+        $this->assertStringContainsStringIgnoringCase('value=""', $test);
 
         $this->element->setRenderPassword(true);
         $test = $this->element->render();
-        $this->assertContains('value="foobar"', $test);
+        $this->assertStringContainsStringIgnoringCase('value="foobar"', $test);
     }
 }
 

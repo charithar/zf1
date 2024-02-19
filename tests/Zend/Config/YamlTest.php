@@ -33,9 +33,9 @@ require_once 'Zend/Config/Yaml.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
+class Zend_Config_YamlTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_iniFileConfig             = dirname(__FILE__) . '/_files/config.yaml';
         $this->_iniFileAllSectionsConfig  = dirname(__FILE__) . '/_files/allsections.yaml';
@@ -117,7 +117,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Yaml($this->_iniFileConfig, 'extendserror');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
     }
 
@@ -158,7 +158,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Yaml($this->_iniFileCircularConfig, null);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('circular inheritance', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('circular inheritance', $expected->getMessage());
         }
     }
 
@@ -168,7 +168,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Yaml('','');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Filename is not set', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Filename is not set', $expected->getMessage());
         }
     }
 
@@ -178,14 +178,14 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Yaml($this->_iniFileConfig,array('all', 'notthere'));
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
 
         try {
             $config = new Zend_Config_Yaml($this->_iniFileConfig,'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsStringIgnoringCase('cannot be found', $expected->getMessage());
         }
 
     }

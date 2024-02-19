@@ -38,7 +38,7 @@ require_once 'Zend/XmlRpc/Server/Cache.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_Server_CacheTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -66,7 +66,7 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_file = realpath(dirname(__FILE__)) . '/xmlrpc.cache';
         $this->_server = new Zend_XmlRpc_Server();
@@ -76,7 +76,7 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists($this->_file)) {
             unlink($this->_file);

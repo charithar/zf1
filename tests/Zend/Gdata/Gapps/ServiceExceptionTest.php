@@ -33,12 +33,12 @@ require_once 'Zend/Gdata/Gapps.php';
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-class Zend_Gdata_Gapps_ServiceExceptionTest extends PHPUnit_Framework_TestCase
+class Zend_Gdata_Gapps_ServiceExceptionTest extends \PHPUnit\Framework\TestCase
 {
     protected $fixture;
     protected $data;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->xmlSample = file_get_contents(
                 'Zend/Gdata/Gapps/_files/AppsForYourDomainElementSample1.xml',
                 true);

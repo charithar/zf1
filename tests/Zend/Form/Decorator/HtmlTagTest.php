@@ -40,7 +40,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_HtmlTagTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -60,7 +60,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_HtmlTag();
     }
@@ -71,7 +71,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -98,10 +98,10 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertContains('<' . $value, $html);
-                $this->assertContains('</' . $value . '>', $html);
+                $this->assertStringContainsStringIgnoringCase('<' . $value, $html);
+                $this->assertStringContainsStringIgnoringCase('</' . $value . '>', $html);
             } else {
-                $this->assertContains($key . '="' . $value . '"', $html);
+                $this->assertStringContainsStringIgnoringCase($key . '="' . $value . '"', $html);
             }
         }
     }
@@ -115,10 +115,10 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertContains('<' . $value, $html);
-                $this->assertContains('</' . $value . '>', $html);
+                $this->assertStringContainsStringIgnoringCase('<' . $value, $html);
+                $this->assertStringContainsStringIgnoringCase('</' . $value . '>', $html);
             } else {
-                $this->assertNotContains($key . '="' . (string) $value . '"', $html);
+                $this->assertStringNotContainsStringIgnoringCase($key . '="' . (string) $value . '"', $html);
             }
         }
     }
@@ -132,12 +132,12 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertContains('<' . $value, $html);
-                $this->assertNotContains('</' . $value . '>', $html);
+                $this->assertStringContainsStringIgnoringCase('<' . $value, $html);
+                $this->assertStringNotContainsStringIgnoringCase('</' . $value . '>', $html);
             } elseif ('openOnly' == $key) {
-                $this->assertNotContains($key, $html);
+                $this->assertStringNotContainsStringIgnoringCase($key, $html);
             } else {
-                $this->assertContains($key . '="' . (string) $value . '"', $html);
+                $this->assertStringContainsStringIgnoringCase($key . '="' . (string) $value . '"', $html);
             }
         }
     }
@@ -151,10 +151,10 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertNotContains('<' . $value, $html);
-                $this->assertContains('</' . $value . '>', $html);
+                $this->assertStringNotContainsStringIgnoringCase('<' . $value, $html);
+                $this->assertStringContainsStringIgnoringCase('</' . $value . '>', $html);
             } else {
-                $this->assertNotContains($key . '="' . (string) $value . '"', $html);
+                $this->assertStringNotContainsStringIgnoringCase($key . '="' . (string) $value . '"', $html);
             }
         }
     }
@@ -166,7 +166,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
         $this->decorator->setElement($element)
                         ->setOptions($options);
         $html = $this->decorator->render('');
-        $this->assertContains('class="foobar bazbat"', $html);
+        $this->assertStringContainsStringIgnoringCase('class="foobar bazbat"', $html);
     }
 
     public function testAppendPlacementWithCloseOnlyRendersClosingTagFollowingContent()

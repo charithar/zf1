@@ -33,12 +33,12 @@ require_once 'Zend/Crypt/Math/BigInteger/Bcmath.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-class Zend_Crypt_Math_BigInteger_GmpTest extends PHPUnit_Framework_TestCase
+class Zend_Crypt_Math_BigInteger_GmpTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_math = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('gmp')) {
             $this->markTestSkipped('Skipped: Zend_Crypt_Math_BigInteger_GmpTest due to ext/gmp being unavailable');

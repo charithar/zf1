@@ -52,7 +52,7 @@ require_once 'Zend/Uri/Http.php';
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCase
+abstract class Zend_Http_Client_CommonHttpTests extends \PHPUnit\Framework\TestCase
 {
     /**
      * The bast URI for this test, containing all files in the _files directory
@@ -508,15 +508,15 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $res = $this->client->request('POST');
 
-        $this->assertContains(serialize($params) . "\n" . serialize($params),
+        $this->assertStringContainsStringIgnoringCase(serialize($params) . "\n" . serialize($params),
             $res->getBody(), "returned body does not contain all GET and POST parameters (it should!)");
 
         $this->client->resetParameters();
         $res = $this->client->request('POST');
 
-        $this->assertNotContains(serialize($params), $res->getBody(),
+        $this->assertStringNotContainsStringIgnoringCase(serialize($params), $res->getBody(),
             "returned body contains GET or POST parameters (it shouldn't!)");
-        $this->assertContains($headers["X-Foo"], $this->client->getHeader("X-Foo"), "Header not preserved by reset");
+        $this->assertStringContainsStringIgnoringCase($headers["X-Foo"], $this->client->getHeader("X-Foo"), "Header not preserved by reset");
 
         $this->client->resetParameters(true);
         $this->assertNull($this->client->getHeader("X-Foo"), "Header preserved by reset(true)");
@@ -546,8 +546,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $this->client->setParameterGet('cheese', null)->setParameterPost('to', null);
         $res = $this->client->request('POST');
 
-        $this->assertNotContains('cheese', $res->getBody(), 'The "cheese" GET parameter was expected to be unset');
-        $this->assertNotContains('alice', $res->getBody(), 'The "to" POST parameter was expected to be unset');
+        $this->assertStringNotContainsStringIgnoringCase('cheese', $res->getBody(), 'The "cheese" GET parameter was expected to be unset');
+        $this->assertStringNotContainsStringIgnoringCase('alice', $res->getBody(), 'The "to" POST parameter was expected to be unset');
     }
 
     /**
@@ -583,9 +583,9 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $body = strtolower($res->getBody());
 
         foreach ($headers as $key => $val)
-            $this->assertContains(strtolower("$key: $val"), $body);
+            $this->assertStringContainsStringIgnoringCase(strtolower("$key: $val"), $body);
 
-        $this->assertContains(strtolower($acceptHeader), $body);
+        $this->assertStringContainsStringIgnoringCase(strtolower($acceptHeader), $body);
     }
 
     /**
@@ -614,9 +614,9 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         foreach ($headers as $key => $val) {
             if (is_string($key)) {
-                $this->assertContains(strtolower("$key: $val"), $body);
+                $this->assertStringContainsStringIgnoringCase(strtolower("$key: $val"), $body);
             } else {
-                $this->assertContains(strtolower($val), $body);
+                $this->assertStringContainsStringIgnoringCase(strtolower($val), $body);
             }
         }
      }
@@ -653,7 +653,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             if (is_array($val))
                 $val = implode(', ', $val);
 
-            $this->assertContains(strtolower("$key: $val"), $body);
+            $this->assertStringContainsStringIgnoringCase(strtolower("$key: $val"), $body);
         }
      }
 
@@ -679,8 +679,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
 
         // Make sure the body does *not* contain the set parameters
-        $this->assertNotContains('swallow', $res->getBody());
-        $this->assertNotContains('Camelot', $res->getBody());
+        $this->assertStringNotContainsStringIgnoringCase('swallow', $res->getBody());
+        $this->assertStringNotContainsStringIgnoringCase('Camelot', $res->getBody());
     }
 
     /**
@@ -704,8 +704,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
 
         // Make sure the body *does* contain the set parameters
-        $this->assertContains('swallow', $res->getBody());
-        $this->assertContains('Camelot', $res->getBody());
+        $this->assertStringContainsStringIgnoringCase('swallow', $res->getBody());
+        $this->assertStringContainsStringIgnoringCase('Camelot', $res->getBody());
     }
 
     /**
@@ -846,8 +846,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $res = $this->client->request();
 
         $this->assertEquals(401, $res->getStatus(), 'Expected HTTP 401 response was not recieved');
-        $this->assertNotContains('alice', $res->getBody(), "Body contains the user name, but it shouldn't");
-        $this->assertNotContains('secret', $res->getBody(), "Body contains the password, but it shouldn't");
+        $this->assertStringNotContainsStringIgnoringCase('alice', $res->getBody(), "Body contains the user name, but it shouldn't");
+        $this->assertStringNotContainsStringIgnoringCase('secret', $res->getBody(), "Body contains the password, but it shouldn't");
     }
 
     /**
@@ -864,8 +864,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $res = $this->client->request();
 
         $this->assertEquals(401, $res->getStatus(), 'Expected HTTP 401 response was not recieved');
-        $this->assertNotContains('alice', $res->getBody(), "Body contains the user name, but it shouldn't");
-        $this->assertNotContains('secret', $res->getBody(), "Body contains the password, but it shouldn't");
+        $this->assertStringNotContainsStringIgnoringCase('alice', $res->getBody(), "Body contains the user name, but it shouldn't");
+        $this->assertStringNotContainsStringIgnoringCase('secret', $res->getBody(), "Body contains the password, but it shouldn't");
     }
 
     /**
@@ -1255,8 +1255,8 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $response = $this->client->request();
         $request  = $this->client->getLastRequest();
 
-        $this->assertContains('text/html; charset=ISO-8859-1', $request, $request);
-        $this->assertContains('REQUEST_METHOD: PUT', $response->getBody(), $response->getBody());
+        $this->assertStringContainsStringIgnoringCase('text/html; charset=ISO-8859-1', $request, $request);
+        $this->assertStringContainsStringIgnoringCase('REQUEST_METHOD: PUT', $response->getBody(), $response->getBody());
     }
 
 
@@ -1270,14 +1270,14 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $this->client->setRawData($data, 'text/plain');
         $this->client->setMethod(Zend_Http_Client::PUT);
         $response = $this->client->request();
-        $this->assertContains('REQUEST_METHOD: PUT', $response->getBody(), $response->getBody());
+        $this->assertStringContainsStringIgnoringCase('REQUEST_METHOD: PUT', $response->getBody(), $response->getBody());
 
         $this->client->resetParameters(true);
         $this->client->setUri($this->baseuri . 'ZF10645-PutContentType.php');
         $this->client->setMethod(Zend_Http_Client::PUT);
         $response = $this->client->request();
         $request= $this->client->getLastRequest();
-        $this->assertNotContains('Content-Type: text/plain', $request);
+        $this->assertStringNotContainsStringIgnoringCase('Content-Type: text/plain', $request);
 
     }
 

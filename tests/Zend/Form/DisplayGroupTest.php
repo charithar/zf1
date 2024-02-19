@@ -46,7 +46,7 @@ require_once 'Zend/View.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
+class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -54,7 +54,7 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Form::setDefaultTranslator(null);
@@ -73,7 +73,7 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -101,7 +101,7 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
             $this->group->setName('%\^&*)\(%$#@!.}{;-,');
             $this->fail('Empty names should raise exception');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid name provided', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid name provided', $e->getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
             $this->group->addElements($elements);
             $this->fail('Invalid elements should raise exception');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('must be Zend_Form_Elements only', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('must be Zend_Form_Elements only', $e->getMessage());
         }
     }
 
@@ -238,7 +238,7 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
             $this->group->addDecorator(123);
             $this->fail('Invalid decorator should raise exception');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid decorator', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('Invalid decorator', $e->getMessage());
         }
     }
 
@@ -400,9 +400,9 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
         $this->group->addElements(array($foo, $bar));
         $html = $this->group->render($this->getView());
         $this->assertRegexp('#^<dt[^>]*>&\#160;</dt><dd[^>]*><fieldset.*?</fieldset></dd>$#s', $html, $html);
-        $this->assertContains('<input', $html, $html);
-        $this->assertContains('"foo"', $html);
-        $this->assertContains('"bar"', $html);
+        $this->assertStringContainsStringIgnoringCase('<input', $html, $html);
+        $this->assertStringContainsStringIgnoringCase('"foo"', $html);
+        $this->assertStringContainsStringIgnoringCase('"bar"', $html);
     }
 
     public function testToStringProxiesToRender()
@@ -414,9 +414,9 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
                     ->setView($this->getView());
         $html = $this->group->__toString();
         $this->assertRegexp('#^<dt[^>]*>&\#160;</dt><dd[^>]*><fieldset.*?</fieldset></dd>$#s', $html, $html);
-        $this->assertContains('<input', $html);
-        $this->assertContains('"foo"', $html);
-        $this->assertContains('"bar"', $html);
+        $this->assertStringContainsStringIgnoringCase('<input', $html);
+        $this->assertStringContainsStringIgnoringCase('"foo"', $html);
+        $this->assertStringContainsStringIgnoringCase('"bar"', $html);
     }
 
     public function raiseDecoratorException($content, $element, $options)
@@ -522,7 +522,7 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
                     ->addElement($c)
                     ->setView($this->getView());
         $test = $this->group->render();
-        $this->assertContains('name="a"', $test);
+        $this->assertStringContainsStringIgnoringCase('name="a"', $test);
         if (!preg_match_all('/(<input[^>]+>)/', $test, $matches)) {
             $this->fail('Expected markup not found');
         }
@@ -744,15 +744,15 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
         $this->group->setView($this->getView());
         $html = $this->group->renderFormElements();
         foreach ($this->group->getElements() as $element) {
-            $this->assertContains('id="' . $element->getFullyQualifiedName() . '"', $html, 'Received: ' . $html);
+            $this->assertStringContainsStringIgnoringCase('id="' . $element->getFullyQualifiedName() . '"', $html, 'Received: ' . $html);
         }
-        $this->assertNotContains('<dl', $html);
-        $this->assertNotContains('<form', $html);
+        $this->assertStringNotContainsStringIgnoringCase('<dl', $html);
+        $this->assertStringNotContainsStringIgnoringCase('<form', $html);
 
         $html = $this->group->renderFieldset('this is the content');
-        $this->assertContains('<fieldset', $html);
-        $this->assertContains('</fieldset>', $html);
-        $this->assertContains('this is the content', $html);
+        $this->assertStringContainsStringIgnoringCase('<fieldset', $html);
+        $this->assertStringContainsStringIgnoringCase('</fieldset>', $html);
+        $this->assertStringContainsStringIgnoringCase('this is the content', $html);
     }
 
     /**

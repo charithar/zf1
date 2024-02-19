@@ -31,19 +31,19 @@ require_once 'Zend/Oauth/Http/AccessToken.php';
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Http
  */
-class Zend_Oauth_Http_AccessTokenTest extends PHPUnit_Framework_TestCase
+class Zend_Oauth_Http_AccessTokenTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $stubConsumer = null;
 
-    public function setup()
+    protected function setUp(): void
     {
         $this->stubConsumer = new Test_Consumer_39745;
         $this->stubHttpUtility = new Test_Http_Utility_39745;
         Zend_Oauth::setHttpClient(new Test_Client_39745);
     }
 
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Oauth::clearHttpClient();
     }

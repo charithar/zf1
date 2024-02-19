@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Hostname.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_HostnameTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Default instance created for all test methods
@@ -48,7 +48,7 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_origEncoding = PHP_VERSION_ID < 50600
                     ? iconv_get_encoding('internal_encoding')
@@ -59,7 +59,7 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
     /**
      * Reset iconv
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (PHP_VERSION_ID < 50600) {
             iconv_set_encoding('internal_encoding', $this->_origEncoding);

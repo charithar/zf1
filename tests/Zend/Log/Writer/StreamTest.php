@@ -38,7 +38,7 @@ require_once 'Zend/Log/Writer/Stream.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_StreamTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -105,7 +105,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         $contents = stream_get_contents($stream);
         fclose($stream);
 
-        $this->assertContains($fields['message'], $contents);
+        $this->assertStringContainsStringIgnoringCase($fields['message'], $contents);
     }
 
     public function testWriteThrowsWhenStreamWriteFails()
@@ -153,7 +153,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         $contents = stream_get_contents($stream);
         fclose($stream);
 
-        $this->assertContains($expected, $contents);
+        $this->assertStringContainsStringIgnoringCase($expected, $contents);
     }
 
     public function testFactoryStream()

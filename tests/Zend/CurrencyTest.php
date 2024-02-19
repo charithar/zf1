@@ -35,10 +35,10 @@ require_once 'Zend/Currency.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Currency
  */
-class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
+class Zend_CurrencyTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
@@ -47,7 +47,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         Zend_Currency::setCache($this->_cache);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
     }
@@ -71,7 +71,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $currency = new Zend_Currency();
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains('No region found within the locale', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No region found within the locale', $e->getMessage());
         }
 
         $currency = new Zend_Currency('de_AT');
@@ -103,21 +103,21 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $currency = new Zend_Currency(array('currency' => 'EUR'));
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains('No region found within the locale', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No region found within the locale', $e->getMessage());
         }
 
         try {
             $currency = new Zend_Currency(array('currency' => 'USD'));
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains('No region found within the locale', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No region found within the locale', $e->getMessage());
         }
 
         try {
             $currency = new Zend_Currency(array('currency' => 'AWG'));
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains('No region found within the locale', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No region found within the locale', $e->getMessage());
         }
     }
 
@@ -293,7 +293,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $this->assertSame('$ 53,292.18', $USD->toCurrency('nocontent'));
             $this->fail("No currency expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("has to be numeric", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("has to be numeric", $e->getMessage());
         }
 
         $INR = new Zend_Currency('INR', 'de_AT');
@@ -372,28 +372,28 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $USD->setFormat(array('position' => 'unknown'));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("Unknown position", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("Unknown position", $e->getMessage());
         }
 
         try {
             $USD->setFormat(array('format' => 'unknown'));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("is no format token", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("is no format token", $e->getMessage());
         }
 
         try {
             $USD->setFormat(array('display' => -14));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("Unknown display", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("Unknown display", $e->getMessage());
         }
 
         try {
             $USD->setFormat(array('script' => 'unknown'));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("Unknown script", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("Unknown script", $e->getMessage());
         }
 
         $USD->setFormat(array('precision' => null));
@@ -402,7 +402,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $USD->setFormat(array('precision' => -14));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("precision has to be between", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("precision has to be between", $e->getMessage());
         }
     }
 
@@ -490,7 +490,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $currency = new Zend_Currency(array('currency' => 'USD'));
             $this->assertTrue(in_array('US', $currency->getRegionList()));
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains('No region found within the locale', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('No region found within the locale', $e->getMessage());
         }
 
         $currency = new Zend_Currency(array('currency' => 'USD'), 'en_US');
@@ -499,7 +499,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(in_array('US', $currency->getRegionList()));
             $this->fail("Exception expected");
         } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("No currency defined", $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase("No currency defined", $e->getMessage());
         }
 
         $currency = new Zend_Currency(array('currency' => 'USD'), 'en_US');

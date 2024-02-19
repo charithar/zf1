@@ -37,7 +37,7 @@ require_once 'Zend/Filter/Compress/Tar.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_Compress_TarTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -50,7 +50,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!class_exists('Archive_Tar')) {
             require_once 'Zend/Loader.php';
@@ -92,7 +92,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $files = array(
             dirname(__FILE__) . '/../_files/zipextracted.txt',
@@ -206,7 +206,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
             $filter->setTarget('/unknown/path/to/file.txt');
             $this->fail('Exception expected');
         } catch(Zend_Filter_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsStringIgnoringCase('does not exist', $e->getMessage());
         }
     }
 

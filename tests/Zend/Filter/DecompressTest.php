@@ -37,7 +37,7 @@ require_once 'Zend/Filter/Decompress.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Filter_DecompressTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_DecompressTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -50,14 +50,14 @@ class Zend_Filter_DecompressTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('bz2')) {
             $this->markTestSkipped('This filter is tested with the bz2 extension');
         }
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists(dirname(__FILE__) . '/../_files/compressed.bz2')) {
             unlink(dirname(__FILE__) . '/../_files/compressed.bz2');

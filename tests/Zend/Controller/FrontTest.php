@@ -52,7 +52,7 @@ require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Front
  */
-class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 {
     protected $_controller = null;
 
@@ -69,7 +69,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_controller = Zend_Controller_Front::getInstance();
         $this->_controller->resetInstance();
@@ -81,7 +81,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         Zend_Controller_Action_HelperBroker::resetHelpers();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_controller);
     }
@@ -272,7 +272,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->_controller->setResponse(new Zend_Controller_Response_Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertContains('Index action called', $response->getBody());
+        $this->assertStringContainsStringIgnoringCase('Index action called', $response->getBody());
     }
 
     /**
@@ -284,7 +284,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->_controller->setResponse(new Zend_Controller_Response_Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertContains('Index action called', $response->getBody());
+        $this->assertStringContainsStringIgnoringCase('Index action called', $response->getBody());
     }
 
     /**
@@ -331,9 +331,9 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Bar action called', $body, $body);
-        $this->assertContains('preDispatch called', $body, $body);
-        $this->assertContains('postDispatch called', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('Bar action called', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('preDispatch called', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('postDispatch called', $body, $body);
     }
 
     /**
@@ -348,8 +348,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('foo: bar', $body, $body);
-        $this->assertContains('baz: bat', $body);
+        $this->assertStringContainsStringIgnoringCase('foo: bar', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('baz: bat', $body);
     }
 
     /**
@@ -363,7 +363,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Bar action called', $body);
+        $this->assertStringContainsStringIgnoringCase('Bar action called', $body);
         $params = $request->getParams();
         $this->assertTrue(isset($params['var1']));
         $this->assertEquals('baz', $params['var1']);
@@ -383,7 +383,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = $this->_controller->dispatch($request, $response);
 
         $body = $response->getBody();
-        $this->assertContains('Bar action called', $body);
+        $this->assertStringContainsStringIgnoringCase('Bar action called', $body);
     }
 
     /**
@@ -440,7 +440,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = new Zend_Controller_Response_Cli();
         $response = $this->_controller->dispatch($request, $response);
 
-        $this->assertContains('index.php', $request->getBaseUrl());
+        $this->assertStringContainsStringIgnoringCase('index.php', $request->getBaseUrl());
     }
 
     /**
@@ -511,7 +511,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $body = ob_get_clean();
 
         $actual = $this->_controller->getResponse()->getBody();
-        $this->assertContains($actual, $body);
+        $this->assertStringContainsStringIgnoringCase($actual, $body);
     }
 
     public function testRunStatically()
@@ -536,7 +536,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = $this->_controller->dispatch($request);
 
         $body = $response->getBody();
-        $this->assertContains('Admin_Foo::bar action called', $body, $body);
+        $this->assertStringContainsStringIgnoringCase('Admin_Foo::bar action called', $body, $body);
     }
 
     public function testModuleControllerDirectoryName()
@@ -556,9 +556,9 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($controllerDirs['default']));
         $this->assertFalse(isset($controllerDirs['.svn']));
 
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'foo', $controllerDirs['foo']);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $controllerDirs['bar']);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'default', $controllerDirs['default']);
+        $this->assertStringContainsStringIgnoringCase('modules' . DIRECTORY_SEPARATOR . 'foo', $controllerDirs['foo']);
+        $this->assertStringContainsStringIgnoringCase('modules' . DIRECTORY_SEPARATOR . 'bar', $controllerDirs['bar']);
+        $this->assertStringContainsStringIgnoringCase('modules' . DIRECTORY_SEPARATOR . 'default', $controllerDirs['default']);
     }
 
     /**#@+
@@ -571,16 +571,16 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $request->setModuleName('bar');
         $this->_controller->setRequest($request);
         $dir = $this->_controller->getModuleDirectory();
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $dir);
-        $this->assertNotContains('controllers', $dir);
+        $this->assertStringContainsStringIgnoringCase('modules' . DIRECTORY_SEPARATOR . 'bar', $dir);
+        $this->assertStringNotContainsStringIgnoringCase('controllers', $dir);
     }
 
     public function testShouldAllowRetrievingSpecifiedModuleDirectory()
     {
         $this->testAddModuleDirectory();
         $dir = $this->_controller->getModuleDirectory('foo');
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'foo', $dir);
-        $this->assertNotContains('controllers', $dir);
+        $this->assertStringContainsStringIgnoringCase('modules' . DIRECTORY_SEPARATOR . 'foo', $dir);
+        $this->assertStringNotContainsStringIgnoringCase('controllers', $dir);
     }
 
     public function testShouldReturnNullWhenRetrievingNonexistentModuleDirectory()
@@ -624,7 +624,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->_controller->addModuleDirectory($moduleDir);
         $barDir = $this->_controller->getControllerDirectory('bar');
         $this->assertNotNull($barDir);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $barDir);
+        $this->assertStringContainsStringIgnoringCase('modules' . DIRECTORY_SEPARATOR . 'bar', $barDir);
     }
 
     public function testGetControllerDirectoryByModuleNameReturnsNullOnBadModule()
@@ -678,8 +678,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($request, $requestPost);
         $this->assertNotSame($response, $responsePost);
 
-        $this->assertContains('Reset action called', $responsePost->getBody());
-        $this->assertNotContains('Reset action called', $response->getBody());
+        $this->assertStringContainsStringIgnoringCase('Reset action called', $responsePost->getBody());
+        $this->assertStringNotContainsStringIgnoringCase('Reset action called', $response->getBody());
     }
 
     public function testViewRendererHelperRegisteredWhenDispatched()

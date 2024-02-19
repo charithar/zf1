@@ -51,7 +51,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -70,7 +70,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_origServer = $_SERVER;
         $_SERVER = array(
@@ -99,7 +99,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->request, $this->response, $this->helper);
         $_SERVER = $this->_origServer;
@@ -172,7 +172,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function testActionReturnsContentFromDefaultModule()
     {
         $value = $this->helper->action('bar', 'action-foo');
-        $this->assertContains('In default module, FooController::barAction()', $value);
+        $this->assertStringContainsStringIgnoringCase('In default module, FooController::barAction()', $value);
     }
 
     /**
@@ -181,7 +181,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function testActionReturnsContentFromSpecifiedModule()
     {
         $value = $this->helper->action('bar', 'foo', 'foo');
-        $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
+        $this->assertStringContainsStringIgnoringCase('In foo module, Foo_FooController::barAction()', $value);
     }
 
     /**
@@ -190,8 +190,8 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function testActionReturnsContentReflectingPassedParams()
     {
         $value = $this->helper->action('baz', 'action-foo', null, array('bat' => 'This is my message'));
-        $this->assertNotContains('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
-        $this->assertContains('This is my message', $value);
+        $this->assertStringNotContainsStringIgnoringCase('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
+        $this->assertStringContainsStringIgnoringCase('This is my message', $value);
     }
 
     /**
@@ -265,7 +265,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function testViewObjectRemainsUnchangedAfterAction()
     {
         $value = $this->helper->action('bar', 'foo', 'foo');
-        $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
+        $this->assertStringContainsStringIgnoringCase('In foo module, Foo_FooController::barAction()', $value);
         $this->assertNull($this->view->bar);
     }
 
@@ -273,9 +273,9 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     {
         $html = $this->helper->action('nest', 'foo', 'foo');
         $title = $this->view->headTitle()->toString();
-        $this->assertContains(' - ', $title, $title);
-        $this->assertContains('Foo Nest', $title);
-        $this->assertContains('Nested Stuff', $title);
+        $this->assertStringContainsStringIgnoringCase(' - ', $title, $title);
+        $this->assertStringContainsStringIgnoringCase('Foo Nest', $title);
+        $this->assertStringContainsStringIgnoringCase('Nested Stuff', $title);
     }
 
     /**

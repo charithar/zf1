@@ -39,7 +39,7 @@ require_once 'Zend/View.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FieldsetTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->view   = new Zend_View();
         $this->helper = new Zend_View_Helper_Fieldset();
@@ -73,7 +73,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         ob_end_clean();
     }
@@ -82,8 +82,8 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
     {
         $html = $this->helper->fieldset('foo', 'foobar');
         $this->assertRegexp('#<fieldset[^>]+id="foo".*?>#', $html);
-        $this->assertContains('</fieldset>', $html);
-        $this->assertContains('foobar', $html);
+        $this->assertStringContainsStringIgnoringCase('</fieldset>', $html);
+        $this->assertStringContainsStringIgnoringCase('foobar', $html);
     }
 
     public function testProvidingLegendOptionToFieldsetCreatesLegendTag()
@@ -99,7 +99,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
     {
         foreach (array(null, '', ' ', false) as $legend) {
             $html = $this->helper->fieldset('foo', 'foobar', array('legend' => $legend));
-            $this->assertNotContains('<legend>', $html, 'Failed with value ' . var_export($legend, 1) . ': ' . $html);
+            $this->assertStringNotContainsStringIgnoringCase('<legend>', $html, 'Failed with value ' . var_export($legend, 1) . ': ' . $html);
         }
     }
 

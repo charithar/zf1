@@ -31,7 +31,7 @@ require_once "Zend/Test/DbStatement.php";
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
+class Zend_Test_DbStatementTest extends \PHPUnit\Framework\TestCase
 {
     public function testRowCountDefault()
     {

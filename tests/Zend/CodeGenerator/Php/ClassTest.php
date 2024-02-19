@@ -35,7 +35,7 @@ require_once 'Zend/CodeGenerator/Php/Class.php';
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_ClassTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testConstruction()
@@ -246,7 +246,7 @@ EOS;
 
         $code = $codeGen->generate();
         $expectedClassDef = 'class Zend_CodeGenerator_Php_ClassWithInterface implements Zend_Code_Generator_Php_OneInterface, Zend_Code_Generator_Php_TwoInterface';
-        $this->assertContains($expectedClassDef, $code);
+        $this->assertStringContainsStringIgnoringCase($expectedClassDef, $code);
     }
 
     /**
@@ -267,7 +267,7 @@ EOS;
         $code = $codeGen->generate();
 
         $expectedClassDef = 'class Zend_CodeGenerator_Php_NewClassWithInterface extends Zend_CodeGenerator_Php_ClassWithInterface implements Zend_Code_Generator_Php_ThreeInterface';
-        $this->assertContains($expectedClassDef, $code);
+        $this->assertStringContainsStringIgnoringCase($expectedClassDef, $code);
     }
 
     /**

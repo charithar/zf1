@@ -33,12 +33,12 @@ require_once 'Zend/Version.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Writer_Renderer_Feed_RssTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_validWriter = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_validWriter = new Zend_Feed_Writer_Feed;
         $this->_validWriter->setTitle('This is a test feed.');
@@ -48,7 +48,7 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->_validWriter->setType('rss');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->_validWriter = null;
     }

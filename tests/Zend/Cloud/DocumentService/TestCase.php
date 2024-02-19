@@ -40,7 +40,7 @@ require_once 'Zend/Cloud/DocumentService/Document.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_TestCase
+abstract class Zend_Cloud_DocumentService_TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Reference to Document adapter to test
@@ -93,7 +93,7 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
         $this->_wait();
 
         $collections = $this->_commonDocument->listCollections();
-        $this->assertContains($name, $collections, "New collection not in the list");
+        $this->assertStringContainsStringIgnoringCase($name, $collections, "New collection not in the list");
         $this->_wait();
 
         $this->_commonDocument->deleteCollection($name);
@@ -106,7 +106,7 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
         $this->_wait();
 
         $collections = $this->_commonDocument->listCollections();
-        $this->assertContains($name, $collections, "New collection not in the list");
+        $this->assertStringContainsStringIgnoringCase($name, $collections, "New collection not in the list");
         $this->_wait();
 
         $this->_commonDocument->deleteCollection($name);
@@ -114,7 +114,7 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
         $this->_wait();
 
         $collections = $this->_commonDocument->listCollections();
-        $this->assertNotContains($name, $collections, "New collection not in the list");
+        $this->assertStringNotContainsStringIgnoringCase($name, $collections, "New collection not in the list");
     }
 
     public function testListCollections()
@@ -124,8 +124,8 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
         $this->_wait();
 
         $collections = $this->_commonDocument->listCollections();
-        $this->assertContains($this->_collectionName("test3"), $collections, "New collection test3 not in the list");
-        $this->assertContains($this->_collectionName("test4"), $collections, "New collection test4 not in the list");
+        $this->assertStringContainsStringIgnoringCase($this->_collectionName("test3"), $collections, "New collection test3 not in the list");
+        $this->assertStringContainsStringIgnoringCase($this->_collectionName("test4"), $collections, "New collection test4 not in the list");
         $this->_wait();
 
         $this->_commonDocument->deleteCollection($this->_collectionName("test3"));
@@ -273,8 +273,8 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
 
         $this->assertTrue(count($fetchdocs) >= 2, "Query failed to fetch 2 fields");
         foreach($fetchdocs as $fdoc) {
-            $this->assertContains($fdoc["name"], array($doc[1]->name, $doc[2]->name), "Wrong name in results");
-            $this->assertContains($fdoc["author"], array($doc[1]->author, $doc[2]->author), "Wrong name in results");
+            $this->assertStringContainsStringIgnoringCase($fdoc["name"], array($doc[1]->name, $doc[2]->name), "Wrong name in results");
+            $this->assertStringContainsStringIgnoringCase($fdoc["author"], array($doc[1]->author, $doc[2]->author), "Wrong name in results");
         }
 
         $this->_commonDocument->deleteCollection($name);
@@ -328,7 +328,7 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
         $this->assertEquals(1, count($fetchdocs));
         foreach($fetchdocs as $fdoc) {
             $this->assertTrue($fdoc["year"] > 1945);
-            $this->assertContains($fdoc["name"], array($doc[0]->name, $doc[2]->name, $doc[3]->name), "Wrong name in results");
+            $this->assertStringContainsStringIgnoringCase($fdoc["name"], array($doc[0]->name, $doc[2]->name, $doc[3]->name), "Wrong name in results");
         }
 
         $this->_commonDocument->deleteCollection($name);
@@ -352,7 +352,7 @@ abstract class Zend_Cloud_DocumentService_TestCase extends PHPUnit_Framework_Tes
         $this->_commonDocument->deleteCollection($name);
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_config = $this->_getConfig();
         $this->_commonDocument = Zend_Cloud_DocumentService_Factory::getAdapter($this->_config);

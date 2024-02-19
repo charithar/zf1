@@ -32,7 +32,7 @@ require_once 'Zend/Db/Table/Abstract.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_subscriber = null;
@@ -41,7 +41,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends PHPUnit_Framework_TestCase
 
     protected $_tableGateway = null;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $client = new Zend_Http_Client;
         Zend_Feed_Pubsubhubbub::setHttpClient($client);

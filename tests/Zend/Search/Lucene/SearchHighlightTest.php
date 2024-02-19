@@ -33,7 +33,7 @@ require_once 'Zend/Search/Lucene.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
+class Zend_Search_Lucene_SearchHighlightTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Wildcard pattern minimum preffix
@@ -49,7 +49,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
      */
     protected $_defaultPrefixLength;
 
-    public function setUp()
+    protected function setUp(): void
     {
         require_once 'Zend/Search/Lucene/Search/Query/Wildcard.php';
         $this->_wildcardMinPrefix = Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength();
@@ -60,7 +60,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength(0);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength($this->_wildcardMinPrefix);
         Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength($this->_defaultPrefixLength);

@@ -31,7 +31,7 @@ require_once 'Zend/Feed/Reader.php';
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
-class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
+class Zend_Feed_Reader_Entry_RssTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_feedSamplePath = null;
@@ -42,7 +42,7 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
     
     protected $_expectedCatsAtom = array();
 
-    public function setup()
+    protected function setUp(): void
     {
         Zend_Feed_Reader::reset();
         if (Zend_Registry::isRegistered('Zend_Locale')) {
@@ -105,7 +105,7 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
         );
     }
     
-    public function teardown()
+    protected function tearDown(): void
     {
         Zend_Date::setOptions($this->_options);
     }

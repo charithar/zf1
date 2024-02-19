@@ -32,7 +32,7 @@ require_once 'Zend/XmlRpc/Response.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ResponseTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_XmlRpc_Response object
@@ -48,7 +48,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->_response = new Zend_XmlRpc_Response();
     }
@@ -56,7 +56,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_response);
     }
@@ -264,7 +264,7 @@ EOD;
         $value = $this->_response->getReturnValue();
         $this->assertTrue(empty($value));
         if (is_string($value)) {
-            $this->assertNotContains('Local file inclusion', $value);
+            $this->assertStringNotContainsStringIgnoringCase('Local file inclusion', $value);
         }
     }
 
