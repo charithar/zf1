@@ -43,17 +43,17 @@ class Zend_Auth_Adapter_Http_Resolver_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter_Http Resolver');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Auth_Adapter_Http Resolver');
 
         $suite->addTestSuite('Zend_Auth_Adapter_Http_Resolver_FileTest');
 

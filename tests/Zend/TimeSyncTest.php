@@ -123,6 +123,7 @@ class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
      */
     public function testInitUnknownScheme()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $server = new Zend_TimeSync('http://time.windows.com', 'windows_time');
             $this->fail('Exception expected because we supplied an invalid protocol');
@@ -172,6 +173,7 @@ class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetInvalidOptionKey()
     {
+        $this->expectNotToPerformAssertions();
         $server = new Zend_TimeSync();
 
         try {
@@ -189,6 +191,7 @@ class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetUnknownCurrent()
     {
+        $this->expectNotToPerformAssertions();
         $server = new Zend_TimeSync();
 
         try {
@@ -206,6 +209,7 @@ class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetUnknownCurrent()
     {
+        $this->expectNotToPerformAssertions();
         $server = new Zend_TimeSync();
 
         try {
@@ -223,6 +227,7 @@ class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetUnknownServer()
     {
+        $this->expectNotToPerformAssertions();
         $server = new Zend_TimeSync();
 
         try {

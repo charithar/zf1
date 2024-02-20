@@ -153,6 +153,8 @@ class Zend_MimeTest extends \PHPUnit\Framework\TestCase
      */
     public function testLineLengthInQuotedPrintableHeaderEncoding()
     {
+        $this->expectNotToPerformAssertions();
+
         $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!";
         $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
         foreach(explode(Zend_Mime::LINEEND, $encoded) AS $line ) {

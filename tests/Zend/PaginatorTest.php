@@ -116,8 +116,8 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     /**
@@ -137,7 +137,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
 
     protected $_adapter = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('pdo_sqlite')) {
            $this->markTestSkipped('Pdo_Sqlite extension is not loaded');
@@ -166,7 +166,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
         $this->_restorePaginatorDefaults();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_dbConn = null;
         $this->_testCollection = null;
@@ -518,6 +518,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
 
     public function testGetsAndSetsItemCountPerPage()
     {
+        Zend_Paginator::setDefaultItemCountPerPage(10);
         Zend_Paginator::setConfig(new Zend_Config(array()));
         $this->_paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array(range(1, 101)));
         $this->assertEquals(10, $this->_paginator->getItemCountPerPage());
@@ -942,6 +943,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
     {
         Zend_Paginator::setConfig(new Zend_Config(array()));
 
+        Zend_Paginator::setDefaultItemCountPerPage(10);
         $paginator = Zend_Paginator::factory(range(1, 10));
         $this->assertEquals(10, $paginator->getItemCountPerPage());
 
@@ -1002,9 +1004,9 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
      */
     public function testInvalidDataInConstructor_ThrowsException()
     {
-        $this->setExpectedException("Zend_Paginator_Exception");
+        $this->expectException(Zend_Paginator_Exception::class);
 
-        $p = new Zend_Paginator(array());
+        $p = new Zend_Paginator([]);
     }
 
     /**
@@ -1035,6 +1037,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
     {
         Zend_Paginator::setConfig(new Zend_Config(array()));
 
+        Zend_Paginator::setDefaultPageRange(10);
         $paginator = Zend_Paginator::factory(range(1, 10));
         $this->assertEquals(10, $paginator->getPageRange());
 
@@ -1062,7 +1065,10 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
     	$paginator       = new Zend_Paginator_TestCache($paginatorAdapter);
     	$expectedCacheId = md5($paginator->getCacheInternalId() . '_itemCount');
     
-    	$cache = $this->getMock('Zend_Cache_Core', array('load'), array(), '', false);
+    	//$cache = $this->getMock('Zend_Cache_Core', array('load'), array(), '', false);
+
+        $cache = $this->createMock(Zend_Cache_Core::class);
+
     	$cache->expects($this->once())
     	       ->method('load')
     	       ->with($expectedCacheId)

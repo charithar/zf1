@@ -107,7 +107,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function __construct()
+    public function setUp(): void
     {
         $this->_filesPath      = dirname(__FILE__) . '/_files';
         $this->_basicResolver  = new Zend_Auth_Adapter_Http_Resolver_File("{$this->_filesPath}/htbasic.1");
@@ -333,7 +333,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends \PHPUnit\Framework\TestCase
     protected function _doAuth($clientHeader, $scheme)
     {
         // Set up stub request and response objects
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $request  = $this->createMock(Zend_Controller_Request_Http::class);
         $response = new Zend_Controller_Response_Http;
         $response->setHttpResponseCode(200);
         $response->headersSentThrowsException = false;

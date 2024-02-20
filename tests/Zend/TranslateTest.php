@@ -20,6 +20,10 @@
  * @version    $Id $
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_TranslateTest::main');
+}
+
 /**
  * Zend_Translate
  */
@@ -47,8 +51,8 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_TranslateTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_TranslateTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -637,7 +641,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
     public function testEmptyTranslation()
     {
         $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, null, null, array('disableNotices' => true));
-        $this->assertEquals(0, count($lang->getList()));
+        $this->assertNull($lang->getAdapter()->getList());
     }
 
     /**

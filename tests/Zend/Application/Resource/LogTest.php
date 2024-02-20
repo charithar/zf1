@@ -41,8 +41,8 @@ class Zend_Application_Resource_LogTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -128,6 +128,7 @@ class Zend_Application_Resource_LogTest extends \PHPUnit\Framework\TestCase
      */
     public function testNumericLogStreamFilterParamsPriorityDoesNotFail()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'stream' => array(
                 'writerName'   => 'Stream',
@@ -181,7 +182,7 @@ class Zend_Application_Resource_LogTest extends \PHPUnit\Framework\TestCase
         $contents = stream_get_contents($stream);
 
         $this->assertStringEndsWith($message, $contents);
-        $this->assertRegexp('/\d\d:\d\d:\d\d/', $contents);
+        $this->assertMatchesRegularExpression('/\d\d:\d\d:\d\d/', $contents);
     }
 }
 

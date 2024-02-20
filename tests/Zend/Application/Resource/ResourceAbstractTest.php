@@ -41,8 +41,8 @@ class Zend_Application_Resource_ResourceAbstractTest extends \PHPUnit\Framework\
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -171,7 +171,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends \PHPUnit\Framework\
         ));
         $this->assertSame($this->bootstrap, $resource->getBootstrap());
         $options = $resource->getOptions();
-        $this->assertStringNotContainsStringIgnoringCase('bootstrap', array_keys($options));
+        $this->assertNotContains('bootstrap', array_keys($options));
     }
 
     /**

@@ -31,7 +31,8 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "8.0"
+        "phpunit/phpunit": "^9.5.11",
+      "ext-json": "*"
     },
     "archive": {
         "exclude": ["/demos", "/documentation", "/tests"]

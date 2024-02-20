@@ -11,7 +11,7 @@ Contains Zend Framework 1 plus performance improvements and bug fixes.
 SYSTEM REQUIREMENTS
 ===================
 
-Zend Framework requires PHP 7.1 or later. 
+Zend Framework requires PHP 7.4 or later. 
 
 INSTALLATION
 ============

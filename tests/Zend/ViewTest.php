@@ -51,8 +51,8 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ViewTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_ViewTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -405,6 +405,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
      */
     public function testNoPath()
     {
+        $this->expectNotToPerformAssertions();
         $view = new Zend_View();
         try {
             $view->render('somefootemplate.phtml');
@@ -508,7 +509,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
         $helperPaths = $view->getHelperPaths();
         $filterPaths = $view->getFilterPaths();
 
-        $this->assertStringContainsStringIgnoringCase($this->_filterPath($scriptPath), $this->_filterPath($scriptPaths));
+        $this->assertContains($this->_filterPath($scriptPath), $this->_filterPath($scriptPaths));
 
         $found  = false;
         $prefix = false;
@@ -541,6 +542,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 
     public function testUnset()
     {
+        $this->expectNotToPerformAssertions();
         $view = new Zend_View();
         unset($view->_path);
         // @todo  assert something?
@@ -548,6 +550,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 
     public function testSetProtectedThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         $view = new Zend_View();
         try {
             $view->_path = 'bar';
@@ -602,6 +605,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 
     public function testAssignThrowsExceptionsOnBadValues()
     {
+        $this->expectNotToPerformAssertions();
         $view = new Zend_View();
         try {
             $view->assign('_path', dirname(__FILE__) . '/View/_stubs/HelperDir2/');
@@ -770,7 +774,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
         $scriptPaths = $this->_filterPath($view->getScriptPaths());
         $helperPaths = $this->_filterPath($view->getHelperPaths());
         $filterPaths = $this->_filterPath($view->getFilterPaths());
-        $this->assertStringContainsStringIgnoringCase($base  . '/scripts', $scriptPaths);
+        $this->assertContains($base  . '/scripts', $scriptPaths);
 
         $found  = false;
         $prefix = false;
@@ -828,7 +832,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
         $content = $view->render('testStrictVars.phtml');
         restore_error_handler();
         foreach (array('foo', 'bar') as $key) {
-            $this->assertStringContainsStringIgnoringCase('Key "' . $key . '" does not exist', $this->notices);
+            $this->assertContains('Key "' . $key . '" does not exist', $this->notices);
         }
     }
 
@@ -1102,20 +1106,20 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-8177
-     * @expectedException Zend_View_Exception
      */
     public function testRegisterHelperShouldThrowExceptionIfNotProvidedAnObject()
     {
+        $this->expectException(Zend_View_Exception::class);
         $view = new Zend_View();
         $view->registerHelper('Foo', 'foo');
     }
 
     /**
      * @group ZF-8177
-     * @expectedException Zend_View_Exception
      */
     public function testRegisterHelperShouldThrowExceptionIfProvidedANonHelperObject()
     {
+        $this->expectException(Zend_View_Exception::class);
         $view   = new Zend_View();
         $helper = new stdClass;
         $view->registerHelper($helper, 'foo');
@@ -1143,7 +1147,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
         $path = rtrim('file://' . str_replace('\\', '/', realpath(dirname(__FILE__))), '/') . '/';
         $view->addScriptPath($path);
         $paths = $view->getScriptPaths();
-        $this->assertStringContainsStringIgnoringCase($path, $paths, var_export($paths, 1));
+        $this->assertContains($path, $paths, var_export($paths, 1));
     }
     
     /**

@@ -111,7 +111,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function __construct()
+    public function setUp(): void
     {
         $this->_filesPath      = dirname(__FILE__) . '/_files';
         $this->_basicResolver  = new Zend_Auth_Adapter_Http_Resolver_File("$this->_filesPath/htbasic.1");
@@ -166,6 +166,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidConfigs()
     {
+        $this->expectNotToPerformAssertions();
         $badConfigs = array(
             'bad1' => array(
                 'auth_type' => 'bogus',
@@ -204,6 +205,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
 
     public function testAuthenticateArgs()
     {
+        $this->expectNotToPerformAssertions();
         $a = new Zend_Auth_Adapter_Http($this->_basicConfig);
 
         try {
@@ -213,8 +215,8 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
             // Good, it threw an exception
         }
 
-        $request  = $this->getMock('Zend_Controller_Request_Http');
-        $response = $this->getMock('Zend_Controller_Response_Http');
+        $request  = $this->createMock('Zend_Controller_Request_Http');
+        $response = $this->createMock('Zend_Controller_Response_Http');
 
         // If this throws an exception, it fails
         $a->setRequest($request)
@@ -224,8 +226,9 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
 
     public function testNoResolvers()
     {
-        $request  = $this->getMock('Zend_Controller_Request_Http');
-        $response = $this->getMock('Zend_Controller_Response_Http');
+        $this->expectNotToPerformAssertions();
+        $request  = $this->createMock('Zend_Controller_Request_Http');
+        $response = $this->createMock('Zend_Controller_Response_Http');
 
         // Stub request for Basic auth
         $request->expects($this->any())
@@ -245,7 +248,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
         }
 
         // Stub request for Digest auth, must be reseted (recreated)
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $request  = $this->createMock('Zend_Controller_Request_Http');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('Digest <followed by a space caracter'));
@@ -265,8 +268,8 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
 
     public function testWrongResolverUsed()
     {
-        $response = $this->getMock('Zend_Controller_Response_Http');
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $response = $this->createMock('Zend_Controller_Response_Http');
+        $request  = $this->createMock('Zend_Controller_Request_Http');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('Basic <followed by a space caracter')); // A basic Header will be provided by that request
@@ -282,8 +285,8 @@ class Zend_Auth_Adapter_Http_ObjectTest extends \PHPUnit\Framework\TestCase
 
     public function testUnsupportedScheme()
     {
-        $response = $this->getMock('Zend_Controller_Response_Http');
-        $request  = $this->getMock('Zend_Controller_Request_Http');
+        $response = $this->createMock('Zend_Controller_Response_Http');
+        $request  = $this->createMock('Zend_Controller_Request_Http');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('NotSupportedScheme <followed by a space caracter'));

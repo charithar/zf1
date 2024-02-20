@@ -398,6 +398,7 @@ EOB;
      */
     public function testZf461()
     {
+        $this->expectNotToPerformAssertions();
         $item1 = new Zend_JsonTest_Item() ;
         $item2 = new Zend_JsonTest_Item() ;
         $everything = array() ;

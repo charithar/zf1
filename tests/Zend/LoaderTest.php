@@ -52,9 +52,8 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_LoaderTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_LoaderTest');
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -118,6 +117,8 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
      */
     public function testLoaderClassValid()
     {
+        $this->expectNotToPerformAssertions();
+
         $dir = implode(DIRECTORY_SEPARATOR, [dirname(__FILE__), '_files', '_testDir1']);
 
         Zend_Loader::loadClass('Class1', $dir);
@@ -125,6 +126,7 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
 
     public function testLoaderInterfaceViaLoadClass()
     {
+        $this->expectNotToPerformAssertions();
         try {
             Zend_Loader::loadClass('Zend_Controller_Dispatcher_Interface');
         } catch (Zend_Exception $e) {
@@ -134,6 +136,7 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
 
     public function testLoaderLoadClassWithDotDir()
     {
+        $this->expectNotToPerformAssertions();
         $dirs = ['.'];
         try {
             Zend_Loader::loadClass('Zend_Version', $dirs);
@@ -154,7 +157,7 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
             Zend_Loader::loadClass('ClassNonexistent', $dir);
             static::fail('Zend_Exception was expected but never thrown.');
         } catch (Zend_Exception $e) {
-            static::assertRegExp('/file(.*)does not exist or class(.*)not found/i', $e->getMessage());
+            static::assertMatchesRegularExpression('/file(.*)does not exist or class(.*)not found/i', $e->getMessage());
         }
     }
 
@@ -177,6 +180,8 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
      */
     public function testLoaderClassSearchDirs()
     {
+        $this->expectNotToPerformAssertions();
+
         $dirs = [];
         foreach (['_testDir1', '_testDir2'] as $dir) {
             $dirs[] = implode(DIRECTORY_SEPARATOR, [dirname(__FILE__), '_files', $dir]);
@@ -192,6 +197,8 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
      */
     public function testLoaderClassSearchSubDirs()
     {
+        $this->expectNotToPerformAssertions();
+
         $dirs = [];
         foreach (['_testDir1', '_testDir2'] as $dir) {
             $dirs[] = implode(DIRECTORY_SEPARATOR, [dirname(__FILE__), '_files', $dir]);
@@ -210,7 +217,7 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
             Zend_Loader::loadClass('/path/:to/@danger');
             static::fail('Zend_Exception was expected but never thrown.');
         } catch (Zend_Exception $e) {
-            static::assertRegExp('/security(.*)filename/i', $e->getMessage());
+            static::assertMatchesRegularExpression('/security(.*)filename/i', $e->getMessage());
         }
     }
 
@@ -457,6 +464,8 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
      */
     public function testLoadClassShouldAllowLoadingPhpNamespacedClasses()
     {
+        $this->expectNotToPerformAssertions();
+
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             static::markTestSkipped('PHP < 5.3.0 does not support namespaces');
         }

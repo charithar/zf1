@@ -41,8 +41,8 @@ class Zend_VersionTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     /**
@@ -101,7 +101,7 @@ class Zend_VersionTest extends \PHPUnit\Framework\TestCase
             $this->markTestIncomplete('http://framework.zend.com/ may be down');
         }
 
-        $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
+        $this->assertMatchesRegularExpression('/^[1-2](\.[0-9]+){2}/', $actual);
     }
 }
 

@@ -284,6 +284,7 @@ class Zend_DateTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetTimestamp2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $locale = new Zend_Locale('de_AT');
             $date = new Zend_Date(0,null,$locale);
@@ -320,6 +321,7 @@ class Zend_DateTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddTimestamp2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $locale = new Zend_Locale('de_AT');
             $date = new Zend_Date(0,null,$locale);
@@ -346,6 +348,7 @@ class Zend_DateTest extends \PHPUnit\Framework\TestCase
      */
     public function testSubTimestamp2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $locale = new Zend_Locale('de_AT');
             $date = new Zend_Date(0,null,$locale);

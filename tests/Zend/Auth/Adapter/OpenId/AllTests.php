@@ -43,17 +43,17 @@ class Zend_Auth_Adapter_OpenId_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter_OpenId');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Auth_Adapter_OpenId');
 
         $suite->addTestSuite('Zend_Auth_Adapter_OpenIdTest');
 

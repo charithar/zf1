@@ -67,8 +67,8 @@ class Zend_Application_Resource_TranslateTest extends \PHPUnit\Framework\TestCas
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -218,10 +218,10 @@ class Zend_Application_Resource_TranslateTest extends \PHPUnit\Framework\TestCas
 
     /**
      * @group ZF-10352
-     * @expectedException Zend_Application_Resource_Exception
      */
     public function testToUseTheTwoKeysContentAndDataShouldThrowsException()
     {
+        $this->expectException(Zend_Application_Resource_Exception::class);
         $options = array(
             'adapter' => 'array',
             'content' => array(
