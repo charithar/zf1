@@ -48,8 +48,8 @@ class Zend_Form_Decorator_CallbackTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_CallbackTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_CallbackTest");
+        $suite->run();
     }
 
     /**
@@ -167,7 +167,7 @@ class Zend_Form_Decorator_CallbackTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsStringIgnoringCase('foo bar', $content);
         $this->assertStringContainsStringIgnoringCase($element->getName(), $content);
         $this->assertStringContainsStringIgnoringCase($element->getLabel(), $content);
-        $this->assertRegexp('/foo bar$/s', $content);
+        $this->assertMatchesRegularExpression('/foo bar$/s', $content);
     }
 
     public function testRenderCanReplaceContent()

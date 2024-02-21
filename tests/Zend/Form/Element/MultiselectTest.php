@@ -48,8 +48,8 @@ class Zend_Form_Element_MultiselectTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_MultiselectTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Element_MultiselectTest");
+        $suite->run();
     }
 
     /**
@@ -219,7 +219,7 @@ class Zend_Form_Element_MultiselectTest extends \PHPUnit\Framework\TestCase
         $this->element->addMultiOptions($options);
         $html = $this->element->render($this->getView());
         foreach ($options as $value => $label) {
-            $this->assertRegexp('/<option.*value="' . $value . '"[^>]*>' . $label . '/s', $html, $html);
+            $this->assertMatchesRegularExpression('/<option.*value="' . $value . '"[^>]*>' . $label . '/s', $html, $html);
         }
     }
 
@@ -244,7 +244,7 @@ class Zend_Form_Element_MultiselectTest extends \PHPUnit\Framework\TestCase
         $html = $this->element->render($this->getView());
         foreach ($options as $value => $label) {
             $this->assertStringNotContainsStringIgnoringCase($label, $html, $html);
-            $this->assertRegexp('/<option.*value="' . $value . '"[^>]*>' . $translations[$label] . '/s', $html, $html);
+            $this->assertMatchesRegularExpression('/<option.*value="' . $value . '"[^>]*>' . $translations[$label] . '/s', $html, $html);
         }
     }
 

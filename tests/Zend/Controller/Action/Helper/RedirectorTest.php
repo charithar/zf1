@@ -72,8 +72,8 @@ class Zend_Controller_Action_Helper_RedirectorTest extends \PHPUnit\Framework\Te
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_RedirectorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Action_Helper_RedirectorTest");
+        $suite->run();
     }
 
     /**
@@ -162,6 +162,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends \PHPUnit\Framework\Te
 
     public function testRedirectorShouldOnlyAllowValidHttpRedirectCodes()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->redirector->setCode('306');
             $this->fail('Invalid redirect code should throw exception');

@@ -53,8 +53,8 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Response_HttpTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -136,14 +136,14 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
         $headers = $this->_response->getRawHeaders();
-        $this->assertStringContainsStringIgnoringCase('HTTP/1.0 404 Not Found', $headers);
+        $this->assertContains('HTTP/1.0 404 Not Found', $headers);
     }
 
     public function testClearRawHeaders()
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
         $headers = $this->_response->getRawHeaders();
-        $this->assertStringContainsStringIgnoringCase('HTTP/1.0 404 Not Found', $headers);
+        $this->assertContains('HTTP/1.0 404 Not Found', $headers);
 
         $this->_response->clearRawHeaders();
         $headers = $this->_response->getRawHeaders();
@@ -305,6 +305,7 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testSetResponseCodeThrowsExceptionWithBadCode()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_response->setHttpResponseCode(99);
             $this->fail('Should not accept response codes < 100');

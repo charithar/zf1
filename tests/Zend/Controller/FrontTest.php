@@ -65,8 +65,8 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_FrontTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_FrontTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -128,6 +128,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRequestThrowsExceptionWithBadRequest()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_controller->setRequest('Zend_Controller_Response_Cli');
             $this->fail('Should not be able to set invalid request class');
@@ -150,6 +151,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 
     public function testSetResponseThrowsExceptionWithBadResponse()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_controller->setResponse('Zend_Controller_Request_Http');
             $this->fail('Should not be able to set invalid response class');
@@ -172,6 +174,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRouterThrowsExceptionWithBadRouter()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_controller->setRouter('Zend_Controller_Request_Http');
             $this->fail('Should not be able to set invalid router class');
@@ -421,6 +424,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 
     public function testSetBaseUrlThrowsExceptionOnNonString()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_controller->setBaseUrl(array());
             $this->fail('Should not be able to set non-string base URL');
@@ -465,6 +469,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
      */
     public function testThrowExceptionsThrows()
     {
+        $this->expectNotToPerformAssertions();
         $this->_controller->throwExceptions(true);
         $this->_controller->setControllerDirectory(dirname(__FILE__));
         $request = new Zend_Controller_Request_Http('http://framework.zend.com/bogus/baz');
@@ -516,6 +521,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 
     public function testRunStatically()
     {
+        $this->expectNotToPerformAssertions();
         $request = new Zend_Controller_Request_Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
         Zend_Controller_Front::run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
@@ -523,6 +529,7 @@ class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 
     public function testRunDynamically()
     {
+        $this->expectNotToPerformAssertions();
         $request = new Zend_Controller_Request_Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
         $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');

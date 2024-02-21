@@ -46,8 +46,8 @@ class Zend_Filter_Compress_RarTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_RarTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Filter_Compress_RarTest');
+        $suite->run();
     }
 
     protected function setUp(): void

@@ -57,8 +57,8 @@ class Zend_Dojo_View_Helper_FilteringSelectTest extends \PHPUnit\Framework\TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_FilteringSelectTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_View_Helper_FilteringSelectTest");
+        $suite->run();
     }
 
     /**
@@ -163,7 +163,7 @@ class Zend_Dojo_View_Helper_FilteringSelectTest extends \PHPUnit\Framework\TestC
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
 
-        $this->assertStringContainsStringIgnoringCase('var stateStore;', $this->view->dojo()->getJavascript());
+        $this->assertContains('var stateStore;', $this->view->dojo()->getJavascript());
 
         $found = false;
         $scripts = $this->view->dojo()->_getZendLoadActions();

@@ -56,8 +56,8 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_FormTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Form_FormTest');
+        $suite->run();
     }
 
     public function clearRegistry()
@@ -126,6 +126,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public function testSetOptionsSkipsCallsToSetOptionsAndSetConfig()
     {
+        $this->expectNotToPerformAssertions();
         $options = $this->getOptions();
         $config  = new Zend_Config($options);
         $options['config']  = $config;
@@ -135,6 +136,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public function testSetOptionsSkipsSettingAccessorsRequiringObjectsWhenNonObjectPassed()
     {
+        $this->expectNotToPerformAssertions();
         $options = $this->getOptions();
         $options['pluginLoader'] = true;
         $options['view']         = true;
@@ -385,6 +387,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testDisplayGroupOrderInConfigShouldNotMatter()
     {
+        $this->expectNotToPerformAssertions();
         require_once 'Zend/Config/Xml.php';
         $config = new Zend_Config_Xml(dirname(__FILE__) . '/_files/config/zf3250.xml', 'sitearea', true);
         $form = new Zend_Form($config->test);
@@ -1116,7 +1119,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
                    ->bar->addElement('text', 'foo');
 
         $html = $this->form->setView($this->getView())->render();
-        $this->assertRegexp('/<dd.*?bar-foo.*?>/', $html);
+        $this->assertMatchesRegularExpression('/<dd.*?bar-foo.*?>/', $html);
     }
 
     public function testUseIdForDtTagByDefault()
@@ -1125,7 +1128,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
                    ->bar->addElement('text', 'foo');
 
         $html = $this->form->setView($this->getView())->render();
-        $this->assertRegexp('/<dt.*?bar-foo.*?>/', $html);
+        $this->assertMatchesRegularExpression('/<dt.*?bar-foo.*?>/', $html);
     }
 
     /**
@@ -1633,11 +1636,11 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
         $this->form->setView($this->getView())->populate($data['valid']);
         $html = $this->form->render();
 
-        $this->assertRegexp('/value=.foo Value./', $html);
-        $this->assertRegexp('/value=.baz Value./', $html);
-        $this->assertRegexp('/value=.quo Value./', $html);
-        $this->assertRegexp('/value=.zoo Value./', $html);
-        $this->assertRegexp('/value=.iek Value./', $html);
+        $this->assertMatchesRegularExpression('/value=.foo Value./', $html);
+        $this->assertMatchesRegularExpression('/value=.baz Value./', $html);
+        $this->assertMatchesRegularExpression('/value=.quo Value./', $html);
+        $this->assertMatchesRegularExpression('/value=.zoo Value./', $html);
+        $this->assertMatchesRegularExpression('/value=.iek Value./', $html);
     }
 
     public function testGetValidValuesWithElementsBelongTo()
@@ -2915,7 +2918,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(5, count($messages));
         foreach (range(1, 5) as $id) {
             $message = 'Error ' . $id;
-            $this->assertStringContainsStringIgnoringCase($message, $messages);
+            $this->assertContains($message, $messages);
         }
     }
 
@@ -3119,9 +3122,9 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse(empty($html));
         $this->assertStringContainsStringIgnoringCase('<form', $html);
-        $this->assertRegexp('/<form[^>]+action="' . $this->form->getAction() . '"/', $html);
-        $this->assertRegexp('/<form[^>]+method="' . $this->form->getMethod() . '"/i', $html);
-        $this->assertRegexp('#<form[^>]+enctype="application/x-www-form-urlencoded"#', $html);
+        $this->assertMatchesRegularExpression('/<form[^>]+action="' . $this->form->getAction() . '"/', $html);
+        $this->assertMatchesRegularExpression('/<form[^>]+method="' . $this->form->getMethod() . '"/i', $html);
+        $this->assertMatchesRegularExpression('#<form[^>]+enctype="application/x-www-form-urlencoded"#', $html);
         $this->assertStringContainsStringIgnoringCase('</form>', $html);
     }
 
@@ -3140,7 +3143,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
             $this->assertFalse(empty($key));
             $this->assertFalse(is_numeric($key));
             $this->assertStringContainsStringIgnoringCase('<input', $html);
-            $this->assertRegexp('/<input type="text" name="' . $key . '"/', $html);
+            $this->assertMatchesRegularExpression('/<input type="text" name="' . $key . '"/', $html);
         }
     }
 
@@ -3150,14 +3153,14 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
         $this->setupSubForm();
         $this->form->setView($this->getView());
         $html = $this->form->render();
-        $this->assertRegexp('/<fieldset/', $html);
+        $this->assertMatchesRegularExpression('/<fieldset/', $html);
         $this->assertStringContainsStringIgnoringCase('</fieldset>', $html);
         foreach ($this->form->sub as $key => $item) {
             $this->assertFalse(empty($key));
             $this->assertFalse(is_numeric($key));
             $this->assertStringContainsStringIgnoringCase('<input', $html);
             $pattern = '/<input type="text" name="sub\[' . $key . '\]"/';
-            $this->assertRegexp($pattern, $html, 'Pattern: ' . $pattern . "\nHTML:\n" . $html);
+            $this->assertMatchesRegularExpression($pattern, $html, 'Pattern: ' . $pattern . "\nHTML:\n" . $html);
         }
     }
 
@@ -3167,9 +3170,9 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
         $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz', array('legend' => 'Display Group'));
         $this->form->setView($this->getView());
         $html = $this->html = $this->form->render();
-        $this->assertRegexp('/<fieldset/', $html);
+        $this->assertMatchesRegularExpression('/<fieldset/', $html);
         $this->assertStringContainsStringIgnoringCase('</fieldset>', $html);
-        $this->assertRegexp('#<legend>Display Group</legend>#', $html, $html);
+        $this->assertMatchesRegularExpression('#<legend>Display Group</legend>#', $html, $html);
         $dom = new DOMDocument();
         $dom->loadHTML($html);
         $fieldsets = $dom->getElementsByTagName('fieldset');
@@ -3320,8 +3323,8 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
             $this->fail('Hidden elements should be grouped');
         }
         foreach (array('first', 'second', 'third') as $which) {
-            $this->assertRegexp('#<input[^]*name="' . $which . '"#', $matches[0]);
-            $this->assertRegexp('#<input[^]*value="' . $which . ' value"#', $matches[0]);
+            $this->assertMatchesRegularExpression('#<input[^]*name="' . $which . '"#', $matches[0]);
+            $this->assertMatchesRegularExpression('#<input[^]*value="' . $which . ' value"#', $matches[0]);
         }
     }
 
@@ -3489,6 +3492,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public function testRemovingFormItemsShouldNotRaiseExceptionsDuringIteration()
     {
+        $this->expectNotToPerformAssertions();
         $this->setupElements();
         $bar = $this->form->bar;
         $this->form->removeElement('bar');
@@ -3526,6 +3530,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public function testClearingAttachedItemsShouldNotCauseIterationToRaiseExceptions()
     {
+        $this->expectNotToPerformAssertions();
         $form = new Zend_Form();
         $form->addElements(array(
             'username' => 'text',
@@ -3641,7 +3646,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
             $decorator,
         ));
         $html = $this->form->render($this->getView());
-        $this->assertRegexp('#<tr><td>Foo</td><td>.*?<input[^>]+>.*?</td><td>sample description</td></tr>#s', $html, $html);
+        $this->assertMatchesRegularExpression('#<tr><td>Foo</td><td>.*?<input[^>]+>.*?</td><td>sample description</td></tr>#s', $html, $html);
     }
 
     /**
@@ -4015,10 +4020,10 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-3217
-     * @expectedException Zend_Form_Exception
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $html = $this->form->bogusMethodCall();
     }
 
@@ -4082,7 +4087,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
         $html = $this->form->render($this->getView());
         $this->assertFalse(empty($html));
-        $this->assertRegexp('#<form[^>]+enctype="multipart/form-data"#', $html);
+        $this->assertMatchesRegularExpression('#<form[^>]+enctype="multipart/form-data"#', $html);
     }
 
     /**
@@ -4098,7 +4103,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
         $this->assertStringContainsStringIgnoringCase('id="txt"', $html);
         $this->assertStringContainsStringIgnoringCase('name="txt"', $html);
-        $this->assertRegexp('#<form[^>]+enctype="multipart/form-data"#', $html, $html);
+        $this->assertMatchesRegularExpression('#<form[^>]+enctype="multipart/form-data"#', $html, $html);
     }
 
     /**
@@ -4113,7 +4118,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
         $this->assertStringContainsStringIgnoringCase('id="txt"', $html);
         $this->assertStringContainsStringIgnoringCase('name="txt"', $html);
-        $this->assertRegexp('#<form[^>]+enctype="multipart/form-data"#', $html, $html);
+        $this->assertMatchesRegularExpression('#<form[^>]+enctype="multipart/form-data"#', $html, $html);
     }
 
     /**
@@ -4619,10 +4624,10 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
     
     /**
      * @group ZF-10865
-     * @expectedException Zend_Form_Exception
      */
     public function testExceptionThrownWhenAddElementsIsGivenNullValue()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $form = new Zend_Form();
         $form->addElement(null);
     }

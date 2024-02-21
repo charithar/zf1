@@ -46,8 +46,8 @@ class Zend_Filter_Compress_ZipTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_ZipTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Filter_Compress_ZipTest');
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -299,10 +299,10 @@ class Zend_Filter_Compress_ZipTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group
-     * @expectedException Zend_Filter_Exception
      */
     public function testDecompressWillThrowExceptionWhenDecompressingWithNoTarget()
     {
+        $this->expectException(Zend_Filter_Exception::class);
         $filter  = new Zend_Filter_Compress_Zip(
             array(
                 'archive' => dirname(__FILE__) . '/../_files/compressed.zip',

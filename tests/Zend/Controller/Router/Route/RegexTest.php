@@ -318,6 +318,7 @@ class Zend_Controller_Router_Route_RegexTest extends \PHPUnit\Framework\TestCase
 
     public function testAssembleWithoutMatch()
     {
+        $this->expectNotToPerformAssertions();
         $route = new Zend_Controller_Router_Route_Regex('users/(.+)', null, null, 'users/%s');
 
         try {

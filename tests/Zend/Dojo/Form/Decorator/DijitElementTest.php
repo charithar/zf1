@@ -60,8 +60,8 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends \PHPUnit\Framework\TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_DijitElementTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_Decorator_DijitElementTest");
+        $suite->run();
     }
 
     /**
@@ -179,11 +179,9 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends \PHPUnit\Framework\TestC
         $this->assertEquals('value', $this->decorator->getDijitParam('bogus'));
     }
 
-    /**
-     * @expectedException Zend_Form_Decorator_Exception
-     */
     public function testRenderingShouldThrowExceptionWhenNoViewObjectRegistered()
     {
+        $this->expectException(Zend_Form_Decorator_Exception::class);
         $element = new Zend_Dojo_Form_Element_TextBox(
             'foo',
             array(

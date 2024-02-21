@@ -24,5 +24,6 @@ LICENSE
 The files in this archive are released under the Zend Framework license.
 You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
+docker compose run --rm zf1_test
 
 docker compose exec zf1_test ../bin/phpunit --stderr -d memory_limit=-1 Zend/RegistryTest.php

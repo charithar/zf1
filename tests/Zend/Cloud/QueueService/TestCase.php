@@ -260,8 +260,8 @@ abstract class Zend_Cloud_QueueService_TestCase extends \PHPUnit\Framework\TestC
                 $tests[] = $message;
             }
             $texts = array($tests[0]->getBody(), $tests[1]->getBody());
-            $this->assertStringContainsStringIgnoringCase($message1, $texts);
-            $this->assertStringContainsStringIgnoringCase($message2, $texts);
+            $this->assertContains($message1, $texts);
+            $this->assertContains($message2, $texts);
 
             $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {

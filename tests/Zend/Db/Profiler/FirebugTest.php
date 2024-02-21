@@ -66,8 +66,8 @@ class Zend_Db_Profiler_FirebugTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Db_Profiler_FirebugTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Db_Profiler_FirebugTest");
+        $suite->run();
     }
 
     protected function setUp(): void

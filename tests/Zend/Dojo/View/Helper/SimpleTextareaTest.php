@@ -60,8 +60,8 @@ class Zend_Dojo_View_Helper_SimpleTextareaTest extends \PHPUnit\Framework\TestCa
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_SimpleTextareaTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_View_Helper_SimpleTextareaTest");
+        $suite->run();
     }
 
     /**

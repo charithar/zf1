@@ -46,12 +46,16 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
      */
     public function rand($minimum, $maximum)
     {
-        if (file_exists('/dev/urandom')) {
+        /*
+         * The device file returns random bytes which does not represents a number. Abandoned fixing it because there
+         * are better implementations out there now
+         */
+        /*if (file_exists('/dev/urandom')) {
             $frandom = fopen('/dev/urandom', 'r');
             if ($frandom !== false) {
                 return fread($frandom, strlen($maximum) - 1);
             }
-        }
+        }*/
         if (strlen($maximum) < 4) {
             return mt_rand($minimum, $maximum - 1);
         }

@@ -63,8 +63,8 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_HorizontalSliderTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_View_Helper_HorizontalSliderTest");
+        $suite->run();
     }
 
     /**
@@ -225,11 +225,9 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
         $this->assertStringNotContainsStringIgnoringCase('rightDecoration', $html);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testSliderShouldRaiseExceptionIfMissingRequiredParameters()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->helper->prepareSlider('foo', 4);
     }
 

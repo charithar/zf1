@@ -53,8 +53,8 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_ButtonTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Element_ButtonTest");
+        $suite->run();
     }
 
     /**
@@ -135,7 +135,7 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
         $decorator = $this->element->getDecorator('ViewHelper');
         $decorator->setElement($this->element);
         $html = $decorator->render('');
-        $this->assertRegexp('/<(input|button)[^>]*?>Submit Button/', $html, $html);
+        $this->assertMatchesRegularExpression('/<(input|button)[^>]*?>Submit Button/', $html, $html);
     }
 
     /**

@@ -48,8 +48,8 @@ class Zend_Filter_Word_SeparatorToCamelCaseTest extends \PHPUnit\Framework\TestC
      */
     public static function main() {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_SeparatorToCamelCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Filter_Word_SeparatorToCamelCaseTest");
+        $suite->run();
     }
 
     public function testFilterSeparatesCamelCasedWordsWithSpacesByDefault()

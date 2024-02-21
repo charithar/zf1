@@ -80,8 +80,8 @@ class Zend_Controller_Router_Route_ChainTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Router_Route_ChainTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Router_Route_ChainTest");
+        $suite->run();
     }
 
     public function testChaining()
@@ -1040,7 +1040,7 @@ class Zend_Controller_Router_Route_SubclassTest extends Zend_Controller_Router_R
         return 2;
     }
 
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {}
 
     public static function getInstance(Zend_Config $config)

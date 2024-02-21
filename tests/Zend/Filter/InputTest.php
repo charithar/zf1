@@ -1459,6 +1459,7 @@ class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
 
     public function testSetPluginLoader()
     {
+        $this->expectNotToPerformAssertions();
         $input = new Zend_Filter_Input(null, null);
 
         $loader = new Zend_Loader_PluginLoader();
@@ -1474,6 +1475,7 @@ class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
 
         try {
             $input->setPluginLoader($loader, 'foo');
+            $this->expectNotToPerformAssertions();
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Filter_Exception,
@@ -2134,7 +2136,7 @@ class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
      */
     public function testTranslateNotEmptyMessages()
     {
-        require_once 'Zend/Translate/Adapter/Array.php';
+        //require_once 'Zend/Translate/Adapter/Array.php';
         $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'), 'en');
 
         $validators = array(
@@ -2159,9 +2161,9 @@ class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
      */
     public function testTranslateNotEmptyMessagesByUsingRegistry()
     {
-        require_once 'Zend/Translate/Adapter/Array.php';
+        //require_once 'Zend/Translate/Adapter/Array.php';
         $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'), 'en');
-        require_once 'Zend/Registry.php';
+        //require_once 'Zend/Registry.php';
         Zend_Registry::set('Zend_Translate', $translator);
 
         $validators = array(
@@ -2181,6 +2183,9 @@ class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_array($missing));
         $this->assertEquals(array('rule1'), array_keys($missing));
         $this->assertEquals(array("Still missing"), $missing['rule1']);
+
+        //Clear registray as it could affect other tests
+        Zend_Registry::set('Zend_Translate', null);
     }
 
     /**
@@ -2292,6 +2297,7 @@ class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidatorRuleCanHaveEmptyArrayAsMetacommandValue()
     {
+        $this->expectNotToPerformAssertions();
         $validators = array(
             'perms' => array('Int', 'default' => array()),
         );

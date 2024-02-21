@@ -51,8 +51,8 @@ class Zend_Form_Decorator_ErrorsTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ErrorsTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_ErrorsTest");
+        $suite->run();
     }
 
     /**
@@ -118,7 +118,7 @@ class Zend_Form_Decorator_ErrorsTest extends \PHPUnit\Framework\TestCase
         $this->setupElement();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('#' . $content . '.*?<ul#s', $test, $test);
+        $this->assertMatchesRegularExpression('#' . $content . '.*?<ul#s', $test, $test);
     }
 
     public function testRenderPrependsMessagesToContentWhenRequested()
@@ -127,7 +127,7 @@ class Zend_Form_Decorator_ErrorsTest extends \PHPUnit\Framework\TestCase
         $this->setupElement();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('#</ul>.*?' . $content . '#s', $test);
+        $this->assertMatchesRegularExpression('#</ul>.*?' . $content . '#s', $test);
     }
 
     public function testRenderSeparatesContentAndErrorsWithPhpEolByDefault()

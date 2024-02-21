@@ -130,10 +130,8 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends \PHPUnit\Framework\TestC
      */
     public function testConstructExceptionMissingParams() 
     {
-        $this->setExpectedException(
-            'Zend_Cloud_Infrastructure_Exception',
-            'Invalid options provided'
-        );
+        $this->expectException(Zend_Cloud_Infrastructure_Exception::class);
+        $this->expectExceptionMessage('Invalid options provided');
         $image = new Zend_Cloud_Infrastructure_Adapter_Ec2('foo');
     }
 

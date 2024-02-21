@@ -50,8 +50,8 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_ElementTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Form_ElementTest');
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -81,6 +81,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorRequiresMinimallyElementName()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $element = new Zend_Form_Element(1);
             $this->fail('Zend_Form_Element constructor should not accept integer argument');
@@ -216,7 +217,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function checkFilterValues($item, $key)
     {
-        $this->assertRegexp('/^[A-Z]+$/', $item);
+        $this->assertMatchesRegularExpression('/^[A-Z]+$/', $item);
     }
 
     public function testRetrievingArrayValueFiltersAllArrayValues()
@@ -961,7 +962,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(5, count($messages));
         foreach (range(1, 5) as $id) {
             $message = 'Error ' . $id;
-            $this->assertStringContainsStringIgnoringCase($message, $messages);
+            $this->assertContains($message, $messages);
         }
     }
 
@@ -1045,6 +1046,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testCanValidateElement()
     {
+        $this->expectNotToPerformAssertions();
         $this->element->addValidator(new Zend_Validate_NotEmpty())
                       ->addValidator(new Zend_Validate_EmailAddress());
         try {
@@ -1410,7 +1412,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
             $decorator,
         ));
         $html = $this->element->render($this->getView());
-        $this->assertRegexp('#<tr><td>Foo</td><td>.*?<input[^>]+>.*?</td><td>sample description</td></tr>#s', $html, $html);
+        $this->assertMatchesRegularExpression('#<tr><td>Foo</td><td>.*?<input[^>]+>.*?</td><td>sample description</td></tr>#s', $html, $html);
     }
 
     public function testCanRetrieveSingleDecoratorRegisteredAsDecoratorObjectUsingShortName()
@@ -1593,7 +1595,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_string($html));
         $this->assertFalse(empty($html));
         $this->assertStringContainsStringIgnoringCase('error', $html);
-        $this->assertRegexp('/empty/i', $html);
+        $this->assertMatchesRegularExpression('/empty/i', $html);
     }
 
     public function testToStringProxiesToRender()
@@ -1665,6 +1667,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testSetOptionsSkipsCallsToSetOptionsAndSetConfig()
     {
+        $this->expectNotToPerformAssertions();
         $options = $this->getOptions();
         $config  = new Zend_Config($options);
         $options['config']  = $config;
@@ -1674,6 +1677,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testSetOptionsSkipsSettingAccessorsRequiringObjectsWhenNoObjectPresent()
     {
+        $this->expectNotToPerformAssertions();
         $options = $this->getOptions();
         $options['translator'] = true;
         $options['pluginLoader'] = true;
@@ -1981,17 +1985,17 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->assertStringNotContainsStringIgnoringCase('<label', $html);
 
         $html = $this->element->renderLabel('this is the content');
-        $this->assertRegexp('#<label[^>]*for="' . $this->element->getFullyQualifiedName() . '"[^>]*>Foo Label</label>#', $html);
+        $this->assertMatchesRegularExpression('#<label[^>]*for="' . $this->element->getFullyQualifiedName() . '"[^>]*>Foo Label</label>#', $html);
         $this->assertStringContainsStringIgnoringCase('this is the content', $html);
         $this->assertStringNotContainsStringIgnoringCase('<input', $html);
     }
 
     /**
      * @group ZF-3217
-     * @expectedException Zend_Form_Element_Exception
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $html = $this->element->bogusMethodCall();
     }
 

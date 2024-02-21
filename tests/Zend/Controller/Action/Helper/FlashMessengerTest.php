@@ -79,8 +79,8 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends \PHPUnit\Framewor
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_FlashMessengerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Action_Helper_FlashMessengerTest");
+        $suite->run();
     }
 
     protected function setUp(): void

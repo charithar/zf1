@@ -88,25 +88,10 @@ class Zend_Filter_File_RenameTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_File_RenameTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Filter_File_RenameTest");
+        $suite->run();
     }
 
-    /**
-     * Sets the path to test files
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->_filesPath = dirname(__FILE__) . DIRECTORY_SEPARATOR
-                          . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile  = $this->_filesPath . 'original.file';
-        $this->_oldFile   = $this->_filesPath . 'testfile.txt';
-        $this->_newFile   = $this->_filesPath . 'newfile.xml';
-        $this->_newDir    = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
-        $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
-    }
 
     /**
      * Sets the path to test files
@@ -115,6 +100,14 @@ class Zend_Filter_File_RenameTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
+        $this->_filesPath = dirname(__FILE__) . DIRECTORY_SEPARATOR
+            . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
+        $this->_origFile  = $this->_filesPath . 'original.file';
+        $this->_oldFile   = $this->_filesPath . 'testfile.txt';
+        $this->_newFile   = $this->_filesPath . 'newfile.xml';
+        $this->_newDir    = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
+        $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
+
         if (file_exists($this->_origFile)) {
             unlink($this->_origFile);
         }

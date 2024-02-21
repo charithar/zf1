@@ -131,10 +131,8 @@ class Zend_Cloud_Infrastructure_Adapter_RackspaceTest extends \PHPUnit\Framework
      */
     public function testConstructExceptionMissingParams() 
     {
-        $this->setExpectedException(
-            'Zend_Cloud_Infrastructure_Exception',
-            'Invalid options provided'
-        );
+        $this->expectException(Zend_Cloud_Infrastructure_Exception::class);
+        $this->expectExceptionMessage('Invalid options provided');
         $instance = new Zend_Cloud_Infrastructure_Adapter_Rackspace('foo');
     }
     /**

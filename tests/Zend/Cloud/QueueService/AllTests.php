@@ -42,12 +42,12 @@ class Zend_Cloud_QueueService_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Cloud - QueueService');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Cloud - QueueService');
 
         $suite->addTestSuite('Zend_Cloud_QueueService_FactoryTest');
         $suite->addTest(Zend_Cloud_QueueService_Adapter_AllTests::suite());

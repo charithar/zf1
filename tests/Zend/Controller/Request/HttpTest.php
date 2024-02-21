@@ -57,8 +57,8 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Request_HttpTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -148,6 +148,7 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testSetIsAlias()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_request->set('foo', 'bar');
             $this->fail('set() should alias to __set(), and throw an exception');
@@ -188,6 +189,7 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function test__SetThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_request->foo = 'bar';
             $this->fail('__set() should throw an exception');
@@ -678,11 +680,12 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testGetHeaderThrowsExceptionWithNoInput()
     {
+        $this->expectNotToPerformAssertions();
         try {
             // Suppressing warning
             $header = @$this->_request->getHeader();
             $this->fail('getHeader() should fail with no arguments)');
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             // success
         }
     }

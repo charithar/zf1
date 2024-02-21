@@ -611,6 +611,7 @@ class Zend_Console_GetoptTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddRulesDoesNotThrowWarnings()
     {
+        $this->expectNotToPerformAssertions();
         // Fails if warning is thrown: Should not happen!
         $opts = new Zend_Console_Getopt('abp:');
         $opts->addRules(

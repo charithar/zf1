@@ -36,6 +36,7 @@ class Zend_Dom_Query_Css2XpathTest extends \PHPUnit\Framework\TestCase
 {
     public function testTransformShouldBeCalledStatically()
     {
+        $this->expectNotToPerformAssertions();
         Zend_Dom_Query_Css2Xpath::transform('');
     }
 
@@ -102,7 +103,7 @@ class Zend_Dom_Query_Css2XpathTest extends \PHPUnit\Framework\TestCase
         );
         $this->assertEquals(count($expected), count($actual));
         foreach ($actual as $path) {
-            $this->assertStringContainsStringIgnoringCase($path, $expected);
+            $this->assertContains($path, $expected);
         }
     }
 

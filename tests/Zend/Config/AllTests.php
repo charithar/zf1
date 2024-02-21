@@ -42,12 +42,12 @@ class Zend_Config_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Config');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Config');
 
         $suite->addTest(Zend_Config_Writer_AllTests::suite());
 

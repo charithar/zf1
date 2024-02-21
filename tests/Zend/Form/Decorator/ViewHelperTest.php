@@ -51,8 +51,8 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ViewHelperTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_ViewHelperTest");
+        $suite->run();
     }
 
     /**
@@ -150,7 +150,7 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         $content = 'test content';
         $test = $this->decorator->render($content);
         $this->assertStringContainsStringIgnoringCase($content, $test);
-        $this->assertRegexp('#<input.*?name="foo"#s', $test);
+        $this->assertMatchesRegularExpression('#<input.*?name="foo"#s', $test);
     }
 
     public function testMultiOptionsPassedToViewHelperAreTranslated()
@@ -186,7 +186,7 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
      */
     public function testRenderWithListSeparatorForMulticheckbox()
     {
-        require_once 'Zend/Form/Element/MultiCheckbox.php';
+        //require_once 'Zend/Form/Element/MultiCheckbox.php';
         
         $element = new Zend_Form_Element_MultiCheckbox('foo');
         $options = array(
@@ -202,8 +202,8 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
             )
         );
         
-        $expected = '<p><label><input type="checkbox" name="foo[]" id="foo-foo" value="foo">Foo</label></p>'
-                  . '<p><label><input type="checkbox" name="foo[]" id="foo-bar" value="bar">Bar</label></p>';
+        $expected = '<p><label><input type="checkbox" name="foo[]" id="foo-foo" value="foo" />Foo</label></p>'
+                  . '<p><label><input type="checkbox" name="foo[]" id="foo-bar" value="bar" />Bar</label></p>';
         $actual   = $element->render($this->getView());
         
         $this->assertEquals($expected, $actual);
@@ -230,8 +230,8 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
             )
         );
         
-        $expected = '<p><label><input type="radio" name="foo" id="foo-foo" value="foo">Foo</label></p>'
-                  . '<p><label><input type="radio" name="foo" id="foo-bar" value="bar">Bar</label></p>';
+        $expected = '<p><label><input type="radio" name="foo" id="foo-foo" value="foo" />Foo</label></p>'
+                  . '<p><label><input type="radio" name="foo" id="foo-bar" value="bar" />Bar</label></p>';
         $actual   = $element->render($this->getView());
         
         $this->assertEquals($expected, $actual);

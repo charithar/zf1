@@ -49,8 +49,8 @@ class Zend_Form_Decorator_PrepareElementsTest extends \PHPUnit\Framework\TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_PrepareElementsTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_PrepareElementsTest");
+        $suite->run();
     }
 
     /**

@@ -62,8 +62,8 @@ class Zend_Form_Element_FileTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_FileTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Element_FileTest");
+        $suite->run();
     }
 
     /**
@@ -137,11 +137,9 @@ class Zend_Form_Element_FileTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($adapter, $test);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testElementShouldThrowExceptionWhenAddingAdapterOfInvalidType()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setTransferAdapter(new stdClass);
     }
 
@@ -430,7 +428,7 @@ class Zend_Form_Element_FileTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($element->hasErrors());
         $messages = $element->getMessages();
-        $this->assertStringContainsStringIgnoringCase('TestError3', $messages);
+        $this->assertContains('TestError3', $messages);
     }
 
     public function testGetTranslatorRetrievesGlobalDefaultWhenAvailable()

@@ -62,8 +62,8 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_ContextSwitchTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Action_Helper_ContextSwitchTest");
+        $suite->run();
     }
 
     /**
@@ -841,6 +841,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
      */
     public function testPostJsonContextDoesntThrowExceptionWhenGetVarsMethodsExists()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->setAutoJsonSerialization(true);
             $this->helper->postJsonContext();
@@ -854,6 +855,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
      */
     public function testPostJsonContextThrowsExceptionWhenGetVarsMethodsDoesntExist()
     {
+        $this->expectNotToPerformAssertions();
         $view = new Zend_Controller_Action_Helper_ContextSwitchText_CustomView();
         $this->viewRenderer->setView($view);
 

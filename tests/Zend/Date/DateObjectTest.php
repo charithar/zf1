@@ -92,6 +92,7 @@ class Zend_Date_DateObjectTest extends \PHPUnit\Framework\TestCase
      */
     public function testCreationFailed()
     {
+        $this->expectNotToPerformAssertions();
         // look if locale is detectable
         try {
             $locale = new Zend_Locale();
@@ -131,6 +132,7 @@ class Zend_Date_DateObjectTest extends \PHPUnit\Framework\TestCase
      */
     public function testsetUnixTimestampFailed()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $date = new Zend_Date_DateObjectTestHelper(Zend_Date::now());
             $date->setUnixTimestamp("notimestamp");

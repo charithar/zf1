@@ -305,6 +305,7 @@ CERT;
 
     public function testKeyGenerationCreatesPassphrasedPrivateKey()
     {
+        $this->expectNotToPerformAssertions();
         $rsa = new Zend_Crypt_Rsa;
         // check to see if openssl.cnf can be found by trying to generate a key
         $test = openssl_pkey_new();
@@ -329,6 +330,7 @@ CERT;
 
     public function testConstructorLoadsPassphrasedKeys()
     {
+        $this->expectNotToPerformAssertions();
         $rsa = new Zend_Crypt_Rsa;
         // check to see if openssl.cnf can be found by trying to generate a key
         $test = openssl_pkey_new();
@@ -356,6 +358,7 @@ CERT;
      */
     public function testLoadsPublicKeyFromPEMWithoutPrivateKeyAndThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $rsa = new Zend_Crypt_Rsa;
         $rsa->setPemString($this->_testPemStringPublic);
     }

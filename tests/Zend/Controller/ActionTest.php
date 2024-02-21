@@ -52,8 +52,8 @@ class Zend_Controller_ActionTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_ActionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_ActionTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -193,6 +193,7 @@ class Zend_Controller_ActionTest extends \PHPUnit\Framework\TestCase
 
     public function testRun2()
     {
+        $this->expectNotToPerformAssertions();
         $this->_controller->getRequest()->setActionName('bar');
         try {
             $response = $this->_controller->run();

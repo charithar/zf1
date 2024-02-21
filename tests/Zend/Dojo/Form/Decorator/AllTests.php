@@ -47,12 +47,12 @@ class Zend_Dojo_Form_Decorator_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Dojo_Form_Decorator');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Dojo_Form_Decorator');
 
         $suite->addTestSuite('Zend_Dojo_Form_Decorator_AccordionContainerTest');
         $suite->addTestSuite('Zend_Dojo_Form_Decorator_AccordionPaneTest');

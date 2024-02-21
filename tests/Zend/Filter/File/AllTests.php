@@ -47,17 +47,17 @@ class Zend_Filter_File_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Filter_File');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Filter_File');
 
         $suite->addTestSuite('Zend_Filter_File_DecryptTest');
         $suite->addTestSuite('Zend_Filter_File_EncryptTest');

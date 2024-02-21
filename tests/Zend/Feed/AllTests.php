@@ -76,12 +76,12 @@ class Zend_Feed_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Feed');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Feed');
 
         $suite->addTestSuite('Zend_Feed_ArrayAccessTest');
         $suite->addTestSuite('Zend_Feed_AtomEntryOnlyTest');

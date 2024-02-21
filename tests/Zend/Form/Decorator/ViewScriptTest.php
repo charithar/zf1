@@ -50,8 +50,8 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ViewScriptTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_ViewScriptTest");
+        $suite->run();
     }
 
     /**
@@ -233,7 +233,7 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
 
         $expected = 'Foo:'
                   . PHP_EOL
-                  . '<input type="text" name="foo" id="foo" value="">';
+                  . '<input type="text" name="foo" id="foo" value="" />';
 
         $this->assertSame($expected, $this->decorator->render('Foo:'));
     }

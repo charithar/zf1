@@ -122,10 +122,8 @@ abstract class Zend_Cloud_Infrastructure_TestCase extends \PHPUnit\Framework\Tes
      */
     public function testConstructExceptionMissingParams() 
     {
-        $this->setExpectedException(
-            'Zend\Cloud\Infrastructure\Exception\InvalidArgumentException',
-            'You must pass an array of params'
-        );
+        $this->expectException('Zend\Cloud\Infrastructure\Exception\InvalidArgumentException');
+        $this->expectExceptionMessage('You must pass an array of params');
         $instance = new Zend_Cloud_Infrastructure_Instance(self::$adapter,array());
     }
 

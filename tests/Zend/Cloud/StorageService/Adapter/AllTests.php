@@ -60,17 +60,16 @@ class Zend_Cloud_StorageService_Adapter_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Cloud');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Cloud');
 
         $suite->addTestSuite('Zend_Cloud_StorageService_Adapter_WindowsAzureTest');
         $suite->addTestSuite('Zend_Cloud_StorageService_Adapter_RackspaceTest');

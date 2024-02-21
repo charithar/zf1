@@ -40,12 +40,12 @@ class Zend_Dom_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Dom');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Dom');
 
         $suite->addTestSuite('Zend_Dom_QueryTest');
         $suite->addTestSuite('Zend_Dom_Query_Css2XpathTest');

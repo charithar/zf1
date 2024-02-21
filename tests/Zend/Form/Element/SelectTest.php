@@ -46,8 +46,8 @@ class Zend_Form_Element_SelectTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_SelectTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Element_SelectTest");
+        $suite->run();
     }
 
     /**
@@ -119,18 +119,18 @@ class Zend_Form_Element_SelectTest extends \PHPUnit\Framework\TestCase
             ))
             ->setAttrib('disable', array('baz', 'test'));
         $html = $this->element->render($this->getView());
-        $this->assertNotRegexp('/<select[^>]*?(disabled="disabled")/', $html, $html);
+        $this->assertDoesNotMatchRegularExpression('/<select[^>]*?(disabled="disabled")/', $html, $html);
         foreach (array('baz', 'test') as $test) {
             if (!preg_match('/(<option[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
                 $this->fail('Unable to find matching disabled option for ' . $test);
             }
-            $this->assertRegexp('/<option[^>]*?(disabled="disabled")/', $m[1]);
+            $this->assertMatchesRegularExpression('/<option[^>]*?(disabled="disabled")/', $m[1]);
         }
         foreach (array('foo', 'bat') as $test) {
             if (!preg_match('/(<option[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
                 $this->fail('Unable to find matching option for ' . $test);
             }
-            $this->assertNotRegexp('/<option[^>]*?(disabled="disabled")/', $m[1], var_export($m, 1));
+            $this->assertDoesNotMatchRegularExpression('/<option[^>]*?(disabled="disabled")/', $m[1], var_export($m, 1));
         }
     }
 
@@ -141,8 +141,9 @@ class Zend_Form_Element_SelectTest extends \PHPUnit\Framework\TestCase
      */
     public function testTranslationShouldNotRaiseWarningsWithNestedGroups()
     {
-        require_once 'Zend/Translate.php';
-        require_once 'Zend/View.php';
+        $this->expectNotToPerformAssertions();
+        //require_once 'Zend/Translate.php';
+        //require_once 'Zend/View.php';
         $translate = new Zend_Translate('array', array('Select Test', 'Select Test Translated'), 'en');
         $this->element
              ->setLabel('Select Test')

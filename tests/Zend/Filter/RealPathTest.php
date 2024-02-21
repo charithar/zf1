@@ -42,15 +42,6 @@ class Zend_Filter_RealPathTest extends \PHPUnit\Framework\TestCase
      */
     protected $_filesPath;
 
-    /**
-     * Sets the path to test files
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->_filesPath = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
-    }
 
     /**
      * Zend_Filter_Basename object
@@ -66,6 +57,8 @@ class Zend_Filter_RealPathTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
+        $this->_filesPath = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+
         $this->_filter = new Zend_Filter_RealPath();
     }
 

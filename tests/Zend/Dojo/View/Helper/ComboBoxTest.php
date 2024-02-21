@@ -57,8 +57,8 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_ComboBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_View_Helper_ComboBoxTest");
+        $suite->run();
     }
 
     /**
@@ -164,7 +164,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
 
         $found = false;
-        $this->assertStringContainsStringIgnoringCase('var stateStore;', $this->view->dojo()->getJavascript());
+        $this->assertContains('var stateStore;', $this->view->dojo()->getJavascript());
 
         $scripts = $this->view->dojo()->_getZendLoadActions();
         foreach ($scripts as $js) {
@@ -208,7 +208,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends \PHPUnit\Framework\TestCase
         $html = $this->getElementAsRemoter();
 
         $js   = $this->view->dojo()->getJavascript();
-        $this->assertStringContainsStringIgnoringCase('var stateStore;', $js);
+        $this->assertContains('var stateStore;', $js);
 
         $onLoad = $this->view->dojo()->_getZendLoadActions();
         $storeDeclarationFound = false;

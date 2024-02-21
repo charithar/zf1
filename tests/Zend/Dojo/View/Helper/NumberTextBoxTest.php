@@ -57,8 +57,8 @@ class Zend_Dojo_View_Helper_NumberTextBoxTest extends \PHPUnit\Framework\TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_NumberTextBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_View_Helper_NumberTextBoxTest");
+        $suite->run();
     }
 
     /**

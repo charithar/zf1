@@ -48,8 +48,8 @@ class Zend_Controller_Response_HttpTestCaseTest extends \PHPUnit\Framework\TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTestCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Response_HttpTestCaseTest");
+        $suite->run();
     }
 
     /**
@@ -113,10 +113,10 @@ class Zend_Controller_Response_HttpTestCaseTest extends \PHPUnit\Framework\TestC
         $test = $this->response->sendHeaders();
         $this->assertTrue(is_array($test));
         $this->assertEquals(3, count($test));
-        $this->assertStringNotContainsStringIgnoringCase('Content-Type: text/xml', $test);
-        $this->assertStringContainsStringIgnoringCase('Content-Type: text/html', $test);
-        $this->assertStringContainsStringIgnoringCase('X-Foo-Bar: baz', $test);
-        $this->assertStringContainsStringIgnoringCase('200 OK', $test);
+        $this->assertNotContains('Content-Type: text/xml', $test);
+        $this->assertContains('Content-Type: text/html', $test);
+        $this->assertContains('X-Foo-Bar: baz', $test);
+        $this->assertContains('200 OK', $test);
     }
 
     public function testCanSendHeadersShouldAlwaysReturnTrue()

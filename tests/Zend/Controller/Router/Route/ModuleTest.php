@@ -56,8 +56,8 @@ class Zend_Controller_Router_Route_ModuleTest extends \PHPUnit\Framework\TestCas
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Router_Route_ModuleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Router_Route_ModuleTest");
+        $suite->run();
     }
 
     protected function setUp(): void

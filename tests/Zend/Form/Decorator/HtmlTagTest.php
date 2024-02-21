@@ -50,8 +50,8 @@ class Zend_Form_Decorator_HtmlTagTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_HtmlTagTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_HtmlTagTest");
+        $suite->run();
     }
 
     /**
@@ -178,7 +178,7 @@ class Zend_Form_Decorator_HtmlTagTest extends \PHPUnit\Framework\TestCase
         );
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(content).*?(</div>)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(content).*?(</div>)#', $html, $html);
     }
 
     public function testAppendPlacementWithOpenOnlyRendersOpeningTagFollowingContent()
@@ -190,7 +190,7 @@ class Zend_Form_Decorator_HtmlTagTest extends \PHPUnit\Framework\TestCase
         );
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(content).*?(<div>)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(content).*?(<div>)#', $html, $html);
     }
 
     public function testPrependPlacementWithCloseOnlyRendersClosingTagBeforeContent()
@@ -202,7 +202,7 @@ class Zend_Form_Decorator_HtmlTagTest extends \PHPUnit\Framework\TestCase
         );
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(</div>).*?(content)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(</div>).*?(content)#', $html, $html);
     }
 
     public function testPrependPlacementWithOpenOnlyRendersOpeningTagBeforeContent()
@@ -214,7 +214,7 @@ class Zend_Form_Decorator_HtmlTagTest extends \PHPUnit\Framework\TestCase
         );
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(<div>).*?(content)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(<div>).*?(content)#', $html, $html);
     }
 
     public function testTagIsInitiallyDiv()

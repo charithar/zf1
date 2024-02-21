@@ -42,12 +42,12 @@ class Zend_Cloud_Infrastructure_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Cloud_Infrastructure');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Cloud_Infrastructure');
 
         $suite->addTestSuite('Zend_Cloud_Infrastructure_FactoryTest');
         $suite->addTest(Zend_Cloud_Infrastructure_Adapter_AllTests::suite());

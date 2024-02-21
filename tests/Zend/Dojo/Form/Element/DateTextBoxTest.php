@@ -57,8 +57,8 @@ class Zend_Dojo_Form_Element_DateTextBoxTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_DateTextBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_Element_DateTextBoxTest");
+        $suite->run();
     }
 
     /**
@@ -155,11 +155,9 @@ class Zend_Dojo_Form_Element_DateTextBoxTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('long', $this->element->dijitParams['constraints']['formatLength']);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testFormatLengthMutatorShouldThrowExceptionWithInvalidFormatLength()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setFormatLength('foobar');
     }
 
@@ -174,11 +172,9 @@ class Zend_Dojo_Form_Element_DateTextBoxTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('time', $this->element->dijitParams['constraints']['selector']);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testSelectorMutatorShouldThrowExceptionWithInvalidSelector()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setSelector('foobar');
     }
 

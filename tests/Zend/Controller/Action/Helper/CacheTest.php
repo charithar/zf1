@@ -28,8 +28,8 @@ class Zend_Controller_Action_Helper_CacheTest extends \PHPUnit\Framework\TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_CacheTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Action_Helper_CacheTest");
+        $suite->run();
     }
 
     protected function setUp(): void

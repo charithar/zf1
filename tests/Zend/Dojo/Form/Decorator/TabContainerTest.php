@@ -60,8 +60,8 @@ class Zend_Dojo_Form_Decorator_TabContainerTest extends \PHPUnit\Framework\TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_TabContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_Decorator_TabContainerTest");
+        $suite->run();
     }
 
     /**

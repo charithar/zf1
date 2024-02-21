@@ -62,8 +62,8 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_DojoTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_View_Helper_DojoTest");
+        $suite->run();
     }
 
     /**
@@ -121,7 +121,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->requireModule('foo.bar');
         $modules = $this->helper->getModules();
-        $this->assertStringContainsStringIgnoringCase('foo.bar', $modules);
+        $this->assertContains('foo.bar', $modules);
     }
 
     /**
@@ -152,6 +152,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
      */
     public function testRequireModuleShouldAllowDashAndUnderscoreCharacters()
     {
+        $this->expectNotToPerformAssertions();
         $this->helper->requireModule('dojox.highlight.language._www');
         $this->helper->requireModule('dojo.NodeList-fx');
     }
@@ -161,7 +162,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
         $this->helper->requireModule('foo.bar');
         $this->helper->requireModule('foo.bar');
         $modules = $this->helper->getModules();
-        $this->assertStringContainsStringIgnoringCase('foo.bar', $modules);
+        $this->assertContains('foo.bar', $modules);
         $this->assertEquals(1, count($modules));
     }
 
@@ -176,7 +177,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
         $this->helper->registerModulePath('custom', '../custom');
         $paths = $this->helper->getModulePaths();
         $this->assertTrue(array_key_exists('custom', $paths), var_export($paths, 1));
-        $this->assertStringContainsStringIgnoringCase('../custom', $paths);
+        $this->assertContains('../custom', $paths);
     }
 
     public function testShouldNotBeAbleToRegisterDuplicateModulePaths()
@@ -186,7 +187,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
         $paths = $this->helper->getModulePaths();
         $this->assertEquals(1, count($paths));
         $this->assertTrue(array_key_exists('custom', $paths));
-        $this->assertStringContainsStringIgnoringCase('../custom', $paths);
+        $this->assertContains('../custom', $paths);
     }
 
     public function testShouldBeDisabledByDefault()
@@ -314,19 +315,19 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->addStylesheetModule('dijit.themes.tundra');
         $stylesheets = $this->helper->getStylesheetModules();
-        $this->assertStringContainsStringIgnoringCase('dijit.themes.tundra', $stylesheets);
+        $this->assertContains('dijit.themes.tundra', $stylesheets);
     }
 
     public function testDuplicateStylesheetModulesShouldNotBeAllowed()
     {
         $this->helper->addStylesheetModule('dijit.themes.tundra');
         $stylesheets = $this->helper->getStylesheetModules();
-        $this->assertStringContainsStringIgnoringCase('dijit.themes.tundra', $stylesheets);
+        $this->assertContains('dijit.themes.tundra', $stylesheets);
 
         $this->helper->addStylesheetModule('dijit.themes.tundra');
         $stylesheets = $this->helper->getStylesheetModules();
         $this->assertEquals(1, count($stylesheets));
-        $this->assertStringContainsStringIgnoringCase('dijit.themes.tundra', $stylesheets);
+        $this->assertContains('dijit.themes.tundra', $stylesheets);
     }
 
     /**
@@ -334,6 +335,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddingStylesheetModuleShouldAllowDashAndUnderscoreCharacters()
     {
+        $this->expectNotToPerformAssertions();
         $this->helper->addStylesheetModule('dojox._highlight.pygments');
         $this->helper->addStylesheetModule('dojo.NodeList-fx.styles');
     }
@@ -362,7 +364,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
         $this->helper->addStylesheet('/css/foo.css');
         $css = $this->helper->getStylesheets();
         $this->assertTrue(is_array($css));
-        $this->assertStringContainsStringIgnoringCase('/css/foo.css', $css);
+        $this->assertContains('/css/foo.css', $css);
     }
 
     public function testShouldNotAllowSpecifyingDuplicateLocalStylesheets()
@@ -372,7 +374,7 @@ class Zend_Dojo_View_Helper_DojoTest extends \PHPUnit\Framework\TestCase
         $css = $this->helper->getStylesheets();
         $this->assertTrue(is_array($css));
         $this->assertEquals(1, count($css));
-        $this->assertStringContainsStringIgnoringCase('/css/foo.css', $css);
+        $this->assertContains('/css/foo.css', $css);
     }
 
     public function testShouldAllowSpecifyingOnLoadFunctionPointer()
@@ -544,11 +546,9 @@ function() {
         $this->assertEquals('dijit.form.Form', $dijit['params']['dojoType']);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testAddingDuplicateProgrammaticDijitsShouldRaiseExceptions()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.Form'));
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.ComboBox'));
     }
@@ -793,11 +793,9 @@ function() {
         $this->assertSame(array('foo', 'bar'), $found);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCallingMethodThatDoesNotExistInContainerShouldRaiseException()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $dojo = new Zend_Dojo_View_Helper_Dojo();
         $dojo->bogus();
     }

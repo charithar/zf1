@@ -530,7 +530,7 @@ abstract class Zend_Db_TestUtil_Common
         return $this->_db;
     }
 
-    protected function tearDown(): void
+    public function tearDown(): void
     {
         $this->dropView();
         $this->dropTable();

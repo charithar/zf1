@@ -46,8 +46,8 @@ class Zend_Captcha_FigletTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Captcha_FigletTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Captcha_FigletTest");
+        $suite->run();
     }
 
     /**
@@ -253,6 +253,7 @@ class Zend_Captcha_FigletTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldAllowFigletsLargerThanFourteenCharacters()
     {
+        $this->expectNotToPerformAssertions();
         $this->captcha->setName('foo')
                       ->setWordLen(14);
         $id = $this->captcha->generate();

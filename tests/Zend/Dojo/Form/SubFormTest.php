@@ -51,8 +51,8 @@ class Zend_Dojo_Form_SubFormTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_SubFormTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_SubFormTest");
+        $suite->run();
     }
 
     /**

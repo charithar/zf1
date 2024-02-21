@@ -151,6 +151,7 @@ class Zend_Config_Writer_XmlTest extends \PHPUnit\Framework\TestCase
      */
     public function testWriteMultidimensionalArrayWithNumericKeys()
     {
+        $this->expectNotToPerformAssertions();
         $writer = new Zend_Config_Writer_Xml;
         $writer->write($this->_tempName, new Zend_Config(array(
             'notification' => array(

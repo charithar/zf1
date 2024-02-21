@@ -60,8 +60,8 @@ class Zend_Dojo_Form_Decorator_BorderContainerTest extends \PHPUnit\Framework\Te
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_BorderContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_Decorator_BorderContainerTest");
+        $suite->run();
     }
 
     /**

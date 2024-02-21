@@ -57,8 +57,8 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     /**
@@ -93,11 +93,9 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends \PHPUnit\Framework\TestCase
         return $view;
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testHelperShouldRaiseExceptionIfNoDojoTypePassed()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->view->customDijit('foo');
     }
 
@@ -112,7 +110,7 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends \PHPUnit\Framework\TestCase
         $content = $this->view->customDijit('foo', 'content', array('dojoType' => 'custom.Dijit'));
         $dojo    = $this->view->dojo();
         $modules = $dojo->getModules();
-        $this->assertStringContainsStringIgnoringCase('custom.Dijit', $modules);
+        $this->assertContains('custom.Dijit', $modules);
     }
 
     public function testHelperInProgrammaticModeShouldRegisterDojoTypeAsModule()
@@ -121,7 +119,7 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends \PHPUnit\Framework\TestCase
         $content = $this->view->customDijit('foo', 'content', array('dojoType' => 'custom.Dijit'));
         $dojo    = $this->view->dojo();
         $modules = $dojo->getModules();
-        $this->assertStringContainsStringIgnoringCase('custom.Dijit', $modules);
+        $this->assertContains('custom.Dijit', $modules);
     }
 
     public function testHelperInProgrammaticModeShouldGenerateDivWithoutPassedDojoType()

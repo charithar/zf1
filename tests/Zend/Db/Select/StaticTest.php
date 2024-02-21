@@ -714,7 +714,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * @group ZF-5263
      */
     public function testSelectLimitFetchCol()
-    {}
+    {
+        $this->expectNotToPerformAssertions();
+    }
 
     public function testSelectLimitNone()
     {

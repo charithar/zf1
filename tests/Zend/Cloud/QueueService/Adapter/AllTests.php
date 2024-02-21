@@ -54,17 +54,16 @@ class Zend_Cloud_QueueService_Adapter_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Cloud - QueueService - Adapter');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Cloud - QueueService - Adapter');
 
         $suite->addTestSuite('Zend_Cloud_QueueService_Adapter_SqsTest');
         $suite->addTestSuite('Zend_Cloud_QueueService_Adapter_WindowsAzureTest');

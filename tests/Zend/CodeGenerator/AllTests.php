@@ -38,12 +38,12 @@ class Zend_CodeGenerator_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_CodeGenerator');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_CodeGenerator');
 
         $suite->addTest(Zend_CodeGenerator_Php_AllTests::suite());
 

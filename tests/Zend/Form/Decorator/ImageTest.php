@@ -52,8 +52,8 @@ class Zend_Form_Decorator_ImageTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ImageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_ImageTest");
+        $suite->run();
     }
 
     /**
@@ -139,7 +139,7 @@ class Zend_Form_Decorator_ImageTest extends \PHPUnit\Framework\TestCase
                         ->setOption('tag', 'div');
 
         $image = $this->decorator->render('');
-        $this->assertRegexp('#<div>.*?<input[^>]*>.*?</div>#s', $image, $image);
+        $this->assertMatchesRegularExpression('#<div>.*?<input[^>]*>.*?</div>#s', $image, $image);
     }
 
     public function testCanPrependImageToContent()
@@ -151,7 +151,7 @@ class Zend_Form_Decorator_ImageTest extends \PHPUnit\Framework\TestCase
                         ->setOption('placement', 'prepend');
 
         $image = $this->decorator->render('content');
-        $this->assertRegexp('#<input[^>]*>.*?(content)#s', $image, $image);
+        $this->assertMatchesRegularExpression('#<input[^>]*>.*?(content)#s', $image, $image);
     }
 
     /**

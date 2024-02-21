@@ -50,8 +50,8 @@ class Zend_Form_Decorator_DescriptionTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_DescriptionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Decorator_DescriptionTest");
+        $suite->run();
     }
 
     /**
@@ -102,7 +102,7 @@ class Zend_Form_Decorator_DescriptionTest extends \PHPUnit\Framework\TestCase
     public function testParagraphTagsContainHintClassByDefault()
     {
         $this->testRendersDescriptionInParagraphTagsByDefault();
-        $this->assertRegexp('/<p[^>]*?class="hint"/', $this->html);
+        $this->assertMatchesRegularExpression('/<p[^>]*?class="hint"/', $this->html);
     }
 
     public function testCanSpecifyAlternateTag()
@@ -128,14 +128,14 @@ class Zend_Form_Decorator_DescriptionTest extends \PHPUnit\Framework\TestCase
     public function testAlternateTagContainsHintClass()
     {
         $this->testCanSpecifyAlternateTag();
-        $this->assertRegexp('/<quote[^>]*?class="hint"/', $this->html);
+        $this->assertMatchesRegularExpression('/<quote[^>]*?class="hint"/', $this->html);
     }
 
     public function testCanSpecifyAlternateClass()
     {
         $this->decorator->setOption('class', 'haha');
         $html = $this->decorator->render('');
-        $this->assertRegexp('/<p[^>]*?class="haha"/', $html);
+        $this->assertMatchesRegularExpression('/<p[^>]*?class="haha"/', $html);
     }
 
     public function testRenderingEscapesDescriptionByDefault()

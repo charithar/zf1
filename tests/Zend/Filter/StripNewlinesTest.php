@@ -47,7 +47,7 @@ class Zend_Filter_StripNewlinesTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp ()
+    public function setUp(): void
     {
         $this->_filter = new Zend_Filter_StripNewlines();
     }
@@ -57,7 +57,7 @@ class Zend_Filter_StripNewlinesTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function testBasic ()
+    public function testBasic()
     {
         $valuesExpected = array(
             '' => '',

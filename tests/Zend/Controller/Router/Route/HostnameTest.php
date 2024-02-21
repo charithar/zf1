@@ -50,8 +50,8 @@ class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestC
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Router_Route_HostnameTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Router_Route_HostnameTest");
+        $suite->run();
     }
 
     public function testCorrectStaticHostMatch()

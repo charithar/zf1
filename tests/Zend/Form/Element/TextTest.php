@@ -47,8 +47,8 @@ class Zend_Form_Element_TextTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_TextTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Form_Element_TextTest");
+        $suite->run();
     }
 
     /**

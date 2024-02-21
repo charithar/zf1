@@ -57,8 +57,8 @@ class Zend_Dojo_Form_Element_DijitTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_DijitTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_Element_DijitTest");
+        $suite->run();
     }
 
     /**

@@ -64,8 +64,8 @@ class Zend_Controller_Plugin_PutHandlerTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Plugin_PutHandlerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Plugin_PutHandlerTest");
+        $suite->run();
     }
 
     /**
@@ -74,7 +74,7 @@ class Zend_Controller_Plugin_PutHandlerTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         Zend_Controller_Front::getInstance()->resetInstance();
         $this->request  = new Zend_Controller_Request_HttpTestCase();

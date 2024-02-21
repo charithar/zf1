@@ -46,8 +46,8 @@ class Zend_Filter_Compress_LzfTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_LzfTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Filter_Compress_LzfTest');
+        $suite->run();
     }
 
     protected function setUp(): void

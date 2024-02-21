@@ -57,8 +57,8 @@ class Zend_Dojo_Form_Element_EditorTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_EditorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dojo_Form_Element_EditorTest");
+        $suite->run();
     }
 
     /**
@@ -131,7 +131,7 @@ class Zend_Dojo_Form_Element_EditorTest extends \PHPUnit\Framework\TestCase
         $this->element->removeCaptureEvent('bar.baz');
         $this->assertFalse($this->element->hasCaptureEvent('bar.baz'), var_export($this->element->getCaptureEvents(), 1));
         $events = $this->element->getDijitParam('captureEvents');
-        $this->assertStringNotContainsStringIgnoringCase('bar.baz', $events, var_export($events, 1));
+        $this->assertContains('bar.baz', $events, var_export($events, 1));
     }
 
     public function testShouldNotHaveEventsByDefault()
@@ -150,7 +150,7 @@ class Zend_Dojo_Form_Element_EditorTest extends \PHPUnit\Framework\TestCase
         $this->element->removeEvent('onKeyUp');
         $this->assertFalse($this->element->hasEvent('onKeyUp'), var_export($this->element->getEvents(), 1));
         $events = $this->element->getDijitParam('events');
-        $this->assertStringNotContainsStringIgnoringCase('onKeyUp', $events, var_export($events, 1));
+        $this->assertContains('onKeyUp', $events, var_export($events, 1));
     }
 
     public function testShouldNotHavePluginsByDefault()
@@ -169,7 +169,7 @@ class Zend_Dojo_Form_Element_EditorTest extends \PHPUnit\Framework\TestCase
         $this->element->removePlugin('bold');
         $this->assertFalse($this->element->hasPlugin('bold'), var_export($this->element->getPlugins(), 1));
         $plugins = $this->element->getDijitParam('plugins');
-        $this->assertStringNotContainsStringIgnoringCase('bold', $plugins, var_export($plugins, 1));
+        $this->assertContains('bold', $plugins, var_export($plugins, 1));
     }
 
     public function testEditActionIntervalShouldDefaultToThree()
@@ -310,7 +310,7 @@ class Zend_Dojo_Form_Element_EditorTest extends \PHPUnit\Framework\TestCase
         $this->element->removeExtraPlugin('bold');
         $this->assertFalse($this->element->hasExtraPlugin('bold'), var_export($this->element->getExtraPlugins(), 1));
         $extraPlugins = $this->element->getDijitParam('extraPlugins');
-        $this->assertStringNotContainsStringIgnoringCase('bold', $extraPlugins, var_export($extraPlugins, 1));
+        $this->assertContains('bold', $extraPlugins, var_export($extraPlugins, 1));
     }
 }
 

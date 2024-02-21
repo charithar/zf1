@@ -50,8 +50,8 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_DisplayGroupTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Form_DisplayGroupTest');
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -399,7 +399,7 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 
         $this->group->addElements(array($foo, $bar));
         $html = $this->group->render($this->getView());
-        $this->assertRegexp('#^<dt[^>]*>&\#160;</dt><dd[^>]*><fieldset.*?</fieldset></dd>$#s', $html, $html);
+        $this->assertMatchesRegularExpression('#^<dt[^>]*>&\#160;</dt><dd[^>]*><fieldset.*?</fieldset></dd>$#s', $html, $html);
         $this->assertStringContainsStringIgnoringCase('<input', $html, $html);
         $this->assertStringContainsStringIgnoringCase('"foo"', $html);
         $this->assertStringContainsStringIgnoringCase('"bar"', $html);
@@ -413,7 +413,7 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
         $this->group->addElements(array($foo, $bar))
                     ->setView($this->getView());
         $html = $this->group->__toString();
-        $this->assertRegexp('#^<dt[^>]*>&\#160;</dt><dd[^>]*><fieldset.*?</fieldset></dd>$#s', $html, $html);
+        $this->assertMatchesRegularExpression('#^<dt[^>]*>&\#160;</dt><dd[^>]*><fieldset.*?</fieldset></dd>$#s', $html, $html);
         $this->assertStringContainsStringIgnoringCase('<input', $html);
         $this->assertStringContainsStringIgnoringCase('"foo"', $html);
         $this->assertStringContainsStringIgnoringCase('"bar"', $html);
@@ -537,6 +537,7 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 
     public function testRemovingElementsShouldNotRaiseExceptionsDuringIteration()
     {
+        $this->expectNotToPerformAssertions();
         $this->setupIteratorElements();
         $bar = $this->group->getElement('bar');
         $this->group->removeElement('bar');
@@ -581,6 +582,7 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 
     public function testSetOptionsOmitsAccessorsRequiringObjectsOrMultipleParams()
     {
+        $this->expectNotToPerformAssertions();
         $options = $this->getOptions();
         $config  = new Zend_Config($options);
         $options['config']       = $config;
@@ -757,10 +759,10 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-3217
-     * @expectedException Zend_Form_Exception
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $html = $this->group->bogusMethodCall();
     }
 

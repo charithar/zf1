@@ -42,12 +42,12 @@ class Zend_Crypt_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Crypt');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Crypt');
 
         $suite->addTestSuite('Zend_Crypt_DiffieHellmanTest');
         $suite->addTestSuite('Zend_Crypt_HmacTest');

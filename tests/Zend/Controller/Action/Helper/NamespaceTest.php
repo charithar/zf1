@@ -47,8 +47,8 @@ class Zend_Controller_Action_Helper_NamespaceTest extends \PHPUnit\Framework\Tes
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Controller_Action_Helper_NamespaceTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Controller_Action_Helper_NamespaceTest');
+        $suite->run();
     }
 
     /**

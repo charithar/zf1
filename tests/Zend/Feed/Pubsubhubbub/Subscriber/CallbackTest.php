@@ -72,6 +72,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
         $this->_originalServer = $_SERVER;
         $_SERVER['REQUEST_METHOD'] = 'get';
         $_SERVER['QUERY_STRING'] = 'xhub.subscription=verifytokenkey';
+        $_SERVER['REQUEST_TIME_FLOAT'] = microtime(true);
     }
 
     protected function tearDown(): void

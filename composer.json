@@ -34,7 +34,8 @@
         "phpunit/phpunit": "^9.5.11",
       "ext-json": "*",
       "ext-gd": "*",
-        "ext-dom": "*"
+        "ext-dom": "*",
+      "ext-bcmath": "*"
     },
     "archive": {
         "exclude": ["/demos", "/documentation", "/tests"]

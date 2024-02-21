@@ -49,8 +49,8 @@ class Zend_Dom_QueryTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dom_QueryTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Dom_QueryTest");
+        $suite->run();
     }
 
     /**
@@ -94,6 +94,7 @@ class Zend_Dom_QueryTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorShouldNotRequireArguments()
     {
+        $this->expectNotToPerformAssertions();
         $query = new Zend_Dom_Query();
     }
 
@@ -379,7 +380,7 @@ EOB;
 </results>
 XML;
         $this->query->setDocumentXml($xml);
-        $this->setExpectedException("Zend_Dom_Exception");
+        $this->expectException(Zend_Dom_Exception::class);
         $this->query->queryXpath('/');
     }
 }

@@ -71,8 +71,8 @@ class Zend_Controller_Router_RewriteTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Router_RewriteTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Router_RewriteTest");
+        $suite->run();
     }
 
     protected function setUp(): void {
@@ -84,7 +84,8 @@ class Zend_Controller_Router_RewriteTest extends \PHPUnit\Framework\TestCase
         $this->_router->setFrontController($front);
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         unset($this->_router);
     }
 
@@ -759,10 +760,10 @@ class Zend_Controller_Router_RewriteTest extends \PHPUnit\Framework\TestCase
     
     /**
      * @group ZF-11393
-     * @expectedException Zend_Controller_Router_Exception
      */
     public function testCallingAssembleWithNullArgumentShouldThrowException()
     {
+        $this->expectException(Zend_Controller_Router_Exception::class);
         $this->_router->assemble(null);
     }
 }

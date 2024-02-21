@@ -47,7 +47,7 @@ class Zend_Form_Element_CaptchaTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_Element_CaptchaTest');
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Form_Element_CaptchaTest');
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -72,11 +72,9 @@ class Zend_Form_Element_CaptchaTest extends \PHPUnit\Framework\TestCase
         return $captcha;
     }
 
-    /**
-     * @expectedException Zend_Form_Exception
-     */
     public function testConstructionShouldRequireCaptchaDetails()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $this->element = new Zend_Form_Element_Captcha('foo');
     }
 

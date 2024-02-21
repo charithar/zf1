@@ -83,8 +83,8 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends \PHPUnit\Framework\TestCas
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Plugin_ErrorHandlerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Controller_Plugin_ErrorHandlerTest");
+        $suite->run();
     }
 
     /**
@@ -93,7 +93,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends \PHPUnit\Framework\TestCas
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         Zend_Controller_Front::getInstance()->resetInstance();
         $this->request  = new Zend_Controller_Request_Http();
@@ -110,7 +110,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends \PHPUnit\Framework\TestCas
      *
      * @access protected
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -220,6 +220,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends \PHPUnit\Framework\TestCas
 
     public function testPostDispatchDoesNothingWhenCalledRepeatedlyWithoutNewExceptions()
     {
+        $this->expectNotToPerformAssertions();
         $this->response->setException(new Exception('Testing other exception'));
         $this->request->setModuleName('foo')
                       ->setControllerName('bar')
