@@ -75,6 +75,7 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'cache_by_default' => false,
             'cached_functions' => array('foo', 'bar')
@@ -84,6 +85,7 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorBadCall()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'cache_by_default' => false,
             0 => array('foo', 'bar')
@@ -96,6 +98,10 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
         $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
 
+    /**
+     * @depends testCallObjectMethodCorrectCall1
+     * @return void
+     */
     public function testCallCorrectCall1()
     {
         ob_start();
@@ -107,6 +113,10 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foo', $data);
     }
 
+    /**
+     * @depends testCallCorrectCall1
+     * @return void
+     */
     public function testCallCorrectCall2()
     {
         ob_start();
@@ -118,6 +128,10 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foobar_output(param3, param4)', $data);
     }
 
+    /**
+     * @depends testCallCorrectCall2
+     * @return void
+     */
     public function testCallCorrectCall3()
     {
         // cacheByDefault = false
@@ -131,6 +145,10 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foobar_output(param1, param2)', $data);
     }
 
+    /**
+     * @depends testCallCorrectCall3
+     * @return void
+     */
     public function testCallCorrectCall4()
     {
         // cacheByDefault = false
@@ -146,6 +164,10 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foo', $data);
     }
 
+    /**
+     * @depends testCallCorrectCall4
+     * @return void
+     */
     public function testCallCorrectCall5()
     {
         // cacheByDefault = true
@@ -177,6 +199,11 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foobar_output(param1, param2)', $data);
     }
 
+    /**
+     * @depends testCallObjectMethodCorrectCall1
+     * @return void
+     * @throws Zend_Cache_Exception
+     */
     public function testCallObjectMethodCorrectCall2()
     {
         // cacheByDefault = true
@@ -196,16 +223,18 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
     public function testCallClosureThrowsException()
     {
         if (version_compare(PHP_VERSION, '5.3', '<')) {
+            $this->expectNotToPerformAssertions();
             $this->markTestSkipped();
         }
 
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->expectException(Zend_Cache_Exception::class);
         eval('$closure = function () {};'); // no parse error on php < 5.3
         $this->_instance->call($closure);
     }
 
     public function testCallWithABadSyntax1()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->call(1, array());
         } catch (Zend_Cache_Exception $e) {

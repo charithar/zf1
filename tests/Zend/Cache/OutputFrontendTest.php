@@ -55,6 +55,7 @@ class Zend_Cache_OutputFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Frontend_Output(array('lifetime' => 3600, 'caching' => true));
     }
 

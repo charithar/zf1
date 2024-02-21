@@ -38,7 +38,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
         parent::__construct('Zend_Cache_Backend_Static', $data, $dataName);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         $this->mkdir();
         $this->_cache_dir = $this->mkdir();
@@ -76,6 +76,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_Static(array());
     }
 
@@ -160,8 +161,9 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
     {
         try {
             $this->_instance->setOption('cache_directory_umask', '777');
+            $this->expectNotToPerformAssertions();
             $this->fail();
-        } catch (PHPUnit_Framework_Error $e) {
+        } catch (\PHPUnit\Framework\Error\Error $e) {
             $this->assertEquals(
                 "'cache_directory_umask' is deprecated -> please use 'cache_directory_perm' instead",
                 $e->getMessage()
@@ -176,8 +178,9 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
     {
         try {
             $this->_instance->setOption('cache_file_umask', '777');
+            $this->expectNotToPerformAssertions();
             $this->fail();
-        } catch (PHPUnit_Framework_Error $e) {
+        } catch (\PHPUnit\Framework\Error\Error $e) {
             $this->assertEquals(
                 "'cache_file_umask' is deprecated -> please use 'cache_file_perm' instead",
                 $e->getMessage()
@@ -202,11 +205,11 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testTestWithAnExistingCacheId()
     {
+        $this->expectNotToPerformAssertions();
         $res = $this->_instance->test(bin2hex('/bar'));
         if (!$res) {
             $this->fail('test() return false');
         }
-        return;
     }
 
     public function testTestWithANonExistingCacheId()
@@ -216,12 +219,12 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testTestWithAnExistingCacheIdAndANullLifeTime()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('lifetime' => null));
         $res = $this->_instance->test(bin2hex('/bar'));
         if (!$res) {
             $this->fail('test() return false');
         }
-        return;
     }
 
     public function testGetWithANonExistingCacheId()
@@ -304,11 +307,13 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testGetWithAnExpiredCacheId()
     {
+        $this->expectNotToPerformAssertions();
         $this->markTestSkipped('Irrelevant Test');
     }
 
     public function testCleanModeOld()
     {
+        $this->expectNotToPerformAssertions();
         $this->markTestSkipped('Irrelevant Test');
     }
 

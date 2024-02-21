@@ -45,7 +45,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
         parent::__construct($name, $data, $dataName);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         $this->mkdir();
         $this->_instance->setDirectives(array('logging' => true));
@@ -100,11 +100,13 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $this->fail('PLEASE IMPLEMENT A testConstructorCorrectCall !!!');
     }
 
     public function testConstructorBadOption()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $class = $this->_className;
             $test = new $class(array(1 => 'bar'));
@@ -116,11 +118,13 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
 
     public function testSetDirectivesCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('lifetime' => 3600, 'logging' => true));
     }
 
     public function testSetDirectivesBadArgument()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->setDirectives('foo');
         } catch (Zend_Cache_Exception $e) {
@@ -131,6 +135,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
 
     public function testSetDirectivesBadDirective()
     {
+        $this->expectNotToPerformAssertions();
         // A bad directive (not known by a specific backend) is possible
         // => so no exception here
         $this->_instance->setDirectives(array('foo' => true, 'lifetime' => 3600));
@@ -138,6 +143,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
 
     public function testSetDirectivesBadDirective2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->setDirectives(array('foo' => true, 12 => 3600));
         } catch (Zend_Cache_Exception $e) {
@@ -176,6 +182,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
 
     public function testTestWithAnExistingCacheId()
     {
+        $this->expectNotToPerformAssertions();
         $res = $this->_instance->test('bar');
         if (!$res) {
             $this->fail('test() return false');
@@ -183,7 +190,6 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
         if (!($res > 999999)) {
             $this->fail('test() return an incorrect integer');
         }
-        return;
     }
 
     public function testTestWithANonExistingCacheId()
@@ -193,6 +199,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
 
     public function testTestWithAnExistingCacheIdAndANullLifeTime()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('lifetime' => null));
         $res = $this->_instance->test('bar');
         if (!$res) {
@@ -201,7 +208,6 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
         if (!($res > 999999)) {
             $this->fail('test() return an incorrect integer');
         }
-        return;
     }
 
     public function testGetWithANonExistingCacheId()
@@ -292,7 +298,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
     {
         $this->assertTrue(is_numeric($this->_instance->getOption('LifeTime')));
 
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->expectException(Zend_Cache_Exception::class);
         $this->_instance->getOption('unknown');
     }
 }

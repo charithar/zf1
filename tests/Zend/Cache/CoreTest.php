@@ -58,6 +58,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Core(array('lifetime' => 3600, 'caching' => true));
     }
 
@@ -66,6 +67,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructorCorrectCallWithZendConfig()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Core(
             new Zend_Config(array('lifetime' => 3600, 'caching' => true))
         );
@@ -95,6 +97,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorBadOption()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Core(array(0 => 'bar', 'lifetime' => 3600));
         } catch (Zend_Cache_Exception $e) {
@@ -105,11 +108,13 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSetLifeTime()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setLifeTime(3600);
     }
 
     public function testSetBackendCorrectCall1()
     {
+        $this->expectNotToPerformAssertions();
         $backend = new Zend_Cache_Backend_File(array());
         $this->_instance->setBackend($backend);
     }
@@ -125,11 +130,13 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSetOptionCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setOption('caching', false);
     }
 
     public function testSetOptionBadCall()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->setOption(array('lifetime'), 1200);
         } catch (Zend_Cache_Exception $e) {
@@ -146,6 +153,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetOptionUnknownOption()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->setOption(0, 1200);
             $this->fail('Zend_Cache_Exception was expected but not thrown');
@@ -161,6 +169,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSaveCorrectBadCall1()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->save('data', 'foo bar');
         }  catch (Zend_Cache_Exception $e) {
@@ -171,6 +180,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSaveCorrectBadCall2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->save('data', 'foobar', array('tag1', 'foo bar'));
         }  catch (Zend_Cache_Exception $e) {
@@ -181,6 +191,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSaveCorrectBadCall3()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->save(array('data'), 'foobar');
         }  catch (Zend_Cache_Exception $e) {
@@ -191,6 +202,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSaveWithABadCacheId()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->save(array('data'), true);
         }  catch (Zend_Cache_Exception $e) {
@@ -201,6 +213,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSaveWithABadCacheId2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->save(array('data'), 'internal_foo');
         }  catch (Zend_Cache_Exception $e) {
@@ -211,6 +224,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testSaveWithABadTags()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->save(array('data'), 'foo', 'foobar');
         }  catch (Zend_Cache_Exception $e) {
@@ -338,6 +352,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testTestBadCall()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_instance->test('foo bar');
         }  catch (Zend_Cache_Exception $e) {
@@ -378,6 +393,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBadCall()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $res = $this->_instance->load('foo bar');
         }  catch (Zend_Cache_Exception $e) {
@@ -407,6 +423,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testRemoveBadCall()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $res = $this->_instance->remove('foo bar');
         }  catch (Zend_Cache_Exception $e) {
@@ -441,6 +458,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testCleanBadCall1()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $res = $this->_instance->clean('matchingTag', array('foo bar', 'foo'));
         }  catch (Zend_Cache_Exception $e) {
@@ -451,6 +469,7 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
 
     public function testCleanBadCall2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $res = $this->_instance->clean('foo');
         }  catch (Zend_Cache_Exception $e) {
@@ -491,32 +510,32 @@ class Zend_Cache_CoreTest extends \PHPUnit\Framework\TestCase
     {
         $this->_instance->setOption('cache_id_prefix', 'prefix_');
         $ids = $this->_instance->getIds();
-        $this->assertStringContainsStringIgnoringCase('id1', $ids);
-        $this->assertStringContainsStringIgnoringCase('id2', $ids);
+        $this->assertContains('id1', $ids);
+        $this->assertContains('id2', $ids);
     }
 
     public function testGetIdsMatchingTags()
     {
         $this->_instance->setOption('cache_id_prefix', 'prefix_');
         $ids = $this->_instance->getIdsMatchingTags(array('tag1', 'tag2'));
-        $this->assertStringContainsStringIgnoringCase('id1', $ids);
-        $this->assertStringContainsStringIgnoringCase('id2', $ids);
+        $this->assertContains('id1', $ids);
+        $this->assertContains('id2', $ids);
     }
 
     public function testGetIdsNotMatchingTags()
     {
         $this->_instance->setOption('cache_id_prefix', 'prefix_');
         $ids = $this->_instance->getIdsNotMatchingTags(array('tag3', 'tag4'));
-        $this->assertStringContainsStringIgnoringCase('id3', $ids);
-        $this->assertStringContainsStringIgnoringCase('id4', $ids);
+        $this->assertContains('id3', $ids);
+        $this->assertContains('id4', $ids);
     }
 
     public function testGetIdsMatchingAnyTags()
     {
         $this->_instance->setOption('cache_id_prefix', 'prefix_');
         $ids = $this->_instance->getIdsMatchingAnyTags(array('tag5', 'tag6'));
-        $this->assertStringContainsStringIgnoringCase('id5', $ids);
-        $this->assertStringContainsStringIgnoringCase('id6', $ids);
+        $this->assertContains('id5', $ids);
+        $this->assertContains('id6', $ids);
     }
 
     public function testLoggerSanity()

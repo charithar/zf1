@@ -56,7 +56,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
         parent::__construct('Zend_Cache_Backend_File', $data, $dataName);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         $this->mkdir();
         $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
@@ -83,8 +83,9 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
                 'cache_dir'              => $this->_cache_dir,
                 'hashed_directory_umask' => 0700,
             ));
+            $this->expectNotToPerformAssertions();
             $this->fail("Missing expected E_USER_NOTICE error");
-        } catch (PHPUnit_Framework_Error $e) {
+        } catch (\PHPUnit\Framework\Error\Error $e) {
             if ($e->getCode() != E_USER_NOTICE) {
                 throw $e;
             }
@@ -100,8 +101,9 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
                     'cache_dir'        => $this->_cache_dir,
                     'cache_file_umask' => 0700,
             ));
+            $this->expectNotToPerformAssertions();
             $this->fail("Missing expected E_USER_NOTICE error");
-        } catch (PHPUnit_Framework_Error $e) {
+        } catch (\PHPUnit\Framework\Error\Error $e) {
             if ($e->getCode() != E_USER_NOTICE) {
                 throw $e;
             }
@@ -112,11 +114,13 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_File(array());
     }
 
     public function testConstructorWithABadFileNamePrefix()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $class = new Zend_Cache_Backend_File(array(
                 'file_name_prefix' => 'foo bar'

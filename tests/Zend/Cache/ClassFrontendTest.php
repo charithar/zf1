@@ -111,6 +111,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorCorrectCall1()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'cache_by_default' => false,
             'cached_entity' => 'test'
@@ -120,6 +121,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorCorrectCall2()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'cache_by_default' => false,
             'cached_entity' => new test()
@@ -129,6 +131,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorBadCall()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'cached_entity' => new test(),
             0 => true,
@@ -248,6 +251,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorWithABadCachedEntity()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $options = array(
                 'cached_entity' => array()
@@ -264,6 +268,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
      */
     public function testCallingConstructorWithInvalidOptionShouldNotRaiseException()
     {
+        $this->expectNotToPerformAssertions();
         $options = array(
             'cached_entity' => new test(),
             'this_key_does_not_exist' => true
@@ -295,7 +300,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
      */
     public function testThrowExceptionOnInvalidCallback()
     {
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->expectException(Zend_Cache_Exception::class);
         $this->_instance2->unknownMethod();
     }
 }

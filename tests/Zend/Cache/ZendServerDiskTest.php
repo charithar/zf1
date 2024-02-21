@@ -48,7 +48,7 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
         parent::__construct('Zend_Cache_Backend_ZendServer_Disk', $data, $dataName);
     }
 
-    public function setUp($notag = true)
+    public function setUp($notag = true): void
     {
         $this->_instance = new Zend_Cache_Backend_ZendServer_Disk();
         parent::setUp(true);
@@ -62,10 +62,12 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_ZendServer_Disk();
     }
 
     public function testCleanModeOld() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('old');
         // do nothing, just to see if an error occured
@@ -73,6 +75,7 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
     }
 
     public function testCleanModeMatchingTags() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('matchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -80,6 +83,7 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
     }
 
     public function testCleanModeNotMatchingTags() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('notMatchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -87,10 +91,18 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
     }
 
     // Because of limitations of this backend...
-    public function testGetWithAnExpiredCacheId() {}
-    public function testCleanModeMatchingTags2() {}
-    public function testCleanModeNotMatchingTags2() {}
-    public function testCleanModeNotMatchingTags3() {}
+    public function testGetWithAnExpiredCacheId() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
+    }
     public function testSaveCorrectCall()
     {
         $this->_instance->setDirectives(array('logging' => false));
@@ -107,7 +119,6 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
 
     public function testSaveWithSpecificLifeTime()
     {
-
         $this->_instance->setDirectives(array('logging' => false));
         parent::testSaveWithSpecificLifeTime();
         $this->_instance->setDirectives(array('logging' => true));

@@ -460,8 +460,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function setForeColor($value)
     {
-        if (preg_match('`\#[0-9A-F]{6}`', $value)) {
-            $this->_foreColor = hexdec($value);
+        if (preg_match('`\#([0-9A-F]{6})`', $value, $matches)) {
+            $this->_foreColor = hexdec($matches[1]);
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->_foreColor = intval($value);
         } else {
@@ -476,7 +476,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     /**
      * Retrieve color of the barcode and text
      *
-     * @return unknown
+     * @return mixed
      */
     public function getForeColor()
     {
@@ -492,8 +492,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function setBackgroundColor($value)
     {
-        if (preg_match('`\#[0-9A-F]{6}`', $value)) {
-            $this->_backgroundColor = hexdec($value);
+        if (preg_match('`\#([0-9A-F]{6})`', $value, $matches)) {
+            $this->_backgroundColor = hexdec($matches[1]);
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->_backgroundColor = intval($value);
         } else {

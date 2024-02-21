@@ -84,6 +84,7 @@ class Zend_Cache_FactoryTest extends \PHPUnit\Framework\TestCase
     }
     public function testFactoryLoadsPlatformBackend()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $cache = Zend_Cache::factory('Core', 'Zend-Platform');
         } catch (Zend_Cache_Exception $e) {
@@ -96,6 +97,7 @@ class Zend_Cache_FactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testBadFrontend()
     {
+        $this->expectNotToPerformAssertions();
         try {
             Zend_Cache::factory('badFrontend', 'File');
         } catch (Zend_Exception $e) {
@@ -106,6 +108,7 @@ class Zend_Cache_FactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testBadBackend()
     {
+        $this->expectNotToPerformAssertions();
         try {
             Zend_Cache::factory('Output', 'badBackend');
         } catch (Zend_Exception $e) {
@@ -121,6 +124,7 @@ class Zend_Cache_FactoryTest extends \PHPUnit\Framework\TestCase
     {
         try {
             Zend_Cache::factory('ZF11988\Frontend', 'File', array(), array(), true, false, false);
+            $this->expectNotToPerformAssertions();
             $this->fail('Zend_Cache_Exception was expected but not thrown');
         } catch ( Zend_Cache_Exception $e ) {
             $this->assertNotEquals('Invalid frontend name [ZF11988\Frontend]', $e->getMessage());
@@ -134,6 +138,7 @@ class Zend_Cache_FactoryTest extends \PHPUnit\Framework\TestCase
     {
         try {
             Zend_Cache::factory('Output', 'ZF11988\Backend', array(), array(), false, true, false);
+            $this->expectNotToPerformAssertions();
             $this->fail('Zend_Cache_Exception was expected but not thrown');
         } catch ( Zend_Cache_Exception $e ) {
             $this->assertNotEquals('Invalid backend name [ZF11988\Backend]', $e->getMessage());

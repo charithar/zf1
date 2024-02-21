@@ -50,7 +50,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
         parent::__construct('Zend_Cache_Backend_TwoLevels', $data, $dataName);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         @mkdir($this->getTmpDir());
         $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
@@ -78,6 +78,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $slowBackend = 'File';
         $fastBackend = 'Apc';
         $slowBackendOptions = array(
@@ -96,7 +97,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
     public function testSaveOverwritesIfFastIsFull()
     {
         $slowBackend = 'File';
-        $fastBackend = $this->getMock('Zend_Cache_Backend_Apc', array('getFillingPercentage'));
+        $fastBackend = $this->createMock('Zend_Cache_Backend_Apc');
         $fastBackend->expects($this->at(0))
             ->method('getFillingPercentage')
             ->will($this->returnValue(0));
@@ -128,7 +129,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
     public function testSaveReturnsTrueIfFastIsFullOnFirstSave()
     {
         $slowBackend = 'File';
-        $fastBackend = $this->getMock('Zend_Cache_Backend_Apc', array('getFillingPercentage'));
+        $fastBackend = $this->createMock('Zend_Cache_Backend_Apc');
         $fastBackend->expects($this->any())
             ->method('getFillingPercentage')
             ->will($this->returnValue(90));

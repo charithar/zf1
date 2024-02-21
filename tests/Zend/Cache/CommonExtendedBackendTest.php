@@ -42,7 +42,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         parent::__construct($name);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         parent::setUp($notag);
         $this->_capabilities = $this->_instance->getCapabilities();
@@ -70,6 +70,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIds()
     {
         if (!($this->_capabilities['get_list'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -83,6 +84,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetTags()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -97,6 +99,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsMatchingTags()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -110,6 +113,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsMatchingTags2()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -121,6 +125,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsMatchingTags3()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -132,6 +137,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsMatchingTags4()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -143,6 +149,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsNotMatchingTags()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -153,6 +160,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsNotMatchingTags2()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }
@@ -165,6 +173,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
     public function testGetIdsNotMatchingTags3()
     {
         if (!($this->_capabilities['tags'])) {
+            $this->expectNotToPerformAssertions();
             # unsupported by this backend
             return;
         }

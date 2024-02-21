@@ -48,7 +48,7 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
         parent::__construct('Zend_Cache_Backend_Apc', $data, $dataName);
     }
 
-    public function setUp($notag = true)
+    public function setUp($notag = true): void
     {
         $this->_instance = new Zend_Cache_Backend_Apc(array());
         parent::setUp($notag);
@@ -62,10 +62,12 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_Apc();
     }
 
     public function testCleanModeOld() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('old');
         // do nothing, just to see if an error occured
@@ -73,6 +75,7 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     }
 
     public function testCleanModeMatchingTags() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('matchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -80,6 +83,7 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     }
 
     public function testCleanModeNotMatchingTags() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('notMatchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -87,18 +91,42 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     }
 
     // Because of limitations of this backend...
-    public function testGetWithAnExpiredCacheId() {}
-    public function testCleanModeMatchingTags2() {}
-    public function testCleanModeNotMatchingTags2() {}
-    public function testCleanModeNotMatchingTags3() {}
-    public function testGetIdsMatchingTags() {}
-    public function testGetIdsMatchingTags2() {}
-    public function testGetIdsMatchingTags3() {}
-    public function testGetIdsMatchingTags4() {}
-    public function testGetIdsNotMatchingTags() {}
-    public function testGetIdsNotMatchingTags2() {}
-    public function testGetIdsNotMatchingTags3() {}
-    public function testGetTags() {}
+    public function testGetWithAnExpiredCacheId() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsMatchingTags() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsMatchingTags3() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsMatchingTags4() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsNotMatchingTags() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetIdsNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testGetTags() {
+        $this->expectNotToPerformAssertions();
+    }
 
     public function testSaveCorrectCall()
     {

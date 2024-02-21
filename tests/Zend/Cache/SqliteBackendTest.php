@@ -49,7 +49,7 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest 
         parent::__construct('Zend_Cache_Backend_Sqlite', $data, $dataName);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         @mkdir($this->getTmpDir());
         $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
@@ -69,11 +69,13 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest 
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_Sqlite(array('cache_db_complete_path' => $this->_cache_dir . 'cache.db'));
     }
 
     public function testConstructorWithABadDBPath()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Backend_Sqlite(array('cache_db_complete_path' => '/foo/bar/lfjlqsdjfklsqd/cache.db'));
         } catch (Zend_Cache_Exception $e) {

@@ -49,15 +49,14 @@ class Zend_Barcode_Renderer_PdfTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodPdfResource()
     {
+        $this->expectNotToPerformAssertions();
         $pdfResource = new Zend_Pdf();
         $this->_renderer->setResource($pdfResource, 10);
     }
 
-    /**
-     * @expectedException Zend_Barcode_Renderer_Exception
-     */
     public function testObjectPdfResource()
     {
+        $this->expectException(Zend_Barcode_Renderer_Exception::class);
         $pdfResource = new StdClass();
         $this->_renderer->setResource($pdfResource);
     }

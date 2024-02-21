@@ -48,7 +48,7 @@ class Zend_Cache_WinCacheBackendTest extends Zend_Cache_CommonExtendedBackendTes
         parent::__construct('Zend_Cache_Backend_WinCache', $data, $dataName);
     }
 
-    public function setUp($notag = true)
+    public function setUp($notag = true): void
     {
         $this->_instance = new Zend_Cache_Backend_WinCache(array());
         parent::setUp($notag);
@@ -62,10 +62,12 @@ class Zend_Cache_WinCacheBackendTest extends Zend_Cache_CommonExtendedBackendTes
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_WinCache();
     }
 
     public function testCleanModeOld() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('old');
         // do nothing, just to see if an error occured
@@ -73,6 +75,7 @@ class Zend_Cache_WinCacheBackendTest extends Zend_Cache_CommonExtendedBackendTes
     }
 
     public function testCleanModeMatchingTags() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('matchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -80,6 +83,7 @@ class Zend_Cache_WinCacheBackendTest extends Zend_Cache_CommonExtendedBackendTes
     }
 
     public function testCleanModeNotMatchingTags() {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('notMatchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -88,50 +92,62 @@ class Zend_Cache_WinCacheBackendTest extends Zend_Cache_CommonExtendedBackendTes
 
     // Because of limitations of this backend...
     public function testGetWithAnExpiredCacheId() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testCleanModeMatchingTags2() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testCleanModeNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testCleanModeNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsMatchingTags() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsMatchingTags2() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsMatchingTags3() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsMatchingTags4() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsNotMatchingTags() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetIdsNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
     
     public function testGetTags() {
+        $this->expectNotToPerformAssertions();
     	$this->markTestSkipped('This test skipped due to limitations in this adapter.');
     }
 

@@ -48,7 +48,7 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
         parent::__construct('Zend_Cache_Backend_Memcached', $data, $dataName);
     }
 
-    public function setUp($notag = true)
+    public function setUp($notag = true): void
     {
         if(!class_exists('Memcached')) {
             $this->markTestSkipped('Memcached is not installed, skipping test');
@@ -82,11 +82,13 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_Memcached();
     }
 
     public function testCleanModeOld()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('old');
         // do nothing, just to see if an error occured
@@ -95,6 +97,7 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
 
     public function testCleanModeMatchingTags()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('matchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -103,6 +106,7 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
 
     public function testCleanModeNotMatchingTags()
     {
+        $this->expectNotToPerformAssertions();
         $this->_instance->setDirectives(array('logging' => false));
         $this->_instance->clean('notMatchingTag', array('tag1'));
         // do nothing, just to see if an error occured
@@ -130,10 +134,18 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
     }
 
     // Because of limitations of this backend...
-    public function testGetWithAnExpiredCacheId() {}
-    public function testCleanModeMatchingTags2() {}
-    public function testCleanModeNotMatchingTags2() {}
-    public function testCleanModeNotMatchingTags3() {}
+    public function testGetWithAnExpiredCacheId() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
+    }
     public function testSaveCorrectCall()
     {
         $this->_instance->setDirectives(array('logging' => false));

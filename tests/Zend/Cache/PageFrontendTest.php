@@ -55,11 +55,13 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Frontend_Page(array('lifetime' => 3600, 'caching' => true));
     }
 
     public function testConstructorUnimplementedOption()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Frontend_Page(array('http_conditional' => true));
         } catch (Exception $e) {
@@ -70,6 +72,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorWithBadDefaultOptions()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Frontend_Page(array('default_options' => 'foo'));
         } catch (Exception $e) {
@@ -84,6 +87,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
      */
     public function testConstructorWithBadDefaultOptions2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Frontend_Page(array('default_options' => array('cache' => true, 1 => 'bar')));
         } catch (Exception $e) {
@@ -94,6 +98,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorWithBadRegexps()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Frontend_Page(array('regexps' => 'foo'));
         } catch (Exception $e) {
@@ -104,6 +109,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorWithBadRegexps2()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $test = new Zend_Cache_Frontend_Page(array('regexps' => array('foo', 'bar')));
         } catch (Exception $e) {
@@ -118,6 +124,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
      */
     public function testConstructorWithBadRegexps3()
     {
+        $this->expectNotToPerformAssertions();
         $array = array(
            '^/$' => array('cache' => true),
            '^/index/' => array('cache' => true),
@@ -138,6 +145,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorWithGoodRegexps()
     {
+        $this->expectNotToPerformAssertions();
         $array = array(
            '^/$' => array('cache' => true),
            '^/index/' => array('cache' => true),
@@ -153,6 +161,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testConstructorWithGoodDefaultOptions()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Frontend_Page(array('default_options' => array('cache' => true)));
     }
 
@@ -201,6 +210,7 @@ class Zend_Cache_PageFrontendTest extends \PHPUnit\Framework\TestCase {
      */
     public function testNootice()
     {
+        $this->expectNotToPerformAssertions();
         $regex = array('^/article/' => array('cache' => false));
         $this->_instance->setOption('regexps', $regex);
         $this->_instance->setOption('caching', false);

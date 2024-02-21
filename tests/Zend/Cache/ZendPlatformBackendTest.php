@@ -48,7 +48,7 @@ class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest {
         parent::__construct('Zend_Cache_Backend_ZendPlatform', $data, $dataName);
     }
 
-    public function setUp($notag = false)
+    public function setUp($notag = false): void
     {
         if(!function_exists('output_cache_get')) {
             $this->markTestSkipped('Zend Platform is not installed, skipping test');
@@ -66,6 +66,7 @@ class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testConstructorCorrectCall()
     {
+        $this->expectNotToPerformAssertions();
         $test = new Zend_Cache_Backend_ZendPlatform();
     }
 
@@ -87,10 +88,18 @@ class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest {
     }
 
     // Because of limitations of this backend...
-    public function testCleanModeNotMatchingTags2() {}
-    public function testCleanModeNotMatchingTags3() {}
-    public function testCleanModeOld() {}
-    public function testCleanModeNotMatchingTags() {}
+    public function testCleanModeNotMatchingTags2() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags3() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeOld() {
+        $this->expectNotToPerformAssertions();
+    }
+    public function testCleanModeNotMatchingTags() {
+        $this->expectNotToPerformAssertions();
+    }
 }
 
 
