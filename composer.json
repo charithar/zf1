@@ -32,7 +32,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.11",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-gd": "*",
+        "ext-dom": "*"
     },
     "archive": {
         "exclude": ["/demos", "/documentation", "/tests"]
