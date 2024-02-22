@@ -54,8 +54,8 @@ class Zend_Layout_LayoutTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Layout_LayoutTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Layout_LayoutTest");
+        $suite->run();
     }
 
     /**
@@ -524,6 +524,7 @@ class Zend_Layout_LayoutTest extends \PHPUnit\Framework\TestCase
 
     public function testMinimalViewObjectWorks()
     {
+        $this->expectNotToPerformAssertions();
         require_once dirname(__FILE__) . '/_files/MinimalCustomView.php';
         $layout = new Zend_Layout(array(
             'view' => new Zend_Layout_Test_MinimalCustomView(),

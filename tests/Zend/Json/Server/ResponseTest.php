@@ -50,8 +50,8 @@ class Zend_Json_Server_ResponseTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_ResponseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Json_Server_ResponseTest");
+        $suite->run();
     }
 
     /**

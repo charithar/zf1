@@ -50,8 +50,8 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_SmdTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Json_Server_SmdTest");
+        $suite->run();
     }
 
     /**

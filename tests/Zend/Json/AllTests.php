@@ -40,12 +40,12 @@ class Zend_Json_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Json');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Json');
 
         $suite->addTestSuite('Zend_Json_JsonXMLTest');
         $suite->addTestSuite('Zend_Json_ServerTest');

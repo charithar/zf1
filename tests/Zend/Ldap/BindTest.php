@@ -267,7 +267,8 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
     public function testBindWithNullPassword()
     {
         $ldap = new Zend_Ldap($this->_options);
-        $this->setExpectedException('Zend_Ldap_Exception', 'Invalid credentials');
+        $this->expectException('Zend_Ldap_Exception');
+        $this->expectExceptionMessage('Invalid credentials');
         $ldap->bind($this->_altUsername, "\0invalidpassword");
     }
 }

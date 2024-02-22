@@ -64,30 +64,34 @@ class Zend_Http_Client_TestAdapterTest extends \PHPUnit\Framework\TestCase
     /**
      * Make sure an exception is thrown on invalid cofiguration
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
      */
     public function testSetConfigThrowsOnInvalidConfig()
     {
+        $this->expectException(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT);
         $this->adapter->setConfig('foo');
     }
 
     public function testSetConfigReturnsQuietly()
     {
+        $this->expectNotToPerformAssertions();
         $this->adapter->setConfig(array('foo' => 'bar'));
     }
 
     public function testConnectReturnsQuietly()
     {
+        $this->expectNotToPerformAssertions();
         $this->adapter->connect('http://foo');
     }
 
     public function testCloseReturnsQuietly()
     {
+        $this->expectNotToPerformAssertions();
         $this->adapter->close();
     }
 
     public function testFailRequestOnDemand()
     {
+        $this->expectNotToPerformAssertions();
         $this->adapter->setNextRequestWillFail(true);
 
         try {
@@ -193,7 +197,7 @@ class Zend_Http_Client_TestAdapterTest extends \PHPUnit\Framework\TestCase
             } catch (Exception $e) {
                 $class = 'Zend_Http_Client_Adapter_Exception';
                 $this->assertTrue($e instanceof $class);
-                $this->assertRegexp('/out of range/i', $e->getMessage());
+                $this->assertMatchesRegularExpression('/out of range/i', $e->getMessage());
             }
         }
     }

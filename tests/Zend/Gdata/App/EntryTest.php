@@ -81,6 +81,7 @@ class Zend_Gdata_App_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testConvertEntryToAndFromString()
     {
+        $this->expectNotToPerformAssertions();
         $this->enry->transferFromXML($this->enryText);
         $enryXml = $this->enry->saveXML();
         $newEntry = new Zend_Gdata_App_Entry();
@@ -501,7 +502,7 @@ class Zend_Gdata_App_EntryTest extends \PHPUnit\Framework\TestCase
     {
         $expectedVersion = 0;
         $entry = $this->service->newEntry();
-        $this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
+        $this->expectException(Zend_Gdata_App_InvalidArgumentException::class);
         $entry->setMajorProtocolVersion($expectedVersion);
     }
 
@@ -509,7 +510,7 @@ class Zend_Gdata_App_EntryTest extends \PHPUnit\Framework\TestCase
     {
         $expectedVersion = -1;
         $entry = $this->service->newEntry();
-        $this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
+        $this->expectException(Zend_Gdata_App_InvalidArgumentException::class);
         $entry->setMajorProtocolVersion($expectedVersion);
     }
 
@@ -535,7 +536,7 @@ class Zend_Gdata_App_EntryTest extends \PHPUnit\Framework\TestCase
     {
         $expectedVersion = -1;
         $entry = $this->service->newEntry();
-        $this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
+        $this->expectException(Zend_Gdata_App_InvalidArgumentException::class);
         $entry->setMinorProtocolVersion($expectedVersion);
     }
 

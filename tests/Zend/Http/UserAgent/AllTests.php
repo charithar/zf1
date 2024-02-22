@@ -42,12 +42,12 @@ class Zend_Http_UserAgent_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Http - UserAgent');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Http - UserAgent');
 
         $suite->addTestSuite('Zend_Http_UserAgentTest');
         $suite->addTestSuite('Zend_Http_UserAgent_AbstractDeviceTest');

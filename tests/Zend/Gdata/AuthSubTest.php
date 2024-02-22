@@ -124,7 +124,7 @@ class Zend_Gdata_AuthSubTest extends \PHPUnit\Framework\TestCase
 
     public function testPrivateKeyNotFound()
     {
-        $this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
+        $this->expectException(Zend_Gdata_App_InvalidArgumentException::class);
 
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('The openssl extension is not available');

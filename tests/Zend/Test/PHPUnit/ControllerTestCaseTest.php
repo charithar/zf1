@@ -32,10 +32,10 @@ require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
 require_once 'Zend/Registry.php';
 
 /** Zend_Session */
-require_once 'Zend/Session.php';
+//require_once 'Zend/Session.php';
 
 /** Zend_Controller_Action */
-require_once 'Zend/Controller/Action.php';
+//require_once 'Zend/Controller/Action.php';
 
 /**
  * Test class for Zend_Test_PHPUnit_ControllerTestCase.

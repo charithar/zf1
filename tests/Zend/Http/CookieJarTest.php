@@ -69,6 +69,7 @@ class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
      */
     public function testExceptAddInvalidCookie()
     {
+        $this->expectNotToPerformAssertions();
         $jar = new Zend_Http_CookieJar();
 
         try {
@@ -110,10 +111,10 @@ class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
      * Test we get an exception in case of invalid response objects
      *
      * @dataProvider invalidResponseProvider
-     * @expectedException Zend_Http_Exception
      */
     public function testExceptAddCookiesInvalidResponse($resp)
     {
+        $this->expectException(Zend_Http_Exception::class);
         $jar = new Zend_Http_Cookiejar();
         $jar->addCookiesFromResponse($resp, 'http://www.example.com');
     }
@@ -260,6 +261,7 @@ class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
      */
     public function testExceptGetCookieInvalidUri()
     {
+        $this->expectNotToPerformAssertions();
         $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=www.example.com; path=/tests');
         $jar = new Zend_Http_CookieJar();
         $jar->addCookie($cookie);
@@ -285,6 +287,7 @@ class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
      */
     public function testExceptGetCookieInvalidReturnType()
     {
+        $this->expectNotToPerformAssertions();
         $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=example.com;');
         $jar = new Zend_Http_CookieJar();
         $jar->addCookie($cookie);
@@ -431,6 +434,7 @@ class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
      */
     public function testExceptGetMatchingCookiesInvalidUri()
     {
+        $this->expectNotToPerformAssertions();
         $jar = new Zend_Http_CookieJar();
 
         try {

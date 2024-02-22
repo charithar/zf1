@@ -106,10 +106,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that passing an invalid URI string throws an exception
      *
-     * @expectedException Zend_Uri_Exception
      */
     public function testInvalidUriStringException()
     {
+        $this->expectException(Zend_Uri_Exception::class);
         $this->_client->setUri('httpp://__invalid__.com');
     }
 
@@ -155,10 +155,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
     /**
      * Make sure an exception is thrown if an invalid header name is used
      *
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testInvalidHeaderExcept()
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $this->_client->setHeaders('Ina_lid* Hea%der', 'is not good');
     }
 
@@ -168,6 +168,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     public function testInvalidHeaderNonStrictMode()
     {
+        $this->expectNotToPerformAssertions();
         // Disable strict validation
         $this->_client->setConfig(array('strict' => false));
 
@@ -208,10 +209,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      * Test setAuth (dynamic method) fails when trying to use an unsupported
      * authentication scheme
      *
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testExceptUnsupportedAuthDynamic()
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $this->_client->setAuth('shahar', '1234', 'SuperStrongAlgo');
     }
 
@@ -219,10 +220,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      * Test encodeAuthHeader (static method) fails when trying to use an
      * unsupported authentication scheme
      *
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testExceptUnsupportedAuthStatic()
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         Zend_Http_Client::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
     }
 
@@ -283,10 +284,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
     /**
      * Make sure using an invalid cookie jar object throws an exception
      *
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testSetInvalidCookieJar()
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $this->_client->setCookieJar('cookiejar');
     }
 
@@ -384,10 +385,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      * Test that passing invalid variables to setConfig() causes an exception
      *
      * @dataProvider      invalidConfigProvider
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testConfigSetInvalid($config)
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $this->_client->setConfig($config);
     }
 
@@ -457,10 +458,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      * Check we get an exception when trying to send a POST request with an
      * invalid content-type header
      *
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testInvalidPostContentType()
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $this->_client->setEncType('x-foo/something-fake');
         $this->_client->setParameterPost('parameter', 'value');
 
@@ -471,10 +472,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
     /**
      * Check we get an exception if there's an error in the socket
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
      */
     public function testSocketErrorException()
     {
+        $this->expectException(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT);
         // Try to connect to an invalid host
         $this->_client->setUri('http://255.255.255.255');
 
@@ -492,6 +493,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     public function testSettingExtendedMethod($method)
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_client->setMethod($method);
         } catch (Exception $e) {
@@ -504,10 +506,10 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      * the request method.
      *
      * @dataProvider invalidMethodProvider
-     * @expectedException Zend_Http_Client_Exception
      */
     public function testSettingInvalidMethodThrowsException($method)
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $this->_client->setMethod($method);
     }
 
@@ -544,7 +546,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 
             $expected = trim($expected);
             $got = trim($got);
-            $this->assertRegExp("/^$expected$/", $got);
+            $this->assertMatchesRegularExpression("/^$expected$/", $got);
         }
     }
 
@@ -567,7 +569,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 
             $expected = trim($expected);
             $got = trim($got);
-            $this->assertRegExp("/^$expected$/", $got);
+            $this->assertMatchesRegularExpression("/^$expected$/", $got);
         }
     }
 
@@ -592,7 +594,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 
             $expected = trim($expected);
             $got = trim($got);
-            $this->assertRegExp("/^$expected$/", $got);
+            $this->assertMatchesRegularExpression("/^$expected$/", $got);
         }
     }
 
@@ -628,6 +630,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetDisabledAuthBeforSettingUriBug()
     {
+        $this->expectNotToPerformAssertions();
         $client = new Zend_Http_Client_StaticTest_Mock();
         // if the bug exists this call should creates a fatal error
         $client->setAuth(false);
@@ -640,6 +643,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     public function testOpenTempStreamWithValidFileDoesntThrowsException()
     {
+        $this->expectNotToPerformAssertions();
     	$url = 'http://www.example.com';
     	$config = array (
 			'output_stream' => realpath(dirname(__FILE__) . '/_files/zend_http_client_stream.file'),
@@ -662,6 +666,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     public function testOpenTempStreamWithBogusFileClosesTheConnection()
     {
+        $this->expectNotToPerformAssertions();
     	$url = 'http://www.example.com';
     	$config = array (
 			'output_stream' => '/path/to/bogus/file.ext',
@@ -719,6 +724,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     function testStreamWarningRewind()
     {
+        $this->expectNotToPerformAssertions();
         $httpClient = new Zend_Http_Client();
         $httpClient->setUri('http://example.org');
         $httpClient->setMethod(Zend_Http_Client::GET);

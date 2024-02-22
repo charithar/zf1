@@ -277,6 +277,7 @@ class Zend_Http_ResponseTest extends \PHPUnit\Framework\TestCase
 
     public function testExceptInvalidChunkedBody()
     {
+        $this->expectNotToPerformAssertions();
         try {
             Zend_Http_Response::decodeChunkedBody($this->readResponse('response_deflate'));
             $this->fail('An expected exception was not thrown');
@@ -412,7 +413,8 @@ class Zend_Http_ResponseTest extends \PHPUnit\Framework\TestCase
      */
     public function testExtractHeadersRaisesExceptionWhenDetectingCRLFInjection($message)
     {
-        $this->setExpectedException('Zend_Http_Exception', 'Invalid');
+        $this->expectException('Zend_Http_Exception');
+        $this->expectExceptionMessage('Invalid');
         Zend_Http_Response::extractHeaders($message);
     }
 

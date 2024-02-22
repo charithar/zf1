@@ -50,12 +50,12 @@ class Zend_Ldap_Node_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Ldap_Node');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Ldap_Node');
 
         $suite->addTestSuite('Zend_Ldap_Node_OfflineTest');
         $suite->addTestSuite('Zend_Ldap_Node_AttributeIterationTest');

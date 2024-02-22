@@ -43,10 +43,10 @@ class Zend_Http_CookieTest extends \PHPUnit\Framework\TestCase
      * Make sure we can't set invalid names
      *
      * @dataProvider invalidCookieNameCharProvider
-     * @expectedException Zend_Http_Exception
      */
     public function testSetInvalidName($char)
     {
+        $this->expectException(Zend_Http_Exception::class);
         $cookie = new Zend_Http_Cookie("cookie_$char", 'foo', 'example.com');
     }
 
@@ -214,6 +214,7 @@ class Zend_Http_CookieTest extends \PHPUnit\Framework\TestCase
     {
         $cookie = Zend_Http_Cookie::fromString($cStr);
         if (! $cookie instanceof Zend_Http_Cookie) {
+            $this->expectNotToPerformAssertions();
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
 
