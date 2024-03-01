@@ -57,15 +57,15 @@ class Zend_Service_SqlAzure_Management_ManagementClientTest extends \PHPUnit\Fra
     public static function main()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_RUNTESTS) {
-            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_SqlAzure_Management_ManagementClientTest");
-            $result = PHPUnit_TextUI_TestRunner::run($suite);
+            $suite  = new \PHPUnit\Framework\TestSuite("Zend_Service_SqlAzure_Management_ManagementClientTest");
+            $suite->run();
         }
     }
     
     /**
      * Test teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // Clean up server
         $managementClient = $this->createManagementClient();

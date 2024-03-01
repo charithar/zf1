@@ -39,12 +39,12 @@ class Zend_Test_PHPUnit_Constraint_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Constraint');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Test_PHPUnit_Constraint');
 
         $suite->addTestSuite('Zend_Test_PHPUnit_Constraint_DomQueryTest');
 

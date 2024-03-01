@@ -46,8 +46,8 @@ class Zend_Validate_CallbackTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Validate_CallbackTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Zend_Validate_CallbackTest');
+        $suite->run();
     }
 
     /**
@@ -121,7 +121,7 @@ class Zend_Validate_CallbackTest extends \PHPUnit\Framework\TestCase
     public function optionsCallback($value)
     {
         $args = func_get_args();
-        $this->assertStringContainsStringIgnoringCase('something', $args);
+        $this->assertContains('something', $args);
         return $args;
     }
 }

@@ -57,15 +57,15 @@ class Zend_Service_WindowsAzure_Management_ManagementClientTest extends \PHPUnit
     public static function main()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_RUNTESTS) {
-            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_Management_ManagementClientTest");
-            $result = PHPUnit_TextUI_TestRunner::run($suite);
+            $suite  = new \PHPUnit\Framework\TestSuite("Zend_Service_WindowsAzure_Management_ManagementClientTest");
+            $suite->run();
         }
     }
     
     /**
      * Test setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     	// Upload sample package to Windows Azure
     	$storageClient = $this->createStorageInstance();
@@ -79,7 +79,7 @@ class Zend_Service_WindowsAzure_Management_ManagementClientTest extends \PHPUnit
     /**
      * Test teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     	// Clean up storage
         $storageClient = $this->createStorageInstance();

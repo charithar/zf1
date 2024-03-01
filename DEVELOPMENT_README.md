@@ -68,3 +68,7 @@ To stop the VM do one of the following:
 Also, when any of of the Puppet manifests change (.pp files), it is a good idea to rerun them:
 
     vagrant provision
+
+docker compose run --rm zf1_test
+
+docker compose exec zf1_test ../bin/phpunit --stderr -d memory_limit=-1 Zend/RegistryTest.php

@@ -173,6 +173,7 @@ class Zend_Validate_Db_NoRecordExistsTest extends \PHPUnit\Framework\TestCase
      */
     public function testThrowsExceptionWithNoAdapter()
     {
+        $this->expectNotToPerformAssertions();
         Zend_Db_Table_Abstract::setDefaultAdapter(null);
         try {
             $validator = new Zend_Validate_Db_NoRecordExists('users', 'field1', 'id != 1');

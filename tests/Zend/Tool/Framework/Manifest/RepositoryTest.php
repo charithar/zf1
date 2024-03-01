@@ -112,11 +112,9 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends \PHPUnit\Framework\Tes
 
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Manifest_Exception
-     */
     public function testAddManifestThrowsExceptionOnBadGetProviders()
     {
+        $this->expectException(Zend_Tool_Framework_Manifest_Exception::class);
         $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_ManifestBadProvider());
     }
 
@@ -131,11 +129,9 @@ class Zend_Tool_Framework_Manifest_RepositoryTest extends \PHPUnit\Framework\Tes
         $this->assertEquals(2, count($this->_repository->getManifests()));
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Manifest_Exception
-     */
     public function testProcessThrowsExceptionOnBadMetadata()
     {
+        $this->expectException(Zend_Tool_Framework_Manifest_Exception::class);
         $this->_repository->addManifest(new Zend_Tool_Framework_Manifest_ManifestBadMetadata());
         $this->_repository->process();
     }

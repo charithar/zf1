@@ -50,8 +50,8 @@ class Zend_View_Helper_FormButtonTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormButtonTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_FormButtonTest");
+        $suite->run();
     }
 
     /**
@@ -60,7 +60,7 @@ class Zend_View_Helper_FormButtonTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_FormButton();
@@ -73,16 +73,16 @@ class Zend_View_Helper_FormButtonTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
     public function testFormButtonRendersButtonXhtml()
     {
         $button = $this->helper->formButton('foo', 'bar');
-        $this->assertRegexp('/<button[^>]*?value="bar"/', $button);
-        $this->assertRegexp('/<button[^>]*?name="foo"/', $button);
-        $this->assertRegexp('/<button[^>]*?id="foo"/', $button);
+        $this->assertMatchesRegularExpression('/<button[^>]*?value="bar"/', $button);
+        $this->assertMatchesRegularExpression('/<button[^>]*?name="foo"/', $button);
+        $this->assertMatchesRegularExpression('/<button[^>]*?id="foo"/', $button);
         $this->assertStringContainsStringIgnoringCase('</button>', $button);
     }
 
@@ -111,7 +111,7 @@ class Zend_View_Helper_FormButtonTest extends \PHPUnit\Framework\TestCase
     public function testValueUsedForContentWhenNoContentProvided()
     {
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
-        $this->assertRegexp('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
+        $this->assertMatchesRegularExpression('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
     }
 
     public function testButtonTypeIsButtonByDefault()

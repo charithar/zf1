@@ -88,11 +88,9 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends \PHPUnit\Framework\Tes
         $this->assertEquals('FooBar', $this->_repository->getProviderSignature('FooBar')->getName());
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Provider_Exception
-     */
     public function testAddProviderThrowsExceptionOnDuplicateName()
     {
+        $this->expectException(Zend_Tool_Framework_Provider_Exception::class);
         $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
         $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderOne());
     }

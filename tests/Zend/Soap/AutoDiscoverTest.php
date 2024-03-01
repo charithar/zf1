@@ -617,6 +617,7 @@ class Zend_Soap_AutoDiscoverTest extends \PHPUnit\Framework\TestCase
 
     public function testSetNonStringNonZendUriUriThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         $server = new Zend_Soap_AutoDiscover();
         try {
             $server->setUri(array("bogus"));
@@ -677,6 +678,7 @@ class Zend_Soap_AutoDiscoverTest extends \PHPUnit\Framework\TestCase
 
     public function testUnusedFunctionsOfAutoDiscoverThrowException()
     {
+        $this->expectNotToPerformAssertions();
         $server = new Zend_Soap_AutoDiscover();
         try {
             $server->setPersistence("bogus");

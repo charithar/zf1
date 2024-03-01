@@ -50,22 +50,22 @@ class Zend_Service_WindowsAzure_TableStorageTest extends \PHPUnit\Framework\Test
     public static function main()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS) {
-            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_TableStorageTest");
-            $result = PHPUnit_TextUI_TestRunner::run($suite);
+            $suite  = new \PHPUnit\Framework\TestSuite("Zend_Service_WindowsAzure_TableStorageTest");
+            $suite->run();
         }
     }
     
     /**
      * Test setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
     
     /**
      * Test teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $storageClient = $this->createStorageInstance();
         for ($i = 1; $i <= self::$uniqId; $i++)

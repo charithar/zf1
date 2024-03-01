@@ -57,12 +57,12 @@ class Zend_Service_WindowsAzure_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_WindowsAzure');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Service_WindowsAzure');
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_CREDENTIALS_RUNTESTS) {
             $suite->addTest(Zend_Service_WindowsAzure_Credentials_AllTests::suite());

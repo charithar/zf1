@@ -51,7 +51,7 @@ class Zend_Translate_Adapter_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Translate_Adapter');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Translate_Adapter');
 
         $suite->addTestSuite('Zend_Translate_Adapter_ArrayTest');
         $suite->addTestSuite('Zend_Translate_Adapter_CsvTest');

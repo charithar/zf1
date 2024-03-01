@@ -54,8 +54,8 @@ class Zend_View_Helper_Placeholder_RegistryTest extends \PHPUnit\Framework\TestC
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_Placeholder_RegistryTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_Placeholder_RegistryTest");
+        $suite->run();
     }
 
     /**
@@ -153,6 +153,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends \PHPUnit\Framework\TestC
      */
     public function testSetContainerClassThrowsExceptionWithInvalidContainerClass()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->registry->setContainerClass('Zend_View_Helper_Placeholder_RegistryTest_BogusContainer');
             $this->fail('Invalid container classes should not be accepted');

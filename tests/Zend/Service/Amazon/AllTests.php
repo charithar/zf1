@@ -50,17 +50,17 @@ class Zend_Service_Amazon_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Amazon');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Service_Amazon');
 
         $suite->addTestSuite('Zend_Service_Amazon_OfflineTest');
         if (defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED') &&

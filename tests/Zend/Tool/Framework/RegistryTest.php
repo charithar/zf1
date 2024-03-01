@@ -113,35 +113,27 @@ class Zend_Tool_Framework_RegistryTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->_registry->request instanceof Zend_Tool_Framework_Client_Request);
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Exception
-     */
     public function testMagicGetThrowsExceptionOnNonExistentItem()
     {
+        $this->expectException(Zend_Tool_Framework_Exception::class);
         $foo = $this->_registry->foo;
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Exception
-     */
     public function testMagicSetThrowsExceptionOnNonExistentItem()
     {
+        $this->expectException(Zend_Tool_Framework_Exception::class);
         $this->_registry->foo = 'foo';
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Exception
-     */
     public function testIsObjectRegistryEnablableWillThrowExceptionsOnNonObject()
     {
+        $this->expectException(Zend_Tool_Framework_Exception::class);
         $this->_registry->isObjectRegistryEnablable('foo');
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Exception
-     */
     public function testEnableRegistryOnObjectWillThrowExceptionsOnNonObject()
     {
+        $this->expectException(Zend_Tool_Framework_Exception::class);
         $this->_registry->enableRegistryOnObject(new ArrayObject());
     }
 

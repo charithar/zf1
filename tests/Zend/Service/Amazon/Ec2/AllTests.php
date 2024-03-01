@@ -53,7 +53,7 @@ class Zend_Service_Amazon_Ec2_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
@@ -68,7 +68,7 @@ class Zend_Service_Amazon_Ec2_AllTests
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Amazon_Ec2');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Service_Amazon_Ec2');
 
         $suite->addTestSuite('Zend_Service_Amazon_Ec2_AvailabilityzonesTest');
         $suite->addTestSuite('Zend_Service_Amazon_Ec2_EbsTest');

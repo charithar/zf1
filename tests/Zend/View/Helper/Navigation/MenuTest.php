@@ -336,6 +336,7 @@ class Zend_View_Helper_Navigation_MenuTest
 
     public function testRenderingPartialShouldFailOnInvalidPartialArray()
     {
+        $this->expectNotToPerformAssertions();
         $this->_helper->setPartial(array('menu.phtml'));
 
         try {

@@ -38,12 +38,12 @@ class Zend_Service_Rackspace_Servers_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Rackspace_Servers');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Service_Rackspace_Servers');
 
         $suite->addTestSuite('Zend_Service_Rackspace_Servers_OfflineTest');
         $suite->addTestSuite('Zend_Service_Rackspace_Servers_OnlineTest');

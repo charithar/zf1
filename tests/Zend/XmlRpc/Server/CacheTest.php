@@ -47,8 +47,8 @@ class Zend_XmlRpc_Server_CacheTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Server_CacheTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_XmlRpc_Server_CacheTest");
+        $suite->run();
     }
 
     /**

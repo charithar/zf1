@@ -47,8 +47,8 @@ class Zend_XmlRpc_Request_HttpTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Request_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_XmlRpc_Request_HttpTest");
+        $suite->run();
     }
 
     /**
@@ -145,6 +145,7 @@ EOT;
 
     public function testCanPassInMethodAndParams()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $request = new Zend_XmlRpc_Request_Http('foo', array('bar', 'baz'));
         } catch (Exception $e) {

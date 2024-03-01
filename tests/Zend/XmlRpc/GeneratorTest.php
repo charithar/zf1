@@ -92,7 +92,7 @@ class Zend_XmlRpc_GeneratorTest extends \PHPUnit\Framework\TestCase
         $variant2 = '<element>&lt;&gt;&amp;&quot;\'€</element>';
         try {
             $this->assertXml($variant1, $generator);
-        } catch (PHPUnit_Framework_ExpectationFailedException $e) {
+        } catch (\PHPUnit\Framework\ExpectationFailedException $e) {
             $this->assertXml($variant2, $generator);
         }
     }

@@ -153,7 +153,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends \PHPUnit\Framework\
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException("Zend_Soap_Wsdl_Exception");
+        $this->expectException("Zend_Soap_Wsdl_Exception");
 
         $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
     }

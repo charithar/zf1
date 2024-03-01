@@ -42,12 +42,12 @@ class Zend_Test_PHPUnit_Db_DataSet_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Db_DataSet');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Test_PHPUnit_Db_DataSet');
 
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_DbRowsetTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_QueryDataSetTest');

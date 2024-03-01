@@ -43,8 +43,8 @@ class Zend_Xml_SecurityTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
  
     public function testScanForXEE()
@@ -57,12 +57,13 @@ class Zend_Xml_SecurityTest extends \PHPUnit\Framework\TestCase
 </results>
 XML;
 
-        $this->setExpectedException('Zend_Xml_Exception');
+        $this->expectException(Zend_Xml_Exception::class);
         $result = Zend_Xml_Security::scan($xml);
     }
 
     public function testScanForXXE()
     {
+        $this->expectNotToPerformAssertions();
         $file = tempnam(sys_get_temp_dir(), 'Zend_XML_Security');
         file_put_contents($file, 'This is a remote content!');
         $xml = <<<XML

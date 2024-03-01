@@ -39,12 +39,12 @@ class Zend_Xml_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Xml');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Xml');
 
         $suite->addTestSuite('Zend_Xml_SecurityTest');
         $suite->addTestSuite('Zend_Xml_MultibyteTest');

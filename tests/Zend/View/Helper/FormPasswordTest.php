@@ -52,8 +52,8 @@ class Zend_View_Helper_FormPasswordTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormPasswordTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_FormPasswordTest");
+        $suite->run();
     }
 
     /**
@@ -62,7 +62,7 @@ class Zend_View_Helper_FormPasswordTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -84,7 +84,7 @@ class Zend_View_Helper_FormPasswordTest extends \PHPUnit\Framework\TestCase
             'attribs' => array('disable' => true)
         ));
 
-        $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(disabled="disabled")/', $html);
     }
 
     /**
@@ -98,7 +98,7 @@ class Zend_View_Helper_FormPasswordTest extends \PHPUnit\Framework\TestCase
             'attribs' => array('disable' => true)
         ));
 
-        $this->assertNotRegexp('/<input[^>]*?(type="hidden")/', $html);
+        $this->assertDoesNotMatchRegularExpression('/<input[^>]*?(type="hidden")/', $html);
     }
 
     public function testShouldRenderAsHtmlByDefault()

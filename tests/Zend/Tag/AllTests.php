@@ -40,12 +40,12 @@ class Zend_Tag_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Tag');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Tag');
 
         $suite->addTestSuite('Zend_Tag_ItemTest');
         $suite->addTestSuite('Zend_Tag_ItemListTest');

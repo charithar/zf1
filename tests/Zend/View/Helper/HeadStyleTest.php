@@ -65,8 +65,8 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadStyleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_HeadStyleTest");
+        $suite->run();
     }
 
     /**
@@ -116,6 +116,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonStyleValueProvided()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->append('foo');
             $this->fail('Non-style value should not append');
@@ -145,8 +146,8 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
             $item = $values[$i];
 
             $this->assertTrue($item instanceof stdClass);
-            $this->assertObjectHasAttribute('content', $item);
-            $this->assertObjectHasAttribute('attributes', $item);
+            $this->assertObjectHasProperty('content', $item);
+            $this->assertObjectHasProperty('attributes', $item);
             $this->assertEquals($string, $item->content);
         }
     }
@@ -162,8 +163,8 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
             $item = array_shift($values);
 
             $this->assertTrue($item instanceof stdClass);
-            $this->assertObjectHasAttribute('content', $item);
-            $this->assertObjectHasAttribute('attributes', $item);
+            $this->assertObjectHasProperty('content', $item);
+            $this->assertObjectHasProperty('attributes', $item);
             $this->assertEquals($string, $item->content);
         }
     }
@@ -181,8 +182,8 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         $item = array_shift($values);
 
         $this->assertTrue($item instanceof stdClass);
-        $this->assertObjectHasAttribute('content', $item);
-        $this->assertObjectHasAttribute('attributes', $item);
+        $this->assertObjectHasProperty('content', $item);
+        $this->assertObjectHasProperty('attributes', $item);
         $this->assertEquals($string, $item->content);
     }
 
@@ -197,7 +198,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         ));
         $value = $this->helper->getValue();
 
-        $this->assertObjectHasAttribute('attributes', $value);
+        $this->assertObjectHasProperty('attributes', $value);
         $attributes = $value->attributes;
 
         $this->assertTrue(isset($attributes['lang']));
@@ -231,7 +232,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         $this->helper->setStyle('a {}', array(
         ));
         $value = $this->helper->toString();
-        $this->assertRegexp('#<style [^>]*?media="screen"#', $value, $value);
+        $this->assertMatchesRegularExpression('#<style [^>]*?media="screen"#', $value, $value);
     }
 
     /**
@@ -306,6 +307,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidMethodRaisesException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->bogusMethod();
             $this->fail('Invalid method should raise exception');
@@ -314,6 +316,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
 
     public function testTooFewArgumentsRaisesException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->appendStyle();
             $this->fail('Too few arguments should raise exception');
@@ -345,6 +348,7 @@ h1 {
 
     public function testSerialCapturingWorks()
     {
+        $this->expectNotToPerformAssertions();
         $this->helper->headStyle()->captureStart();
         echo "Captured text";
         $this->helper->headStyle()->captureEnd();

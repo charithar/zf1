@@ -80,11 +80,10 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
      * non-HTTP scheme
      *
      * @group ZF-4395
-     *
-     * @expectedException Zend_Uri_Exception
      */
     public function testFromStringInvalidScheme()
     {
+        $this->expectException(Zend_Uri_Exception::class);
         Zend_Uri_Http::fromString('ftp://example.com/file');
     }
 
@@ -95,7 +94,7 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
      */
     public function testFromStringWithInvalidVariableType()
     {
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->expectException(Zend_Uri_Exception::class);
         Zend_Uri_Http::fromString(0);
     }
 
@@ -146,21 +145,25 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testUsernameInvalidCharacter()
     {
+        $this->expectNotToPerformAssertions();
         $this->_testInvalidUri('http://an`di:password@www.zend.com');
     }
 
     public function testNoUsernamePassword()
     {
+        $this->expectNotToPerformAssertions();
         $this->_testInvalidUri('http://:password@www.zend.com');
     }
 
     public function testPasswordInvalidCharacter()
     {
+        $this->expectNotToPerformAssertions();
         $this->_testInvalidUri('http://andi:pass%word@www.zend.com');
     }
 
     public function testMissingDomainParts()
     {
+        $this->expectNotToPerformAssertions();
         $this->_testInvalidUri('https://www.zend..com');
     }
 
@@ -362,14 +365,14 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
     public function testSetInvalidUsername()
     {
         $uri = Zend_Uri::factory('http://example.com');
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->expectException(Zend_Uri_Exception::class);
         $uri->setUsername('alice?');
     }
 
     public function testSetInvalidPassword()
     {
         $uri = Zend_Uri::factory('http://example.com');
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->expectException(Zend_Uri_Exception::class);
         $uri->setUsername('alice');
         $uri->setPassword('secret?');
     }
@@ -378,7 +381,7 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
     {
         $uri = Zend_Uri::factory('http://example.com');
         $host = '';
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->expectException(Zend_Uri_Exception::class);
         $uri->setHost($host);
     }
 
@@ -386,7 +389,7 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
     {
         $uri = Zend_Uri::factory('http://example.com');
         $host = 'example§com';
-        $this->setExpectedException('Zend_Uri_Exception');
+        $this->expectException(Zend_Uri_Exception::class);
         $uri->setHost($host);
     }
 

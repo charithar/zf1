@@ -49,8 +49,8 @@ class Zend_View_Helper_FormImageTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormImageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_FormImageTest");
+        $suite->run();
     }
 
     /**
@@ -59,7 +59,7 @@ class Zend_View_Helper_FormImageTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         $this->view->doctype('HTML4_LOOSE');  // Reset doctype to default
@@ -74,25 +74,25 @@ class Zend_View_Helper_FormImageTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
     public function testFormImageRendersFormImageXhtml()
     {
         $button = $this->helper->formImage('foo', 'bar');
-        $this->assertRegexp('/<input[^>]*?src="bar"/', $button);
-        $this->assertRegexp('/<input[^>]*?name="foo"/', $button);
-        $this->assertRegexp('/<input[^>]*?type="image"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?src="bar"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?name="foo"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?type="image"/', $button);
     }
 
     public function testDisablingFormImageRendersImageInputWithDisableAttribute()
     {
         $button = $this->helper->formImage('foo', 'bar', array('disable' => true));
-        $this->assertRegexp('/<input[^>]*?disabled="disabled"/', $button);
-        $this->assertRegexp('/<input[^>]*?src="bar"/', $button);
-        $this->assertRegexp('/<input[^>]*?name="foo"/', $button);
-        $this->assertRegexp('/<input[^>]*?type="image"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?disabled="disabled"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?src="bar"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?name="foo"/', $button);
+        $this->assertMatchesRegularExpression('/<input[^>]*?type="image"/', $button);
     }
     
     /**

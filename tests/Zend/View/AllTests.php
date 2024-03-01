@@ -38,12 +38,12 @@ class Zend_View_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_View');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_View');
 
         $suite->addTest(Zend_View_Helper_AllTests::suite());
 

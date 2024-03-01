@@ -39,8 +39,8 @@ class Zend_Tag_ItemTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     public function testConstuctor()
@@ -121,6 +121,7 @@ class Zend_Tag_ItemTest extends \PHPUnit\Framework\TestCase
 
     public function testSkipOptions()
     {
+        $this->expectNotToPerformAssertions();
         $tag = new Zend_Tag_Item(array('title' => 'foo', 'weight' => 1, 'param' => 'foobar'));
         // In case would fail due to an error
     }

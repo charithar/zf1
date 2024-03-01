@@ -74,8 +74,8 @@ class Zend_Tool_Project_ProfileTest extends \PHPUnit\Framework\TestCase
         $profile->setAttribute('boof', 'foob');
 
         $this->assertEquals('foob', $profile->getAttribute('boof'));
-        $this->assertStringContainsStringIgnoringCase('bar', $profile->getAttributes());
-        $this->assertStringContainsStringIgnoringCase('BAZ', $profile->getAttributes());
+        $this->assertContains('bar', $profile->getAttributes());
+        $this->assertContains('BAZ', $profile->getAttributes());
 
     }
 
@@ -223,48 +223,36 @@ class Zend_Tool_Project_ProfileTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(file_exists($this->_projectDirectory . 'application/configs'));
     }
 
-    /**
-     *
-     * @expectedException Zend_Tool_Project_Exception
-     */
     public function testProfileThrowsExceptionOnLoadFromData()
     {
+        $this->expectException(Zend_Tool_Project_Exception::class);
         $profile = new Zend_Tool_Project_Profile();
 
         // missing data from attributes should throw exception here
         $profile->loadFromData();
     }
 
-    /**
-     *
-     * @expectedException Zend_Tool_Project_Exception
-     */
     public function testProfileThrowsExceptionOnLoadFromFile()
     {
+        $this->expectException(Zend_Tool_Project_Exception::class);
         $profile = new Zend_Tool_Project_Profile();
 
         // missing file path or project path
         $profile->loadFromFile();
     }
 
-    /**
-     *
-     * @expectedException Zend_Tool_Project_Exception
-     */
     public function testProfileThrowsExceptionOnStoreToFile()
     {
+        $this->expectException(Zend_Tool_Project_Exception::class);
         $profile = new Zend_Tool_Project_Profile();
 
         // missing file path or project path
         $profile->storeToFile();
     }
 
-    /**
-     *
-     * @expectedException Zend_Tool_Project_Exception
-     */
     public function testProfileThrowsExceptionOnLoadFromFileWithBadPathForProfileFile()
     {
+        $this->expectException(Zend_Tool_Project_Exception::class);
         $profile = new Zend_Tool_Project_Profile();
         $profile->setAttribute('projectProfileFile', '/path/should/not/exist');
 

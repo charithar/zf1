@@ -455,7 +455,10 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         $type  = (string) $type;
         $title = (string) $title;
 
-        $attributes = compact('rel', 'href', 'type', 'title', 'extras');
+        $vars = ['rel', 'href', 'type', 'title'];
+        if (isset($extras)) $vars[] = 'extras';
+
+        $attributes = compact(...$vars);
         return $this->createData($this->_applyExtras($attributes));
     }
 

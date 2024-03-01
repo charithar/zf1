@@ -520,7 +520,7 @@ class Zend_Locale_Format
 
         $regexs = Zend_Locale_Format::_getRegexForType('decimalnumber', $options);
         $regexs = array_merge($regexs, Zend_Locale_Format::_getRegexForType('scientificnumber', $options));
-        if (!empty($input) && ($input[0] == $symbols['decimal'])) {
+        if (!empty($input) && (('' . $input)[0] == $symbols['decimal'])) {
             $input = 0 . $input;
         }
         foreach ($regexs as $regex) {
@@ -813,6 +813,10 @@ class Zend_Locale_Format
             trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
         }
 
+        if (!is_string($date)) {
+            throw new Zend_Locale_Exception("Specified date is not a string value");
+        }
+
         $options = self::_checkOptions($options) + self::$_options;
         $test = array('h', 'H', 'm', 's', 'y', 'Y', 'M', 'd', 'D', 'E', 'S', 'l', 'B', 'I',
                        'X', 'r', 'U', 'G', 'w', 'e', 'a', 'A', 'Z', 'z', 'v');
@@ -910,7 +914,7 @@ class Zend_Locale_Format
         if (count($splitted[0]) == 0) {
             self::_setEncoding($oenc);
             //require_once 'Zend/Locale/Exception.php';
-            throw new Zend_Locale_Exception("No date part in '$date' found.");
+            throw new Zend_Locale_Exception("No date part in '" . is_scalar($date) ? $date : var_export($date, true) . "' found.");
         }
         if (count($splitted[0]) == 1) {
             $split = 0;
@@ -1107,12 +1111,14 @@ class Zend_Locale_Format
         // mapping for each month number from 1 to 12.
         // If no $locale was given, or $locale was invalid, do not use this identity mapping to normalize.
         // Otherwise, translate locale aware month names in $number to their numeric equivalents.
-        $position = false;
-        if ($monthlist && $monthlist[1] != 1) {
-            foreach($monthlist as $key => $name) {
-                if (($position = iconv_strpos($number, $name, 0, 'UTF-8')) !== false) {
-                    $number   = str_ireplace($name, $key, $number);
-                    return $position;
+        if (is_string($number)) {
+            $position = false;
+            if ($monthlist && $monthlist[1] != 1) {
+                foreach ($monthlist as $key => $name) {
+                    if (($position = iconv_strpos($number, $name, 0, 'UTF-8')) !== false) {
+                        $number = str_ireplace($name, $key, $number);
+                        return $position;
+                    }
                 }
             }
         }

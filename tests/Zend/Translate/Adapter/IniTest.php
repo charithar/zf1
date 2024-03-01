@@ -42,8 +42,8 @@ class Zend_Translate_Adapter_IniTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_IniTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Translate_Adapter_IniTest");
+        $suite->run();
     }
 
     public function testCreate()

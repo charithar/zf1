@@ -40,8 +40,8 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     public function testDefaultOutput()
@@ -91,6 +91,7 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends \PHPUnit\Framework\TestCase
 
     public function testSkipOptions()
     {
+        $this->expectNotToPerformAssertions();
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(array('options' => 'foobar'));
         // In case would fail due to an error
     }

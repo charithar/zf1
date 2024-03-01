@@ -77,8 +77,8 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Wildfire_WildfireTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Wildfire_WildfireTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -187,6 +187,7 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
 
     public function testFirePhpPluginInstanciation()
     {
+        $this->expectNotToPerformAssertions();
         $this->_setupWithoutFrontController();
         try {
             Zend_Wildfire_Plugin_FirePhp::getInstance();
@@ -739,6 +740,7 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
 
     public function testChannelInstanciation()
     {
+        $this->expectNotToPerformAssertions();
         $this->_setupWithoutFrontController();
         try {
             Zend_Wildfire_Channel_HttpHeaders::getInstance();
@@ -1046,6 +1048,7 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
      */
     public function testFileLineOffsets()
     {
+        $this->expectNotToPerformAssertions();
         $this->_setupWithoutFrontController();
 
         $firephp = Zend_Wildfire_Plugin_FirePhp::getInstance();

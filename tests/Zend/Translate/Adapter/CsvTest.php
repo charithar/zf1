@@ -42,8 +42,8 @@ class Zend_Translate_Adapter_CsvTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_CsvTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Translate_Adapter_CsvTest");
+        $suite->run();
     }
 
     protected function setUp(): void

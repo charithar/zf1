@@ -40,12 +40,12 @@ class Zend_Tool_Project_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Tool_Project');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Tool_Project');
 
         // suites here
         $suite->addTestSuite('Zend_Tool_Project_ProfileTest');

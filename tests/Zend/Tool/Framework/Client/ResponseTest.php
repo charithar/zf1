@@ -92,11 +92,9 @@ class Zend_Tool_Framework_Client_ResponseTest extends \PHPUnit\Framework\TestCas
         $this->assertEquals('my response exception', $this->_response->getException()->getMessage());
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Client_Exception
-     */
     public function testSetCallbackThrowsExceptionOnInvalidCallback()
     {
+        $this->expectException(Zend_Tool_Framework_Client_Exception::class);
         $this->_response->setContentCallback(5);
     }
 
@@ -113,7 +111,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends \PHPUnit\Framework\TestCas
         $this->_response->addContentDecorator($separator);
         $decorators = $this->_response->getContentDecorators();
         $this->assertArrayHasKey('separator', $decorators);
-        $this->assertStringContainsStringIgnoringCase($separator, $decorators);
+        $this->assertContains($separator, $decorators);
     }
 
     public function testResponseWillApplyDecorator()

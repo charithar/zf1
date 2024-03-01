@@ -44,17 +44,17 @@ class Zend_Service_Twitter_AllTests
      */
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     /**
      * Creates and returns this test suite
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Twitter');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Service_Twitter');
 
         $suite->addTestSuite('Zend_Service_Twitter_TwitterTest');
 

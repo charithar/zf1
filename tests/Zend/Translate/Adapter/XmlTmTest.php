@@ -42,8 +42,8 @@ class Zend_Translate_Adapter_XmlTmTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_XmlTmTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Translate_Adapter_XmlTmTest");
+        $suite->run();
     }
 
     public function testCreate()

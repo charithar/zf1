@@ -65,14 +65,14 @@ class Zend_View_Helper_BaseUrlTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_BaseUrlTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_BaseUrlTest");
+        $suite->run();
     }
 
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_previousBaseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->_server = $_SERVER;
@@ -81,7 +81,7 @@ class Zend_View_Helper_BaseUrlTest extends \PHPUnit\Framework\TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Zend_Controller_Front::getInstance()->setBaseUrl($this->_previousBaseUrl);
         Zend_Controller_Front::getInstance()->resetInstance();

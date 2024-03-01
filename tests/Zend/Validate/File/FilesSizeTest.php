@@ -47,8 +47,8 @@ class Zend_Validate_File_FilesSizeTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Validate_File_FilesSizeTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Validate_File_FilesSizeTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -187,6 +187,7 @@ class Zend_Validate_File_FilesSizeTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorShouldRaiseErrorWhenPassedMultipleOptions()
     {
+        $this->expectNotToPerformAssertions();
         $handler = set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE);
         $validator = new Zend_Validate_File_FilesSize(1000, 10000);
         restore_error_handler();

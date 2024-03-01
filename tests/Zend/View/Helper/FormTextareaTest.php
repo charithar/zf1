@@ -53,8 +53,8 @@ class Zend_View_Helper_FormTextareaTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormTextareaTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_FormTextareaTest");
+        $suite->run();
     }
 
     /**
@@ -63,7 +63,7 @@ class Zend_View_Helper_FormTextareaTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_FormTextarea();
@@ -81,7 +81,7 @@ class Zend_View_Helper_FormTextareaTest extends \PHPUnit\Framework\TestCase
             'attribs' => array('disable' => true)
         ));
 
-        $this->assertRegexp('/<textarea[^>]*?(disabled="disabled")/', $html);
+        $this->assertMatchesRegularExpression('/<textarea[^>]*?(disabled="disabled")/', $html);
     }
 
     /**
@@ -95,7 +95,7 @@ class Zend_View_Helper_FormTextareaTest extends \PHPUnit\Framework\TestCase
             'attribs' => array('disable' => true)
         ));
 
-        $this->assertNotRegexp('/<textarea[^>]*?(type="hidden")/', $html);
+        $this->assertDoesNotMatchRegularExpression('/<textarea[^>]*?(type="hidden")/', $html);
     }
 }
 

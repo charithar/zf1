@@ -65,8 +65,8 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PartialLoopTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_PartialLoopTest");
+        $suite->run();
     }
 
     /**
@@ -173,6 +173,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
      */
     public function testPartialLoopThrowsExceptionWithBadIterator()
     {
+        $this->expectNotToPerformAssertions();
         $data = array(
             array('message' => 'foo'),
             array('message' => 'bar'),
@@ -300,6 +301,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
      */
     public function testEmptyArrayPassedToPartialLoopShouldNotThrowException()
     {
+        $this->expectNotToPerformAssertions();
         $view = new Zend_View(array(
             'scriptPath' => $this->basePath . '/default/views/scripts'
         ));

@@ -49,8 +49,8 @@ class Zend_View_Helper_FieldsetTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FieldsetTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_FieldsetTest");
+        $suite->run();
     }
 
     /**
@@ -81,7 +81,7 @@ class Zend_View_Helper_FieldsetTest extends \PHPUnit\Framework\TestCase
     public function testFieldsetHelperCreatesFieldsetWithProvidedContent()
     {
         $html = $this->helper->fieldset('foo', 'foobar');
-        $this->assertRegexp('#<fieldset[^>]+id="foo".*?>#', $html);
+        $this->assertMatchesRegularExpression('#<fieldset[^>]+id="foo".*?>#', $html);
         $this->assertStringContainsStringIgnoringCase('</fieldset>', $html);
         $this->assertStringContainsStringIgnoringCase('foobar', $html);
     }
@@ -89,7 +89,7 @@ class Zend_View_Helper_FieldsetTest extends \PHPUnit\Framework\TestCase
     public function testProvidingLegendOptionToFieldsetCreatesLegendTag()
     {
         $html = $this->helper->fieldset('foo', 'foobar', array('legend' => 'Great Scott!'));
-        $this->assertRegexp('#<legend>Great Scott!</legend>#', $html);
+        $this->assertMatchesRegularExpression('#<legend>Great Scott!</legend>#', $html);
     }
 
     /**
@@ -109,7 +109,7 @@ class Zend_View_Helper_FieldsetTest extends \PHPUnit\Framework\TestCase
     public function testHelperShouldAllowDisablingEscapingOfLegend()
     {
         $html = $this->helper->fieldset('foo', 'foobar', array('legend' => '<b>Great Scott!</b>', 'escape' => false));
-        $this->assertRegexp('#<legend><b>Great Scott!</b></legend>#', $html, $html);
+        $this->assertMatchesRegularExpression('#<legend><b>Great Scott!</b></legend>#', $html, $html);
     }
 }
 

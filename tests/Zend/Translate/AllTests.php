@@ -43,7 +43,7 @@ class Zend_Translate_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Translate');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Translate');
 
         $suite->addTestSuite('Zend_Translate_Adapter_AllTests');
 

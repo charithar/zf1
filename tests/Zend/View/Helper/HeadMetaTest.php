@@ -67,8 +67,8 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadMetaTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_HeadMetaTest");
+        $suite->run();
     }
 
     /**
@@ -128,6 +128,7 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonMetaValueProvided()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->append('foo');
             $this->fail('Non-meta value should not append');
@@ -169,10 +170,10 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals($i + 1, count($values));
 
             $item   = $values[$i];
-            $this->assertObjectHasAttribute('type', $item);
-            $this->assertObjectHasAttribute('modifiers', $item);
-            $this->assertObjectHasAttribute('content', $item);
-            $this->assertObjectHasAttribute($item->type, $item);
+            $this->assertObjectHasProperty('type', $item);
+            $this->assertObjectHasProperty('modifiers', $item);
+            $this->assertObjectHasProperty('content', $item);
+            $this->assertObjectHasProperty($item->type, $item);
             $this->assertEquals('keywords', $item->{$item->type});
             $this->assertEquals($string, $item->content);
         }
@@ -189,10 +190,10 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals($i + 1, count($values));
             $item = array_shift($values);
 
-            $this->assertObjectHasAttribute('type', $item);
-            $this->assertObjectHasAttribute('modifiers', $item);
-            $this->assertObjectHasAttribute('content', $item);
-            $this->assertObjectHasAttribute($item->type, $item);
+            $this->assertObjectHasProperty('type', $item);
+            $this->assertObjectHasProperty('modifiers', $item);
+            $this->assertObjectHasProperty('content', $item);
+            $this->assertObjectHasProperty($item->type, $item);
             $this->assertEquals('keywords', $item->{$item->type});
             $this->assertEquals($string, $item->content);
         }
@@ -212,10 +213,10 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
 
-        $this->assertObjectHasAttribute('type', $item);
-        $this->assertObjectHasAttribute('modifiers', $item);
-        $this->assertObjectHasAttribute('content', $item);
-        $this->assertObjectHasAttribute($item->type, $item);
+        $this->assertObjectHasProperty('type', $item);
+        $this->assertObjectHasProperty('modifiers', $item);
+        $this->assertObjectHasProperty('content', $item);
+        $this->assertObjectHasProperty($item->type, $item);
         $this->assertEquals('keywords', $item->{$item->type});
         $this->assertEquals($string, $item->content);
     }
@@ -252,6 +253,7 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingThrowsExceptionWithFewerThanTwoArgs()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->setName('foo');
             $this->fail('Overloading should require at least two arguments');
@@ -261,6 +263,7 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingThrowsExceptionWithInvalidMethodType()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->setFoo('foo');
             $this->fail('Overloading should only work for (set|prepend|append)(Name|HttpEquiv)');
@@ -273,7 +276,7 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
         $this->helper->setName('keywords', 'foo bar', array('lang' => 'us_en', 'scheme' => 'foo', 'bogus' => 'unused'));
         $value = $this->helper->getValue();
 
-        $this->assertObjectHasAttribute('modifiers', $value);
+        $this->assertObjectHasProperty('modifiers', $value);
         $modifiers = $value->modifiers;
         $this->assertTrue(array_key_exists('lang', $modifiers));
         $this->assertEquals('us_en', $modifiers['lang']);
@@ -494,6 +497,7 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
 	 */
 	public function testCharsetValidateFail()
 	{
+        $this->expectNotToPerformAssertions();
 		$view = new Zend_View();
 		$view->doctype('HTML4_STRICT');
 
@@ -529,8 +533,8 @@ class Zend_View_Helper_HeadMetaTest extends \PHPUnit\Framework\TestCase
     {
         $html = $this->helper->appendHttpEquiv('foo', 'bar', array('conditional' => 'lt IE 7'))->toString();
         
-        $this->assertRegExp("|^<!--\[if lt IE 7\]>|", $html);
-        $this->assertRegExp("|<!\[endif\]-->$|", $html);
+        $this->assertMatchesRegularExpression("|^<!--\[if lt IE 7\]>|", $html);
+        $this->assertMatchesRegularExpression("|<!\[endif\]-->$|", $html);
     }
 
     /**

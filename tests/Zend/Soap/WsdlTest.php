@@ -550,6 +550,7 @@ class Zend_Soap_WsdlTest extends \PHPUnit\Framework\TestCase
 
     function testSettingUnknownStrategyThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', 'Zend_Soap_Wsdl_Strategy_UnknownStrategyType');
             $this->fail();
@@ -560,6 +561,7 @@ class Zend_Soap_WsdlTest extends \PHPUnit\Framework\TestCase
 
     function testSettingInvalidStrategyObjectThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $strategy = new Zend_Soap_Wsdl_Test();
             $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', $strategy);

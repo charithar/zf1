@@ -43,12 +43,12 @@ class Zend_Service_LiveDocx_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service - LiveDocX');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Service - LiveDocX');
 
         $suite->addTestSuite('Zend_Service_LiveDocx_LiveDocxTest');
         $suite->addTestSuite('Zend_Service_LiveDocx_MailMergeTest');

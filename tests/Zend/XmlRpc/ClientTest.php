@@ -525,7 +525,7 @@ class Zend_XmlRpc_ClientTest extends \PHPUnit\Framework\TestCase
         try {
             $i->getSignatureForEachMethodByMulticall();
         } catch (Zend_XmlRpc_Client_IntrospectException $e) {
-            $this->assertRegexp('/bad number/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/bad number/i', $e->getMessage());
         }
     }
 
@@ -547,7 +547,7 @@ class Zend_XmlRpc_ClientTest extends \PHPUnit\Framework\TestCase
         try {
             $i->getSignatureForEachMethodByMulticall();
         } catch (Zend_XmlRpc_Client_IntrospectException $e) {
-            $this->assertRegexp('/got integer/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/got integer/i', $e->getMessage());
         }
     }
 
@@ -775,20 +775,13 @@ class Zend_XmlRpc_ClientTest extends \PHPUnit\Framework\TestCase
 
     public function mockIntrospector()
     {
-        $this->mockedIntrospector = $this->getMock(
-            'Zend_XmlRpc_Client_ServerIntrospection',
-            array(),
-            array(),
-            '',
-            false,
-            false
-        );
+        $this->mockedIntrospector = $this->createMock('Zend_XmlRpc_Client_ServerIntrospection');
         $this->xmlrpcClient->setIntrospector($this->mockedIntrospector);
     }
 
     public function mockHttpClient()
     {
-        $this->mockedHttpClient = $this->getMock('Zend_Http_Client');
+        $this->mockedHttpClient = $this->createMock('Zend_Http_Client');
         $this->xmlrpcClient->setHttpClient($this->mockedHttpClient);
     }
 }

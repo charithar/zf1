@@ -40,12 +40,12 @@ class Zend_Test_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Test');
 
         $suite->addTestSuite('Zend_Test_DbAdapterTest');
         $suite->addTestSuite('Zend_Test_DbStatementTest');

@@ -68,8 +68,8 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadLinkTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_HeadLinkTest");
+        $suite->run();
     }
 
     /**
@@ -122,6 +122,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testPrependThrowsExceptionWithoutArrayArgument()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->prepend('foo');
             $this->fail('prepend should raise exception without array argument');
@@ -131,6 +132,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testAppendThrowsExceptionWithoutArrayArgument()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->append('foo');
             $this->fail('append should raise exception without array argument');
@@ -140,6 +142,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testSetThrowsExceptionWithoutArrayArgument()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->set('foo');
             $this->fail('set should raise exception without array argument');
@@ -149,6 +152,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testOffsetSetThrowsExceptionWithoutArrayArgument()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->offsetSet(1, 'foo');
             $this->fail('set should raise exception without array argument');
@@ -271,6 +275,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingThrowsExceptionWithNoArguments()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->appendStylesheet();
             $this->fail('Helper should expect at least one argument');
@@ -286,6 +291,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingUsingSingleArrayArgumentWithInvalidValuesThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->setStylesheet(array('bogus' => 'unused'));
             $this->fail('Invalid attribute values should raise exception');
@@ -303,6 +309,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingThrowsExceptionWithInvalidMethod()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->bogusMethod();
             $this->fail('Invalid method should raise exception');
@@ -313,8 +320,8 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->setStylesheet('/styles.css', 'projection', 'ie6');
         $item = $this->helper->getValue();
-        $this->assertObjectHasAttribute('media', $item);
-        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertObjectHasProperty('media', $item);
+        $this->assertObjectHasProperty('conditionalStylesheet', $item);
 
         $this->assertEquals('projection', $item->media);
         $this->assertEquals('ie6', $item->conditionalStylesheet);
@@ -324,7 +331,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->setStylesheet('/styles.css');
         $item = $this->helper->getValue();
-        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertObjectHasProperty('conditionalStylesheet', $item);
         $this->assertFalse($item->conditionalStylesheet);
 
         $string = $this->helper->toString();
@@ -338,7 +345,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->setStylesheet('/styles.css', 'screen', 'ie6');
         $item = $this->helper->getValue();
-        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertObjectHasProperty('conditionalStylesheet', $item);
         $this->assertEquals('ie6', $item->conditionalStylesheet);
 
         $string = $this->helper->toString();
@@ -349,6 +356,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testSettingAlternateWithTooFewArgsRaisesException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->setAlternate('foo');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
@@ -504,7 +512,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->setStylesheet('/styles.css', 'screen', '!IE');
         $item = $this->helper->getValue();
-        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertObjectHasProperty('conditionalStylesheet', $item);
         $this->assertEquals('!IE', $item->conditionalStylesheet);
         $string = $this->helper->toString();
         $this->assertStringContainsStringIgnoringCase('/styles.css', $string);
@@ -519,7 +527,7 @@ class Zend_View_Helper_HeadLinkTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->setStylesheet('/styles.css', 'screen', '! IE');
         $item = $this->helper->getValue();
-        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertObjectHasProperty('conditionalStylesheet', $item);
         $this->assertEquals('! IE', $item->conditionalStylesheet);
         $string = $this->helper->toString();
         $this->assertStringContainsStringIgnoringCase('/styles.css', $string);

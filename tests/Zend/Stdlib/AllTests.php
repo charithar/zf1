@@ -36,16 +36,16 @@ require_once 'Zend/Stdlib/SplPriorityQueueTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Stdlib
  */
-class Zend_EventManager_AllTests
+class Zend_Stdlib_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Stdlib');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Stdlib');
 
         $suite->addTestSuite('Zend_Stdlib_CallbackHandlerTest');
         $suite->addTestSuite('Zend_Stdlib_PriorityQueueTest');

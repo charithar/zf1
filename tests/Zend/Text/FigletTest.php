@@ -53,8 +53,8 @@ class Zend_Text_FigletTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Text_FigletTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Text_FigletTest");
+        $suite->run();
     }
 
     public function testStandardAlignLeft()

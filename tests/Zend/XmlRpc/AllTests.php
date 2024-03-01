@@ -48,12 +48,12 @@ class Zend_XmlRpc_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_XmlRpc');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_XmlRpc');
 
         $suite->addTestSuite('Zend_XmlRpc_BigIntegerValueTest');
         $suite->addTestSuite('Zend_XmlRpc_ValueTest');

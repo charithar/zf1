@@ -42,8 +42,8 @@ class Zend_Translate_Adapter_GettextTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_GettextTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Translate_Adapter_GettextTest");
+        $suite->run();
         Zend_Translate_Adapter_Gettext::removeCache();
     }
 

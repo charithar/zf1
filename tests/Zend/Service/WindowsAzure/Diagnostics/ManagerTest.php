@@ -51,14 +51,14 @@ class Zend_Service_WindowsAzure_Diagnostics_ManagerTest extends \PHPUnit\Framewo
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_Diagnostics_ManagerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Service_WindowsAzure_Diagnostics_ManagerTest");
+        $suite->run();
     }
 
     /**
      * Test teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $storageClient = $this->createStorageInstance();
         for ($i = 1; $i <= self::$uniqId; $i++)

@@ -64,8 +64,8 @@ class Zend_View_Helper_HeadScriptTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadScriptTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_HeadScriptTest");
+        $suite->run();
     }
 
     /**
@@ -115,6 +115,7 @@ class Zend_View_Helper_HeadScriptTest extends \PHPUnit\Framework\TestCase
 
     public function testSetPrependAppendAndOffsetSetThrowExceptionsOnInvalidItems()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->append('foo');
             $this->fail('Append should throw exception with invalid item');
@@ -251,6 +252,7 @@ class Zend_View_Helper_HeadScriptTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingThrowsExceptionWithInvalidMethod()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->fooBar('foo');
             $this->fail('Invalid method should raise exception');
@@ -260,6 +262,7 @@ class Zend_View_Helper_HeadScriptTest extends \PHPUnit\Framework\TestCase
 
     public function testOverloadingWithTooFewArgumentsRaisesException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->helper->setScript();
             $this->fail('Too few arguments should raise exception');
@@ -283,16 +286,16 @@ class Zend_View_Helper_HeadScriptTest extends \PHPUnit\Framework\TestCase
             $item = $items[$i];
             switch ($i) {
                 case 0:
-                    $this->assertObjectHasAttribute('source', $item);
+                    $this->assertObjectHasProperty('source', $item);
                     $this->assertEquals('bar', $item->source);
                     break;
                 case 1:
-                    $this->assertObjectHasAttribute('attributes', $item);
+                    $this->assertObjectHasProperty('attributes', $item);
                     $this->assertTrue(isset($item->attributes['src']));
                     $this->assertEquals('foo', $item->attributes['src']);
                     break;
                 case 2:
-                    $this->assertObjectHasAttribute('source', $item);
+                    $this->assertObjectHasProperty('source', $item);
                     $this->assertEquals('baz', $item->source);
                     break;
             }
@@ -378,6 +381,7 @@ document.write(bar.strlen());');
 
     public function testCanPerformMultipleSerialCaptures()
     {
+        $this->expectNotToPerformAssertions();
         $this->helper->headScript()->captureStart();
         echo "this is something captured";
         $this->helper->headScript()->captureEnd();

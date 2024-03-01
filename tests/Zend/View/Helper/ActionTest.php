@@ -60,8 +60,8 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_ActionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_ActionTest");
+        $suite->run();
     }
 
     /**
@@ -217,6 +217,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructorThrowsExceptionWithNoControllerDirsInFrontController()
     {
+        $this->expectNotToPerformAssertions();
         Zend_Controller_Front::getInstance()->resetInstance();
         try {
             $helper = new Zend_View_Helper_Action();
@@ -230,6 +231,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructorThrowsExceptionWithNoRequestInFrontController()
     {
+        $this->expectNotToPerformAssertions();
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
 
@@ -249,6 +251,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructorThrowsExceptionWithNoResponseInFrontController()
     {
+        $this->expectNotToPerformAssertions();
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
 
@@ -329,7 +332,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     public function testActionCalledWithinActionResetsResponseState()
     {
         $value = $this->helper->action('bar-one', 'baz', 'foo');
-        $this->assertRegexp('/Baz-Three-View-Script\s+Baz-Two-View-Script\s+Baz-One-View-Script/s', $value);
+        $this->assertMatchesRegularExpression('/Baz-Three-View-Script\s+Baz-Two-View-Script\s+Baz-One-View-Script/s', $value);
     }
 }
 

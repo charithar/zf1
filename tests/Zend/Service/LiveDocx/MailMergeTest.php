@@ -53,8 +53,8 @@ class Zend_Service_LiveDocx_MailMergeTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void

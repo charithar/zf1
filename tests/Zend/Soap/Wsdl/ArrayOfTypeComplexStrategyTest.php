@@ -50,6 +50,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends \PHPUnit\Framework\T
 
     public function testNestingObjectsDeepMakesNoSenseThrowingException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTest[][]');
             $this->fail();
@@ -60,6 +61,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends \PHPUnit\Framework\T
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
         } catch(Zend_Soap_Wsdl_Exception $e) {
@@ -188,6 +190,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends \PHPUnit\Framework\T
      */
     public function testArrayOfComplexNestedObjectsIsCoveredByStrategyAndNotThrowingException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $return = $this->wsdl->addComplexType("Zend_Soap_Wsdl_ComplexTypeA");
             $wsdl = $this->wsdl->toXml();
@@ -224,6 +227,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends \PHPUnit\Framework\T
      */
     public function testNestingOfSameTypesDoesNotLeadToInfiniteRecursionButWillThrowException()
     {
+        $this->expectNotToPerformAssertions();
         $return = $this->wsdl->addComplexType("Zend_Soap_AutoDiscover_Recursion");
     }
 }

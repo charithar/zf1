@@ -117,21 +117,17 @@ class Zend_Tool_Framework_Provider_SignatureTest extends \PHPUnit\Framework\Test
         $this->assertEquals(array('_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'), $signature->getSpecialties());
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Provider_Exception
-     */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadPropertyValue()
     {
+        $this->expectException(Zend_Tool_Framework_Provider_Exception::class);
         $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeaturedBadSpecialties());
         $signature->setRegistry($this->_registry);
         $signature->process();
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Provider_Exception
-     */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadReturnValue()
     {
+        $this->expectException(Zend_Tool_Framework_Provider_Exception::class);
         $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeaturedBadSpecialties2());
         $signature->setRegistry($this->_registry);
         $signature->process();

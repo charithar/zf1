@@ -43,12 +43,12 @@ class Zend_Service_SqlAzure_Management_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new \PHPUnit\Framework\TestSuite(__CLASS__);
         $suite->addTestSuite('Zend_Service_SqlAzure_Management_ManagementClientTest');
         
         return $suite;

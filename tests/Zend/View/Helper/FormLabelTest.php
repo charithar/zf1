@@ -51,8 +51,8 @@ class Zend_View_Helper_FormLabelTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormLabelTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_FormLabelTest");
+        $suite->run();
     }
 
     /**
@@ -61,7 +61,7 @@ class Zend_View_Helper_FormLabelTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_FormLabel();
@@ -74,7 +74,7 @@ class Zend_View_Helper_FormLabelTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 

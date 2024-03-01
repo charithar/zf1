@@ -57,8 +57,8 @@ class Zend_View_Helper_Placeholder_StandaloneContainerTest extends \PHPUnit\Fram
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_Placeholder_StandaloneContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_Placeholder_StandaloneContainerTest");
+        $suite->run();
     }
 
     /**

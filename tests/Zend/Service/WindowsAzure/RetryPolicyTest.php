@@ -59,8 +59,8 @@ class Zend_Service_WindowsAzure_RetryPolicyTest extends \PHPUnit\Framework\TestC
     
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_RetryPolicyTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Service_WindowsAzure_RetryPolicyTest");
+        $suite->run();
     }
 
     /**

@@ -56,7 +56,7 @@ class Zend_View_Helper_PaginationControlTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PaginationControlTest");
+        $suite = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_PaginationControlTest");
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -66,7 +66,7 @@ class Zend_View_Helper_PaginationControlTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $view = new Zend_View();
         $view->addBasePath(dirname(__FILE__) . '/_files');

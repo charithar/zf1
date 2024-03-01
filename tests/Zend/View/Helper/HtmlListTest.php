@@ -53,8 +53,8 @@ class Zend_View_Helper_HtmlListTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HtmlListTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_HtmlListTest");
+        $suite->run();
     }
 
     /**
@@ -63,7 +63,7 @@ class Zend_View_Helper_HtmlListTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_HtmlList();
@@ -217,7 +217,7 @@ class Zend_View_Helper_HtmlListTest extends \PHPUnit\Framework\TestCase
         $list = $this->helper->htmlList($items, false, array('class' => 'foo'));
 
         foreach ($items[1] as $item) {
-            $this->assertRegexp('#<ul[^>]*?class="foo"[^>]*>.*?(<li>' . $item . ')#s', $list);
+            $this->assertMatchesRegularExpression('#<ul[^>]*?class="foo"[^>]*>.*?(<li>' . $item . ')#s', $list);
         }
 
     }

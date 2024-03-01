@@ -306,7 +306,8 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
         $help = $this->_server->methodHelp('system.methodHelp', 'system.listMethods');
         $this->assertStringContainsStringIgnoringCase('Display help message for an XMLRPC method', $help);
 
-        $this->setExpectedException('Zend_XmlRpc_Server_Exception', 'Method "foo" does not exist');
+        $this->expectException(Zend_XmlRpc_Server_Exception::class);
+        $this->expectExceptionMessage('Method "foo" does not exist');
         $this->_server->methodHelp('foo');
     }
 
@@ -326,7 +327,8 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_array($sig));
         $this->assertEquals(1, count($sig), var_export($sig, 1));
 
-        $this->setExpectedException('Zend_XmlRpc_Server_Exception', 'Method "foo" does not exist');
+        $this->expectException(Zend_XmlRpc_Server_Exception::class);
+        $this->expectExceptionMessage('Method "foo" does not exist');
         $this->_server->methodSignature('foo');
     }
 
@@ -436,11 +438,12 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
     {
         $this->_server->addFunction('Zend_XmlRpc_Server_testFunction', 'test', 'arg1');
         $methods = $this->_server->listMethods();
-        $this->assertStringContainsStringIgnoringCase('test.Zend_XmlRpc_Server_testFunction', $methods);
+        $this->assertContains('test.Zend_XmlRpc_Server_testFunction', $methods);
     }
 
     public function testAddFunctionThrowsExceptionWithBadData()
     {
+        $this->expectNotToPerformAssertions();
         $o = new stdClass();
         try {
             $this->_server->addFunction($o);
@@ -478,9 +481,8 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadFunctionsReadsMethodsFromServerDefinitionObjects()
     {
-        $mockedMethod = $this->getMock('Zend_Server_Method_Definition', array(), array(), '', false,
-            false);
-        $mockedDefinition = $this->getMock('Zend_Server_Definition', array(), array(), '', false, false);
+        $mockedMethod = $this->createMock(Zend_Server_Method_Definition::class);
+        $mockedDefinition = $this->createMock('Zend_Server_Definition');
         $mockedDefinition->expects($this->once())
                          ->method('getMethods')
                          ->will($this->returnValue(array('bar' => $mockedMethod)));
@@ -489,6 +491,7 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetClassThrowsExceptionWithInvalidClass()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_server->setClass('mybogusclass');
             $this->fail('setClass() should not allow invalid classes');
@@ -505,6 +508,7 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRequestThrowsExceptionOnBadClass()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_server->setRequest('Zend_XmlRpc_Server_testRequest2');
             $this->fail('Invalid request class should throw exception');
@@ -634,8 +638,8 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 
     public function testCallingUnregisteredMethod()
     {
-        $this->setExpectedException('Zend_XmlRpc_Server_Exception',
-            'Unknown instance method called on server: foobarbaz');
+        $this->expectException(Zend_XmlRpc_Server_Exception::class);
+        $this->expectExceptionMessage('Unknown instance method called on server: foobarbaz');
         $this->_server->foobarbaz();
     }
 
@@ -647,13 +651,15 @@ class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 
     public function testPassingInvalidRequestClassThrowsException()
     {
-        $this->setExpectedException('Zend_XmlRpc_Server_Exception', 'Invalid request class');
+        $this->expectException(Zend_XmlRpc_Server_Exception::class);
+        $this->expectExceptionMessage('Invalid request class');
         $this->_server->setRequest('stdClass');
     }
 
     public function testPassingInvalidResponseClassThrowsException()
     {
-        $this->setExpectedException('Zend_XmlRpc_Server_Exception', 'Invalid response class');
+        $this->expectException(Zend_XmlRpc_Server_Exception::class);
+        $this->expectExceptionMessage('Invalid response class');
         $this->_server->setResponseClass('stdClass');
     }
 

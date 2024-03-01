@@ -53,7 +53,7 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HtmlObjectTest");
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_HtmlObjectTest");
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -63,7 +63,7 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_HtmlObject();

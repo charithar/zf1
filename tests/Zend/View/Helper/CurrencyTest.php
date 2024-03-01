@@ -60,8 +60,8 @@ class Zend_View_Helper_CurrencyTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_CurrencyTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_CurrencyTest");
+        $suite->run();
     }
 
     public function clearRegistry()

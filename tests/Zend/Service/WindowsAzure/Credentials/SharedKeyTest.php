@@ -45,8 +45,8 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyTest extends \PHPUnit\Frame
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_Credentials_SharedKeyTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Service_WindowsAzure_Credentials_SharedKeyTest");
+        $suite->run();
     }
 
     /**

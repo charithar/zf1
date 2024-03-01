@@ -65,8 +65,8 @@ class Zend_View_Helper_PartialTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PartialTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_PartialTest");
+        $suite->run();
     }
 
     /**
@@ -140,6 +140,7 @@ class Zend_View_Helper_PartialTest extends \PHPUnit\Framework\TestCase
      */
     public function testPartialThrowsExceptionWithInvalidModule()
     {
+        $this->expectNotToPerformAssertions();
         Zend_Controller_Front::getInstance()->addModuleDirectory($this->basePath);
         $view = new Zend_View(array(
             'scriptPath' => $this->basePath . '/default/views/scripts'

@@ -41,7 +41,7 @@ class Zend_Service_Ebay_Finding_OnlineTest extends \PHPUnit\Framework\TestCase
 
     protected $_httpClientOriginal;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_finding = new Zend_Service_Ebay_Finding(constant('TESTS_ZEND_SERVICE_EBAY_ONLINE_APPID'));
         $this->_httpClientOriginal = Zend_Rest_Client::getHttpClient();

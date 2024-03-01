@@ -47,8 +47,8 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Text_MultiByteTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Text_MultiByteTest");
+        $suite->run();
     }
 
     /**

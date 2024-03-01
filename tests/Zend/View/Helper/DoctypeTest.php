@@ -62,8 +62,8 @@ class Zend_View_Helper_DoctypeTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_DoctypeTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_DoctypeTest");
+        $suite->run();
     }
 
     /**
@@ -202,6 +202,7 @@ class Zend_View_Helper_DoctypeTest extends \PHPUnit\Framework\TestCase
 
     public function testMalformedCustomDoctypeRaisesException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $doctype = $this->helper->doctype('<!FOO HTML>');
             $this->fail('Malformed doctype should raise exception');

@@ -131,7 +131,8 @@ class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
      */
     public function testMarshalI4FromOverlongNativeThrowsException()
     {
-        $this->setExpectedException('Zend_XmlRpc_Value_Exception', 'Overlong integer given');
+        $this->expectException(Zend_XmlRpc_Value_Exception::class);
+        $this->expectExceptionMessage('Overlong integer given');
         $x = Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 5000, Zend_XmlRpc_Value::XMLRPC_TYPE_I4);
     }
 
@@ -140,7 +141,8 @@ class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
      */
     public function testMarshalIntegerFromOverlongNativeThrowsException()
     {
-        $this->setExpectedException('Zend_XmlRpc_Value_Exception', 'Overlong integer given');
+        $this->expectException(Zend_XmlRpc_Value_Exception::class);
+        $this->expectExceptionMessage('Overlong integer given');
         Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 5000, Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER);
     }
 
@@ -390,8 +392,8 @@ class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
         $native = array();
         $xml    = '<value><array/></value>';
 
-        $this->setExpectedException('Zend_XmlRpc_Value_Exception',
-            'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag');
+        $this->expectException(Zend_XmlRpc_Value_Exception::class);
+        $this->expectExceptionMessage('Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag');
         $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
                                     Zend_XmlRpc_Value::XML_STRING);
     }
@@ -611,12 +613,13 @@ class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
 
     public function testMarshalDateTimeFromInvalidString()
     {
-        $phpunitVersion = PHPUnit_Runner_Version::id();
+        $phpunitVersion = \PHPUnit\Runner\Version::id();
         if (version_compare($phpunitVersion, '3.7.0', '<=')) {
             $this->markTestSkipped('Cannot expect generic exceptions prior to PHPUnit 3.7.');
         }
 
-        $this->setExpectedException('Exception', "foobarbaz");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("foobarbaz");
         Zend_XmlRpc_Value::getXmlRpcValue('foobarbaz', Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME);
     }
 
@@ -838,7 +841,7 @@ class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
             Zend_XmlRpc_Value::getXmlRpcValue('', 'bad type here');
             $this->fail();
         } catch (Exception $e) {
-            $this->assertRegexp('/given type is not/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/given type is not/i', $e->getMessage());
         }
     }
 
@@ -921,7 +924,7 @@ class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
 
     public function testGetXmlRpcTypeByValueThrowsExceptionOnInvalidValue()
     {
-        $this->setExpectedException('Zend_XmlRpc_Value_Exception');
+        $this->expectException(Zend_XmlRpc_Value_Exception::class);
         Zend_XmlRpc_Value::getXmlRpcTypeByValue(fopen(__FILE__, 'r'));
     }
 

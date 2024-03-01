@@ -60,8 +60,8 @@ class Zend_View_Helper_PlaceholderTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PlaceholderTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_View_Helper_PlaceholderTest");
+        $suite->run();
     }
 
     /**
