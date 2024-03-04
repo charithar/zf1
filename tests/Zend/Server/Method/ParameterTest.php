@@ -47,8 +47,8 @@ class Zend_Server_Method_ParameterTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_ParameterTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Server_Method_ParameterTest");
+        $suite->run();
     }
 
     /**

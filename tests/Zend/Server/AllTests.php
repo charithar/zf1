@@ -51,12 +51,12 @@ class Zend_Server_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Server');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Server');
 
         $suite->addTestSuite('Zend_Server_DefinitionTest');
         $suite->addTestSuite('Zend_Server_Method_DefinitionTest');

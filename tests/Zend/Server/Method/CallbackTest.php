@@ -47,8 +47,8 @@ class Zend_Server_Method_CallbackTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_CallbackTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Server_Method_CallbackTest");
+        $suite->run();
     }
 
     /**
@@ -120,11 +120,9 @@ class Zend_Server_Method_CallbackTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('instance', $this->callback->getType());
     }
 
-    /**
-     * @expectedException Zend_Server_Exception
-     */
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
+        $this->expectException('Zend_Server_Exception');
         $this->callback->setType('bogus');
     }
 

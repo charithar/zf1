@@ -62,7 +62,7 @@ class Zend_Service_Ebay_OfflineTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->_finding->setClient(new ClientCustom()) instanceof Zend_Service_Ebay_Finding);
         $this->assertTrue($this->_finding->getClient() instanceof ClientCustom);
 
-        $this->setExpectedException('Zend_Service_Ebay_Finding_Exception');
+        $this->expectException('Zend_Service_Ebay_Finding_Exception');
         $this->_finding->setClient(new stdClass());
     }
 
@@ -81,7 +81,7 @@ class Zend_Service_Ebay_OfflineTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('app-id', $finding->getOption(Zend_Service_Ebay_Finding::OPTION_APP_ID));
         $this->assertEquals('bar', $finding->getOption('foo'));
 
-        $this->setExpectedException('Zend_Service_Ebay_Finding_Exception');
+        $this->expectException('Zend_Service_Ebay_Finding_Exception');
         $finding = new Zend_Service_Ebay_Finding(array('foo' => 'bar'));
     }
 

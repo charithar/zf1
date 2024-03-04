@@ -105,6 +105,7 @@ class Zend_Rest_ClientTest extends \PHPUnit\Framework\TestCase
 
     public function testRestGetThrowsExceptionWithNoUri()
     {
+        $this->expectNotToPerformAssertions();
         $expXml   = file_get_contents($this->path . 'returnString.xml');
         $response = "HTTP/1.0 200 OK\r\n"
                   . "X-powered-by: PHP/5.2.0\r\n"
@@ -326,6 +327,7 @@ class Zend_Rest_ClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testInvalidXmlInClientResultLeadsToException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $result = new Zend_Rest_Client_Result("invalidxml");
             $this->fail();

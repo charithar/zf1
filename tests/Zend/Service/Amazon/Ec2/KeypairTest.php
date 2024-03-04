@@ -77,6 +77,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateKeyPairNoNameThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->Zend_Service_Amazon_Ec2_Keypair->create('');
             $this->fail('An exception should be thrown if an empty keyname is passed in.');
@@ -208,6 +209,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends \PHPUnit\Framework\TestCase
 
     public function testDeleteKeyPairNoNameThrowsException()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->Zend_Service_Amazon_Ec2_Keypair->delete('');
             $this->fail('An exception should be thrown if an empty keyname is passed in.');

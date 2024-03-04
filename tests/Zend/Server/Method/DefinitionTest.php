@@ -53,8 +53,8 @@ class Zend_Server_Method_DefinitionTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_DefinitionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Server_Method_DefinitionTest");
+        $suite->run();
     }
 
     /**
@@ -139,11 +139,9 @@ class Zend_Server_Method_DefinitionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($object, $this->definition->getObject());
     }
 
-    /**
-     * @expectedException Zend_Server_Exception
-     */
     public function testSettingObjectToNonObjectShouldThrowException()
     {
+        $this->expectException('Zend_Server_Exception');
         $this->definition->setObject('foo');
     }
 

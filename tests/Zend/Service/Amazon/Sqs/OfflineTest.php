@@ -77,10 +77,8 @@ class Zend_Service_Amazon_Sqs_OfflineTest extends \PHPUnit\Framework\TestCase
     
     public function testSetEmptyRegion()
     {
-         $this->setExpectedException(
-            'Zend_Service_Amazon_Sqs_Exception',
-            'Empty region specified.'
-        );
+         $this->expectException('Zend_Service_Amazon_Sqs_Exception');
+         $this->expectExceptionMessage('Empty region specified.');
         $this->_amazon->setEndpoint('');
     }
     

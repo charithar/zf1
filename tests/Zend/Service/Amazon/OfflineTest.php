@@ -134,6 +134,7 @@ class Zend_Service_Amazon_OfflineTest extends \PHPUnit\Framework\TestCase
      */
     public function testSimilarProductConstructorMissingAttributeDoesNotThrowNotice()
     {
+        $this->expectNotToPerformAssertions();
         $dom = new DOMDocument();
         $asin = $dom->createElement("ASIN", "TEST");
         $product = $dom->createElement("product");
@@ -356,6 +357,7 @@ class Zend_Service_Amazon_OfflineTest extends \PHPUnit\Framework\TestCase
      */
     public function testAmazonComponentHandlesEmptyBookResults()
     {
+        $this->expectNotToPerformAssertions();
     	$xml = file_get_contents(dirname(__FILE__)."/_files/amazon-response-invalid.xml");
         $dom = new DOMDocument();
         $dom->loadXML($xml);

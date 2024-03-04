@@ -85,10 +85,8 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
      */
     public function testConstructExceptionMissingUserAttribute()
     {
-        $this->setExpectedException(
-            'Zend_Service_Rackspace_Exception',
-            'The user cannot be empty'
-        );
+        $this->expectException('Zend_Service_Rackspace_Exception');
+        $this->expectExceptionMessage('The user cannot be empty');
         $file= new Zend_Service_Rackspace_Files(null,'bar');
     }
     /**
@@ -98,10 +96,8 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
      */
     public function testConstructExceptionMissingKeyAttribute()
     {
-        $this->setExpectedException(
-            'Zend_Service_Rackspace_Exception',
-            'The key cannot be empty'
-        );
+        $this->expectException('Zend_Service_Rackspace_Exception');
+        $this->expectExceptionMessage('The key cannot be empty');
         $file= new Zend_Service_Rackspace_Files('foo',null);
     }
     /**
@@ -142,10 +138,8 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
      */
     public function testSetInvalidAuthUrl()
     {
-        $this->setExpectedException(
-            'Zend_Service_Rackspace_Exception',
-            'The authentication URL is not valid'
-        );
+        $this->expectException('Zend_Service_Rackspace_Exception');
+        $this->expectExceptionMessage('The authentication URL is not valid');
         $this->_files->setAuthUrl('http://test');
     }
     /**

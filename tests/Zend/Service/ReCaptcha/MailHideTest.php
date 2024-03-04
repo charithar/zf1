@@ -102,13 +102,13 @@ class Zend_Service_ReCaptcha_MailHideTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testGetHtmlWithNoEmail() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_MailHide_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_MailHide_Exception');
 
         $html = $this->_mailHide->getHtml();
     }
 
     public function testGetHtmlWithMissingPublicKey() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_MailHide_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_MailHide_Exception');
 
         $mail = 'mail@example.com';
 
@@ -119,7 +119,7 @@ class Zend_Service_ReCaptcha_MailHideTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testGetHtmlWithMissingPrivateKey() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_MailHide_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_MailHide_Exception');
 
         $mail = 'mail@example.com';
 

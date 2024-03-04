@@ -145,7 +145,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('Evaling of invalid input is PHP Parse error in PHP7+');
         }
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->expectException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
 

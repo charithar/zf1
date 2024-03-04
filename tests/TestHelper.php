@@ -34,6 +34,8 @@
     }
 }*/
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 /*
  * Set error reporting to the level to which Zend Framework code must comply.
  */

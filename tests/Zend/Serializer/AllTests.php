@@ -45,12 +45,12 @@ class Zend_Serializer_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend');
 
         /**
          * Performe Zend_Serializer_Adapter tests

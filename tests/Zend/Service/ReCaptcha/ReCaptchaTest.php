@@ -133,7 +133,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testSetInvalidParams() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_Exception');
         $var = 'string';
         $this->_reCaptcha->setParams($var);
     }
@@ -154,7 +154,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testSetInvalidOptions() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_Exception');
         $var = 'string';
         $this->_reCaptcha->setOptions($var);
     }
@@ -200,7 +200,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testGetHtmlWithNoPublicKey() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_Exception');
 
         $html = $this->_reCaptcha->getHtml();
     }
@@ -253,13 +253,13 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testVerifyWithMissingPrivateKey() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_Exception');
 
         $this->_reCaptcha->verify('challenge', 'response');
     }
 
     public function testVerifyWithMissingIp() {
-        $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
+        $this->expectException('Zend_Service_ReCaptcha_Exception');
 
         $this->_reCaptcha->setPrivateKey($this->_privateKey);
         $this->_reCaptcha->verify('challenge', 'response');

@@ -51,8 +51,8 @@ class Zend_Rest_ServerTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Rest_ServerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Rest_ServerTest");
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -425,7 +425,7 @@ class Zend_Rest_ServerTest extends \PHPUnit\Framework\TestCase
         $server->handle(array('method' => 'test2ThrowException'));
         $result = ob_get_clean();
         $headers = $server->getHeaders();
-        $this->assertStringContainsStringIgnoringCase('HTTP/1.0 400 Bad Request', $headers);
+        $this->assertContains('HTTP/1.0 400 Bad Request', $headers);
     }
 
     public function testReturnResponse()

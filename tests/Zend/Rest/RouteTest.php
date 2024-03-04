@@ -58,8 +58,8 @@ class Zend_Rest_RouteTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Rest_RouteTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Rest_RouteTest");
+        $suite->run();
     }
 
     protected function setUp(): void

@@ -66,7 +66,7 @@ class Zend_Service_LiveDocX_LiveDocxTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function tearDown ()
+    public function tearDown (): void
     {
 	if (isset($this->phpLiveDocx)) {
 	    foreach ($this->phpLiveDocx->listTemplates() as $template) {

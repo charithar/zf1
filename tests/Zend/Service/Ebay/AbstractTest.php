@@ -82,7 +82,7 @@ class Zend_Service_Ebay_AbstractTest extends \PHPUnit\Framework\TestCase
 
     public function testOptionsToArrayInvalid()
     {
-        $this->setExpectedException('Zend_Service_Ebay_Exception');
+        $this->expectException('Zend_Service_Ebay_Exception');
         Zend_Service_Ebay_Abstract::optionsToArray('invalid');
     }
 
@@ -141,7 +141,7 @@ class Zend_Service_Ebay_AbstractTest extends \PHPUnit\Framework\TestCase
 
     public function testToPhpValueInvalidType()
     {
-        $this->setExpectedException('Zend_Service_Ebay_Exception');
+        $this->expectException('Zend_Service_Ebay_Exception');
         Zend_Service_Ebay_Abstract::toPhpValue('value', 'invalid-type');
     }
 

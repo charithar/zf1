@@ -42,12 +42,12 @@ class Zend_Rest_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Rest');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Rest');
 
         $suite->addTestSuite('Zend_Rest_ControllerTest');
         $suite->addTestSuite('Zend_Rest_RouteTest');

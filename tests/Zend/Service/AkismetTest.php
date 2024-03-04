@@ -125,6 +125,7 @@ class Zend_Service_AkismetTest extends \PHPUnit\Framework\TestCase
 
     public function testIsSpamThrowsExceptionOnInvalidKey()
     {
+        $this->expectNotToPerformAssertions();
         $response = "HTTP/1.0 200 OK\r\n"
                   . "X-powered-by: PHP/4.4.2\r\n"
                   . "Content-type: text/plain; charset=utf-8\r\n"
@@ -175,6 +176,7 @@ class Zend_Service_AkismetTest extends \PHPUnit\Framework\TestCase
 
     public function testSubmitSpamThrowsExceptionOnInvalidKey()
     {
+        $this->expectNotToPerformAssertions();
         $response = "HTTP/1.0 200 OK\r\n"
                   . "X-powered-by: PHP/4.4.2\r\n"
                   . "Content-type: text/plain; charset=utf-8\r\n"
@@ -196,6 +198,7 @@ class Zend_Service_AkismetTest extends \PHPUnit\Framework\TestCase
 
     public function testSubmitSpam()
     {
+        $this->expectNotToPerformAssertions();
         $response = "HTTP/1.0 200 OK\r\n"
                   . "X-powered-by: PHP/4.4.2\r\n"
                   . "Content-type: text/html\r\n"
@@ -215,6 +218,7 @@ class Zend_Service_AkismetTest extends \PHPUnit\Framework\TestCase
 
     public function testSubmitHam()
     {
+        $this->expectNotToPerformAssertions();
         $response = "HTTP/1.0 200 OK\r\n"
                   . "X-powered-by: PHP/4.4.2\r\n"
                   . "Content-type: text/html\r\n"

@@ -40,7 +40,7 @@ class Zend_Service_ShortUrl_JdemCzTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp ()
+    public function setUp(): void
     {
         if (!defined('TESTS_ZEND_SERVICE_SHORTURL_JDEMCZ_ENABLED')
             || !constant('TESTS_ZEND_SERVICE_SHORTURL_JDEMCZ_ENABLED')
@@ -55,13 +55,13 @@ class Zend_Service_ShortUrl_JdemCzTest extends \PHPUnit\Framework\TestCase
 
     public function testShortenEmptyUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
         $this->_s->shorten('');
     }
 
     public function testShortenIncorrectUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
         $this->_s->shorten('wrongAdress.cccc');
     }
 
@@ -91,19 +91,19 @@ class Zend_Service_ShortUrl_JdemCzTest extends \PHPUnit\Framework\TestCase
 
     public function testUnshortenEmptyUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
         $this->_s->unshorten('');
     }
 
     public function testUnshortenIncorrectUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
         $this->_s->unshorten('wrongAdress.cccc');
     }
 
     public function testUnshortenWrongUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
         $this->_s->unshorten('http://www.zend.com');
     }
 }

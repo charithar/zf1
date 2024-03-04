@@ -34,7 +34,7 @@ class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp ()
+    public function setUp(): void
     {
         if (!defined('TESTS_ZEND_SERVICE_SHORTURL_BITLY_ENABLED')
             || !constant('TESTS_ZEND_SERVICE_SHORTURL_BITLY_ENABLED')
@@ -47,7 +47,7 @@ class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
 
     public function testShortenEmptyUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
 
         $s = new Zend_Service_ShortUrl_BitLy('test');
         $s->shorten('');
@@ -55,7 +55,7 @@ class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
 
     public function testShortenIncorrectUrlException()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
 
         $s = new Zend_Service_ShortUrl_BitLy('test');
         $s->shorten('wrongAdress.cccc');
@@ -63,12 +63,12 @@ class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
 
     public function testExceptionOnBadApiResponse()
     {
-        $this->setExpectedException('Zend_Service_ShortUrl_Exception');
+        $this->expectException('Zend_Service_ShortUrl_Exception');
 
-        $clientResponse = $this->getMock('Zend_Http_Response', array(), array(), '', false);
+        $clientResponse = $this->createMock('Zend_Http_Response');
         $clientResponse->expects($this->once())->method('getStatus')->will($this->returnValue(500));
 
-        $client = $this->getMock('Zend_Http_Client', array(), array(), '', false);
+        $client = $this->createMock('Zend_Http_Client');
         $client->expects($this->once())->method('request')->will($this->returnValue($clientResponse));
 
         $s = new Zend_Service_ShortUrl_BitLy('test');
@@ -80,11 +80,11 @@ class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
     {
         $accessToken = 'test';
 
-        $clientResponse = $this->getMock('Zend_Http_Response', array(), array(), '', false);
+        $clientResponse = $this->createMock('Zend_Http_Response');
         $clientResponse->expects($this->once())->method('getStatus')->will($this->returnValue(200));
         $clientResponse->expects($this->once())->method('getBody')->will($this->returnValue('http://bit.ly/ZFramework'));
 
-        $client = $this->getMock('Zend_Http_Client', array(), array(), '', false);
+        $client = $this->createMock('Zend_Http_Client');
         $client->expects($this->any())->method('setParameterGet')->with($this->anything(),$this->anything());
         $client->expects($this->at(0))->method('setParameterGet')->with('access_token',$accessToken);
         $client->expects($this->once())->method('request')->will($this->returnValue($clientResponse));
@@ -99,11 +99,11 @@ class Zend_Service_ShortUrl_BitLyTest extends \PHPUnit\Framework\TestCase
         $login = 'test';
         $apiKey = 'api';
 
-        $clientResponse = $this->getMock('Zend_Http_Response', array(), array(), '', false);
+        $clientResponse = $this->createMock('Zend_Http_Response');
         $clientResponse->expects($this->once())->method('getStatus')->will($this->returnValue(200));
         $clientResponse->expects($this->once())->method('getBody')->will($this->returnValue('http://bit.ly/ZFramework'));
 
-        $client = $this->getMock('Zend_Http_Client', array(), array(), '', false);
+        $client = $this->createMock('Zend_Http_Client');
         $client->expects($this->any())->method('setParameterGet')->with($this->anything(),$this->anything());
         $client->expects($this->at(0))->method('setParameterGet')->with('login',$login);
         $client->expects($this->at(1))->method('setParameterGet')->with('apiKey',$apiKey);

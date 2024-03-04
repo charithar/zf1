@@ -537,6 +537,7 @@ class Zend_Service_Yahoo_OfflineTest extends \PHPUnit\Framework\TestCase
      * @group ZF-3636
      */
     public function testWebResultCache(){
+        $this->expectNotToPerformAssertions();
         // create empty result eg. without cache section
         $domDoc = new DOMDocument();
         $element = $domDoc->createElement('Result');
