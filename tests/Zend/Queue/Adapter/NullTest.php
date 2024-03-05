@@ -85,5 +85,6 @@ class Zend_Queue_Adapter_NullTest extends Zend_Queue_Adapter_AdapterTest
     // test the constants
     public function testConst()
     {
+        $this->expectNotToPerformAssertions();
     }
 }

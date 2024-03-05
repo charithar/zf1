@@ -128,6 +128,7 @@ class Zend_Navigation_PageFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldFailForInvalidType()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $page = Zend_Navigation_Page::factory(array(
                 'type'  => 'My_InvalidPage',

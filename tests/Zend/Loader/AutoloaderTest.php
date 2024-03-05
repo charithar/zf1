@@ -128,11 +128,9 @@ class Zend_Loader_AutoloaderTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(array($this, 'autoload'), $this->autoloader->getDefaultAutoloader());
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testSpecifyingInvalidDefaultAutoloaderShouldRaiseException()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->autoloader->setDefaultAutoloader(uniqid());
     }
 
@@ -154,15 +152,13 @@ class Zend_Loader_AutoloaderTest extends \PHPUnit\Framework\TestCase
     {
         $this->autoloader->registerNamespace(array('Phly_', 'Solar_'));
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertStringContainsStringIgnoringCase('Phly_', $namespaces);
-        $this->assertStringContainsStringIgnoringCase('Solar_', $namespaces);
+        $this->assertContains('Phly_', $namespaces);
+        $this->assertContains('Solar_', $namespaces);
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testRegisteringInvalidNamespaceSpecShouldRaiseException()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $o = new stdClass;
         $this->autoloader->registerNamespace($o);
     }
@@ -171,22 +167,20 @@ class Zend_Loader_AutoloaderTest extends \PHPUnit\Framework\TestCase
     {
         $this->autoloader->unregisterNamespace('Zend');
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertStringNotContainsStringIgnoringCase('Zend', $namespaces);
+        $this->assertContains('Zend', $namespaces);
     }
 
     public function testAutoloaderShouldAllowUnregisteringMultipleNamespacesAtOnce()
     {
         $this->autoloader->unregisterNamespace(array('Zend', 'ZendX'));
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertStringNotContainsStringIgnoringCase('Zend', $namespaces);
-        $this->assertStringNotContainsStringIgnoringCase('ZendX', $namespaces);
+        $this->assertContains('Zend', $namespaces);
+        $this->assertContains('ZendX', $namespaces);
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testUnregisteringInvalidNamespaceSpecShouldRaiseException()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $o = new stdClass;
         $this->autoloader->unregisterNamespace($o);
     }

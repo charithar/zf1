@@ -481,7 +481,7 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
     public function testBackwardsCompatibilityMaintainedWhenPartClassNotSpecified()
     {
         $message = new Zend_Mail_Message(array('file' => $this->_file));
-        $this->assertGreaterThan(0, count($message));
+        $this->assertGreaterThan(0, iterator_count($message));
         foreach ( $message as $part ) {
             $this->assertEquals('Zend_Mail_Part', get_class($part));
         }
@@ -499,7 +499,7 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('ZF3745_Mail_Part', $message->getPartClass());
         
         // Ensure message parts use the specified part class
-        $this->assertGreaterThan(0, count($message));
+        $this->assertGreaterThan(0, iterator_count($message));
         foreach ( $message as $part ) {
             $this->assertEquals('ZF3745_Mail_Part', get_class($part));
         }
@@ -515,7 +515,7 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('ZF3745_Mail_Part', $message->getPartClass());
         
         // Ensure message parts use the specified part class
-        $this->assertGreaterThan(0, count($message));
+        $this->assertGreaterThan(0, iterator_count($message));
         foreach ( $message as $part ) {
             $this->assertEquals('ZF3745_Mail_Part', get_class($part));
         }
@@ -537,7 +537,8 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
     public function testRaisesExceptionWhenProvidedWithHeaderContainingCRLFInjection($name, $value)
     {
         $headers = array($name => $value);
-        $this->setExpectedException('Zend_Mail_Exception', 'valid');
+        $this->expectException('Zend_Mail_Exception');
+        $this->expectExceptionMessage('valid');
         $message = new Zend_Mail_Message(array(
             'headers' => $headers,
         ));

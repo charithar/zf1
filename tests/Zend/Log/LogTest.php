@@ -48,8 +48,8 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -223,7 +223,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', array('content' => 'nonesuch'));
         $event = array_shift($mock->events);
-        $this->assertStringContainsStringIgnoringCase('content', array_keys($event));
+        $this->assertContains('content', array_keys($event));
         $this->assertEquals('nonesuch', $event['content']);
     }
 
@@ -235,9 +235,9 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', array('content' => 'nonesuch', 'bar'));
         $event = array_shift($mock->events);
-        $this->assertStringContainsStringIgnoringCase('content', array_keys($event));
-        $this->assertStringContainsStringIgnoringCase('info', array_keys($event));
-        $this->assertStringContainsStringIgnoringCase('bar', $event['info']);
+        $this->assertContains('content', array_keys($event));
+        $this->assertContains('info', array_keys($event));
+        $this->assertContains('bar', $event['info']);
     }
 
     /**
@@ -248,7 +248,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', 'nonesuch');
         $event = array_shift($mock->events);
-        $this->assertStringContainsStringIgnoringCase('info', array_keys($event));
+        $this->assertContains('info', array_keys($event));
         $info = $event['info'];
         $this->assertStringContainsStringIgnoringCase('nonesuch', $info);
     }
@@ -457,6 +457,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
      */
     public function testLogConstructFromConfigFormatter()
     {
+        $this->expectNotToPerformAssertions();
         $config = array(
         	'log' => array(
 	        	'test' => array(
@@ -478,6 +479,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
      */
     public function testLogConstructFromConfigCustomFormatter()
     {
+        $this->expectNotToPerformAssertions();
         $config = array(
         	'log' => array(
 	        	'test' => array(
@@ -526,6 +528,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
 
     public function testFactorySupportsPHP53Namespaces()
     {
+        $this->expectNotToPerformAssertions();
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             $this->markTestSkipped('PHP < 5.3.0 does not support namespaces');
         }
@@ -564,11 +567,9 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($log instanceof ZLTest_My_Log);
     }
 
-    /**
-     * @expectedException Zend_Log_Exception
-     */
     public function testZendLogThrowsAnExceptionWhenPassingIncorrectClassToFactory()
     {
+        $this->expectException(Zend_Log_Exception::class);
         $writer = new Zend_Log_Writer_Null();
         ZLTest_My_Log::factory(
             array(

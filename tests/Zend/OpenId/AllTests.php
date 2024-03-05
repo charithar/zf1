@@ -44,12 +44,12 @@ class Zend_OpenId_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_OpenId');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_OpenId');
 
         $suite->addTestSuite('Zend_OpenId_ConsumerTest');
         $suite->addTestSuite('Zend_OpenId_Consumer_Storage_FileTest');

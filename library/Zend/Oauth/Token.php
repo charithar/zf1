@@ -71,7 +71,7 @@ abstract class Zend_Oauth_Token
         if ($response !== null) {
             $this->_response = $response;
             $params = $this->_parseParameters($response);
-            if (count($params) > 0) {
+            if (!empty($params)) {
                 $this->setParams($params);
             }
         }

@@ -69,8 +69,8 @@ class Zend_Log_Writer_FirebugTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -114,6 +114,7 @@ class Zend_Log_Writer_FirebugTest extends \PHPUnit\Framework\TestCase
      */
     public function testZf3960()
     {
+        $this->expectNotToPerformAssertions();
         Zend_Wildfire_Channel_HttpHeaders::destroyInstance();
         Zend_Wildfire_Plugin_FirePhp::destroyInstance();
 
@@ -298,6 +299,7 @@ class Zend_Log_Writer_FirebugTest extends \PHPUnit\Framework\TestCase
      */
     public function testFileLineOffsets()
     {
+        $this->expectNotToPerformAssertions();
         $firephp = Zend_Wildfire_Plugin_FirePhp::getInstance();
         $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
         $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);

@@ -100,7 +100,7 @@ class Zend_Locale_FormatTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(  '1.234.567,12345',   Zend_Locale_Format::toNumber( 1234567.12345,  $options));
         $this->assertEquals(  '1٬234٬567٫12345',   Zend_Locale_Format::toNumber( 1234567.12345,  array('locale' => 'ar_QA')));
         $this->assertEquals(  '‏-1٬234٬567٫12345',  Zend_Locale_Format::toNumber(-1234567.12345,  array('locale' => 'ar_QA')));
-        $this->assertEquals(  '12,34,567.12345',   Zend_Locale_Format::toNumber( 1234567.12345,  array('locale' => 'dz_BT')));
+        $this->assertEquals(  '1,234,567.12345',   Zend_Locale_Format::toNumber( 1234567.12345,  array('locale' => 'dz_BT')));
         $this->assertEquals(  '-1.234.567,12345',  Zend_Locale_Format::toNumber(-1234567.12345,  array('locale' => 'mk_MK')));
         $this->assertEquals(        '452.25',      Zend_Locale_Format::toNumber(     452.25,     array('locale' => 'en_US')));
         $this->assertEquals(     '54,321.1234',    Zend_Locale_Format::toNumber(   54321.1234,   array('locale' => 'en_US')));

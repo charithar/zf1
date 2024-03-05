@@ -49,12 +49,12 @@ class Zend_Locale_AllTests
             setlocale(LC_ALL, TESTS_ZEND_LOCALE_FORMAT_SETLOCALE);
         }
 
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Locale');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Locale');
 
         $suite->addTestSuite('Zend_Locale_DataTest');
         $suite->addTestSuite('Zend_Locale_FormatTest');

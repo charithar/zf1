@@ -39,12 +39,13 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     public function testWrite()
     {
+        $this->expectNotToPerformAssertions();
         $fields = array('message' => 'foo', 'priority' => LOG_NOTICE);
         $writer = new Zend_Log_Writer_Syslog();
         $writer->write($fields);
@@ -118,6 +119,7 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
      */
     public function testWriteWithFormatter()
     {
+        $this->expectNotToPerformAssertions();
         $event = array(
         	'message' => 'tottakai',
             'priority' => Zend_Log::ERR

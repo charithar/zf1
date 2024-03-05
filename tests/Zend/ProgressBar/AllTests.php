@@ -39,12 +39,12 @@ class Zend_ProgressBar_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_ProgressBar');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_ProgressBar');
         $suite->addTest(Zend_ProgressBar_Adapter_AllTests::suite());
         $suite->addTestSuite('Zend_ProgressBar_ProgressBarTest');
 

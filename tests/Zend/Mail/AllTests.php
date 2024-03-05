@@ -54,12 +54,12 @@ class Zend_Mail_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Mail');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Mail');
 
         $suite->addTest(Zend_Mail_Header_AllTests::suite());
         $suite->addTestSuite('Zend_Mail_MailTest');

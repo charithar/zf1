@@ -46,12 +46,12 @@ class Zend_Markup_AllTests
             $parameters['reportDirectory'] = TESTS_GENERATE_REPORT_TARGET;
         }
 
-        PHPUnit_TextUI_TestRunner::run(self::suite(), $parameters);
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Markup');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Markup');
 
         $suite->addTestSuite('Zend_Markup_BbcodeAndHtmlTest');
         $suite->addTestSuite('Zend_Markup_ParserIntegrityTest');

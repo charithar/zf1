@@ -39,12 +39,13 @@ class Zend_Log_Writer_NullTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     public function testWrite()
     {
+        $this->expectNotToPerformAssertions();
         $writer = new Zend_Log_Writer_Null();
         $writer->write(array('message' => 'foo', 'priority' => 42));
     }

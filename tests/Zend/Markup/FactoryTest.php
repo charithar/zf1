@@ -39,6 +39,7 @@ class Zend_Markup_FactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testFactory()
     {
+        $this->expectNotToPerformAssertions();
         Zend_Markup::addParserPath('Zend_Markup_Test_Parser', 'Zend/Markup/Test/Parser');
         Zend_Markup::addRendererPath('Zend_Markup_Test_Renderer', 'Zend/Markup/Test/Renderer');
 

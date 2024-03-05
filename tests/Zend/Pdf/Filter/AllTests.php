@@ -39,12 +39,12 @@ class Zend_Pdf_Filter_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Pdf_Filter');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Pdf_Filter');
 
         $suite->addTestSuite('Zend_Pdf_Filter_Ascii85Test');
         $suite->addTestSuite('Zend_Pdf_Filter_RunLengthTest');

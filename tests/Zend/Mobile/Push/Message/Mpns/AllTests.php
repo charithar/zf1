@@ -40,12 +40,12 @@ class Zend_Mobile_Push_Message_Mpns_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Mobile_Push_Message_Mpns');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Mobile_Push_Message_Mpns');
         
         $suite->addTestSuite('Zend_Mobile_Push_Message_Mpns_RawTest');
         $suite->addTestSuite('Zend_Mobile_Push_Message_Mpns_TileTest');

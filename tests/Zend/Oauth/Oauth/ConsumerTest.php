@@ -126,6 +126,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetSignatureMethodThrowsExceptionForInvalidMethod()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {
@@ -137,6 +138,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRequestMethodThrowsExceptionForInvalidMethod()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {
@@ -148,6 +150,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRequestSchemeThrowsExceptionForInvalidMethod()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {
@@ -159,6 +162,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetLocalUrlThrowsExceptionForInvalidUrl()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {
@@ -170,6 +174,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRequestTokenUrlThrowsExceptionForInvalidUrl()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {
@@ -181,6 +186,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetUserAuthorizationUrlThrowsExceptionForInvalidUrl()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {
@@ -192,6 +198,7 @@ class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetAccessTokenUrlThrowsExceptionForInvalidUrl()
     {
+        $this->expectNotToPerformAssertions();
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Zend_Oauth_Consumer($config);
         try {

@@ -441,6 +441,7 @@ class Zend_Pdf_ActionTest extends \PHPUnit\Framework\TestCase
      */
     public function testPhpVersionBug()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $file = dirname(__FILE__) . '/_files/ZF-8462.pdf';
             $pdf = Zend_Pdf::load($file);

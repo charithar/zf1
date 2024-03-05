@@ -123,7 +123,7 @@ class Zend_Mail_FileTransportTest extends \PHPUnit\Framework\TestCase
 
         $mail = $this->_prepareMail();
 
-        $this->setExpectedException('Zend_Mail_Transport_Exception');
+        $this->expectException('Zend_Mail_Transport_Exception');
         $mail->send($transport);
     }
 

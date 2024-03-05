@@ -48,12 +48,12 @@ class Zend_Pdf_Element_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Pdf_Element');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Pdf_Element');
 
         $suite->addTestSuite('Zend_Pdf_Element_ArrayTest');
         $suite->addTestSuite('Zend_Pdf_Element_BooleanTest');

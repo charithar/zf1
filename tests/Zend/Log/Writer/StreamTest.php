@@ -42,8 +42,8 @@ class Zend_Log_Writer_StreamTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     public function testConstructorThrowsWhenResourceIsNotStream()
@@ -61,12 +61,14 @@ class Zend_Log_Writer_StreamTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorWithValidStream()
     {
+        $this->expectNotToPerformAssertions();
         $stream = fopen('php://memory', 'w+');
         new Zend_Log_Writer_Stream($stream);
     }
 
     public function testConstructorWithValidUrl()
     {
+        $this->expectNotToPerformAssertions();
         new Zend_Log_Writer_Stream('php://memory');
     }
 

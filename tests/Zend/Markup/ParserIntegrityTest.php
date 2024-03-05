@@ -45,8 +45,8 @@ class Zend_Markup_ParserIntegrityTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Markup_MarkupTest");
+        $suite->run();
     }
 
     public function testBbcodeParser()

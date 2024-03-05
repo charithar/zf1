@@ -90,7 +90,8 @@ class Zend_Mail_Header_HeaderNameTest extends \PHPUnit\Framework\TestCase
      */
     public function testAssertValidRaisesExceptionForInvalidNames($name)
     {
-        $this->setExpectedException('Zend_Mail_Exception', 'Invalid');
+        $this->expectException('Zend_Mail_Exception');
+        $this->expectExceptionMessage('Invalid');
         Zend_Mail_Header_HeaderName::assertValid($name);
     }
 }

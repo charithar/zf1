@@ -52,12 +52,12 @@ class Zend_Oauth_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Oauth');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Oauth');
 
         $suite->addTestSuite('Zend_OauthTest');
         $suite->addTestSuite('Zend_Oauth_ClientTest');

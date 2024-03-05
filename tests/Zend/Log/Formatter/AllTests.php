@@ -41,12 +41,12 @@ class Zend_Log_Formatter_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Log_Formatter');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Log_Formatter');
 
         $suite->addTestSuite('Zend_Log_Formatter_FirebugTest');
         $suite->addTestSuite('Zend_Log_Formatter_SimpleTest');

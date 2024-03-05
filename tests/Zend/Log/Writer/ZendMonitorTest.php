@@ -39,8 +39,8 @@ class Zend_Log_Writer_ZendMonitorTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     /**
@@ -48,6 +48,7 @@ class Zend_Log_Writer_ZendMonitorTest extends \PHPUnit\Framework\TestCase
      */
     public function testWrite()
     {
+        $this->expectNotToPerformAssertions();
         $writer = new Zend_Log_Writer_ZendMonitor();
         $writer->write(array('message' => 'my mess', 'priority' => 1));
     }

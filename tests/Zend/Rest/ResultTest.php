@@ -40,23 +40,17 @@ class Zend_Rest_ResultTest extends \PHPUnit\Framework\TestCase
 {
     static $path;
 
-    public function __construct()
+
+    public static function setUpBeforeClass(): void
     {
         self::$path = dirname(__FILE__).'/responses/';
     }
 
     public function testResponseSuccess()
     {
-        try {
-            $xml = file_get_contents(self::$path . "returnString.xml");
-            $client = new Zend_Rest_Client_Result($xml);
-            $this->assertTrue($client->isSuccess());
-        }
-        catch (Throwable $e) {
-            echo $e->getMessage();
-            var_dump($e->getTrace());
-            exit();
-        }
+        $xml = file_get_contents(self::$path . "returnString.xml");
+        $client = new Zend_Rest_Client_Result($xml);
+        $this->assertTrue($client->isSuccess());
     }
 
     public function testResponseIsError()

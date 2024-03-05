@@ -54,8 +54,8 @@ class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Markup_MarkupTest");
+        $suite->run();
     }
 
     /**
@@ -119,7 +119,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
      */
     public function testExceptionParserWrongInputType()
     {
-        $this->setExpectedException('Zend_Markup_Parser_Exception');
+        $this->expectException('Zend_Markup_Parser_Exception');
 
         $this->_markup->getParser()->parse(array());
     }
@@ -131,7 +131,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
      */
     public function testExceptionParserEmptyInput()
     {
-        $this->setExpectedException('Zend_Markup_Parser_Exception');
+        $this->expectException('Zend_Markup_Parser_Exception');
 
         $this->_markup->getParser()->parse('');
     }
@@ -189,6 +189,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
 
     public function testAttributeNotEndingValueDoesNotThrowNotice()
     {
+        $this->expectNotToPerformAssertions();
         // Notice: Uninitialized string offset: 13
         // in Zend/Markup/Parser/Bbcode.php on line 337
 
@@ -197,6 +198,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
 
     public function testAttributeFollowingValueDoesNotThrowNotice()
     {
+        $this->expectNotToPerformAssertions();
         // Notice: Uninitialized string offset: 38
         // in Zend/Markup/Parser/Bbcode.php on line 337
 
@@ -382,6 +384,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends \PHPUnit\Framework\TestCase
 
     public function testWrongNestedLists()
     {
+        $this->expectNotToPerformAssertions();
         $m = $this->_markup;
         // thanks to PadraicB for finding this
         $input = <<<BBCODE

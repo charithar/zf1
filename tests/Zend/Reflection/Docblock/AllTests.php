@@ -40,12 +40,12 @@ class Zend_Reflection_Docblock_AllTests
 {
     public static function main()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        self::suite()->run();
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Reflection_Docblock');
+        $suite = new \PHPUnit\Framework\TestSuite('Zend Framework - Zend_Reflection_Docblock');
 
         $suite->addTestSuite('Zend_Reflection_Docblock_TagTest');
         $suite->addTestSuite('Zend_Reflection_Docblock_Tag_ParamTest');

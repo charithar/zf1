@@ -56,6 +56,7 @@ class Zend_Navigation_Page_UriTest extends \PHPUnit\Framework\TestCase
 
     public function testUriOptionAsInteger()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $page = new Zend_Navigation_Page_Uri(array('uri' => 1337));
             $this->fail('An invalid \'uri\' was given, but ' .
@@ -67,6 +68,7 @@ class Zend_Navigation_Page_UriTest extends \PHPUnit\Framework\TestCase
 
     public function testUriOptionAsObject()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $uri = new stdClass();
             $uri->foo = 'bar';

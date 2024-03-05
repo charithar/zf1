@@ -39,8 +39,8 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite(__CLASS__);
+        $suite->run();
     }
 
     protected function setUp(): void
@@ -72,7 +72,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
         $this->writer->write($fields);
 
         // insert should be called once...
-        $this->assertStringContainsStringIgnoringCase('insert', array_keys($this->db->calls));
+        $this->assertContains('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
@@ -94,7 +94,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
         $this->writer->write(array('message' => $message, 'priority' => $priority));
 
         // insert should be called once...
-        $this->assertStringContainsStringIgnoringCase('insert', array_keys($this->db->calls));
+        $this->assertContains('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
@@ -145,7 +145,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
         try {
             $this->writer->setFormatter(new StdClass());
         } catch (Exception $e) {
-            $this->assertTrue($e instanceof PHPUnit_Framework_Error);
+            $this->assertTrue($e instanceof \PHPUnit\Framework\Error);
             $this->assertStringContainsStringIgnoringCase('must implement interface', $e->getMessage());
         }
     }

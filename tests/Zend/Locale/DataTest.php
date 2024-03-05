@@ -89,6 +89,7 @@ class Zend_Locale_DataTest extends \PHPUnit\Framework\TestCase
      */
     public function testNoType()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $value = Zend_Locale_Data::getContent('de','');
             $this->fail('content should throw an exception');
@@ -7236,6 +7237,7 @@ class Zend_Locale_DataTest extends \PHPUnit\Framework\TestCase
      */
     public function testCreateValidCacheIdsInGetContentMethod()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $content = Zend_Locale_Data::getContent('de_DE', 'language', 1234.56);
         } catch (Zend_Cache_Exception $e) {
@@ -7248,6 +7250,7 @@ class Zend_Locale_DataTest extends \PHPUnit\Framework\TestCase
      */
     public function testCreateValidCacheIdsInGetListMethod()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $list = Zend_Locale_Data::getList('de_DE', 'language', 1234.56);
         } catch (Zend_Cache_Exception $e) {
