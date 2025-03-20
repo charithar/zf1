@@ -327,10 +327,11 @@ class Zend_Filter_Compress_ZipTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group RS
-     * @expectedException Zend_Filter_Exception
+     *
      */
     public function testDecompressWillThrowExceptionWhenDetectingUpwardDirectoryTraversal()
     {
+        $this->expectException(Zend_Filter_Exception::class);
         if (version_compare(PHP_VERSION, '5.2.8', '>=')) {
             $this->markTestSkipped('This test is to run on PHP less than 5.2.8');
             return;

@@ -98,11 +98,9 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('title');
         $atomFeed->render();
@@ -155,11 +153,9 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
         $this->assertEquals(1234567890, $feed->getDateModified()->get(Zend_Date::TIMESTAMP));
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('dateModified');
         $atomFeed->render();
@@ -241,11 +237,9 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
         $atomFeed->render();
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsExceptionIfIdMissing()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('link');
         $atomFeed->render();
@@ -259,11 +253,9 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
         $this->assertEquals('http://www.example.com/atom', $feed->getFeedLink());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testFeedLinkToXmlAtomWhereTheFeedWillBeAvailableIfMissingThrowsException()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('feedLinks');
         $atomFeed->render();

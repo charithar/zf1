@@ -323,11 +323,9 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
         $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
     }
 
-    /**
-     * @expectedException Zend_Feed_Pubsubhubbub_Exception
-     */
     public function testGetStorageThrowsExceptionIfNoneSet()
     {
+        $this->expectException(Zend_Feed_Pubsubhubbub_Exception::class);
         $this->_subscriber->getStorage();
     }
 

@@ -43,22 +43,18 @@ class Zend_Gdata_Calendar_EventQueryExceptionTest extends \PHPUnit\Framework\Tes
         $this->query = new Zend_Gdata_Calendar_EventQuery();
     }
 
-    /**
-     * @expectedException Zend_Gdata_App_Exception
-     */
     public function testSingleEventsThrowsExceptionOnSetInvalidValue()
     {
+        $this->expectException(Zend_Gdata_App_Exception::class);
         $this->query->resetParameters();
         $singleEvents = 'puppy';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setSingleEvents($singleEvents);
     }
 
-    /**
-     * @expectedException Zend_Gdata_App_Exception
-     */
     public function testFutureEventsThrowsExceptionOnSetInvalidValue()
     {
+        $this->expectException(Zend_Gdata_App_Exception::class);
         $this->query->resetParameters();
         $futureEvents = 'puppy';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);

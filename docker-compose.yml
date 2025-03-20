@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   zf1_test:
     build:
@@ -14,6 +13,7 @@ services:
      - .:/app
     environment:
       - PHPUNIT=/app/bin/phpunit
+      - TMPDIR=/tmp
     working_dir: /app/tests
   memcachedb:
     image: memcached:1.6.5

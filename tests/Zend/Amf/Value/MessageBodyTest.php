@@ -45,8 +45,9 @@ class Zend_Amf_Value_MessageBodyTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_Value_MessageBodyTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_Value_MessageBodyTest");
+        $suite->run();
+        //$result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     protected function setUp(): void

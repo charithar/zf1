@@ -168,10 +168,11 @@ class Zend_Feed_ReaderTest extends \PHPUnit\Framework\TestCase
     
     /**
      * @group ZF-8328
-     * @expectedException Zend_Feed_Exception
+     *
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {

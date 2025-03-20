@@ -475,7 +475,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      */
     public function testSocketErrorException()
     {
-        $this->expectException(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT);
+        $this->expectException(Zend_Http_Client_Adapter_Exception::class);
         // Try to connect to an invalid host
         $this->_client->setUri('http://255.255.255.255');
 

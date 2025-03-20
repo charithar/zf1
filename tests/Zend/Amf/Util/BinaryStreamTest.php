@@ -45,23 +45,20 @@ class Zend_Amf_Util_BinaryStreamTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_Util_BinaryStreamTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_Util_BinaryStreamTest");
+        $suite->run();
+        //$result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    /**
-     * @expectedException Zend_Amf_Exception
-     */
     public function testConstructorShouldThrowExceptionForInvalidStream()
     {
+        $this->expectException(Zend_Amf_Exception::class);
         $test = new Zend_Amf_Util_BinaryStream(array('foo', 'bar'));
     }
 
-    /**
-     * @expectedException Zend_Amf_Exception
-     */
     public function testReadBytesShouldRaiseExceptionForBufferUnderrun()
     {
+        $this->expectException(Zend_Amf_Exception::class);
         $string = 'this is a short stream';
         $stream = new Zend_Amf_Util_BinaryStream($string);
         $length = strlen($string);

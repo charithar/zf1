@@ -817,31 +817,25 @@ class Zend_Feed_Writer_FeedTest extends \PHPUnit\Framework\TestCase
         ), $writer->getImage());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsImageUriThrowsExceptionOnEmptyUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $writer = new Zend_Feed_Writer_Feed;
         $writer->setImage(array(
             'uri' => ''
         ));
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsImageUriThrowsExceptionOnMissingUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $writer = new Zend_Feed_Writer_Feed;
         $writer->setImage(array());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsImageUriThrowsExceptionOnInvalidUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $writer = new Zend_Feed_Writer_Feed;
         $writer->setImage(array(
             'uri' => 'http://'
@@ -926,31 +920,25 @@ class Zend_Feed_Writer_FeedTest extends \PHPUnit\Framework\TestCase
         ), $writer->getIcon());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsIconUriThrowsExceptionOnEmptyUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $writer = new Zend_Feed_Writer_Feed;
         $writer->setIcon(array(
             'uri' => ''
         ));
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsIconUriThrowsExceptionOnMissingUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $writer = new Zend_Feed_Writer_Feed;
         $writer->setIcon(array());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testSetsIconUriThrowsExceptionOnInvalidUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $writer = new Zend_Feed_Writer_Feed;
         $writer->setIcon(array(
             'uri' => 'http://'

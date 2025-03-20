@@ -56,8 +56,9 @@ class Zend_Amf_Value_ArrayCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_Value_ArrayCollectionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_Value_ArrayCollectionTest");
+        $suite->run();
+        //$result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     protected function setUp(): void

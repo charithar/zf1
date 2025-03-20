@@ -183,11 +183,9 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $entry->getEnclosure());
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $entry = new Zend_Feed_Writer_Entry;
         $entry->setEnclosure(array(
             'type' => 'audio/mpeg',
@@ -195,11 +193,9 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    /**
-     * @expectedException Zend_Feed_Exception
-     */
     public function testAddsEnclosureThrowsExceptionWhenUriIsInvalid()
     {
+        $this->expectException(Zend_Feed_Exception::class);
         $entry = new Zend_Feed_Writer_Entry;
         $entry->setEnclosure(array(
             'type' => 'audio/mpeg',

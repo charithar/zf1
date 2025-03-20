@@ -820,7 +820,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->element->isValid('');
         $messages = $this->element->getMessages();
         $this->assertEquals(1, count($messages));
+        echo "==============1".var_export($messages, true).$message. current($messages);
         $this->assertEquals($message, current($messages));
+        echo "==============2";
     }
 
     public function testMessagesAreTranslatedForCurrentLocale()

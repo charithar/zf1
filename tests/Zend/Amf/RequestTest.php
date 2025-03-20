@@ -55,8 +55,9 @@ class Zend_Amf_RequestTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_RequestTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_RequestTest");
+        $suite->run();
+        //$result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -433,7 +434,7 @@ class Zend_Amf_RequestTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($bodies[0] instanceof Zend_Amf_Value_MessageBody);
         $data = $bodies[0]->getData();
         // Make sure that the string was deserialized properly and check its value
-        $this->assertTrue(array_key_exists(1, $data[0]));
+        $this->assertTrue(property_exists($data[0], '1'));
         $this->assertEquals('two', $data[0]->two);
     }
 

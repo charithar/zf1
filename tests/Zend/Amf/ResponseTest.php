@@ -62,8 +62,9 @@ class Zend_Amf_ResponseTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_ResponseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_ResponseTest");
+        $suite->run();
+        //$result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -1014,8 +1015,10 @@ class Zend_Amf_ResponseTest extends \PHPUnit\Framework\TestCase
                         ->addAmfHeader($this->header2);
         $headers = $this->_response->getAmfHeaders();
         $this->assertEquals(2, count($headers));
-        $this->assertStringContainsStringIgnoringCase($this->header1, $headers);
-        $this->assertStringContainsStringIgnoringCase($this->header2, $headers);
+        $this->assertEquals($this->header1, $headers);
+        $this->assertEquals($this->header2, $headers);
+        //$this->assertStringContainsStringIgnoringCase($this->header1, $headers);
+        //$this->assertStringContainsStringIgnoringCase($this->header2, $headers);
     }
 
     public function testResponseHeadersShouldBeSerializedWhenWritingMessage()

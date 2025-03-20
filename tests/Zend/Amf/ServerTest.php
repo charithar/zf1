@@ -51,8 +51,9 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_ServerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_ServerTest");
+        $suite->run();
+        //$result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     protected function setUp(): void
@@ -103,27 +104,21 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(in_array('test.__construct', $methods));
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetClassShouldRaiseExceptionOnInvalidClassname()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->setClass('foobar');
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetClassShouldRaiseExceptionOnInvalidClasstype()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->setClass(array('foobar'));
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetClassShouldRaiseExceptionOnDuplicateMethodName()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->setClass('Zend_Amf_testclass', 'tc');
         $this->_server->setClass('Zend_Amf_testclassPrivate', 'tc');
     }
@@ -184,19 +179,15 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(in_array('zsr.Zend_Amf_Server_testFunction2', $methods));
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testAddFunctionShouldRaiseExceptionForInvalidFunctionName()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->addFunction(true);
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testAddFunctionShouldRaiseExceptionOnDuplicateMethodName()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->addFunction('Zend_Amf_Server_testFunction', 'tc');
         $this->_server->addFunction('Zend_Amf_Server_testFunction', 'tc');
     }
@@ -732,11 +723,9 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($request instanceof Zend_Amf_Request_Http);
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetRequestShouldRaiseExceptionOnInvalidStringClassName()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->setRequest('Zend_Amf_ServerTest_BogusRequest');
     }
 
@@ -747,11 +736,9 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($request, $this->_server->getRequest());
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetRequestShouldRaiseExceptionOnInvalidRequestObjects()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         require_once 'Zend/XmlRpc/Request.php';
         $request = new Zend_XmlRpc_Request;
         $this->_server->setRequest($request);
@@ -765,11 +752,9 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($response instanceof Zend_Amf_Response_Http);
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetResponseShouldRaiseExceptionOnInvalidStringClassName()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         $this->_server->setResponse('Zend_Amf_ServerTest_BogusResponse');
     }
 
@@ -780,11 +765,9 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($response, $this->_server->getResponse());
     }
 
-    /**
-     * @expectedException Zend_Amf_Server_Exception
-     */
     public function testSetResponseShouldRaiseExceptionOnInvalidResponseObjects()
     {
+        $this->expectException(Zend_Amf_Server_Exception::class);
         require_once 'Zend/XmlRpc/Response.php';
         $response = new Zend_XmlRpc_Response;
         $this->_server->setResponse($response);
@@ -802,7 +785,7 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         foreach ($functions as $key => $value) {
             $this->assertTrue(strstr($key, '.') ? true : false, $key);
             $ns = substr($key, 0, strpos($key, '.'));
-            $this->assertStringContainsStringIgnoringCase($ns, $namespaces, $key);
+            $this->assertEquals($ns, $namespaces, $key);
             $this->assertTrue($value instanceof Zend_Server_Reflection_Function_Abstract);
         }
     }
@@ -1014,8 +997,8 @@ class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
         $this->_server->addDirectory(dirname(__FILE__)."/_files/services");
         $this->_server->addDirectory(dirname(__FILE__)."/_files/");
         $dirs = $this->_server->getDirectory();
-        $this->assertStringContainsStringIgnoringCase(dirname(__FILE__)."/_files/services/", $dirs);
-        $this->assertStringContainsStringIgnoringCase(dirname(__FILE__)."/_files/", $dirs);
+        $this->assertContains(dirname(__FILE__)."/_files/services/", $dirs);
+        $this->assertContains(dirname(__FILE__)."/_files/", $dirs);
     }
 
     public function testAddDirectoryService()

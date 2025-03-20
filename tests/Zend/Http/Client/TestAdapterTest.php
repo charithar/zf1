@@ -67,7 +67,7 @@ class Zend_Http_Client_TestAdapterTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetConfigThrowsOnInvalidConfig()
     {
-        $this->expectException(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT);
+        $this->expectException(Zend_Http_Client_Adapter_Exception::class);
         $this->adapter->setConfig('foo');
     }
 

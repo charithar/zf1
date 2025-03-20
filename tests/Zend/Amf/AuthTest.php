@@ -9,8 +9,8 @@
  * It is also available through the world-wide-web at this URL:
  * http://framework.zend.com/license/new-bsd
  * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
+ * obtain it through the world-wide-web, please email
+ *  license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
  * @package    Zend_Amf
@@ -55,8 +55,9 @@ class Zend_Amf_AuthTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_AuthTest");
-        PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite("Zend_Amf_AuthTest");
+        $suite->run();
+        //PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     protected function setUp(): void
@@ -67,7 +68,7 @@ class Zend_Amf_AuthTest extends \PHPUnit\Framework\TestCase
         $this->_acl = new Zend_Acl();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_server);
     }

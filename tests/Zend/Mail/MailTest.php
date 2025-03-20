@@ -772,6 +772,7 @@ class Zend_Mail_MailTest extends \PHPUnit\Framework\TestCase
             $mail->setDate('invalid date');
             $this->fail('Invalid date should throw an exception');
         } catch (Exception $e) {
+            $this->expectNotToPerformAssertions();
         }
     }
 
