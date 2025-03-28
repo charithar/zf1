@@ -416,10 +416,14 @@ class Zend_Feed_Reader
         }
         $responseHtml = $response->getBody();
         $libxml_errflag = libxml_use_internal_errors(true);
-        $oldValue = libxml_disable_entity_loader(true);
+        if (\PHP_VERSION_ID < 80000) {
+            $oldValue = libxml_disable_entity_loader(true);
+        }
         $dom = new DOMDocument;
         $status = $dom->loadHTML($responseHtml);
-        libxml_disable_entity_loader($oldValue);
+        if (\PHP_VERSION_ID < 80000) {
+            libxml_disable_entity_loader($oldValue);
+        }
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
             // Build error message

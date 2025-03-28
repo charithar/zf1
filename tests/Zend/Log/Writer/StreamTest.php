@@ -52,7 +52,7 @@ class Zend_Log_Writer_StreamTest extends \PHPUnit\Framework\TestCase
         try {
             new Zend_Log_Writer_Stream($resource);
             $this->fail();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertMatchesRegularExpression('/not a stream/i', $e->getMessage());
         }
@@ -89,7 +89,7 @@ class Zend_Log_Writer_StreamTest extends \PHPUnit\Framework\TestCase
         try {
             new Zend_Log_Writer_Stream('');
             $this->fail();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertMatchesRegularExpression('/cannot be opened/i', $e->getMessage());
         }

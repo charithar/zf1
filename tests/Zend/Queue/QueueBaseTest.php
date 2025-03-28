@@ -186,7 +186,7 @@ abstract class Zend_Queue_QueueBaseTest extends \PHPUnit\Framework\TestCase
         try {
             $this->queue->send(array());
             $this->fail('send() $mesage must be a string');
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->assertTrue(true);
         }
 

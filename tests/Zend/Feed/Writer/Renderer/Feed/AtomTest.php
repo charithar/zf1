@@ -65,6 +65,7 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
+        $this->expectNotToPerformAssertions();
         $feed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         try {
             $feed->render();
@@ -128,6 +129,7 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
 
     public function testFeedSubtitleThrowsNoExceptionIfMissing()
     {
+        $this->expectNotToPerformAssertions();
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('description');
         $atomFeed->render();
@@ -172,6 +174,7 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
 
     public function testFeedGeneratorIfMissingThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('generator');
         $atomFeed->render();
@@ -208,6 +211,7 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
 
     public function testFeedLanguageIfMissingThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('language');
         $atomFeed->render();
@@ -231,6 +235,7 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends \PHPUnit\Framework\TestCas
 
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsNoExceptionIfIdSet()
     {
+        $this->expectNotToPerformAssertions();
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->setId('http://www.example.com');
         $this->_validWriter->remove('link');

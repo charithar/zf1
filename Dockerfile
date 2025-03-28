@@ -13,7 +13,7 @@
 #
 #   docker-compose run zf1_test ../bin/phpunit <path to test file>
 #
-FROM php:7.4-cli
+FROM php:8.0-cli
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -33,15 +33,16 @@ RUN apt-get update \
         libbz2-dev \
         libjpeg62-turbo-dev \
         curl \
-        unzip \
+        unzip
 #    && git checkout -b php7 origin/php7 \
-    && docker-php-ext-configure bcmath --enable-bcmath \
+
+RUN docker-php-ext-configure bcmath --enable-bcmath \
 #    && docker-php-ext-configure pcntl --enable-pcntl \
 #    && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
 #    && docker-php-ext-configure pdo_pgsql \
 #    && docker-php-ext-configure mcrypt --enable-mcrypt \
 #    && docker-php-ext-configure mbstring --enable-mbstring \
-#    && docker-php-ext-configure soap --enable-soap \
+    && docker-php-ext-configure soap --enable-soap \
 #    && docker-php-ext-configure intl \
     && docker-php-ext-install \
         bcmath \
@@ -52,7 +53,7 @@ RUN apt-get update \
 #        pcntl \
 #        pdo_mysql \
 #        pdo_pgsql \
-#        soap \
+        soap \
 #        sockets \
         zip
 
@@ -93,7 +94,9 @@ RUN curl -sS https://getcomposer.org/installer \
 #COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 #COPY ./timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY tests/php7_config.ini $PHP_INI_DIR/conf.d/
+COPY tests/php8_config.ini $PHP_INI_DIR/conf.d/
+
+RUN php -m
 
 #COPY . /app
 

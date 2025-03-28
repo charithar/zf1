@@ -94,6 +94,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_callback->setHttpResponse(new stdClass);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -102,6 +103,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testThrowsExceptionIfNonObjectSetAsHttpResponseObject()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_callback->setHttpResponse('');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -121,6 +123,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testThrowsExceptionOnSettingZeroAsSubscriberCount()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_callback->setSubscriberCount(0);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -129,6 +132,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testThrowsExceptionOnSettingLessThanZeroAsSubscriberCount()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_callback->setSubscriberCount(-1);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -137,6 +141,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsSubscriberCount()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_callback->setSubscriberCount('0aa');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -153,8 +158,11 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testValidatesValidHttpGetData()
     {
-
-        $mockReturnValue = $this->getMock('Result', array('toArray'));
+        $mockReturnValue = $this->getMockBuilder(stdClass::class)
+            ->setMockClassName('Result')
+            ->addMethods(array('toArray'))
+            ->getMock();
+        //$mockReturnValue = $this->getMock('Result', array('toArray'));
         $mockReturnValue->expects($this->any())->method('toArray')->will($this->returnValue(array(
                 'verify_token' => hash('sha256', 'cba')
             )));
@@ -205,8 +213,11 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
 
     public function testReturnsTrueIfModeSetAsUnsubscribeFromHttpGetData()
     {
-
-        $mockReturnValue = $this->getMock('Result', array('toArray'));
+        $mockReturnValue = $this->getMockBuilder(stdClass::class)
+            ->setMockClassName('Result')
+            ->addMethods(array('toArray'))
+            ->getMock();
+        //$mockReturnValue = $this->getMock('Result', array('toArray'));
         $mockReturnValue->expects($this->any())->method('toArray')->will($this->returnValue(array(
                 'verify_token' => hash('sha256', 'cba')
             )));
@@ -497,13 +508,18 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends \PHPUnit\Framework\
             $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods,
-            array(),
-            $className . '_PubsubSubscriberMock_' . uniqid(),
-            false
-        );
+        $mocked = $this->getMockBuilder($className)
+            ->setMockClassName($className . '_PubsubSubscriberMock_' . uniqid())
+            ->onlyMethods($stubMethods)
+            ->disableOriginalConstructor()
+            ->getMock();
+//        $mocked = $this->getMock(
+//            $className,
+//            $stubMethods,
+//            array(),
+//            $className . '_PubsubSubscriberMock_' . uniqid(),
+//            false
+//        );
         return $mocked;
     }
 

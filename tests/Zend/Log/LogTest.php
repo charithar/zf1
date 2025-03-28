@@ -341,7 +341,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
      * Used by testUsingWithErrorHandler -
      * verifies that the data written to the original logger is the same as the data written in Zend_Log
      */
-    public function verifyHandlerData($errno, $errstr, $errfile, $errline, $errcontext)
+    public function verifyHandlerData($errno, $errstr, $errfile, $errline, $errcontext = [])
     {
         if ($this->expectingLogging) {
             $this->assertFalse(empty($this->errWriter->events));

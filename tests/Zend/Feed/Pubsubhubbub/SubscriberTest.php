@@ -107,6 +107,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingEmptyHubServerUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->addHubUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -115,6 +116,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->addHubUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -123,6 +125,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->addHubUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -195,6 +198,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingEmptyTopicUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setTopicUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -204,6 +208,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingNonStringTopicUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setTopicUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -213,6 +218,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingInvalidTopicUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setTopicUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -221,6 +227,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnMissingTopicUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->getTopicUrl();
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -235,6 +242,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingEmptyCallbackUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setCallbackUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -244,6 +252,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingNonStringCallbackUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setCallbackUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -253,6 +262,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingInvalidCallbackUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setCallbackUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -261,6 +271,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnMissingCallbackUrl()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->getCallbackUrl();
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -275,6 +286,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingZeroAsLeaseSeconds()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setLeaseSeconds(0);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -283,6 +295,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingLessThanZeroAsLeaseSeconds()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setLeaseSeconds(-1);
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -291,6 +304,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsLeaseSeconds()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setLeaseSeconds('0aa');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -305,6 +319,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
 
     public function testSetsPreferredVerificationModeThrowsExceptionOnSettingBadMode()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_subscriber->setPreferredVerificationMode('abc');
             $this->fail('Should not fail as an Exception would be raised and caught');
@@ -339,13 +354,19 @@ class Zend_Feed_Pubsubhubbub_SubscriberTest extends \PHPUnit\Framework\TestCase
             $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods,
-            array(),
-            $className . '_PubsubSubscriberMock_' . uniqid(),
-            false
-        );
+        $mocked = $this->getMockBuilder($className)
+            ->setMockClassName($className . '_PubsubSubscriberMock_' . uniqid())
+            //->addMethods($stubMethods)
+            ->disableOriginalConstructor()
+            ->onlyMethods($stubMethods)
+            ->getMock();
+//        $mocked = $this->getMock(
+//            $className,
+//            $stubMethods,
+//            array(),
+//            $className . '_PubsubSubscriberMock_' . uniqid(),
+//            false
+//        );
         return $mocked;
     }
 

@@ -533,7 +533,12 @@ class Zend_Soap_ClientTest extends \PHPUnit\Framework\TestCase
         $fixtureCookieKey = "foo";
         $fixtureCookieValue = "bar";
 
-        $clientMock = $this->getMock('SoapClient', array('__setCookie'), array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')));
+        $clientMock = $this->getMockBuilder('SoapClient')
+            ->onlyMethods(array('__setCookie'))
+            ->setConstructorArgs(array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')))
+            ->getMock();
+        $clientMock->uri = 'http://www.zend.com';
+        $clientMock->location = 'http://www.zend.com';
         $clientMock->expects($this->once())
                    ->method('__setCookie')
                    ->with($fixtureCookieKey, $fixtureCookieValue);
@@ -546,7 +551,12 @@ class Zend_Soap_ClientTest extends \PHPUnit\Framework\TestCase
 
     public function testSetSoapClient()
     {
-        $clientMock = $this->getMock('SoapClient', array('__setCookie'), array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')));
+        $clientMock = $this->getMockBuilder('SoapClient')
+            ->onlyMethods(array('__setCookie'))
+            ->setConstructorArgs(array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')))
+            ->getMock();
+        $clientMock->uri = 'http://www.zend.com';
+        $clientMock->location = 'http://www.zend.com';
 
         $soap = new Zend_Soap_Client();
         $soap->setSoapClient($clientMock);

@@ -96,7 +96,7 @@ class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
 
         $fields['message'] = fopen('php://stdout', 'w');
         $line = $f->format($fields);
-        $this->assertStringContainsStringIgnoringCase('Resource id ', $line);
+        $this->assertStringContainsStringIgnoringCase('Resource', $line);
         fclose($fields['message']);
 
         $fields['message'] = range(1,10);

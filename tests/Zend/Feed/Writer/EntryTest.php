@@ -64,6 +64,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidName()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor('');
@@ -74,6 +75,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidEmail()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor('Joe', '');
@@ -84,6 +86,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidUri()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor('Joe', null, 'notauri');
@@ -115,6 +118,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidNameFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor(array('name'=>''));
@@ -125,6 +129,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidEmailFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor(array('name'=>'Joe','email'=>''));
@@ -135,6 +140,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidUriFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor(array('name'=>'Joe','uri'=>'notauri'));
@@ -145,6 +151,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddAuthorThrowsExceptionIfNameOmittedFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->addAuthor(array('uri'=>'notauri'));
@@ -213,6 +220,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCopyrightThrowsExceptionOnInvalidParam()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCopyright('');
@@ -230,6 +238,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetContentThrowsExceptionOnInvalidParam()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setContent('');
@@ -332,6 +341,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetDateCreatedThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setDateCreated('abc');
@@ -342,6 +352,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetDateModifiedThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setDateModified('abc');
@@ -383,6 +394,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetDescriptionThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setDescription('');
@@ -406,6 +418,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetIdThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setId('');
@@ -429,6 +442,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetLinkThrowsExceptionOnEmptyString()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setLink('');
@@ -439,6 +453,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetLinkThrowsExceptionOnInvalidUri()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setLink('http://');
@@ -462,6 +477,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentLinkThrowsExceptionOnEmptyString()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentLink('');
@@ -472,6 +488,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentLinkThrowsExceptionOnInvalidUri()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentLink('http://');
@@ -496,6 +513,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentFeedLinkThrowsExceptionOnEmptyString()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentFeedLink(array('uri'=>'', 'type'=>'rdf'));
@@ -506,6 +524,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentFeedLinkThrowsExceptionOnInvalidUri()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentFeedLink(array('uri'=>'http://', 'type'=>'rdf'));
@@ -516,6 +535,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentFeedLinkThrowsExceptionOnInvalidType()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentFeedLink(array('uri'=>'http://www.example.com/id/comments', 'type'=>'foo'));
@@ -539,6 +559,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetTitleThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setTitle('');
@@ -572,6 +593,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentCountThrowsExceptionOnInvalidEmptyParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentCount('');
@@ -582,6 +604,7 @@ class Zend_Feed_Writer_EntryTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCommentCountThrowsExceptionOnInvalidNonIntegerParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Entry;
         try {
             $entry->setCommentCount('a');

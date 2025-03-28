@@ -307,7 +307,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
                     $num -= $num;
                 }
 
-                $value += $num;
+                $value = is_string($value) ? $num : $value + $num;
             }
 
             str_replace('/', '', $value);

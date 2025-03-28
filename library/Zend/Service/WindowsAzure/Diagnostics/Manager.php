@@ -209,12 +209,16 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 	 * @param Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance $configuration Configuration to apply
 	 * @throws Zend_Service_WindowsAzure_Diagnostics_Exception
 	 */
-	public function setConfigurationForRoleInstance($roleInstance = null, Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance $configuration)
+	public function setConfigurationForRoleInstance($roleInstance = null, ?Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance $configuration = null)
 	{
 		if (is_null($roleInstance)) {
 			//require_once 'Zend/Service/WindowsAzure/Diagnostics/Exception.php';
 			throw new Zend_Service_WindowsAzure_Diagnostics_Exception('Role instance should be specified. Try reading $_SERVER[\'RdRoleId\'] for this information if the application is hosted on Windows Azure Fabric or Development Fabric.');
 		}
+
+        if (is_null($configuration)) {
+            throw new Zend_Service_WindowsAzure_Diagnostics_Exception('The configuration should not be null');
+        }
 
 		$this->_blobStorageClient->putBlobData($this->_controlContainer, $roleInstance, $configuration->toXml(), array(), null, array('Content-Type' => 'text/xml'));
 	}

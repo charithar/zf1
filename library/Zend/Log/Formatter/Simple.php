@@ -95,7 +95,7 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
 
         foreach ($event as $name => $value) {
             if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)
+                || is_array($value) || is_resource($value)
             ) {
                 $value = gettype($value);
             }

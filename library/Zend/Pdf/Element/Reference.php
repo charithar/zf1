@@ -88,7 +88,7 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
      * @param Zend_Pdf_ElementFactory $factory
      * @throws Zend_Pdf_Exception
      */
-    public function __construct($objNum, $genNum = 0, Zend_Pdf_Element_Reference_Context $context, Zend_Pdf_ElementFactory $factory)
+    public function __construct($objNum, $genNum = 0, ?Zend_Pdf_Element_Reference_Context $context = null, ?Zend_Pdf_ElementFactory $factory = null)
     {
         if ( !(is_integer($objNum) && $objNum > 0) ) {
             //require_once 'Zend/Pdf/Exception.php';
@@ -97,6 +97,19 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
         if ( !(is_integer($genNum) && $genNum >= 0) ) {
             //require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Generation number must be non-negative integer');
+        }
+
+        /*
+         * These two parameters were set to null by default because original implementation had the $genNum param before
+         * the with a default value which is a deprecated behavior now. In order to solve it without breaking parameter
+         * order these two were set to null and added a null check
+         */
+        if (is_null($context)) {
+            throw new Zend_Pdf_Exception('Context must not be null');
+        }
+
+        if (is_null($factory)) {
+            throw new Zend_Pdf_Exception('Factory must not be null');
         }
 
         $this->_objNum  = $objNum;

@@ -231,6 +231,7 @@ class Zend_Feed_ImportTest extends \PHPUnit\Framework\TestCase
      */
     public function testAtomImportFullArray()
     {
+        $this->expectNotToPerformAssertions();
         $feed = Zend_Feed::importArray($this->_getFullArray(), 'atom');
     }
 
@@ -267,8 +268,8 @@ class Zend_Feed_ImportTest extends \PHPUnit\Framework\TestCase
      */
     public function testAtomImportFullBuilder()
     {
+        $this->expectNotToPerformAssertions();
         $feed = Zend_Feed::importBuilder(new Zend_Feed_Builder($this->_getFullArray()), 'atom');
-
     }
 
     /**

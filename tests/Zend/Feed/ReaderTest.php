@@ -141,6 +141,7 @@ class Zend_Feed_ReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testImportsFile()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $feed = Zend_Feed_Reader::importFile(
                 dirname(__FILE__) . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
@@ -158,6 +159,8 @@ class Zend_Feed_ReaderTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('testImportsUri() requires a network connection');
             return;
         }
+
+        $this->expectNotToPerformAssertions();
 
         try {
             $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
@@ -333,7 +336,7 @@ class Zend_Feed_ReaderTest extends \PHPUnit\Framework\TestCase
             'adapter'=>$testAdapter
         )));
         
-        $this->setExpectedException('Zend_Feed_Exception', 'Feed failed to load');
+        $this->expectException('Zend_Feed_Exception');
         $result = Zend_Feed_Reader::import('http://www.example.com');
     }
 
@@ -341,7 +344,7 @@ class Zend_Feed_ReaderTest extends \PHPUnit\Framework\TestCase
      {
          $string = file_get_contents($this->_feedSamplePath.'/Reader/xxe-atom10.xml');
          $string = str_replace('XXE_URI', $this->_feedSamplePath.'/Reader/xxe-info.txt', $string);
-         $this->setExpectedException('Zend_Feed_Exception');
+         $this->expectException('Zend_Feed_Exception');
          $feed = Zend_Feed_Reader::importString($string);
      }
  

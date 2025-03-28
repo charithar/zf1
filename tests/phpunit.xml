@@ -4,7 +4,9 @@
     <testsuite name="Zend Framework - Testsuite">
         <directory>./</directory>
     </testsuite>
-
+<!--    <logging>-->
+<!--        <log type="testdox-text" target="php://stdout"/>-->
+<!--    </logging>-->
     <!-- Enable this for proper unit testing code coverage reports
     <filter>
         <whitelist>

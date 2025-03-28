@@ -519,7 +519,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 	 * @param Zend_Service_WindowsAzure_Storage_QueueMessage $message Message to delete from queue. A message retrieved using "peekMessages" can NOT be deleted!
 	 * @throws Zend_Service_WindowsAzure_Exception
 	 */
-	public function deleteMessage($queueName = '', Zend_Service_WindowsAzure_Storage_QueueMessage $message)
+	public function deleteMessage($queueName = '', ?Zend_Service_WindowsAzure_Storage_QueueMessage $message = null)
 	{
 		if ($queueName === '') {
 			//require_once 'Zend/Service/WindowsAzure/Exception.php';
@@ -529,6 +529,9 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 			//require_once 'Zend/Service/WindowsAzure/Exception.php';
 		    throw new Zend_Service_WindowsAzure_Exception('Queue name does not adhere to queue naming conventions. See http://msdn.microsoft.com/en-us/library/dd179349.aspx for more information.');
 		}
+        if (is_null($message)) {
+            throw new Zend_Service_WindowsAzure_Exception('The message can not be null');
+        }
 		if ($message->PopReceipt == '') {
 			//require_once 'Zend/Service/WindowsAzure/Exception.php';
 		    throw new Zend_Service_WindowsAzure_Exception('A message retrieved using "peekMessages" can NOT be deleted! Use "getMessages" instead.');

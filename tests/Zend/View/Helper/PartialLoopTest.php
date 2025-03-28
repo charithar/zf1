@@ -398,7 +398,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
 
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
         foreach ($data as $key => $item) {
-            $string = 'Total count: ' . count($data);
+            $string = 'Total count: ' . ($data instanceof Traversable ? iterator_count($data) : count($data));
             $this->assertStringContainsStringIgnoringCase($string, $result);
         }
     }

@@ -63,6 +63,7 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends \PHPUnit\Framework\TestCas
 
     public function testRenderMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
+        $this->expectNotToPerformAssertions();
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         try {
             $renderer->render();

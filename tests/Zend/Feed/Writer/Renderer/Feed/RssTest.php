@@ -62,6 +62,7 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends \PHPUnit\Framework\TestCase
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckRssCompliance()
     {
+        $this->expectNotToPerformAssertions();
         $feed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         try {
             $feed->render();
@@ -154,6 +155,7 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends \PHPUnit\Framework\TestCase
 
     public function testFeedUpdatedDateIfMissingThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validWriter->remove('dateModified');
         $rssFeed->render();
@@ -179,6 +181,7 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends \PHPUnit\Framework\TestCase
 
     public function testFeedGeneratorIfMissingThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validWriter->remove('generator');
         $rssFeed->render();
@@ -203,6 +206,7 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends \PHPUnit\Framework\TestCase
 
     public function testFeedLanguageIfMissingThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validWriter->remove('language');
         $rssFeed->render();
@@ -243,6 +247,7 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends \PHPUnit\Framework\TestCase
 
     public function testFeedLinkToXmlRssWhereTheFeedWillBeAvailableIfMissingThrowsNoException()
     {
+        $this->expectNotToPerformAssertions();
         $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validWriter->remove('feedLinks');
         $rssFeed->render();

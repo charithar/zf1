@@ -43,6 +43,7 @@ class Zend_Feed_Writer_DeletedTest extends \PHPUnit\Framework\TestCase
 
     public function testSetReferenceThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setReference('');
@@ -105,6 +106,7 @@ class Zend_Feed_Writer_DeletedTest extends \PHPUnit\Framework\TestCase
 
     public function testSetWhenThrowsExceptionOnInvalidParameter()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setWhen('abc');
@@ -142,6 +144,7 @@ class Zend_Feed_Writer_DeletedTest extends \PHPUnit\Framework\TestCase
 
     public function testAddByThrowsExceptionOnInvalidNameFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('name'=>''));
@@ -152,6 +155,7 @@ class Zend_Feed_Writer_DeletedTest extends \PHPUnit\Framework\TestCase
 
     public function testAddByThrowsExceptionOnInvalidEmailFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('name'=>'Joe','email'=>''));
@@ -162,6 +166,7 @@ class Zend_Feed_Writer_DeletedTest extends \PHPUnit\Framework\TestCase
 
     public function testAddByThrowsExceptionOnInvalidUriFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
@@ -172,6 +177,7 @@ class Zend_Feed_Writer_DeletedTest extends \PHPUnit\Framework\TestCase
 
     public function testAddByThrowsExceptionIfNameOmittedFromArray()
     {
+        $this->expectNotToPerformAssertions();
         $entry = new Zend_Feed_Writer_Deleted;
         try {
             $entry->setBy(array('uri'=>'notauri'));

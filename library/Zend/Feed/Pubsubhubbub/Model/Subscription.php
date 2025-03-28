@@ -92,7 +92,7 @@ class Zend_Feed_Pubsubhubbub_Model_Subscription
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->find($key);
-        if (count($result)) {
+        if ($result && count($result)) {
             return $result->current()->toArray();
         }
         return false;
@@ -114,7 +114,7 @@ class Zend_Feed_Pubsubhubbub_Model_Subscription
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->find($key);
-        if (count($result)) {
+        if (!$result && count($result)) {
             return true;
         }
         return false;

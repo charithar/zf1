@@ -81,6 +81,8 @@ class Zend_Validate_DateTest extends \PHPUnit\Framework\TestCase
             'sdgsdg'     => false
             );
         foreach ($valuesExpected as $input => $result) {
+            //$this->_validator->isValid($input);
+            //var_dump($this->_validator->getMessages());
             $this->assertEquals($result, $this->_validator->isValid($input),
                                 "'$input' expected to be " . ($result ? '' : 'in') . 'valid');
         }
@@ -251,7 +253,7 @@ class Zend_Validate_DateTest extends \PHPUnit\Framework\TestCase
      * @return void
      * @group ZF-2789
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
     {
         $this->_errorOccurred = true;
     }
