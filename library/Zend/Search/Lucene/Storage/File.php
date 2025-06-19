@@ -55,6 +55,7 @@ abstract class Zend_Search_Lucene_Storage_File
      * @param integer $whence
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     abstract public function seek($offset, $whence=SEEK_SET);
 
     /**

@@ -88,6 +88,7 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
      * @param integer $whence
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function seek($offset, $whence=SEEK_SET)
     {
         return fseek($this->_fileHandle, $offset, $whence);

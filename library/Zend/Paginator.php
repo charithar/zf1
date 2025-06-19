@@ -514,6 +514,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         if (!$this->_pageCount) {
