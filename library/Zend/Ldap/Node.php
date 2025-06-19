@@ -874,6 +874,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      * @return null
      * @throws Zend_Ldap_Exception
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($name, $value)
     {
         $this->setAttribute($name, $value);
@@ -891,6 +892,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      * @return null
      * @throws Zend_Ldap_Exception
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($name)
     {
         $this->deleteAttribute($name);
