@@ -199,7 +199,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function set($key, $value)
     {
-        return $this->__set($key, $value);
+        $this->__set($key, $value);
     }
 
     /**
@@ -504,6 +504,10 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 
             // Does the baseUrl have anything in common with the request_uri?
             $requestUri = $this->getRequestUri();
+
+            if (is_null($requestUri) && is_null($baseUrl)) {
+                return $this;
+            }
 
             if (0 === strpos($requestUri, $baseUrl)) {
                 // full $baseUrl matches
