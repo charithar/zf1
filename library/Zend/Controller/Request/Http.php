@@ -503,11 +503,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             }
 
             // Does the baseUrl have anything in common with the request_uri?
-            $requestUri = $this->getRequestUri();
-
-            if (is_null($requestUri) && is_null($baseUrl)) {
-                return $this;
-            }
+            $requestUri = $this->getRequestUri() ?? '';
 
             if (0 === strpos($requestUri, $baseUrl)) {
                 // full $baseUrl matches
@@ -527,7 +523,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             }
 
             $basename = basename($baseUrl);
-            if (empty($basename) || $truncatedRequestUri && !strpos($truncatedRequestUri, $basename)) {
+            if (empty($basename) || !strpos($truncatedRequestUri, $basename)) {
                 // no match whatsoever; set it blank
                 $this->_baseUrl = '';
                 return $this;
