@@ -1070,7 +1070,15 @@ class Zend_Gdata_App
             }
             if ($foundClassName != null) {
                 $reflectionObj = new ReflectionClass($foundClassName);
-                $instance = $reflectionObj->newInstanceArgs($args);
+                if (PHP_VERSION_ID < 80000) {
+                    $instance = $reflectionObj->newInstanceArgs($args);
+                }
+                else {
+                    if (is_array($args) && array_keys($args) !== range(0, count($args) - 1)) {
+                        $args = [ $args ];   // wrap as single positional argument
+                    }
+                    $instance = $reflectionObj->newInstanceArgs($args);
+                }
                 if ($instance instanceof Zend_Gdata_App_FeedEntryParent) {
                     $instance->setHttpClient($this->_httpClient);
 

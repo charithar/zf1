@@ -1198,7 +1198,16 @@ class Zend_Filter_Input
         }
 
         if ($class->hasMethod('__construct')) {
-            $object = $class->newInstanceArgs($args);
+            if (PHP_VERSION_ID < 80000) {
+                $object = $class->newInstanceArgs($args);
+            }
+            else {
+                if (is_array($args) && array_keys($args) !== range(0, count($args) - 1)) {
+                    $args = [ $args ];   // wrap as single positional argument
+                }
+
+                $object = $class->newInstanceArgs($args);
+            }
         } else {
             $object = $class->newInstance();
         }

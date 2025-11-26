@@ -2112,7 +2112,18 @@ class Zend_Form_Element implements Zend_Validate_Interface
         } else {
             $r = new ReflectionClass($name);
             if ($r->hasMethod('__construct')) {
-                $instance = $r->newInstanceArgs((array) $filter['options']);
+                //Named arguments in PHP 8 causing issues here when passing $filter['options']
+                if (PHP_VERSION_ID < 80000) {
+                    $instance = $r->newInstanceArgs((array)$filter['options']);
+                }
+                else {
+                    $args = (array)$filter['options'];
+                    if (is_array($args) && array_keys($args) !== range(0, count($args) - 1)) {
+                        $args = [ $args ];   // wrap as single positional argument
+                    }
+
+                    $instance = $r->newInstanceArgs($args);
+                }
             } else {
                 $instance = $r->newInstance();
             }
@@ -2179,7 +2190,17 @@ class Zend_Form_Element implements Zend_Validate_Interface
                 }
 
                 if ($numeric) {
-                    $instance = $r->newInstanceArgs((array) $validator['options']);
+                    if (PHP_VERSION_ID < 80000) {
+                        $instance = $r->newInstanceArgs((array)$validator['options']);
+                    }
+                    else {
+                        $args = (array)$validator['options'];
+                        if (is_array($args) && array_keys($args) !== range(0, count($args) - 1)) {
+                            $args = [ $args ];   // wrap as single positional argument
+                        }
+
+                        $instance = $r->newInstanceArgs($args);
+                    }
                 } else {
                     $instance = $r->newInstance($validator['options']);
                 }
