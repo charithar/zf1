@@ -2122,18 +2122,20 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     protected function _dissolveArrayValue($value, $arrayPath)
     {
-        // As long as we have more levels
-        while ($arrayPos = strpos($arrayPath, '[')) {
-            // Get the next key in the path
-            $arrayKey = trim(substr($arrayPath, 0, $arrayPos), ']');
+        if ($arrayPath) {
+            // As long as we have more levels
+            while ($arrayPos = strpos($arrayPath, '[')) {
+                // Get the next key in the path
+                $arrayKey = trim(substr($arrayPath, 0, $arrayPos), ']');
 
-            // Set the potentially final value or the next search point in the array
-            if (isset($value[$arrayKey])) {
-                $value = $value[$arrayKey];
+                // Set the potentially final value or the next search point in the array
+                if (isset($value[$arrayKey])) {
+                    $value = $value[$arrayKey];
+                }
+
+                // Set the next search point in the path
+                $arrayPath = trim(substr($arrayPath, $arrayPos + 1), ']');
             }
-
-            // Set the next search point in the path
-            $arrayPath = trim(substr($arrayPath, $arrayPos + 1), ']');
         }
 
         if (isset($value[$arrayPath])) {
