@@ -45,6 +45,8 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
     implements Zend_Application_Bootstrap_Bootstrapper,
                Zend_Application_Bootstrap_ResourceBootstrapper
 {
+    use Zend_Legacy_LegacyDynamicProperties;
+
     /**
      * @var Zend_Application|Zend_Application_Bootstrap_Bootstrapper
      */
