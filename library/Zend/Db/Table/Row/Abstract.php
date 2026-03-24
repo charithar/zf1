@@ -304,7 +304,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      #[\ReturnTypeWillChange]
      public function offsetUnset($offset)
      {
-         return $this->__unset($offset);
+         $this->__unset($offset);
      }
 
     /**
@@ -686,7 +686,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      */
     public function refresh()
     {
-        return $this->_refresh();
+        $this->_refresh();
     }
 
     /**

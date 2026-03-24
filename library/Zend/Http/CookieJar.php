@@ -401,6 +401,7 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
      *
      * @return ArrayIterator
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->_rawCookies);

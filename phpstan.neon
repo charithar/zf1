@@ -1,0 +1,26 @@
+includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - phpstan-baseline.neon
+
+parameters:
+    phpVersion: 80200
+    level: 0
+    paths:
+        - library/Zend
+    excludePaths:
+        - library/Zend/Amf
+        - library/Zend/Cloud
+        - library/Zend/Dojo
+        - library/Zend/Dojo.php
+        - library/Zend/Gdata
+        - library/Zend/Gdata.php
+        - library/Zend/Oauth
+        - library/Zend/Oauth.php
+        - library/Zend/OpenId
+        - library/Zend/OpenId.php
+        - library/Zend/Pdf
+        - library/Zend/Pdf.php
+        - library/Zend/Search
+        - library/Zend/Rest
+        - library/Zend/Wildfire
+    reportUnmatchedIgnoredErrors: false

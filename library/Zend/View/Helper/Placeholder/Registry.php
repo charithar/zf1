@@ -60,7 +60,7 @@ class Zend_View_Helper_Placeholder_Registry
     /**
      * Retrieve or create registry instnace
      *
-     * @return void
+     * @return static
      */
     public static function getRegistry()
     {

@@ -145,9 +145,6 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
                         throw new Zend_Filter_Exception("Public key '{$cert}' not valid");
                     }
 
-                    if (PHP_VERSION_ID < 80000) {
-                        openssl_free_key($test);
-                    }
                     $this->_keys['public'][$key] = $cert;
                     break;
                 case 'private':
@@ -157,9 +154,6 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
                         throw new Zend_Filter_Exception("Private key '{$cert}' not valid");
                     }
 
-                    if (PHP_VERSION_ID < 80000) {
-                        openssl_free_key($test);
-                    }
                     $this->_keys['private'][$key] = $cert;
                     break;
                 case 'envelope':
@@ -390,11 +384,6 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
 
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length("AES-256-CBC"));
         $crypt  = openssl_seal($value, $encrypted, $encryptedkeys, $keys, "AES-256-CBC", $iv);
-        foreach ($keys as $key) {
-            if (PHP_VERSION_ID < 80000) {
-                openssl_free_key($key);
-            }
-        }
 
         if ($crypt === false) {
             //require_once 'Zend/Filter/Exception.php';
@@ -471,10 +460,6 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
 
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length("AES-256-CBC"));
         $crypt  = openssl_open($value, $decrypted, $envelope, $keys, "AES-256-CBC", $iv);
-        if (PHP_VERSION_ID < 80000) {
-            openssl_free_key($keys);
-        }
-
         if ($crypt === false) {
             //require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Openssl was not able to decrypt you content with the given options');

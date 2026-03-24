@@ -589,6 +589,7 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
      *
      * @return bool  whether container has any pages
      */
+    #[\ReturnTypeWillChange]
     public function hasChildren()
     {
         return $this->hasPages();
@@ -601,6 +602,7 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
      *
      * @return Zend_Navigation_Page|null
      */
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         $hash = key($this->_index);

@@ -502,4 +502,28 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
             $this->insert($item['data'], $item['priority']);
         }
     }
+
+    public function __serialize(): array
+    {
+        $data = array();
+        $this->setExtractFlags(self::EXTR_BOTH);
+        while ($this->valid()) {
+            $data[] = $this->current();
+            $this->next();
+        }
+        $this->setExtractFlags(self::EXTR_DATA);
+
+        foreach ($data as $item) {
+            $this->insert($item['data'], $item['priority']);
+        }
+
+        return $data;
+    }
+
+    public function __unserialize(array $data): void
+    {
+        foreach ($data as $item) {
+            $this->insert($item['data'], $item['priority']);
+        }
+    }
 }

@@ -170,7 +170,8 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             $item  = $this->createData($type, $args[0], $args[1], $args[2]);
 
             if ('offsetSet' == $action) {
-                return $this->offsetSet($index, $item);
+                $this->offsetSet($index, $item);
+                return $this;
             }
 
             $this->$action($item);
@@ -332,7 +333,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             }
         }
 
-        return $this->append($value);
+        $this->append($value);
     }
 
     /**

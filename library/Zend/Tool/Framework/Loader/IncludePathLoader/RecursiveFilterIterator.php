@@ -49,8 +49,9 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
     /**
      * accept() - Which iterable items to accept or deny, required by FilterInterface
      *
-     * @return unknown
+     * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function accept()
     {
         $currentNode = $this->current();
@@ -74,6 +75,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
      *
      * @return Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator
      */
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         if (empty($this->ref)) {

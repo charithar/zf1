@@ -80,6 +80,22 @@ class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements 
         $this->seek($dataArr['pos']+$dataArr['offset']);
     }
 
+    public function __serialize(): array
+    {
+        return array(
+            'it'     => $this->getInnerIterator(),
+            'offset' => $this->_offset,
+            'count'  => $this->_count,
+            'pos'    => $this->getPosition(),
+        );
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->__construct($data['it'], $data['offset'], $data['count']);
+        $this->seek($data['pos'] + $data['offset']);
+    }
+
     /**
      * Returns value of the Iterator
      *

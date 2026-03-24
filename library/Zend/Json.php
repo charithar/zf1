@@ -192,7 +192,7 @@ class Zend_Json
      * @param null $currentKey
      *
      * @internal param mixed $valueToCheck
-     * @return void
+     * @return mixed
      */
     protected static function _recursiveJsonExprFinder(&$value, array &$javascriptExpressions, $currentKey = null)
     {

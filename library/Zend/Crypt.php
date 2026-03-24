@@ -102,12 +102,6 @@ class Zend_Crypt
                return;
             }
         }
-        if (function_exists('mhash')) {
-            self::$_type = self::TYPE_MHASH;
-            if (in_array($algorithm, self::$_supportedAlgosMhash)) {
-               return;
-            }
-        }
         if (function_exists('openssl_digest')) {
             if ($algorithm == 'ripemd160') {
                 $algorithm = 'rmd160';
@@ -133,22 +127,6 @@ class Zend_Crypt
     protected static function _digestHash($algorithm, $data, $binaryOutput)
     {
         return hash($algorithm, $data, $binaryOutput);
-    }
-
-    /**
-     * @param string $algorithm
-     * @param string $data
-     * @param bool $binaryOutput
-     * @return string
-     */
-    protected static function _digestMhash($algorithm, $data, $binaryOutput)
-    {
-        $constant = constant('MHASH_' . strtoupper($algorithm));
-        $binary = mhash($constant, $data);
-        if ($binaryOutput) {
-            return $binary;
-        }
-        return bin2hex($binary);
     }
 
     /**

@@ -131,6 +131,7 @@ class Zend_Tool_Framework_Action_Repository
      *
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->_actions);

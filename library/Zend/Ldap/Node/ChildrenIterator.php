@@ -129,6 +129,7 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function hasChildren()
     {
         if ($this->current() instanceof Zend_Ldap_Node) {
@@ -143,6 +144,7 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
      *
      * @return Zend_Ldap_Node_ChildrenIterator
      */
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         if ($this->current() instanceof Zend_Ldap_Node) {

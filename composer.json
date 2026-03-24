@@ -35,7 +35,9 @@
       "ext-json": "*",
       "ext-gd": "*",
         "ext-dom": "*",
-      "ext-bcmath": "*"
+      "ext-bcmath": "*",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0"
     },
     "archive": {
         "exclude": ["/demos", "/documentation", "/tests"]

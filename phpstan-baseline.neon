@@ -1,0 +1,10 @@
+parameters:
+    ignoreErrors:
+        -
+            message: '#Call to deprecated function libxml_disable_entity_loader\(\)#'
+            path: library/Zend/Feed/Reader.php
+            count: 2
+        -
+            message: '#Call to deprecated function libxml_disable_entity_loader\(\)#'
+            path: library/Zend/Xml/Security.php
+            count: 3

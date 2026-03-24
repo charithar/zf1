@@ -470,9 +470,9 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         $this->_momorize($value);
 
         foreach ($value as $k => $v) {
-            $this->_pickle .= $this->_write($k)
-                            . $this->_write($v)
-                            . self::OP_SETITEM;
+            $this->_write($k);
+            $this->_write($v);
+            $this->_pickle .= self::OP_SETITEM;
         }
     }
 
@@ -493,7 +493,8 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         $this->_momorize($value);
 
         foreach ($value as $k => $v) {
-            $this->_pickle .= $this->_write($v) . self::OP_APPEND;
+            $this->_write($v);
+            $this->_pickle .= self::OP_APPEND;
         }
     }
 

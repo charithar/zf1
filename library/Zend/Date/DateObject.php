@@ -914,12 +914,11 @@ abstract class Zend_Date_DateObject {
     {
         // timestamp within 32bit
         if (abs($this->_unixTimestamp) <= 0x7FFFFFFF) {
+            $sunInfo = date_sun_info($this->_unixTimestamp, $location['latitude'], $location['longitude']);
             if ($rise === false) {
-                return date_sunset($this->_unixTimestamp, SUNFUNCS_RET_TIMESTAMP, $location['latitude'],
-                                   $location['longitude'], 90 + $horizon, $this->getGmtOffset() / 3600);
+                return $sunInfo['sunset'];
             }
-            return date_sunrise($this->_unixTimestamp, SUNFUNCS_RET_TIMESTAMP, $location['latitude'],
-                                $location['longitude'], 90 + $horizon, $this->getGmtOffset() / 3600);
+            return $sunInfo['sunrise'];
         }
 
         // self calculation - timestamp bigger than 32bit
