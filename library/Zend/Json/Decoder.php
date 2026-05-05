@@ -77,6 +77,8 @@ class Zend_Json_Decoder
      */
     protected $_token;
 
+    protected $_tokenValue;
+
     /**
      * Flag indicating how objects should be decoded
      *
