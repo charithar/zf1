@@ -55,6 +55,8 @@ class Zend_Form_Element implements Zend_Validate_Interface
      */
     public $helper = 'formText';
 
+    public $id;
+
     /**
      * 'Allow empty' flag
      * @var bool
@@ -970,7 +972,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      *
      * @param  string $key
      * @param  mixed $value
-     * @return voide
+     * @return void
      */
     public function __set($key, $value)
     {
