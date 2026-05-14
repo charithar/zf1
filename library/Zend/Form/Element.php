@@ -59,6 +59,8 @@ class Zend_Form_Element implements Zend_Validate_Interface
 
     public $class;
 
+    public $type;
+
     /**
      * 'Allow empty' flag
      * @var bool
