@@ -197,6 +197,10 @@ class Zend_Locale_Format
      */
     public static function convertNumerals($input, $from, $to = null)
     {
+        if (is_null($input)) {
+            return $input;
+        }
+
         if (!self::_getUniCodeSupport()) {
             trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
         }
@@ -301,6 +305,9 @@ class Zend_Locale_Format
     {
         // load class within method for speed
         //require_once 'Zend/Locale/Math.php';
+        if (is_null($value)) {
+            return $value;
+        }
 
         $value             = Zend_Locale_Math::floatalize($value);
         $value             = Zend_Locale_Math::normalize($value);
@@ -658,6 +665,10 @@ class Zend_Locale_Format
      */
     public static function toFloat($value, array $options = array())
     {
+        if (is_null($value)) {
+            return $value;
+        }
+
         $options['number_format'] = Zend_Locale_Format::STANDARD;
         return self::toNumber($value, $options);
     }
