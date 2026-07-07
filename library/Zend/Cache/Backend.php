@@ -146,7 +146,7 @@ class Zend_Cache_Backend
         if ($specificLifetime === false) {
             return $this->_directives['lifetime'];
         }
-        return $specificLifetime;
+        return $specificLifetime ?? 0;
     }
 
     /**
